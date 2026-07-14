@@ -1,0 +1,375 @@
+[site]
+author = "Alex Morozov"
+default_lang = "en"
+# Path to a photo (place alongside index.html or use a URL)
+photo = "public/assets/me.jpeg"
+
+[hero]
+# Replace with your real embed URL. While this placeholder is in place,
+# a built-in interactive canvas renders in the background.
+iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA0WYy24cxxWG36W1LQ_Otauby2SRTYAESZDIEbQYmyOLiCwGQ9oGEuTdg-_vGdEChzXddTnnv5Xk_y6_LQ9pZmP5vDx45xzLf56ff14e7DRXj7H8-_z1_fKwrnM7bfr2_fLQnvvJx_J8ffrpn7fZHVVjefn8_Nsfrk-Py8On85eXy1h-Pl__dbm-_P3p5emHL5fl4fX6y-WY9ruf_vp6vr58m_nyer7--fz1fS8PvvXktNuj73mUNU_zbVZQ7WanepvFI5tvD97n8uC15ml9m5PLw2516m-FLQ8fPkSZneZwNzvFWN49zsf98XH5OD50Mddzm6ccyztLW23nhYfN0zoyp1bkeT2f9-Xjx7H8-Mv118vvn788a-9va8by7tPOH0a9zk8_GiPf8rLW8nEs1-fXP_16uV6fHi8s_G7fxnflo_axlHVVdbanV5VlZrebpZVbZFS4d3ZmdJjxJjq9vK0dWqwtuqq9LKKiOyLarMOtrbyzPDKrMzutsryrLdPdPSsykvXelVbayLP5L7ucJ_zxygy3oMLwMk8Py3CPdn45y7zDOivCzcMivD2ry7SuonjoYV1UaGHexrswq4imT0q2NM_yBIeuLnaq8uimsGD3LHe3qCzz5nlYmTY19yqzzojItI5sp51Ms8rwqih6Khpxa3YEdsoBoGpP87KManVm0dbFDm1JvdlqJ8OqUoR1WGWnZ3qIQMqj7fYIYO92D_ij5jBPWLLjRAuA9SinFWZkVQJOengGS7uPupqWUqvc2x0U3BveO6qrguoC9tsrkvqhA_otzKzhJrwNbIGaDsAqqw00zLodFBEVq9OyjsORhkNLVR67eCAOgEFo0q-xW4c3PwgU9aZHhYRpVsgEFRm7cnxleodHJfg6R0q-bSntBbpHFdBcTElki3wBMKhJFIOE0QezBARMNocl_KCLpENAybSiTLHd0sONLUqWYBBhN_KgvYBPQ-GijOLpzyGE1agWdQM_2BtuEo-NzE0eaRCQIlO67sDWpQMRpaUs3IVWGy-h7nLwyPLjoaQPCooAOgFtdpCxhG_AI91idMzvBbn4FuDAEh2xN8JgL-QU2MYDDJELJ4My7pdKCBtMBwjoD1uFN8oMoManwMz3w2_Iq5iNfRVMMMhvQquSyq3KCppRfGXCUzSSUlCV4gas0CUWRgvt6IKSi0ITGzVKYhY_HOJNvCHUA0Pa8bYMaIGDpGEAKHwii-PMkuMwCswEqsSOKBSJR8MRqc27JAiNwDziFvNnya0wgqvFqyEvokqEFEGl0pXYoIAvpQzsrODBR0HN6M1pIdQ7E5VxfLMKI10JMyqIwAQIRrGBotAzm-FhBUmSFcCMjQsYiGElh2ormiJlIDRx7mEQTHPIlRQOloEId0y6uKOq4oYi0oGAIwkKUcEb5FaK1uSeQNoYR2oBrps0Si5nMsFGgEgwSKawMYpFIplK4Ejq0z1EdYQfFNoBDN5wEIZUXWpkeUvUYlaelU90gRCalE1aE3tcoYS7nF9NGkncpITdYpguQOmAi0uINdxw0pOIJZQ5khiklsDLSNJJTSdavKgTHHmDCJBvpZOsiiMsj0u0oTSNpAl_fYbdQkCCQOG6GQgicCTxGuHpbuHGNoiFPtpkJ_AmFyg-S9mha62hg1gGVcGp-zjdDeq5vrkbdBsq2rGucQTImIMKugRD8oq5XKO64SiTFNUVRyEdyJm4MAjSAUUEEFUG6bpLuV2oGfXoclRqURP3BgrCK6g-AY0uAai4PBq3WmJN4v1wDOQt97_o8Ve1yJjDh5fz2XOOGjF87HuPHs3QY1tHjY0h82r4XIePrUYODWLE2BnYyOE1fMx9xAiWzDliJKN2Gz2Siens2MNH-D5Ki2eP1CHhG8fGfWh6HTH5xeaR6zZspGk8mZFsQOX8mdvIkepiHamNNvZrhquxTE_DWepGhRtPVuNx2TrigIGhD3rxbHBi1jaFCnO3uJ-5UwODTZ3zeE8ecfAet5c7kAUr88BBc49uOQ5EqHLng5e7ZlCxzzn6qGo7luZI4erCMSBQryfM8ZolNjjS0_ZhYyb9MqY_Gx6rthYO-20HGxheJQHOCgLaaE0blG6jN6Y2m-fKm-02pAsbtcGSJ3vthaK067oLwbyPbUxnta-BGjSckZIDw-m3lbHZnXkp4xjxyU_6NnpAdPquEegyD-xKKnFJZeO1cJvoBWAqdCxf4dJHUVe-bb7qk6acymiwxD_PeoUJDuwbeD62HfU1H5sdbOZYDRQ4vBu9U63nxo55Hx5feh4HJv-iyxuMMdZgzM8achGjPuj1MQOSNOpjm9DIZM_pfndIsEJ-MNhT2_t2t3yJRlS3ozS-uTWgSUNuh-4QTPedB9vUYkivOaWB2xgdMlSAHP7wlGDEh9dOefyQwndX9s2gmoDiNMS2R9u-TrbYJHVJ0nXIKh8dM_ZDMMyQp3a5IekIBHwWkKjBKVNIZrnq6TF5P8imEWEqVMMAy6dcvGIiJoc5748ydpfgmeL7KujyPr4Bue2YS55geDgtciWh5G1Vcut2Txo4TrxRbwzFLMPDrMeyyQS5OVLnwXKkOHRcFblKuFpJpH2bcuhBw3X0sXXaUbFO0TUBQNzC9zpy1YkKBrxyy61cj7DUkMO_qUMBcr-A_vj09fKPp8fXz_o_NmM5f3m9XP_29OXy8pfz69MzT3393_8BCnNb_OcRAAA"
+# Optional: separate URL for mobile
+# iframe_url_mobile = ""
+
+[social]
+github = "https://github.com/username"
+telegram = "https://t.me/username"
+email = "mailto:hello@example.com"
+location_link = "https://www.openstreetmap.org/?query=Berlin"
+
+[contact]
+telegram_bot = "my_portfolio_bot"
+# Webhook URL that forwards to your Telegram bot (e.g. Cloudflare Worker).
+# Leave empty to use the Telegram deeplink fallback (opens t.me/...).
+webhook_url = ""
+fallback_telegram = true
+
+# ══════════════════════════════════════════════════════════════
+# ENGLISH
+# ══════════════════════════════════════════════════════════════
+[en]
+
+[en.ui]
+scroll_cue = "Scroll to explore"
+hero_interact = "Drag to draw · tap & drag on touch"
+hero_label = "Portfolio · 2024"
+based_in = "Based in"
+spoken_languages = "Spoken languages"
+skills_languages = "Programming languages"
+skills_frameworks = "Frameworks & libraries"
+skills_tools = "Infrastructure & tools"
+skills_suites = "Application suites"
+form_invalid = "Please fill in name, email and message."
+
+[en.ui.tabs]
+about = "About"
+skills = "Skills"
+experience = "Experience"
+projects = "Projects"
+publications = "Publications"
+posts = "Posts"
+
+[en.ui.panels_about]
+title = "About"
+sub = "A short introduction."
+
+[en.ui.panels_skills]
+title = "Skills & tools"
+sub = "What I work with, more or less daily."
+
+[en.ui.panels_experience]
+title = "Experience"
+sub = "Where I have spent my hours."
+
+[en.ui.panels_projects]
+title = "Featured projects"
+sub = "Open-source work worth a look."
+
+[en.ui.panels_publications]
+title = "Publications"
+sub = "Co-authored research papers."
+
+[en.ui.panels_posts]
+title = "Recent posts"
+sub = "From my Telegram channel."
+
+[en.ui.contact]
+title = "Let's <em>talk</em>."
+intro = "For collaborations, questions, or just to say hello — drop a message below. It lands in my Telegram via a private bot."
+send = "Send message"
+sending = "Sending…"
+success = "Message sent. I will get back to you shortly."
+error = "Could not send. Please use Telegram directly."
+name = "Name"
+email = "Email"
+subject = "Subject"
+message = "Message"
+
+[en.about]
+name = "Alex Morozov"
+tagline = "Software engineer and researcher working at the intersection of distributed systems, computational geometry, and human-computer interaction."
+bio_lead = "I build tools that turn mathematical structures into things you can touch, drag, and feel."
+bio = "Currently based in Berlin, I split my time between engineering interactive systems and collaborating on research in geometric algorithms. Previously I worked on rendering pipelines, developer tooling, and a few too many side projects."
+location = "Berlin, Germany"
+
+[en.about.spoken_languages]
+"English" = "Fluent (C2)"
+"French" = "Intermediate (B2)"
+"German" = "Basic (A2)"
+"Russian" = "Native"
+
+[[en.experience]]
+role = "Senior Software Engineer"
+company = "Helix Labs"
+period = "2022 — present"
+description = "Leading development of a real-time collaborative editor with CRDT-based sync. Built the rendering layer, plugin system, and the math-aware input pipeline."
+
+[[en.experience]]
+role = "Software Engineer"
+company = "Northwind Systems"
+period = "2019 — 2022"
+description = "Worked on developer tooling for a data analytics platform. Shipped a query profiler and a notebook-style REPL that became the team's daily driver."
+
+[[en.experience]]
+role = "Research Assistant"
+company = "TU Berlin · Geometry Lab"
+period = "2017 — 2019"
+description = "Implemented numerical methods for curve-shortening flows. Co-authored two papers on discrete differential geometry."
+
+[en.skills]
+languages = ["TypeScript", "Python", "Rust", "Go", "GLSL", "SQL"]
+frameworks = ["React", "Three.js", "FastAPI", "Tokio", "Bevy"]
+tools = ["PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform"]
+suites = ["Figma", "Blender", "Adobe Suite"]
+
+[[en.projects]]
+name = "curve-garden"
+repo = "username/curve-garden"
+description = "Interactive playground for generating and exploring parametric curve families. The piece embedded in the hero is part of this project."
+language = "TypeScript"
+stars = 312
+featured = true
+
+[[en.projects]]
+name = "crdt-notebook"
+repo = "username/crdt-notebook"
+description = "Local-first notebook with conflict-free replication. Syncs over WebRTC without a server."
+language = "Rust"
+stars = 184
+featured = true
+
+[[en.projects]]
+name = "geom-flow"
+repo = "username/geom-flow"
+description = "Numerical solver for geometric flows on polygonal meshes. Used in two published papers."
+language = "Python"
+stars = 47
+featured = true
+
+[[en.projects]]
+name = "tiny-frp"
+repo = "username/tiny-frp"
+description = "Minimal functional-reactive library in 1KB. Built to learn the core ideas from scratch."
+language = "TypeScript"
+stars = 89
+featured = true
+
+[[en.publications]]
+title = "Discrete Curve Shortening on Polygonal Meshes"
+authors = "A. Morozov, L. Schmidt, P. Chen"
+venue = "Journal of Computational Geometry, 14(2)"
+year = 2023
+url = "https://example.com/paper1"
+
+[[en.publications]]
+title = "Stable Numerical Schemes for Anisotropic Mean Curvature Flow"
+authors = "P. Chen, A. Morozov"
+venue = "Proc. Symposium on Geometry Processing"
+year = 2021
+url = "https://example.com/paper2"
+
+[[en.publications]]
+title = "A Note on Discrete Laplacians for Non-Uniform Meshes"
+authors = "A. Morozov"
+venue = "ArXiv preprint 2107.04112"
+year = 2021
+url = "https://example.com/paper3"
+
+[[en.posts]]
+title = "Why I stopped using build tools (mostly)"
+date = "2024-09-12"
+url = "https://t.me/username/123"
+snippet = "After years of webpack/vite/rollup configs, I tried shipping a real project as a single HTML file. Some surprises followed."
+
+[[en.posts]]
+title = "A note on discrete Laplacians"
+date = "2024-07-30"
+url = "https://t.me/username/122"
+snippet = "The cotangent Laplacian is famous, but the uniform Laplacian is what most code actually uses. Why the gap matters."
+
+[[en.posts]]
+title = "Curve shortening, in the browser"
+date = "2024-05-18"
+url = "https://t.me/username/121"
+snippet = "Turning a 200-line numerical solver into something you can poke at with a mouse. Notes on the UI."
+
+[[en.posts]]
+title = "Reading: SNAPL 2024 papers"
+date = "2024-04-02"
+url = "https://t.me/username/120"
+snippet = "Quick takes on the SNAPL 2024 accepted papers I found most interesting this year."
+
+# ══════════════════════════════════════════════════════════════
+# FRENCH
+# ══════════════════════════════════════════════════════════════
+[fr]
+
+[fr.ui]
+scroll_cue = "Défiler pour explorer"
+hero_interact = "Glisser pour dessiner · taper & glisser sur tactile"
+hero_label = "Portfolio · 2024"
+based_in = "Basé à"
+spoken_languages = "Langues parlées"
+skills_languages = "Langages de programmation"
+skills_frameworks = "Frameworks & bibliothèques"
+skills_tools = "Infrastructure & outils"
+skills_suites = "Suites applicatives"
+form_invalid = "Veuillez remplir nom, email et message."
+
+[fr.ui.tabs]
+about = "À propos"
+skills = "Compétences"
+experience = "Expérience"
+projects = "Projets"
+publications = "Publications"
+posts = "Posts"
+
+[fr.ui.panels_about]
+title = "À propos"
+sub = "Une brève introduction."
+
+[fr.ui.panels_skills]
+title = "Compétences & outils"
+sub = "Ce avec quoi je travaille, plus ou moins quotidiennement."
+
+[fr.ui.panels_experience]
+title = "Expérience"
+sub = "Où j'ai passé mes heures."
+
+[fr.ui.panels_projects]
+title = "Projets en vedette"
+sub = "Travail open-source à découvrir."
+
+[fr.ui.panels_publications]
+title = "Publications"
+sub = "Articles de recherche co-écrits."
+
+[fr.ui.panels_posts]
+title = "Posts récents"
+sub = "Depuis ma chaîne Telegram."
+
+[fr.ui.contact]
+title = "<em>Parlons</em>."
+intro = "Pour des collaborations, des questions, ou juste pour dire bonjour — laissez un message ci-dessous. Il arrive sur mon Telegram via un bot privé."
+send = "Envoyer le message"
+sending = "Envoi…"
+success = "Message envoyé. Je reviens vers vous rapidement."
+error = "Échec de l'envoi. Veuillez utiliser Telegram directement."
+name = "Nom"
+email = "Email"
+subject = "Sujet"
+message = "Message"
+
+[fr.about]
+name = "Alex Morozov"
+tagline = "Ingénieur logiciel et chercheur travaillant à l'intersection des systèmes distribués, de la géométrie computationnelle et de l'interaction homme-machine."
+bio_lead = "Je construis des outils qui transforment les structures mathématiques en objets que l'on peut toucher, déplacer et ressentir."
+bio = "Actuellement basé à Berlin, je partage mon temps entre l'ingénierie de systèmes interactifs et la recherche en algorithmes géométriques. Auparavant, j'ai travaillé sur des pipelines de rendu, des outils de développement et beaucoup trop de projets parallèles."
+location = "Berlin, Allemagne"
+
+[fr.about.spoken_languages]
+"Anglais" = "Courant (C2)"
+"Français" = "Intermédiaire (B2)"
+"Allemand" = "Notions (A2)"
+"Russe" = "Langue maternelle"
+
+[[fr.experience]]
+role = "Ingénieur logiciel sénior"
+company = "Helix Labs"
+period = "2022 — présent"
+description = "Responsable du développement d'un éditeur collaboratif en temps réel avec synchronisation CRDT. Construction de la couche de rendu, du système de plugins et du pipeline d'entrée mathématique."
+
+[[fr.experience]]
+role = "Ingénieur logiciel"
+company = "Northwind Systems"
+period = "2019 — 2022"
+description = "Outils de développement pour une plateforme d'analyse de données. Livraison d'un profileur de requêtes et d'un REPL type notebook devenu l'outil quotidien de l'équipe."
+
+[[fr.experience]]
+role = "Assistant de recherche"
+company = "TU Berlin · Laboratoire de Géométrie"
+period = "2017 — 2019"
+description = "Implémentation de méthodes numériques pour les flots de raccourcissement de courbes. Co-auteur de deux articles en géométrie différentielle discrète."
+
+[fr.skills]
+languages = ["TypeScript", "Python", "Rust", "Go", "GLSL", "SQL"]
+frameworks = ["React", "Three.js", "FastAPI", "Tokio", "Bevy"]
+tools = ["PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform"]
+suites = ["Figma", "Blender", "Adobe Suite"]
+
+[[fr.projects]]
+name = "curve-garden"
+repo = "username/curve-garden"
+description = "Atelier interactif pour générer et explorer des familles de courbes paramétriques. L'élément intégré en haut de page fait partie de ce projet."
+language = "TypeScript"
+stars = 312
+featured = true
+
+[[fr.projects]]
+name = "crdt-notebook"
+repo = "username/crdt-notebook"
+description = "Notebook local-first avec réplication sans conflit. Synchronisation via WebRTC sans serveur."
+language = "Rust"
+stars = 184
+featured = true
+
+[[fr.projects]]
+name = "geom-flow"
+repo = "username/geom-flow"
+description = "Solveur numérique pour des flots géométriques sur des maillages polygonaux. Utilisé dans deux articles publiés."
+language = "Python"
+stars = 47
+featured = true
+
+[[fr.projects]]
+name = "tiny-frp"
+repo = "username/tiny-frp"
+description = "Bibliothèque réactive fonctionnelle minimale en 1 Ko. Construite pour comprendre les idées fondamentales."
+language = "TypeScript"
+stars = 89
+featured = true
+
+[[fr.publications]]
+title = "Raccourcissement discret de courbes sur maillages polygonaux"
+authors = "A. Morozov, L. Schmidt, P. Chen"
+venue = "Journal of Computational Geometry, 14(2)"
+year = 2023
+url = "https://example.com/paper1"
+
+[[fr.publications]]
+title = "Schémas numériques stables pour le flot de courbure moyenne anisotrope"
+authors = "P. Chen, A. Morozov"
+venue = "Proc. Symposium on Geometry Processing"
+year = 2021
+url = "https://example.com/paper2"
+
+[[fr.publications]]
+title = "Une note sur les Laplaciens discrets pour maillages non uniformes"
+authors = "A. Morozov"
+venue = "Prépublication ArXiv 2107.04112"
+year = 2021
+url = "https://example.com/paper3"
+
+[[fr.posts]]
+title = "Pourquoi j'ai (presque) arrêté d'utiliser des outils de build"
+date = "2024-09-12"
+url = "https://t.me/username/123"
+snippet = "Après des années de configs webpack/vite/rollup, j'ai essayé de livrer un vrai projet en un seul fichier HTML. Quelques surprises."
+
+[[fr.posts]]
+title = "Une note sur les Laplaciens discrets"
+date = "2024-07-30"
+url = "https://t.me/username/122"
+snippet = "Le Laplacien cotangent est célèbre, mais le Laplacien uniforme est ce que la plupart des codes utilisent. Pourquoi cet écart compte."
+
+[[fr.posts]]
+title = "Raccourcissement de courbes, dans le navigateur"
+date = "2024-05-18"
+url = "https://t.me/username/121"
+snippet = "Transformer un solveur numérique de 200 lignes en quelque chose que l'on peut manipuler à la souris. Notes sur l'interface."
+
+[[fr.posts]]
+title = "Lecture : articles SNAPL 2024"
+date = "2024-04-02"
+url = "https://t.me/username/120"
+snippet = "Brèves réactions sur les articles acceptés à SNAPL 2024 qui m'ont le plus intéressé cette année."
