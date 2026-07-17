@@ -135,6 +135,24 @@ canvas.addEventListener('pointermove', e => {
 });
 canvas.addEventListener('pointerup', () => isDragging = false);
 canvas.addEventListener('pointercancel', () => isDragging = false);
+$('canvasWrap').addEventListener('wheel', (e) => {
+  if (e.ctrlKey) {
+    e.preventDefault();
+  }
+}, {
+  passive: false
+});
+// Попытка заблокировать Ctrl + / Ctrl - / Ctrl 0 (работает не во всех браузерах)
+window.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && (e.key === '+' || e.key === '-' || e.key === '=')) {
+    e.preventDefault();
+  }
+});
+
+// Блокировка жестов масштабирования на тачпадах (Safari/macOS)
+document.addEventListener('gesturestart', (e) => e.preventDefault());
+document.addEventListener('gesturechange', (e) => e.preventDefault());
+document.addEventListener('gestureend', (e) => e.preventDefault());
 
 function animateCanvas() {
   if (!canvasAnimating) return;
