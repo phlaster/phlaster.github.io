@@ -226,22 +226,22 @@ function renderHero() {
   const a = i18nConfig.about || {};
   const u = ui();
   const nameParts = (a.name || '—').split(' ');
-  
+
   // Имя на первой строке, Фамилия — на второй (через flex-direction: column)
   $('heroName').innerHTML = nameParts.length > 1 ?
     `<span>${esc(nameParts[0])}</span><em>${esc(nameParts.slice(1).join(' '))}</em>` :
     `<span>${esc(a.name)}</span>`;
-    
+
   $('heroTagline').textContent = a.tagline || '';
   $('scrollCueText').textContent = u.scroll_cue || 'Scroll to explore';
 
   document.fonts.ready.then(() => {
     const nameEl = $('heroName');
     const taglineEl = $('heroTagline');
-    
+
     taglineEl.style.maxWidth = 'none';
     const nameWidth = nameEl.offsetWidth;
-    
+
     if (nameWidth > 0) {
       taglineEl.style.maxWidth = `${nameWidth * 0.85}px`;
     }
@@ -289,10 +289,14 @@ function renderAbout() {
       <div class="edu-inst">${esc(e.institution)}</div>
     </div>`).join('');
 
-  const interests = a.interests || { items: [] };
+  const interests = a.interests || {
+    items: []
+  };
   const interestTags = interests.items.map(i => `<span class="interest-tag">${esc(i)}</span>`).join('');
 
-  const hobbies = a.hobbies || { items: [] };
+  const hobbies = a.hobbies || {
+    items: []
+  };
   const hobbyTags = hobbies.items.map(i => `<span class="interest-tag">${esc(i)}</span>`).join('');
 
   $('panel-about').innerHTML = `
@@ -488,15 +492,9 @@ function renderContact() {
   $('lbl-email').textContent = c.email || 'Email';
   $('lbl-subject').textContent = c.subject || 'Subject';
   $('lbl-message').textContent = c.message || 'Message';
-  const gh = config.social.github,
-    tg = config.social.telegram,
-    em = config.social.email;
+  const gh = config.social.github;
   $('channelGithub').href = gh;
   $('channelGithub').querySelector('.value').textContent = gh.replace(/^https?:\/\//, '');
-  $('channelTelegram').href = tg;
-  $('channelTelegram').querySelector('.value').textContent = tg.replace(/^https?:\/\//, '');
-  $('channelEmail').href = em;
-  $('channelEmail').querySelector('.value').textContent = em.replace(/^mailto:/, '');
 }
 
 function renderAll() {
@@ -518,7 +516,7 @@ function renderAll() {
 /* ---------- Carousel Logic ---------- */
 function setupCarousel(track, prevBtn, nextBtn) {
   const container = track.parentElement;
-  
+
   // Если карусель уже была инициализирована, просто обновляем её состояние
   if (track._carouselReady) {
     if (track._updateState) track._updateState();
@@ -592,7 +590,9 @@ function setupCarousel(track, prevBtn, nextBtn) {
     hasDragged = false;
     startX = e.touches[0].pageX - track.offsetLeft;
     scrollLeft = track.scrollLeft;
-  }, { passive: true });
+  }, {
+    passive: true
+  });
 
   track.addEventListener('touchmove', (e) => {
     if (!isDown) return;
@@ -600,7 +600,9 @@ function setupCarousel(track, prevBtn, nextBtn) {
     const walk = (x - startX) * 1.5;
     if (Math.abs(x - startX) > 5) hasDragged = true;
     track.scrollLeft = scrollLeft - walk;
-  }, { passive: true });
+  }, {
+    passive: true
+  });
 
   track.addEventListener('touchend', () => {
     isDown = false;
@@ -617,16 +619,24 @@ function setupCarousel(track, prevBtn, nextBtn) {
 
   prevBtn.addEventListener('click', () => {
     const cardWidth = track.querySelector('.carousel-card').offsetWidth + 24;
-    track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    track.scrollBy({
+      left: -cardWidth,
+      behavior: 'smooth'
+    });
   });
 
   nextBtn.addEventListener('click', () => {
     const cardWidth = track.querySelector('.carousel-card').offsetWidth + 24;
-    track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    track.scrollBy({
+      left: cardWidth,
+      behavior: 'smooth'
+    });
   });
 
   // Обновляем состояние при прокрутке и изменении размера окна
-  track.addEventListener('scroll', updateState, { passive: true });
+  track.addEventListener('scroll', updateState, {
+    passive: true
+  });
   window.addEventListener('resize', updateState);
 
   // Сбрасываем прокрутку в начало при рендере и делаем первичную проверку
@@ -642,12 +652,12 @@ function activateTab(name) {
     p.classList.toggle('active', p.dataset.panel === name));
   const contentTop = $('contentArea').getBoundingClientRect().top + window.scrollY;
   const barH = $('topbar').offsetHeight;
-  if (window.scrollY < contentTop - barH - 20) {
-    window.scrollTo({
-      top: contentTop - barH + 15,
-      behavior: 'smooth'
-    });
-  }
+
+  // Проматываем к началу контента из любой точки скролла
+  window.scrollTo({
+    top: contentTop - barH + 15,
+    behavior: 'smooth'
+  });
 }
 
 document.querySelectorAll('.tab').forEach(t => {
@@ -692,8 +702,117 @@ $('scrollCue').addEventListener('click', () => {
   });
 });
 
+let contactTargetState = false;
+let contactTimeouts = [];
+
+// Функция очистки pending-таймаутов при прерывании
+function clearContactTimers() {
+  contactTimeouts.forEach(id => clearTimeout(id));
+  contactTimeouts = [];
+}
+
+// Функция управления анимацией
+function setContactState(expanded) {
+  if (expanded === contactTargetState) return;
+  contactTargetState = expanded;
+  clearContactTimers();
+
+  const contact = $('contact');
+  const title = $('contactTitle');
+  const inner = contact.querySelector('.contact-inner');
+
+  // 1. Полностью замораживаем текущее визуальное состояние в inline-стилях.
+  // Это предотвращает любые скачки при смене классов.
+  title.style.animation = 'none';
+  const cs = window.getComputedStyle(title);
+  title.style.transition = 'none';
+  title.style.transform = cs.transform; // Фиксируем матрицу трансформации
+  title.style.opacity = cs.opacity; // Фиксируем прозрачность
+
+  // Принудительный reflow, чтобы браузер запомнил стартовую точку
+  void title.offsetWidth;
+
+  if (expanded) {
+    // --- РАЗВОРАЧИВАНИЕ ---
+    contact.classList.remove('collapsed');
+
+    // 2. Заголовок уезжает за правый край (от замороженного центра)
+    title.style.transition = 'transform 0.15s ease-in, opacity 0.1s ease-in';
+    title.style.transform = 'translateX(120%)';
+    title.style.opacity = '0';
+
+    contactTimeouts.push(setTimeout(() => {
+      // 3. Появляется контент формы
+      inner.style.transition = 'opacity 0.15s ease-out';
+      inner.style.opacity = '1';
+      inner.style.pointerEvents = 'auto';
+
+      // Подготовка заголовка слева (без анимации)
+      title.style.transition = 'none';
+      title.style.bottom = 'auto';
+      title.style.top = '4rem';
+      title.style.left = 'var(--gutter)';
+      title.style.textAlign = 'left';
+      title.style.transform = 'translateX(-120%)';
+      title.style.opacity = '0';
+
+      void title.offsetWidth;
+
+      // 4. Заголовок выезжает слева на свое место
+      contactTimeouts.push(setTimeout(() => {
+        title.style.transition = 'transform 0.15s ease-out, opacity 0.1s ease-out';
+        title.style.transform = 'translateX(0)';
+        title.style.opacity = '1';
+      }, 150));
+    }, 150));
+  } else {
+    // --- СВОРАЧИВАНИЕ ---
+    contact.classList.remove('collapsed');
+
+    // 2. Заголовок уезжает за левый край
+    title.style.transition = 'transform 0.15s ease-in, opacity 0.1s ease-in';
+    title.style.transform = 'translateX(-120%)';
+    title.style.opacity = '0';
+
+    contactTimeouts.push(setTimeout(() => {
+      // 3. Исчезает контент формы
+      inner.style.transition = 'opacity 0.15s ease-out';
+      inner.style.opacity = '0';
+      inner.style.pointerEvents = 'none';
+
+      // Подготовка заголовка справа
+      title.style.transition = 'none';
+      title.style.top = 'auto';
+      title.style.bottom = '1.5rem';
+      title.style.left = '50%';
+      title.style.textAlign = 'center';
+      title.style.transform = 'translateX(120%)';
+      title.style.opacity = '0';
+
+      void title.offsetWidth;
+
+      // 4. Заголовок выезжает справа в центр
+      contactTimeouts.push(setTimeout(() => {
+        title.style.transition = 'transform 0.15s ease-out, opacity 0.2s ease-out';
+        title.style.transform = 'translateX(-50%)';
+        title.style.opacity = '0.5';
+
+        contact.classList.add('collapsed');
+
+        // Запускаем плавание после завершения движения
+        contactTimeouts.push(setTimeout(() => {
+          // Сбрасываем inline-стили, чтобы управление взял на себя CSS
+          title.style.transition = '';
+          title.style.transform = '';
+          title.style.opacity = '';
+          title.style.animation = 'floatTitle 3s ease-in-out infinite';
+        }, 200));
+      }, 150));
+    }, 150));
+  }
+}
+
 window.addEventListener('scroll', () => {
-  // Логика для topbar (осталась прежней)
   const heroBottom = $('hero').offsetHeight - 80;
   if (window.scrollY > heroBottom) {
     $('topbar').classList.add('solid');
@@ -701,25 +820,37 @@ window.addEventListener('scroll', () => {
     $('topbar').classList.remove('solid');
   }
 
-  // Логика появления contact-section
-  const contentAreaTop = $('contentArea').getBoundingClientRect().top;
+  // Надежная логика видимости
+  const heroRectBottom = $('hero').getBoundingClientRect().bottom;
   const contactTop = $('contact').getBoundingClientRect().top;
 
-  // Появляется ровно когда верхняя граница content-area опускается 
-  // до уровня верхней границы contact-section (скрывая её за собой)
-  if (contentAreaTop <= contactTop) {
-    $('contact').classList.add('visible');
-  } else {
+  if (heroRectBottom > contactTop) {
     $('contact').classList.remove('visible');
+  } else {
+    $('contact').classList.add('visible');
   }
+
+  // Срабатывание в момент НАЧАЛА появления футера
+  const footer = document.querySelector('.site-footer');
+  const footerTop = footer.getBoundingClientRect().top;
+  setContactState(footerTop < window.innerHeight);
 }, {
   passive: true
 });
 
-// Принудительно вызываем событие scroll при загрузке для установки начального состояния
-window.dispatchEvent(new Event('scroll'));
+// Клик по свернутому блоку перематывает страницу к футеру
+$('contact').addEventListener('click', (e) => {
+  if (!contactTargetState) {
+    const footer = document.querySelector('.site-footer');
+    const footerBottom = footer.getBoundingClientRect().bottom + window.scrollY;
+    window.scrollTo({
+      top: footerBottom - window.innerHeight,
+      behavior: 'smooth'
+    });
+  }
+});
 
-// Принудительно вызываем событие scroll при загрузке для установки начального состояния
+// Принудительно вызываем событие scroll при загрузке
 window.dispatchEvent(new Event('scroll'));
 
 const heroObserver = new IntersectionObserver((entries) => {
