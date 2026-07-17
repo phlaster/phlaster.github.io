@@ -29,6 +29,7 @@ scroll_cue = "Scroll to explore"
 hero_interact = "Drag to draw · tap & drag on touch"
 hero_label = "Portfolio · 2026"
 based_in = "Based in"
+education = "Education"
 spoken_languages = "Spoken languages"
 skills_languages = "Programming languages"
 skills_frameworks = "Frameworks & libraries"
@@ -41,6 +42,7 @@ scroll_cue = "Défiler pour explorer"
 hero_interact = "Glisser pour dessiner · taper & glisser sur tactile"
 hero_label = "Portfolio · 2026"
 based_in = "Basé à"
+education = "Formation"
 spoken_languages = "Langues parlées"
 skills_languages = "Langages de programmation"
 skills_frameworks = "Frameworks & bibliothèques"
@@ -53,6 +55,7 @@ scroll_cue = "Прокрутите вниз"
 hero_interact = "Тяните, чтобы рисовать · касание и перетаскивание"
 hero_label = "Портфолио · 2026"
 based_in = "Местонахождение"
+education = "Образование"
 spoken_languages = "Разговорные языки"
 skills_languages = "Языки программирования"
 skills_frameworks = "Фреймворки и библиотеки"
@@ -299,27 +302,16 @@ items = [
 
 [about.hobbies.en]
 title = "Hobbies"
-items = [
-  "Generative Art",
-  "Bouldering",
-  "Synth DIY"
-]
+items = ["Generative Art", "Bouldering", "Synth DIY"]
 
 [about.hobbies.fr]
 title = "Loisirs"
-items = [
-  "Art génératif",
-  "Grimpe en salle",
-  "DIY Synthé"
-]
+items = ["Art génératif", "Grimpe en salle", "DIY Synthé"]
 
 [about.hobbies.ru]
 title = "Хобби"
-items = [
-  "Генеративное искусство",
-  "Скалолазание",
-  "DIY Синтезаторы"
-]
+items = ["Генеративное искусство", "Скалолазание", "DIY Синтезаторы"]
+
 # ══════════════════════════════════════
 # EXPERIENCE
 # ══════════════════════════════════════
@@ -377,7 +369,6 @@ languages = ["Vanilla JS", "WebGL", "CSS"]
 [projects.en]
 description = "Interactive hexagonal tiling playground with real-time manipulation and procedural generation."
 
-
 # ══════════════════════════════════════
 # CONFERENCES
 # ══════════════════════════════════════
@@ -396,8 +387,6 @@ url = "https://example.com/conf2"
 title = "International Conference on HCI"
 location = "Paris, France"
 role = "Participant"
-
-
 
 # ══════════════════════════════════════
 # PUBLICATIONS
@@ -423,8 +412,6 @@ year = 2024
 authors = "Grigory V Gladkov, Anastasiia K Kimeklis, Olga V Orlova, Tatiana O Lisina, Arina A Kichko, Alexander D Bezlepsky, Evgeny E Andronov"
 venue = "Microorganisms 12(8), 1728 (2024)"
 url = "https://www.mdpi.com/2076-2607/12/8/1728"
-
-
 
 # ══════════════════════════════════════
 # POSTS

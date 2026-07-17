@@ -308,18 +308,23 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 160%; /* Выходит далеко за границы текста */
-  height: 200%; /* Выходит далеко за границы текста */
+  width: 160%;
+  /* Выходит далеко за границы текста */
+  height: 200%;
+  /* Выходит далеко за границы текста */
   background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 10%, rgba(15, 14, 12, 0.5) 40%, rgba(15, 14, 12, 0) 75%);
   z-index: -1;
   pointer-events: none;
-  filter: blur(25px); /* Сильное размытие для плавного перехода */
+  filter: blur(25px);
+  /* Сильное размытие для плавного перехода */
 }
 
 .hero-name {
   display: flex;
-  flex-direction: column; /* Имя на 1й строке, Фамилия на 2й */
-  align-items: center; /* Выравнивание по центру */
+  flex-direction: column;
+  /* Имя на 1й строке, Фамилия на 2й */
+  align-items: center;
+  /* Выравнивание по центру */
   font-family: var(--font-serif);
   font-weight: 300;
   font-size: clamp(2.75rem, 9vw, 7rem);
@@ -338,15 +343,17 @@ a {
   font-size: 1.0625rem;
   line-height: 1.5;
   opacity: .95;
-  text-align: justify; /* Выравнивание по ширине */
-  text-align-last: center; /* Последняя строка по центру */
+  text-align: justify;
+  /* Выравнивание по ширине */
+  text-align-last: center;
+  /* Последняя строка по центру */
 }
 
 .hero-photo {
   grid-column: 2;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 var(--gutter); 
+  padding: 0 var(--gutter);
   height: auto;
   max-height: 65vh;
   aspect-ratio: 4/5;
@@ -422,7 +429,8 @@ a {
 
 .content-area {
   position: relative;
-  z-index: 3; /* Подняли над контактной секцией, чтобы перекрывать её сверху */
+  z-index: 3;
+  /* Подняли над контактной секцией, чтобы перекрывать её сверху */
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 4rem var(--gutter) 5rem;
@@ -430,8 +438,10 @@ a {
   background: var(--bg);
   border-left: 1px solid var(--line);
   border-right: 1px solid var(--line);
-  border-top: 1px solid var(--line); /* Добавили верхнюю границу для целостности */
-  border-radius: var(--radius-lg); /* Скруглили все 4 угла */
+  border-top: 1px solid var(--line);
+  /* Добавили верхнюю границу для целостности */
+  border-radius: var(--radius-lg);
+  /* Скруглили все 4 угла */
 }
 
 .panel {
@@ -1026,6 +1036,19 @@ a {
   cursor: progress;
 }
 
+/* Центрируем спиннер в полях контактов */
+.reveal-loader {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+}
+
+.reveal-loader .btn-spinner {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
 .btn-spinner {
   width: 12px;
   height: 12px;
@@ -1036,7 +1059,9 @@ a {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .contact-section {
@@ -1054,7 +1079,8 @@ a {
   border-radius: 0;
   opacity: 0;
   visibility: hidden;
-  overflow: hidden; /* Обязательно, чтобы скрывающийся текст обрезался по краям */
+  overflow: hidden;
+  /* Обязательно, чтобы скрывающийся текст обрезался по краям */
 }
 
 .contact-section.visible {
@@ -1090,7 +1116,8 @@ a {
   z-index: 10;
   white-space: nowrap;
   /* Начальное (свернутое) состояние: внизу по центру */
-  bottom: 1.5rem; /* Опустили еще ниже */
+  bottom: 1.5rem;
+  /* Опустили еще ниже */
   top: auto;
   left: 50%;
   transform: translateX(-50%);
@@ -1100,7 +1127,8 @@ a {
 
 /* Развернутое состояние (когда футер виден) */
 .contact-section:not(.collapsed) #contactTitle {
-  top: 4rem; /* padding-top of contact-section */
+  top: 4rem;
+  /* padding-top of contact-section */
   left: var(--gutter);
   bottom: auto;
   transform: none;
@@ -1109,7 +1137,8 @@ a {
 
 /* Свернутое состояние (пустой блок с надписью внизу) */
 .contact-section.collapsed #contactTitle {
-  bottom: 5rem; /* padding-bottom of contact-section */
+  bottom: 5rem;
+  /* padding-bottom of contact-section */
   left: 50%;
   top: auto;
   transform: translateX(-50%);
@@ -1205,6 +1234,23 @@ a {
   width: 100%;
 }
 
+/* Сброс стилей автозаполнения браузера */
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field textarea:-webkit-autofill,
+.field textarea:-webkit-autofill:hover,
+.field textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--hero-fg);
+  /* Принудительно задаем цвет текста */
+  -webkit-box-shadow: 0 0 0px 1000px var(--ink) inset;
+  /* Закрашиваем фон цветом секции */
+  transition: background-color 5000s ease-in-out 0s;
+  /* Фикс для Firefox */
+  caret-color: var(--hero-fg);
+  /* Цвет курсора */
+}
+
 .field input::placeholder,
 .field textarea::placeholder {
   color: rgba(244, 241, 234, .3);
@@ -1218,6 +1264,7 @@ a {
 .field textarea {
   resize: vertical;
   min-height: 100px;
+  max-height: 300px;
   font-family: var(--font-sans);
 }
 
@@ -1449,8 +1496,15 @@ a {
 
 /* Анимация парения для свернутого состояния */
 @keyframes floatTitle {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-8px);
+  }
 }
 
 /* Состояние ожидания (полупрозрачный) */

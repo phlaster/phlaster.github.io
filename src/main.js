@@ -3,6 +3,11 @@ import {
 } from 'smol-toml';
 import tomlString from './content.toml?raw';
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 const config = parse(tomlString);
 let currentLang = config.site.default_lang || 'en';
 
@@ -330,7 +335,7 @@ function renderAbout() {
           <div class="languages-list">${langItems}</div>
         </div>
         <div class="meta-block">
-          <div class="meta-label">Education</div>
+          <div class="meta-label">${esc(u.education || 'Education')}</div>
           ${eduHtml}
         </div>
       </div>
@@ -492,9 +497,6 @@ function renderContact() {
   $('lbl-email').textContent = c.email || 'Email';
   $('lbl-subject').textContent = c.subject || 'Subject';
   $('lbl-message').textContent = c.message || 'Message';
-  const gh = config.social.github;
-  $('channelGithub').href = gh;
-  $('channelGithub').querySelector('.value').textContent = gh.replace(/^https?:\/\//, '');
 }
 
 function renderAll() {
@@ -747,6 +749,9 @@ function setContactState(expanded) {
       inner.style.opacity = '1';
       inner.style.pointerEvents = 'auto';
 
+      // НАЧИНАЕМ МАЙНИТЬ ХЭШ ДЛЯ РАСКРЫТИЯ КОНТАКТОВ
+      prepareRevealPoW();
+
       // Подготовка заголовка слева (без анимации)
       title.style.transition = 'none';
       title.style.bottom = 'auto';
@@ -893,31 +898,34 @@ $('contactForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  // Блокируем кнопку и пишем "Отправка..."
   btn.disabled = true;
   status.textContent = u.sending || 'Sending…';
   status.className = 'form-status';
 
   try {
-    // 1. Получаем задание
-    const resCh = await fetch(`${workerUrl}/api/challenge`);
-    if (!resCh.ok) throw new Error('Network error');
-    const {
-      challenge
-    } = await resCh.json();
+    // Если фоновой майнинг не запущен и хэша нет, запускаем синхронно
+    if (!formChallenge && !isComputingFormPoW) {
+      prepareFormPoW();
+    }
 
-    // 2. Вычисляем PoW (занимает ~3 секунды)
-    const nonce = await solvePoW(challenge, () => {});
+    // Ждем завершения майнинга
+    while (isComputingFormPoW) {
+      await new Promise(r => setTimeout(r, 100));
+    }
 
-    // 3. Отправляем данные формы и решение
+    if (!formChallenge || !formNonce) {
+      throw new Error('Failed to compute PoW');
+    }
+
+    // Отправляем данные
     const res = await fetch(`${workerUrl}/api/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        challenge,
-        nonce,
+        challenge: formChallenge,
+        nonce: formNonce,
         name,
         email,
         subject,
@@ -925,21 +933,31 @@ $('contactForm').addEventListener('submit', async (e) => {
       })
     });
 
+    // Очищаем использованный хэш
+    formChallenge = null;
+    formNonce = null;
+
     if (!res.ok) throw new Error('Verification failed');
 
-    // 4. Успех
     status.textContent = u.success || 'Message sent. I will get back to you shortly.';
     status.className = 'form-status success';
     $('contactForm').reset();
+
+    // ТАК КАК ХЭШ УДАЛЕН, при следующем вводе в поле слушатель 'input' 
+    // увидит, что formChallenge === null, и сам запустит новый майнинг.
+
   } catch (err) {
-    // 5. Ошибка
     status.textContent = u.error || 'Could not send. Please use Telegram directly.';
     status.className = 'form-status error';
+
+    // При ошибке тоже очищаем хэш. Если юзер захочет попробовать снова,
+    // ему нужно будет поправить текст, что снова триггернет 'input' и майнинг.
+    formChallenge = null;
+    formNonce = null;
   } finally {
     btn.disabled = false;
   }
 });
-
 /* ---------- Email PoW Reveal ---------- */
 async function solvePoW(challenge, statusFn) {
   const enc = new TextEncoder();
@@ -964,87 +982,139 @@ async function solvePoW(challenge, statusFn) {
   }
 }
 
-/* ---------- Contacts PoW Reveal ---------- */
-let isRevealing = false;
+/* ---------- PoW Pre-computation ---------- */
+// --- Для формы отправки сообщения ---
+let formChallenge = null;
+let formNonce = null;
+let isComputingFormPoW = false;
 
-async function revealContacts() {
-  if (isRevealing) return;
-  isRevealing = true;
+async function prepareFormPoW() {
+  // Не запускаем, если уже идет майнинг или хэш уже готов
+  if (isComputingFormPoW || (formChallenge && formNonce)) return;
 
-  const tgBtn = $('revealTgBtn');
-  const emailBtn = $('revealEmailBtn');
-  const workerUrl = config.contact.pow_worker_url;
+  const workerUrl = config.contact.form_worker_url;
+  if (!workerUrl || workerUrl.includes('your-form-worker-name')) return;
 
-  if (!workerUrl || workerUrl.includes('your-worker-name')) {
-    if (tgBtn) tgBtn.querySelector('.btn-text').textContent = "Worker not configured";
-    if (emailBtn) emailBtn.querySelector('.btn-text').textContent = "Worker not configured";
-    isRevealing = false;
-    return;
-  }
-
-  const setLoading = (btn) => {
-    if (!btn) return;
-    btn.disabled = true;
-    btn.querySelector('.btn-text').hidden = true;
-    btn.querySelector('.btn-spinner').hidden = false;
-  };
-
-  setLoading(tgBtn);
-  setLoading(emailBtn);
+  isComputingFormPoW = true;
+  formChallenge = null;
+  formNonce = null;
 
   try {
-    // 1. Получаем задание
     const resCh = await fetch(`${workerUrl}/api/challenge`);
     if (!resCh.ok) throw new Error('Network error');
     const {
       challenge
     } = await resCh.json();
+    formChallenge = challenge;
+    // Майним хэш в фоне
+    formNonce = await solvePoW(challenge, () => {});
+  } catch (err) {
+    console.error('Form PoW prep failed:', err);
+  } finally {
+    isComputingFormPoW = false;
+  }
+}
 
-    // 2. Вычисляем PoW
-    const nonce = await solvePoW(challenge, () => {});
+// --- Для раскрытия контактов (Email/Telegram/GitHub/GitLab) ---
+let revealChallenge = null;
+let revealNonce = null;
+let isComputingRevealPoW = false;
+let contactsRevealed = false;
 
-    // 3. Отправляем решение
+async function prepareRevealPoW() {
+  // Если уже вычисляется или контакты уже загружены - выходим
+  if (isComputingRevealPoW || contactsRevealed) return;
+
+  const workerUrl = config.contact.pow_worker_url;
+  if (!workerUrl || workerUrl.includes('your-worker-name')) {
+    setContactError("Worker not configured");
+    return;
+  }
+
+  isComputingRevealPoW = true;
+  revealChallenge = null;
+  revealNonce = null;
+
+  try {
+    const resCh = await fetch(`${workerUrl}/api/challenge`);
+    if (!resCh.ok) throw new Error('Network error');
+    const {
+      challenge
+    } = await resCh.json();
+    revealChallenge = challenge;
+
+    // Майним хэш в фоне
+    revealNonce = await solvePoW(challenge, () => {});
+
+    // Как только хэш готов, автоматически запрашиваем контакты
+    await fetchRevealedContacts();
+  } catch (err) {
+    console.error('Reveal PoW prep failed:', err);
+    setContactError("Error. Reload page.");
+  } finally {
+    isComputingRevealPoW = false;
+  }
+}
+
+async function fetchRevealedContacts() {
+  if (contactsRevealed) return; // Защита от повторного вызова
+  const workerUrl = config.contact.pow_worker_url;
+
+  try {
     const resData = await fetch(`${workerUrl}/api/get-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        challenge,
-        nonce
+        challenge: revealChallenge,
+        nonce: revealNonce
       })
     });
 
     if (!resData.ok) throw new Error('Verification failed');
     const {
       email,
-      telegram
+      telegram,
+      github,
+      gitlab
     } = await resData.json();
 
-    // 4. Заменяем кнопки на ссылки
-    if (emailBtn) {
-      $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+    // Заменяем спиннеры на реальные ссылки
+    if (github) {
+      $('channelGithubWrap').innerHTML = `<span class="label">GitHub</span><a class="value" href="https://github.com/${github}" target="_blank">@${github}</a>`;
     }
-    if (tgBtn) {
+    if (gitlab) {
+      $('channelGitlabWrap').innerHTML = `<span class="label">GitLab</span><a class="value" href="https://gitlab.com/${gitlab}" target="_blank">@${gitlab}</a>`;
+    }
+    if (telegram) {
       const tgUsername = telegram.replace(/@/g, '');
       $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="https://telegram.me/${tgUsername}">@${tgUsername}</a>`;
     }
+    if (email) {
+      $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+    }
+
+    contactsRevealed = true; // Отмечаем, что контакты получены
 
   } catch (err) {
-    const setError = (btn) => {
-      if (!btn) return;
-      btn.disabled = false;
-      btn.querySelector('.btn-text').hidden = false;
-      btn.querySelector('.btn-spinner').hidden = true;
-      btn.querySelector('.btn-text').textContent = "Error. Try again.";
-    };
-    setError(tgBtn);
-    setError(emailBtn);
-    isRevealing = false;
+    console.error('Fetch contacts failed:', err);
+    setContactError("Error. Reload page.");
   }
 }
 
-if ($('revealEmailBtn')) $('revealEmailBtn').addEventListener('click', revealContacts);
-if ($('revealTgBtn')) $('revealTgBtn').addEventListener('click', revealContacts);
+// Вспомогательная функция для отображения ошибок
+function setContactError(text) {
+  ['channelGithubWrap', 'channelGitlabWrap', 'channelTelegramWrap', 'channelEmailWrap'].forEach(id => {
+    const el = $(id);
+    if (el) el.innerHTML = `<span class="label">${el.id.replace('channel','').replace('Wrap','')}</span><span class="value">${text}</span>`;
+  });
+}
+
+// Начинаем майнить хэш формы, как только юзер начал печатать
+['f-name', 'f-email', 'f-subject', 'f-message'].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', prepareFormPoW);
+});
 
 renderAll();

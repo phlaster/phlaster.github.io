@@ -1,165 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Alex Morozov — Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Alex Morozov — Portfolio</title>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23B4502A'>urve</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23B4502A'>urve</text></svg>">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/src/style.css">
 </head>
+
 <body>
 
-<header class="topbar" id="topbar">
-  <div class="topbar-inner">
-    <div class="brand">A<span class="dot">·</span>M</div>
-    <nav class="tabs" id="tabs" role="tablist">
-      <button class="tab active" data-tab="about" role="tab">About</button>
-      <button class="tab" data-tab="skills" role="tab">Skills</button>
-      <button class="tab" data-tab="experience" role="tab">Experience</button>
-      <button class="tab" data-tab="projects" role="tab">Projects</button>
-      <button class="tab" data-tab="publications" role="tab">Research</button>
-      <button class="tab" data-tab="posts" role="tab">Posts</button>
-    </nav>
-    <div class="lang-switch" id="langSwitch">
-      <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-        <span class="lang-current" id="langCurrent">EN</span>
-      </button>
-      <ul class="lang-dropdown" id="langDropdown" role="menu">
-        <li role="menuitem" data-lang="en" class="active">English</li>
-        <li role="menuitem" data-lang="ru">Русский</li>
-        <li role="menuitem" data-lang="fr">Français</li>
-      </ul>
-    </div>
-  </div>
-</header>
-
-<section class="hero" id="hero">
-  <div class="hero-canvas-wrap" id="canvasWrap">
-    <canvas id="heroCanvas"></canvas>
-    <iframe id="heroIframe" src="" frameborder="0" allow="fullscreen" title="Interactive curve canvas"></iframe>
-  </div>
-  <div class="hero-overlay" id="heroOverlay">
-    <div class="hero-top"></div>
-    
-    <div class="hero-content">
-      <div class="hero-text-block">
-        <h1 class="hero-name" id="heroName">—</h1>
-        <p class="hero-tagline" id="heroTagline"></p>
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <div class="brand">A<span class="dot">·</span>M</div>
+      <nav class="tabs" id="tabs" role="tablist">
+        <button class="tab active" data-tab="about" role="tab">About</button>
+        <button class="tab" data-tab="skills" role="tab">Skills</button>
+        <button class="tab" data-tab="experience" role="tab">Experience</button>
+        <button class="tab" data-tab="projects" role="tab">Projects</button>
+        <button class="tab" data-tab="publications" role="tab">Research</button>
+        <button class="tab" data-tab="posts" role="tab">Posts</button>
+      </nav>
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="lang-current" id="langCurrent">EN</span>
+        </button>
+        <ul class="lang-dropdown" id="langDropdown" role="menu">
+          <li role="menuitem" data-lang="en" class="active">English</li>
+          <li role="menuitem" data-lang="ru">Русский</li>
+          <li role="menuitem" data-lang="fr">Français</li>
+        </ul>
       </div>
-      <img class="hero-photo" id="heroPhoto" src="" alt="">
     </div>
-    
-    <div class="hero-foot">
-      <button class="scroll-cue" id="scrollCue" type="button">
-        <span id="scrollCueText">Scroll to explore</span>
-        <span class="arrow">↓</span>
-      </button>
-    </div>
-  </div>
-</section>
+  </header>
 
-<main class="content-area" id="contentArea">
-  <section class="panel active" data-panel="about" id="panel-about"></section>
-  <section class="panel" data-panel="skills" id="panel-skills"></section>
-  <section class="panel" data-panel="experience" id="panel-experience"></section>
-  
-  <section class="panel" data-panel="projects" id="panel-projects">
-    <div class="panel-head">
-      <h2 class="panel-title" id="proj-title"></h2>
-      <span class="panel-subtitle" id="proj-sub"></span>
+  <section class="hero" id="hero">
+    <div class="hero-canvas-wrap" id="canvasWrap">
+      <canvas id="heroCanvas"></canvas>
+      <iframe id="heroIframe" src="" frameborder="0" allow="fullscreen" title="Interactive curve canvas"></iframe>
     </div>
-    <div class="carousel-container">
-      <button class="carousel-btn prev" id="projPrev">‹</button>
-      <div class="carousel-track" id="projectsTrack"></div>
-      <button class="carousel-btn next" id="projNext">›</button>
+    <div class="hero-overlay" id="heroOverlay">
+      <div class="hero-top"></div>
+
+      <div class="hero-content">
+        <div class="hero-text-block">
+          <h1 class="hero-name" id="heroName">—</h1>
+          <p class="hero-tagline" id="heroTagline"></p>
+        </div>
+        <img class="hero-photo" id="heroPhoto" src="" alt="">
+      </div>
+
+      <div class="hero-foot">
+        <button class="scroll-cue" id="scrollCue" type="button">
+          <span id="scrollCueText">Scroll to explore</span>
+          <span class="arrow">↓</span>
+        </button>
+      </div>
     </div>
   </section>
-  
-  <section class="panel" data-panel="publications" id="panel-publications"></section>
-  
-  <section class="panel" data-panel="posts" id="panel-posts">
-    <div class="panel-head">
-      <h2 class="panel-title" id="posts-title"></h2>
-      <span class="panel-subtitle" id="posts-sub"></span>
-    </div>
-    <div class="carousel-container">
-      <button class="carousel-btn prev" id="postsPrev">‹</button>
-      <div class="carousel-track" id="postsTrack"></div>
-      <button class="carousel-btn next" id="postsNext">›</button>
+
+  <main class="content-area" id="contentArea">
+    <section class="panel active" data-panel="about" id="panel-about"></section>
+    <section class="panel" data-panel="skills" id="panel-skills"></section>
+    <section class="panel" data-panel="experience" id="panel-experience"></section>
+
+    <section class="panel" data-panel="projects" id="panel-projects">
+      <div class="panel-head">
+        <h2 class="panel-title" id="proj-title"></h2>
+        <span class="panel-subtitle" id="proj-sub"></span>
+      </div>
+      <div class="carousel-container">
+        <button class="carousel-btn prev" id="projPrev">‹</button>
+        <div class="carousel-track" id="projectsTrack"></div>
+        <button class="carousel-btn next" id="projNext">›</button>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="publications" id="panel-publications"></section>
+
+    <section class="panel" data-panel="posts" id="panel-posts">
+      <div class="panel-head">
+        <h2 class="panel-title" id="posts-title"></h2>
+        <span class="panel-subtitle" id="posts-sub"></span>
+      </div>
+      <div class="carousel-container">
+        <button class="carousel-btn prev" id="postsPrev">‹</button>
+        <div class="carousel-track" id="postsTrack"></div>
+        <button class="carousel-btn next" id="postsNext">›</button>
+      </div>
+    </section>
+  </main>
+
+  <section class="contact-section collapsed" id="contact">
+    <h2 id="contactTitle">Let's <em>talk</em>.</h2>
+    <div class="contact-inner">
+      <div class="contact-intro">
+        <p id="contactIntro"></p>
+        <div class="contact-channels">
+          <div class="contact-channel" id="channelGithubWrap">
+            <span class="label">GitHub</span>
+            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+          </div>
+          <div class="contact-channel" id="channelGitlabWrap">
+            <span class="label">GitLab</span>
+            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+          </div>
+          <div class="contact-channel" id="channelTelegramWrap">
+            <span class="label">Telegram</span>
+            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+          </div>
+          <div class="contact-channel" id="channelEmailWrap">
+            <span class="label">Email</span>
+            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name" id="lbl-name">Name</label>
+            <input id="f-name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="f-email" id="lbl-email">Email</label>
+            <input id="f-email" name="email" type="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-subject" id="lbl-subject">Subject</label>
+          <input id="f-subject" name="subject" type="text">
+        </div>
+        <div class="field">
+          <label for="f-message" id="lbl-message">Message</label>
+          <textarea id="f-message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="submit-row">
+          <button class="submit-btn" type="submit" id="submitBtn">Send message</button>
+          <span class="form-status" id="formStatus"></span>
+        </div>
+      </form>
     </div>
   </section>
-</main>
 
-<section class="contact-section collapsed" id="contact">
-  <h2 id="contactTitle">Let's <em>talk</em>.</h2>
-  <div class="contact-inner">
-    <div class="contact-intro">
-      <p id="contactIntro"></p>
-      <div class="contact-channels">
-        <a class="contact-channel" href="#" id="channelGithub">
-          <span class="label">GitHub</span>
-          <span class="value">—</span>
-        </a>
-        <div class="contact-channel" id="channelTelegramWrap">
-          <span class="label">Telegram</span>
-          <button class="value reveal-btn" id="revealTgBtn" type="button">
-            <span class="btn-text">Click to reveal</span>
-            <span class="btn-spinner" hidden></span>
-          </button>
-        </div>
-        <div class="contact-channel" id="channelEmailWrap">
-          <span class="label">Email</span>
-          <button class="value reveal-btn" id="revealEmailBtn" type="button">
-            <span class="btn-text">Click to reveal</span>
-            <span class="btn-spinner" hidden></span>
-          </button>
-        </div>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© <span id="footerYear">2024</span> <span id="footerAuthor">Alex Morozov</span></span>
+      <span>Static · GitHub Pages</span>
     </div>
-    <form class="contact-form" id="contactForm" novalidate>
-      <div class="form-row">
-        <div class="field">
-          <label for="f-name" id="lbl-name">Name</label>
-          <input id="f-name" name="name" type="text" required>
-        </div>
-        <div class="field">
-          <label for="f-email" id="lbl-email">Email</label>
-          <input id="f-email" name="email" type="email" required>
-        </div>
-      </div>
-      <div class="field">
-        <label for="f-subject" id="lbl-subject">Subject</label>
-        <input id="f-subject" name="subject" type="text">
-      </div>
-      <div class="field">
-        <label for="f-message" id="lbl-message">Message</label>
-        <textarea id="f-message" name="message" rows="5" required></textarea>
-      </div>
-      <div class="submit-row">
-        <button class="submit-btn" type="submit" id="submitBtn">Send message</button>
-        <span class="form-status" id="formStatus"></span>
-      </div>
-    </form>
-  </div>
-</section>
+  </footer>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span>© <span id="footerYear">2024</span> <span id="footerAuthor">Alex Morozov</span></span>
-    <span>Static · GitHub Pages</span>
-  </div>
-</footer>
-
-<script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
