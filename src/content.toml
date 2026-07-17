@@ -324,63 +324,15 @@ items = [
 # EXPERIENCE
 # ══════════════════════════════════════
 [[experience]]
-company = "Helix Labs"
-
-[experience.en]
-role = "Senior Software Engineer"
-period = "2022 — present"
-description = "Leading development of a real-time collaborative editor with CRDT-based sync. Built the rendering layer, plugin system, and the math-aware input pipeline."
-
-[experience.fr]
-role = "Ingénieur logiciel sénior"
-period = "2022 — présent"
-description = "Responsable du développement d'un éditeur collaboratif en temps réel avec synchronisation CRDT. Construction de la couche de rendu, du système de plugins et du pipeline d'entrée mathématique."
-
-[experience.ru]
-role = "Старший инженер-программист"
-period = "2022 — настоящее время"
-description = "Руковожу разработкой редактора совместной работы в реальном времени с синхронизацией на базе CRDT. Создал слой рендеринга, систему плагинов и конвейер ввода математических данных."
-
-[[experience]]
-company = "Northwind Systems"
-
-[experience.en]
-role = "Software Engineer"
-period = "2019 — 2022"
-description = "Worked on developer tooling for a data analytics platform. Shipped a query profiler and a notebook-style REPL that became the team's daily driver."
-
-[experience.fr]
-role = "Ingénieur logiciel"
-period = "2019 — 2022"
-description = "Outils de développement pour une plateforme d'analyse de données. Livraison d'un profileur de requêtes et d'un REPL type notebook devenu l'outil quotidien de l'équipe."
-
-[experience.ru]
-role = "Инженер-программист"
-period = "2019 — 2022"
-description = "Работал над инструментами разработчика для платформы аналитики данных. Выпустил профилировщик запросов и REPL в стиле блокнота, который стал ежедневным инструментом команды."
-
-[[experience]]
-company = "TU Berlin · Geometry Lab"
-
-[experience.en]
-role = "Research Assistant"
-period = "2017 — 2019"
-description = "Implemented numerical methods for curve-shortening flows. Co-authored two papers on discrete differential geometry."
-
-[experience.fr]
-role = "Assistant de recherche"
-period = "2017 — 2019"
-description = "Implémentation de méthodes numériques pour les flots de raccourcissement de courbes. Co-auteur de deux articles en géométrie différentielle discrète."
-
-[experience.ru]
-role = "Ассистент-исследователь"
-period = "2017 — 2019"
-description = "Реализовывал численные методы для потоков сокращения кривых. Соавтор двух статей по дискретной дифференциальной геометрии."
+company = "Dummy corp"
+role = "Dummy role"
+period = "1900 - present"
+description = "dummy description"
 
 # ══════════════════════════════════════
 # SKILLS
 # ══════════════════════════════════════
-[skills.en]
+[skills]
 languages = ["TypeScript", "Python", "Rust", "Go", "GLSL", "SQL"]
 frameworks = ["React", "Three.js", "FastAPI", "Tokio", "Bevy"]
 tools = ["PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform"]
@@ -480,15 +432,5 @@ url = "https://www.mdpi.com/2076-2607/12/8/1728"
 [[posts]]
 date = "2024-09-12"
 url = "https://t.me/username/123"
-
-[posts.en]
-title = "Why I (almost) stopped using build tools"
-full_text = "After years of webpack/vite/rollup configs, I tried shipping a real project as a single HTML file. The amount of complexity we deal with daily is staggering — removing the build step revealed that modern browsers are incredibly capable. ES modules work out of the box. CSS variables are powerful. I still miss hot module replacement, though."
-
-[posts.fr]
-title = "Pourquoi j'ai (presque) arrêté d'utiliser les outils de build"
-full_text = "Après des années de configs webpack/vite/rollup, j'ai essayé de livrer un vrai projet en un seul fichier HTML. La quantité de complexité dont nous traitons quotidiennement est stupéfiante — supprimer l'étape de build a révélé que les navigateurs modernes sont incroyablement capables. Les modules ES fonctionnent nativement. Mais le hot module replacement me manque."
-
-[posts.ru]
-title = "Почему я (почти) перестал использовать инструменты сборки"
-full_text = "После многих лет конфигов webpack/vite/rollup я попробовал доставить реальный проект одним HTML-файлом. Количество сложности, с которой мы имеем дело ежедневно, поразительно. Убрав этап сборки, я обнаружил, что современные браузеры на самом деле невероятно способны. ES-модули работают прямо из коробки. CSS-переменные мощные. Однако я все еще скучаю по горячей замене модулей."
+title = "Dummy title"
+full_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
