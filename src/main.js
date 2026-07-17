@@ -675,15 +675,34 @@ $('scrollCue').addEventListener('click', () => {
 });
 
 window.addEventListener('scroll', () => {
+  // Логика для topbar (осталась прежней)
   const heroBottom = $('hero').offsetHeight - 80;
   if (window.scrollY > heroBottom) {
     $('topbar').classList.add('solid');
   } else {
     $('topbar').classList.remove('solid');
   }
+
+  // Логика появления contact-section
+  const contentAreaTop = $('contentArea').getBoundingClientRect().top;
+  const contactTop = $('contact').getBoundingClientRect().top;
+
+  // Появляется ровно когда верхняя граница content-area опускается 
+  // до уровня верхней границы contact-section (скрывая её за собой)
+  if (contentAreaTop <= contactTop) {
+    $('contact').classList.add('visible');
+  } else {
+    $('contact').classList.remove('visible');
+  }
 }, {
   passive: true
 });
+
+// Принудительно вызываем событие scroll при загрузке для установки начального состояния
+window.dispatchEvent(new Event('scroll'));
+
+// Принудительно вызываем событие scroll при загрузке для установки начального состояния
+window.dispatchEvent(new Event('scroll'));
 
 const heroObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {

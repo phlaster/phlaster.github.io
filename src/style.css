@@ -1003,16 +1003,26 @@ a {
 
 /* ============ Contact ============ */
 .contact-section {
-  position: relative;
-  z-index: 2; /* Оставили ниже основного блока */
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
   max-width: var(--maxw);
-  margin: 0 auto;
-  margin-top: calc(-1 * var(--radius-lg)); /* Сдвигаем вверх, чтобы залезть под скругление белого блока */
+  margin: calc(-1 * var(--radius-lg)) auto 0; /* Нахлёст сверху на величину радиуса */
   background: var(--ink);
   color: var(--hero-fg);
-  padding: calc(6rem + var(--radius-lg)) var(--gutter) 6rem; 
+  padding: 4rem var(--gutter) 5rem;
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0; /* Убраны верхние скругления углов */
+  opacity: 0;
+  visibility: hidden;
+  /* Свойство transition удалено для мгновенного появления */
+}
+
+.contact-section.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .contact-inner {
