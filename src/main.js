@@ -271,10 +271,11 @@ function renderAbout() {
       <div class="edu-inst">${esc(e.institution)}</div>
     </div>`).join('');
 
-  const interests = a.interests || {
-    items: []
-  };
+  const interests = a.interests || { items: [] };
   const interestTags = interests.items.map(i => `<span class="interest-tag">${esc(i)}</span>`).join('');
+
+  const hobbies = a.hobbies || { items: [] };
+  const hobbyTags = hobbies.items.map(i => `<span class="interest-tag">${esc(i)}</span>`).join('');
 
   $('panel-about').innerHTML = `
     <div class="panel-head">
@@ -285,7 +286,18 @@ function renderAbout() {
       <div class="about-bio">
         <p class="lead">${esc(a.bio_lead)}</p>
         <p>${esc(a.bio)}</p>
+        
+        <div class="bio-meta-block">
+          <div class="meta-label">${esc(interests.title)}</div>
+          <div class="interests-list">${interestTags}</div>
+        </div>
+        
+        <div class="bio-meta-block">
+          <div class="meta-label">${esc(hobbies.title)}</div>
+          <div class="interests-list">${hobbyTags}</div>
+        </div>
       </div>
+      
       <div class="about-meta">
         <div class="meta-block">
           <div class="meta-label">${esc(u.based_in)}</div>
@@ -298,10 +310,6 @@ function renderAbout() {
         <div class="meta-block">
           <div class="meta-label">Education</div>
           ${eduHtml}
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">${esc(interests.title)}</div>
-          <div class="interests-list">${interestTags}</div>
         </div>
       </div>
     </div>

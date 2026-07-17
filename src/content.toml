@@ -1,5 +1,5 @@
 [site]
-author = "Alex Morozov"
+author = "Alex Bezlepsky"
 default_lang = "en"
 photo = "/assets/me.png"
 
@@ -11,8 +11,8 @@ iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA0WYy24cxxW
 # iframe_url_mobile = ""
 
 [social]
-github = "https://github.com/username"
-telegram = "https://t.me/username"
+github = "https://github.com/phlaster"
+telegram = "https://t.me/phlaster"
 email = "mailto:hello@example.com"
 location_link = "https://www.openstreetmap.org/?query=Berlin"
 
@@ -27,7 +27,7 @@ fallback_telegram = true
 [ui.en]
 scroll_cue = "Scroll to explore"
 hero_interact = "Drag to draw · tap & drag on touch"
-hero_label = "Portfolio · 2024"
+hero_label = "Portfolio · 2026"
 based_in = "Based in"
 spoken_languages = "Spoken languages"
 skills_languages = "Programming languages"
@@ -39,7 +39,7 @@ form_invalid = "Please fill in name, email and message."
 [ui.fr]
 scroll_cue = "Défiler pour explorer"
 hero_interact = "Glisser pour dessiner · taper & glisser sur tactile"
-hero_label = "Portfolio · 2024"
+hero_label = "Portfolio · 2026"
 based_in = "Basé à"
 spoken_languages = "Langues parlées"
 skills_languages = "Langages de programmation"
@@ -51,7 +51,7 @@ form_invalid = "Veuillez remplir nom, email et message."
 [ui.ru]
 scroll_cue = "Прокрутите вниз"
 hero_interact = "Тяните, чтобы рисовать · касание и перетаскивание"
-hero_label = "Портфолио · 2024"
+hero_label = "Портфолио · 2026"
 based_in = "Местонахождение"
 spoken_languages = "Разговорные языки"
 skills_languages = "Языки программирования"
@@ -297,6 +297,29 @@ items = [
   "Функциональное реактивное программирование"
 ]
 
+[about.hobbies.en]
+title = "Hobbies"
+items = [
+  "Generative Art",
+  "Bouldering",
+  "Synth DIY"
+]
+
+[about.hobbies.fr]
+title = "Loisirs"
+items = [
+  "Art génératif",
+  "Grimpe en salle",
+  "DIY Synthé"
+]
+
+[about.hobbies.ru]
+title = "Хобби"
+items = [
+  "Генеративное искусство",
+  "Скалолазание",
+  "DIY Синтезаторы"
+]
 # ══════════════════════════════════════
 # EXPERIENCE
 # ══════════════════════════════════════

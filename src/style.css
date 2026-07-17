@@ -406,6 +406,19 @@ a {
 }
 
 /* ============ Content ============ */
+.bio-meta-block {
+  margin-top: 2.5rem;
+}
+
+.bio-meta-block .meta-label {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: .65rem;
+}
+
 .content-area {
   position: relative;
   z-index: 3; /* Подняли над контактной секцией, чтобы перекрывать её сверху */
@@ -489,11 +502,11 @@ a {
 
 /* Scrollable About Meta */
 .about-meta {
-  max-height: 450px;
-  overflow-y: auto;
+  /* max-height: 450px;
+  overflow-y: auto; */
   padding-right: 1rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent; */
 }
 
 .about-meta::-webkit-scrollbar {
