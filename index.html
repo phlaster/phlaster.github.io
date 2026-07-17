@@ -110,14 +110,20 @@
           <span class="label">GitHub</span>
           <span class="value">—</span>
         </a>
-        <a class="contact-channel" href="#" id="channelTelegram">
+        <div class="contact-channel" id="channelTelegramWrap">
           <span class="label">Telegram</span>
-          <span class="value">—</span>
-        </a>
-        <a class="contact-channel" href="#" id="channelEmail">
+          <button class="value reveal-btn" id="revealTgBtn" type="button">
+            <span class="btn-text">Click to reveal</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+        </div>
+        <div class="contact-channel" id="channelEmailWrap">
           <span class="label">Email</span>
-          <span class="value">—</span>
-        </a>
+          <button class="value reveal-btn" id="revealEmailBtn" type="button">
+            <span class="btn-text">Click to reveal</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+        </div>
       </div>
     </div>
     <form class="contact-form" id="contactForm" novalidate>

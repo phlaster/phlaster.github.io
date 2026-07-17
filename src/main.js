@@ -886,51 +886,165 @@ $('contactForm').addEventListener('submit', async (e) => {
     return;
   }
 
+  const workerUrl = config.contact.form_worker_url;
+  if (!workerUrl || workerUrl.includes('your-form-worker-name')) {
+    status.textContent = u.error || "Worker not configured.";
+    status.className = 'form-status error';
+    return;
+  }
+
+  // Блокируем кнопку и пишем "Отправка..."
   btn.disabled = true;
   status.textContent = u.sending || 'Sending…';
   status.className = 'form-status';
 
-  const webhook = config.contact.webhook_url;
+  try {
+    // 1. Получаем задание
+    const resCh = await fetch(`${workerUrl}/api/challenge`);
+    if (!resCh.ok) throw new Error('Network error');
+    const {
+      challenge
+    } = await resCh.json();
 
-  if (webhook) {
-    try {
-      const res = await fetch(webhook, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject,
-          message
-        })
-      });
-      if (res.ok) {
-        status.textContent = u.success || 'Message sent.';
-        status.className = 'form-status success';
-        $('contactForm').reset();
-      } else {
-        throw new Error('Webhook failed');
-      }
-    } catch (err) {
-      status.textContent = u.error || 'Could not send.';
-      status.className = 'form-status error';
-    } finally {
-      btn.disabled = false;
-    }
-  } else if (config.contact.fallback_telegram) {
-    const bot = config.contact.telegram_bot;
-    const text = `New portfolio message\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`;
-    window.open(`https://t.me/${bot}?start=${encodeURIComponent(text)}`, '_blank');
-    status.textContent = u.success || 'Opening Telegram...';
+    // 2. Вычисляем PoW (занимает ~3 секунды)
+    const nonce = await solvePoW(challenge, () => {});
+
+    // 3. Отправляем данные формы и решение
+    const res = await fetch(`${workerUrl}/api/submit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        challenge,
+        nonce,
+        name,
+        email,
+        subject,
+        message
+      })
+    });
+
+    if (!res.ok) throw new Error('Verification failed');
+
+    // 4. Успех
+    status.textContent = u.success || 'Message sent. I will get back to you shortly.';
     status.className = 'form-status success';
-    btn.disabled = false;
-  } else {
-    status.textContent = u.error || 'Messaging is not configured.';
+    $('contactForm').reset();
+  } catch (err) {
+    // 5. Ошибка
+    status.textContent = u.error || 'Could not send. Please use Telegram directly.';
     status.className = 'form-status error';
+  } finally {
     btn.disabled = false;
   }
 });
+
+/* ---------- Email PoW Reveal ---------- */
+async function solvePoW(challenge, statusFn) {
+  const enc = new TextEncoder();
+  let nonce = 0;
+
+  while (true) {
+    const data = enc.encode(challenge + nonce);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashHex = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+
+    // 4 нуля в конце и 5-й с конца символ от 0 до 5
+    if (hashHex.endsWith('0000') && '012345'.includes(hashHex[hashHex.length - 5])) {
+      return nonce.toString();
+    }
+    nonce++;
+
+    // Периодически обновляем статус и отдаем управление потоку
+    if (nonce % 10000 === 0) {
+      statusFn(nonce);
+      await new Promise(r => setTimeout(r));
+    }
+  }
+}
+
+/* ---------- Contacts PoW Reveal ---------- */
+let isRevealing = false;
+
+async function revealContacts() {
+  if (isRevealing) return;
+  isRevealing = true;
+
+  const tgBtn = $('revealTgBtn');
+  const emailBtn = $('revealEmailBtn');
+  const workerUrl = config.contact.pow_worker_url;
+
+  if (!workerUrl || workerUrl.includes('your-worker-name')) {
+    if (tgBtn) tgBtn.querySelector('.btn-text').textContent = "Worker not configured";
+    if (emailBtn) emailBtn.querySelector('.btn-text').textContent = "Worker not configured";
+    isRevealing = false;
+    return;
+  }
+
+  const setLoading = (btn) => {
+    if (!btn) return;
+    btn.disabled = true;
+    btn.querySelector('.btn-text').hidden = true;
+    btn.querySelector('.btn-spinner').hidden = false;
+  };
+
+  setLoading(tgBtn);
+  setLoading(emailBtn);
+
+  try {
+    // 1. Получаем задание
+    const resCh = await fetch(`${workerUrl}/api/challenge`);
+    if (!resCh.ok) throw new Error('Network error');
+    const {
+      challenge
+    } = await resCh.json();
+
+    // 2. Вычисляем PoW
+    const nonce = await solvePoW(challenge, () => {});
+
+    // 3. Отправляем решение
+    const resData = await fetch(`${workerUrl}/api/get-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        challenge,
+        nonce
+      })
+    });
+
+    if (!resData.ok) throw new Error('Verification failed');
+    const {
+      email,
+      telegram
+    } = await resData.json();
+
+    // 4. Заменяем кнопки на ссылки
+    if (emailBtn) {
+      $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+    }
+    if (tgBtn) {
+      const tgUsername = telegram.replace(/@/g, '');
+      $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="https://telegram.me/${tgUsername}">@${tgUsername}</a>`;
+    }
+
+  } catch (err) {
+    const setError = (btn) => {
+      if (!btn) return;
+      btn.disabled = false;
+      btn.querySelector('.btn-text').hidden = false;
+      btn.querySelector('.btn-spinner').hidden = true;
+      btn.querySelector('.btn-text').textContent = "Error. Try again.";
+    };
+    setError(tgBtn);
+    setError(emailBtn);
+    isRevealing = false;
+  }
+}
+
+if ($('revealEmailBtn')) $('revealEmailBtn').addEventListener('click', revealContacts);
+if ($('revealTgBtn')) $('revealTgBtn').addEventListener('click', revealContacts);
 
 renderAll();
