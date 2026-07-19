@@ -1,0 +1,21 @@
+:root {
+  --bg: #F4F1EA;
+  --bg-elev: #FCFAF5;
+  --ink: #1A1815;
+  --ink-2: #54514A;
+  --ink-3: #8B8678;
+  --line: #DDD7CA;
+  --accent: #B4502A;
+  --accent-2: #8B3A1F;
+  --accent-soft: #E8C9B8;
+  --hero-bg: #0F0E0C;
+  --hero-fg: #F4F1EA;
+  --radius: 4px;
+  --radius-lg: 12px;
+  --maxw: 1350px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --bar-h: 60px;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}

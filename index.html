@@ -4,52 +4,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Alex Morozov — Portfolio</title>
+  <title>Alexander Bezlepsky — Portfolio</title>
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23B4502A'>urve</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/styles/main.css">
 </head>
 
 <body>
 
-  <header class="topbar" id="topbar">
+  <header class="topbar no-print" id="topbar">
     <div class="topbar-inner">
-      <div class="brand">A<span class="dot">·</span>M</div>
-      <nav class="tabs" id="tabs" role="tablist">
-        <button class="tab active" data-tab="about" role="tab">About</button>
-        <button class="tab" data-tab="skills" role="tab">Skills</button>
-        <button class="tab" data-tab="experience" role="tab">Experience</button>
-        <button class="tab" data-tab="projects" role="tab">Projects</button>
-        <button class="tab" data-tab="publications" role="tab">Research</button>
-        <button class="tab" data-tab="posts" role="tab">Posts</button>
+      <div class="brand">A<span class="dot">·</span>B</div>
+      <nav class="nav-links" id="navLinks" role="navigation">
+        <a href="#about" class="nav-link active" data-nav="about">About</a>
+        <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
+        <a href="#experience" class="nav-link" data-nav="experience">Experience</a>
+        <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
+        <a href="#research" class="nav-link" data-nav="research">Research</a>
+        <a href="#education" class="nav-link" data-nav="education">Education</a>
+        <a href="#contact" class="nav-link" data-nav="contact">Write me</a>
       </nav>
-      <div class="lang-switch" id="langSwitch">
-        <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-          <span class="lang-current" id="langCurrent">EN</span>
-        </button>
-        <ul class="lang-dropdown" id="langDropdown" role="menu">
-          <li role="menuitem" data-lang="en" class="active">English</li>
-          <li role="menuitem" data-lang="ru">Русский</li>
-          <li role="menuitem" data-lang="fr">Français</li>
-        </ul>
+      <div class="topbar-actions">
+        <button class="btn-action" id="exportPdfBtn">Export PDF</button>
+        <div class="lang-switch" id="langSwitch">
+          <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="lang-current" id="langCurrent">EN</span>
+          </button>
+          <ul class="lang-dropdown" id="langDropdown" role="menu">
+            <li role="menuitem" data-lang="en" class="active">English</li>
+            <li role="menuitem" data-lang="ru">Русский</li>
+            <li role="menuitem" data-lang="fr">Français</li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
 
   <section class="hero" id="hero">
-    <div class="hero-canvas-wrap" id="canvasWrap">
+    <div class="hero-canvas-wrap no-print" id="canvasWrap">
       <canvas id="heroCanvas"></canvas>
       <iframe id="heroIframe" src="" frameborder="0" allow="fullscreen" title="Interactive curve canvas"></iframe>
     </div>
+
+    <img id="printBackground" class="print-only" src="" alt="">
+    
     <div class="hero-overlay" id="heroOverlay">
       <div class="hero-top"></div>
 
@@ -62,7 +69,7 @@
       </div>
 
       <div class="hero-foot">
-        <button class="scroll-cue" id="scrollCue" type="button">
+        <button class="scroll-cue no-print" id="scrollCue" type="button">
           <span id="scrollCueText">Scroll to explore</span>
           <span class="arrow">↓</span>
         </button>
@@ -71,94 +78,144 @@
   </section>
 
   <main class="content-area" id="contentArea">
-    <section class="panel active" data-panel="about" id="panel-about"></section>
-    <section class="panel" data-panel="skills" id="panel-skills"></section>
-    <section class="panel" data-panel="experience" id="panel-experience"></section>
+    
+    <!-- ABOUT -->
+    <section id="about" class="content-section">
+      <div class="panel-head">
+        <h2 class="panel-title" id="about-title"></h2>
+        <span class="panel-subtitle" id="about-sub"></span>
+      </div>
+      <div id="about-content"></div>
+    </section>
 
-    <section class="panel" data-panel="projects" id="panel-projects">
+    <!-- SKILLS -->
+    <section id="skills" class="content-section">
+      <div class="panel-head">
+        <h2 class="panel-title" id="skills-title"></h2>
+        <span class="panel-subtitle" id="skills-sub"></span>
+      </div>
+      <div id="skills-content"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="content-section">
+      <div class="panel-head">
+        <h2 class="panel-title" id="exp-title"></h2>
+        <span class="panel-subtitle" id="exp-sub"></span>
+      </div>
+      <div id="experience-content"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="content-section">
       <div class="panel-head">
         <h2 class="panel-title" id="proj-title"></h2>
         <span class="panel-subtitle" id="proj-sub"></span>
       </div>
-      <div class="carousel-container">
-        <button class="carousel-btn prev" id="projPrev">‹</button>
-        <div class="carousel-track" id="projectsTrack"></div>
-        <button class="carousel-btn next" id="projNext">›</button>
-      </div>
+      <div id="projects-content"></div>
     </section>
 
-    <section class="panel" data-panel="publications" id="panel-publications"></section>
-
-    <section class="panel" data-panel="posts" id="panel-posts">
+    <!-- RESEARCH -->
+    <section id="research" class="content-section">
       <div class="panel-head">
-        <h2 class="panel-title" id="posts-title"></h2>
-        <span class="panel-subtitle" id="posts-sub"></span>
+        <h2 class="panel-title" id="research-title"></h2>
+        <span class="panel-subtitle" id="research-sub"></span>
       </div>
-      <div class="carousel-container">
-        <button class="carousel-btn prev" id="postsPrev">‹</button>
-        <div class="carousel-track" id="postsTrack"></div>
-        <button class="carousel-btn next" id="postsNext">›</button>
-      </div>
+      <div id="research-content"></div>
     </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="content-section">
+      <div class="panel-head">
+        <h2 class="panel-title" id="edu-title"></h2>
+        <span class="panel-subtitle" id="edu-sub"></span>
+      </div>
+      <div id="education-content"></div>
+    </section>
+
   </main>
 
-  <section class="contact-section collapsed" id="contact">
-    <h2 id="contactTitle">Let's <em>talk</em>.</h2>
-    <div class="contact-inner">
-      <div class="contact-intro">
-        <p id="contactIntro"></p>
-        <div class="contact-channels">
-          <div class="contact-channel" id="channelGithubWrap">
-            <span class="label">GitHub</span>
-            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
-          </div>
-          <div class="contact-channel" id="channelGitlabWrap">
-            <span class="label">GitLab</span>
-            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
-          </div>
-          <div class="contact-channel" id="channelTelegramWrap">
-            <span class="label">Telegram</span>
-            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
-          </div>
-          <div class="contact-channel" id="channelEmailWrap">
-            <span class="label">Email</span>
-            <span class="value reveal-loader"><span class="btn-spinner"></span></span>
-          </div>
-        </div>
-      </div>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-row">
-          <div class="field">
-            <label for="f-name" id="lbl-name">Name</label>
-            <input id="f-name" name="name" type="text" required>
-          </div>
-          <div class="field">
-            <label for="f-email" id="lbl-email">Email</label>
-            <input id="f-email" name="email" type="email" required>
-          </div>
-        </div>
-        <div class="field">
-          <label for="f-subject" id="lbl-subject">Subject</label>
-          <input id="f-subject" name="subject" type="text">
-        </div>
-        <div class="field">
-          <label for="f-message" id="lbl-message">Message</label>
-          <textarea id="f-message" name="message" rows="5" required></textarea>
-        </div>
-        <div class="submit-row">
-          <button class="submit-btn" type="submit" id="submitBtn">Send message</button>
-          <span class="form-status" id="formStatus"></span>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <footer class="site-footer">
+  <!-- CONTACT & FOOTER -->
+  <footer class="site-footer" id="contact">
     <div class="footer-inner">
-      <span>© <span id="footerYear">2024</span> <span id="footerAuthor">Alex Morozov</span></span>
-      <span>Static · GitHub Pages</span>
+      <h2 id="contactTitle">Let's <em>talk</em>.</h2>
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p id="contactIntro"></p>
+          <div class="contact-channels">
+            <div class="contact-channel" id="channelTelegramWrap">
+              <span class="label">Telegram</span>
+              <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+            </div>
+            <div class="contact-channel" id="channelEmailWrap">
+              <span class="label">Email</span>
+              <span class="value reveal-loader"><span class="btn-spinner"></span></span>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name" id="lbl-name">Name</label>
+              <input id="f-name" name="name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="f-email" id="lbl-email">Email</label>
+              <input id="f-email" name="email" type="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-subject" id="lbl-subject">Subject</label>
+            <input id="f-subject" name="subject" type="text">
+          </div>
+          <div class="field">
+            <label for="f-message" id="lbl-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="submit-row">
+            <button class="submit-btn" type="submit" id="submitBtn">Send message</button>
+            <span class="form-status" id="formStatus"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="footerYear">2024</span> <span id="footerAuthor">Alexander Bezlepsky</span></span>
+        <span>Static · GitHub Pages</span>
+      </div>
     </div>
   </footer>
+
+  <!-- PDF MODAL -->
+  <div id="pdfModal" class="pdf-modal no-print">
+    <div class="pdf-modal-content">
+      <div class="pdf-modal-header">
+        <div class="pdf-controls">
+          <button id="pdfZoomOut" class="pdf-btn" title="Zoom Out">−</button>
+          <span id="pdfZoomLevel" class="pdf-zoom-level">100%</span>
+          <button id="pdfZoomIn" class="pdf-btn" title="Zoom In">+</button>
+          <a id="pdfDownload" class="pdf-btn pdf-download-btn" download>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download
+          </a>
+        </div>
+        
+        <div class="pdf-page-selector">
+          <button id="pdfPrev" class="pdf-btn" title="Previous page">‹</button>
+          <input type="text" id="pdfCurrentPage" value="1" readonly>
+          <span>/</span>
+          <span id="pdfTotalPages">1</span>
+          <button id="pdfNext" class="pdf-btn" title="Next page">›</button>
+        </div>
+
+        <button id="closePdfModal" class="pdf-modal-close">×</button>
+      </div>
+      <div class="pdf-viewer-wrapper" id="pdf-viewer-wrapper">
+        <div id="pdf-loader" class="pdf-loader">Loading PDF...</div>
+        <div id="pdf-viewer-container"></div>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
