@@ -1,11 +1,16 @@
-import { parse } from 'smol-toml';
+import {
+  parse
+} from 'smol-toml';
 import tomlString from '../content.toml?raw';
 
 export const config = parse(tomlString);
 const langKeys = ['en', 'fr', 'ru'];
-const fallbackMap = { en: 'fr', ru: 'en', fr: 'ru' };
+const fallbackMap = {
+  en: 'fr',
+  ru: 'en',
+  fr: 'ru'
+};
 
-// Определение языка браузера
 export function detectInitialLang() {
   const browserLangs = navigator.languages || [navigator.language];
   for (const bl of browserLangs) {
@@ -15,7 +20,6 @@ export function detectInitialLang() {
   return config.site.default_lang || 'en';
 }
 
-// Рекурсивный резолвер переводов (из предыдущей версии)
 export function resolveTranslations(obj, lang) {
   if (Array.isArray(obj)) return obj.map(item => resolveTranslations(item, lang));
   if (typeof obj === 'object' && obj !== null) {

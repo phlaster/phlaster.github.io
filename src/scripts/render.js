@@ -205,13 +205,12 @@ export function renderContent(i18nConfig, lang) {
     </div>
   `;
 
-  // --- CERTIFICATES & ACHIEVEMENTS ---
   $('cert-title').textContent = sAbout.cert_title;
   $('cert-sub').textContent = sAbout.cert_sub;
   const certs = i18nConfig.certificates || [];
   
   $('certificates-content').innerHTML = `
-    <div class="projects-grid"> <!-- Используем ту же сетку, что и у проектов для красоты -->
+    <div class="projects-grid">
       ${certs.map(c => `
         <div class="project-card" style="padding: 1.5rem;">
           <div class="project-name">${esc(c.title)}</div>

@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,8 +21,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}
 
-/* Утилиты для печати */
-.no-print { display: block; }
-.print-only { display: none; }
+.no-print {
+  display: block;
+}
+
+.print-only {
+  display: none;
+}

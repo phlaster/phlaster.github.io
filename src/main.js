@@ -8,25 +8,20 @@ import { initPdfExport } from './scripts/pdf-export.js';
 let currentLang = detectInitialLang();
 let i18nConfig = resolveTranslations(config, currentLang);
 
-// Функция для перерисовки при смене языка
 function rerender(newLang) {
   currentLang = newLang;
   i18nConfig = resolveTranslations(config, currentLang);
   renderContent(i18nConfig, currentLang);
 }
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-  // Первичная отрисовка
   renderContent(i18nConfig, currentLang);
   
-  // Активация логики интерфейсов
   initNavigation(rerender);
   initContact(() => i18nConfig);
   initPdfModal(() => i18nConfig);
   initPdfExport();
 
-  // Установка начального активного языка в UI
   document.getElementById('langCurrent').textContent = currentLang.toUpperCase();
   document.querySelectorAll('#langDropdown li').forEach(li => {
     li.classList.toggle('active', li.dataset.lang === currentLang);

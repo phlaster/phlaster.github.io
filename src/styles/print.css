@@ -1,21 +1,25 @@
 @media print {
-  /* Скрываем интерактивные элементы */
-  .no-print { display: none !important; }
-  
-  /* Показываем захваченный фон */
-  .print-only { display: block; }
-  
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
   #printBackground {
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     z-index: -1;
     object-fit: cover;
   }
 
-  /* Сбрасываем фон и цвета для экономии тонера и читаемости */
-  body, html {
+  body,
+  html {
     background: white !important;
     color: black !important;
   }
@@ -23,9 +27,9 @@
   .hero {
     height: auto;
     min-height: auto;
-    color: white; /* Текст героя оставляем светлым на фоне картинки */
+    color: white;
   }
-  
+
   .hero-overlay {
     position: relative;
     height: 100vh;
@@ -33,7 +37,7 @@
   }
 
   .hero-text-block::before {
-    background: rgba(15, 14, 12, 0.7); /* Меньше прозрачности для печати */
+    background: rgba(15, 14, 12, 0.7);
   }
 
   .content-area {
@@ -45,24 +49,26 @@
     max-width: 100% !important;
   }
 
-  /* Каждая крупная секция начинается с новой страницы */
   .content-section {
     page-break-before: always;
     padding: 1rem 0 !important;
     border-bottom: none !important;
   }
 
-  /* Убираем эффекты наведения и скругления для карточек */
-  .project-card, .interest-tag, .skill-tag {
+  .project-card,
+  .interest-tag,
+  .skill-tag {
     border: 1px solid #ccc !important;
-    break-inside: avoid; /* Не разрывать карточку между страницами */
+    break-inside: avoid;
     page-break-inside: avoid;
   }
-  
-  .project-card:hover { transform: none; }
 
-  /* Подвал контактов не печатаем */
-  .contact-section, .site-footer {
+  .project-card:hover {
+    transform: none;
+  }
+
+  .contact-section,
+  .site-footer {
     display: none !important;
   }
 }

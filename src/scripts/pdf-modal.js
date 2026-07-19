@@ -5,7 +5,7 @@ const $ = id => document.getElementById(id);
 let pdfDoc = null;
 let currentScale = 1.0;
 let baseViewport = null;
-let isScrolling = false; // Флаг для программной прокрутки
+let isScrolling = false;
 
 export function initPdfModal(i18nConfigGetter) {
   const modal = $('pdfModal');
@@ -15,13 +15,17 @@ export function initPdfModal(i18nConfigGetter) {
   const downloadBtn = $('pdfDownload');
 
   function calcDims() {
-    if (!baseViewport) return { width: 0, height: 0, scale: 1 };
+    if (!baseViewport) return {
+      width: 0,
+      height: 0,
+      scale: 1
+    };
     const containerWidth = container.clientWidth;
     const scale = (containerWidth / baseViewport.width) * currentScale;
-    return { 
-      width: baseViewport.width * scale, 
-      height: baseViewport.height * scale, 
-      scale 
+    return {
+      width: baseViewport.width * scale,
+      height: baseViewport.height * scale,
+      scale
     };
   }
 
@@ -37,22 +41,32 @@ export function initPdfModal(i18nConfigGetter) {
         }
       }
     });
-  }, { root: viewerWrapper, rootMargin: '500px 0px' });
+  }, {
+    root: viewerWrapper,
+    rootMargin: '500px 0px'
+  });
 
   async function renderPage(numStr, wrapper) {
     if (wrapper.querySelector('canvas')) return;
     try {
       const num = parseInt(numStr, 10);
       const page = await pdfDoc.getPage(num);
-      const { scale } = calcDims();
-      const viewport = page.getViewport({ scale });
-      
+      const {
+        scale
+      } = calcDims();
+      const viewport = page.getViewport({
+        scale
+      });
+
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       wrapper.appendChild(canvas);
-      await page.render({ canvasContext: ctx, viewport }).promise;
+      await page.render({
+        canvasContext: ctx,
+        viewport
+      }).promise;
     } catch (err) {
       console.error(`Error rendering page ${numStr}:`, err);
     }
@@ -65,20 +79,26 @@ export function initPdfModal(i18nConfigGetter) {
     container.innerHTML = '';
 
     try {
-      const loadingTask = pdfjsLib.getDocument({ url });
+      const loadingTask = pdfjsLib.getDocument({
+        url
+      });
       pdfDoc = await loadingTask.promise;
-      
+
       const page1 = await pdfDoc.getPage(1);
-      baseViewport = page1.getViewport({ scale: 1 });
-      
+      baseViewport = page1.getViewport({
+        scale: 1
+      });
+
       loader.style.display = 'none';
-      
-      // НОВОЕ: Обновляем счетчик страниц
+
       $('pdfTotalPages').textContent = pdfDoc.numPages;
       $('pdfCurrentPage').value = 1;
-      
-      const { width, height } = calcDims();
-      
+
+      const {
+        width,
+        height
+      } = calcDims();
+
       for (let i = 1; i <= pdfDoc.numPages; i++) {
         const pageDiv = document.createElement('div');
         pageDiv.className = 'pdf-page-wrapper';
@@ -99,15 +119,13 @@ export function initPdfModal(i18nConfigGetter) {
     loadPdf(url);
   };
 
-  // НОВОЕ: Отслеживание скролла для обновления счетчика
   viewerWrapper.addEventListener('scroll', () => {
-    if (isScrolling) return; // Игнорируем, если скролл вызвван кнопками
+    if (isScrolling) return;
 
     const scrollTop = viewerWrapper.scrollTop;
     const pages = document.querySelectorAll('.pdf-page-wrapper');
     if (pages.length === 0) return;
 
-    // Вычисляем, какая страница сейчас ближе всего к верху
     let closestPage = 1;
     let minDistance = Infinity;
 
@@ -123,19 +141,21 @@ export function initPdfModal(i18nConfigGetter) {
     $('pdfCurrentPage').value = closestPage;
   });
 
-  // НОВОЕ: Функция программного перехода к странице
   function goToPage(num) {
     const target = document.querySelector(`.pdf-page-wrapper[data-page-num="${num}"]`);
     if (target) {
       isScrolling = true;
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
       $('pdfCurrentPage').value = num;
-      // Снимаем флаг через некоторое время, чтобы пользователь мог снова крутить мышью
-      setTimeout(() => { isScrolling = false; }, 500);
+      setTimeout(() => {
+        isScrolling = false;
+      }, 500);
     }
   }
 
-  // НОВОЕ: Обработчики стрелок
   $('pdfPrev').addEventListener('click', () => {
     const curr = parseInt($('pdfCurrentPage').value, 10);
     if (curr > 1) goToPage(curr - 1);
@@ -150,9 +170,12 @@ export function initPdfModal(i18nConfigGetter) {
   function changeZoom(delta) {
     currentScale = Math.max(0.5, Math.min(2.5, currentScale + delta));
     $('pdfZoomLevel').textContent = `${Math.round(currentScale * 100)}%`;
-    
-    const { width, height } = calcDims();
-    
+
+    const {
+      width,
+      height
+    } = calcDims();
+
     document.querySelectorAll('.pdf-page-wrapper').forEach(wrapper => {
       wrapper.style.width = width + 'px';
       wrapper.style.height = height + 'px';

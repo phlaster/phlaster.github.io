@@ -28,7 +28,9 @@ export function initContact(i18nConfigGetter) {
     isComputingFormPoW = true;
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const { challenge } = await resCh.json();
+      const {
+        challenge
+      } = await resCh.json();
       formChallenge = challenge;
       formNonce = await solvePoW(challenge);
     } catch (err) {
@@ -42,20 +44,30 @@ export function initContact(i18nConfigGetter) {
     if (contactsRevealed) return;
     const config = i18nConfigGetter();
     const workerUrl = config.contact.worker_url;
-    
+
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const { challenge } = await resCh.json();
+      const {
+        challenge
+      } = await resCh.json();
       const nonce = await solvePoW(challenge);
 
       const resData = await fetch(`${workerUrl}/api/get-email`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ challenge, nonce })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          challenge,
+          nonce
+        })
       });
 
       if (!resData.ok) throw new Error('Verification failed');
-      const { email, telegram } = await resData.json();
+      const {
+        email,
+        telegram
+      } = await resData.json();
 
       if (telegram) {
         const tgUsername = telegram.replace(/@/g, '');
@@ -70,22 +82,19 @@ export function initContact(i18nConfigGetter) {
     }
   }
 
-  // Запускаем раскрытие контактов сразу при инициализации (в фоне)
   prepareRevealPoW();
 
   ['f-name', 'f-email', 'f-subject', 'f-message'].forEach(id => {
     $(id)?.addEventListener('input', prepareFormPoW);
   });
 
-  // Логика счетчика символов
   const messageInput = $('f-message');
   const charCounter = $('charCounter');
-  
+
   messageInput.addEventListener('input', () => {
     charCounter.textContent = `${messageInput.value.length}/2000`;
   });
 
-  // Вспомогательная функция: сбросить хэш и немедленно начать майнить новый
   function invalidateAndRemine() {
     formChallenge = null;
     formNonce = null;
@@ -104,7 +113,6 @@ export function initContact(i18nConfigGetter) {
     const subject = $('f-subject').value.trim();
     const message = messageInput.value.trim();
 
-    // 1. Валидация: Message обязательно, проверка длины остальных полей
     if (!message || message.length > 2000 || name.length > 30 || subject.length > 60) {
       status.textContent = u.form_invalid;
       status.className = 'form-status error';
@@ -112,7 +120,6 @@ export function initContact(i18nConfigGetter) {
       return;
     }
 
-    // 2. Валидация Email: только если поле заполнено
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (email && (email.length > 30 || !emailRegex.test(email))) {
       status.textContent = u.form_invalid_email;
@@ -131,11 +138,14 @@ export function initContact(i18nConfigGetter) {
 
       const res = await fetch(`${config.contact.worker_url}/api/submit`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           challenge: formChallenge,
           nonce: formNonce,
-          name, email,
+          name,
+          email,
           subject: subject,
           message
         })
@@ -147,17 +157,15 @@ export function initContact(i18nConfigGetter) {
         throw new Error(errData.error || 'Server error');
       }
 
-      // --- УСПЕХ ---
       status.textContent = u.success;
       status.className = 'form-status success';
       $('contactForm').reset();
       charCounter.textContent = '0/2000';
-      
+
       formChallenge = null;
       formNonce = null;
 
     } catch (err) {
-      // --- ОШИБКА СЕРВЕРА ---
       status.textContent = err.message || u.error;
       status.className = 'form-status error';
       invalidateAndRemine();

@@ -28,7 +28,6 @@ export function initNavigation(renderCallback) {
     }
   });
 
-  // Подсветка активной секции в меню (включая Contact)
   const sections = document.querySelectorAll('.content-section, #contact');
   const navLinks = document.querySelectorAll('.nav-link');
 
@@ -41,20 +40,22 @@ export function initNavigation(renderCallback) {
         });
       }
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  }, {
+    rootMargin: '-30% 0px -60% 0px'
+  });
 
   sections.forEach(sec => observer.observe(sec));
 
-  // Умная логика топбара: становится solid, только когда касается контента
   const topbar = $('topbar');
   const contentArea = $('contentArea');
 
   window.addEventListener('scroll', () => {
-    // Если верхняя граница контента дошла до низа топбара (или выше)
     if (contentArea.getBoundingClientRect().top <= topbar.offsetHeight) {
       topbar.classList.add('solid');
     } else {
       topbar.classList.remove('solid');
     }
-  }, { passive: true });
+  }, {
+    passive: true
+  });
 }

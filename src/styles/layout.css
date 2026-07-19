@@ -41,7 +41,9 @@
   font-weight: 500;
 }
 
-.brand .dot { color: var(--accent); }
+.brand .dot {
+  color: var(--accent);
+}
 
 .nav-links {
   flex: 1;
@@ -52,7 +54,9 @@
   scrollbar-width: none;
 }
 
-.nav-links::-webkit-scrollbar { display: none; }
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
 
 .nav-link {
   background: transparent;
@@ -69,7 +73,9 @@
   text-decoration: none;
 }
 
-.nav-link:hover { opacity: 1; }
+.nav-link:hover {
+  opacity: 1;
+}
 
 .nav-link.active {
   opacity: 1;
@@ -128,7 +134,9 @@
   opacity: .7;
 }
 
-.lang-trigger:hover { opacity: 1; }
+.lang-trigger:hover {
+  opacity: 1;
+}
 
 .lang-dropdown {
   position: absolute;
@@ -160,8 +168,14 @@
   color: var(--ink);
 }
 
-.lang-dropdown li:hover { background: var(--bg); }
-.lang-dropdown li.active { color: var(--accent); font-weight: 500; }
+.lang-dropdown li:hover {
+  background: var(--bg);
+}
+
+.lang-dropdown li.active {
+  color: var(--accent);
+  font-weight: 500;
+}
 
 /* ============ Hero ============ */
 .hero {
@@ -184,7 +198,8 @@
   pointer-events: auto;
 }
 
-.hero-canvas-wrap canvas, .hero-canvas-wrap iframe {
+.hero-canvas-wrap canvas,
+.hero-canvas-wrap iframe {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -223,9 +238,11 @@
 .hero-text-block::before {
   content: '';
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  width: 160%; height: 200%;
+  width: 160%;
+  height: 200%;
   background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 10%, rgba(15, 14, 12, 0) 75%);
   z-index: -1;
   filter: blur(25px);
@@ -286,9 +303,21 @@
   pointer-events: auto;
 }
 
-.scroll-cue .arrow { animation: bob 1.8s ease-in-out infinite; }
+.scroll-cue .arrow {
+  animation: bob 1.8s ease-in-out infinite;
+}
 
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@keyframes bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
+}
 
 /* ============ Main Content Area ============ */
 .content-area {
@@ -310,8 +339,13 @@
   scroll-margin-top: calc(var(--bar-h) + 20px);
 }
 
-.content-section:first-child { padding-top: 0; }
-.content-section:not(:last-child) { border-bottom: 1px solid var(--line); }
+.content-section:first-child {
+  padding-top: 0;
+}
+
+.content-section:not(:last-child) {
+  border-bottom: 1px solid var(--line);
+}
 
 .panel-head {
   margin-bottom: 2.5rem;
@@ -363,7 +397,10 @@
   letter-spacing: -.015em;
 }
 
-#contactTitle em { color: var(--accent-soft); font-style: italic; }
+#contactTitle em {
+  color: var(--accent-soft);
+  font-style: italic;
+}
 
 .contact-grid {
   display: grid;
@@ -382,23 +419,60 @@
   max-width: 28rem;
 }
 
-.contact-channels { display: flex; flex-direction: column; }
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+}
+
 .contact-channel {
   display: flex;
   gap: 1rem;
   padding: .85rem 0;
   border-top: 1px solid rgba(244, 241, 234, .1);
 }
-.contact-channel:last-child { border-bottom: 1px solid rgba(244, 241, 234, .1); }
-.contact-channel .label { font-family: var(--font-mono); font-size: .7rem; color: rgba(244, 241, 234, .5); width: 80px; flex-shrink: 0; }
-.contact-channel .value { color: var(--accent-soft); }
 
-/* Форма */
-.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-.field { display: flex; flex-direction: column; gap: .5rem; }
-.field label { font-family: var(--font-mono); font-size: .7rem; color: rgba(244, 241, 234, .5); }
-.field input, .field textarea {
+.contact-channel:last-child {
+  border-bottom: 1px solid rgba(244, 241, 234, .1);
+}
+
+.contact-channel .label {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: rgba(244, 241, 234, .5);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.contact-channel .value {
+  color: var(--accent-soft);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: rgba(244, 241, 234, .5);
+}
+
+.field input,
+.field textarea {
   background: transparent;
   border: 0;
   border-bottom: 1px solid rgba(244, 241, 234, .18);
@@ -409,7 +483,6 @@
   width: 100%;
 }
 
-/* Настройки только для текстового поля сообщения */
 .field textarea {
   resize: vertical;
   height: 200px;
@@ -418,17 +491,18 @@
   line-height: 1.5;
 }
 
-.field input:focus, .field textarea:focus { 
-  outline: none; 
-  border-bottom-color: var(--accent); 
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
 }
 
-.field input:focus, .field textarea:focus { 
-  outline: none; 
-  border-bottom-color: var(--accent); 
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
 }
 
-/* СБРОС АВТОЗАПОЛНЕНИЯ БРАУЗЕРА */
 .field input:-webkit-autofill,
 .field input:-webkit-autofill:hover,
 .field input:-webkit-autofill:focus,
@@ -441,7 +515,13 @@
   caret-color: var(--hero-fg);
 }
 
-.submit-row { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+.submit-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
 .submit-btn {
   background: var(--accent);
   color: var(--hero-fg);
@@ -453,11 +533,22 @@
   cursor: pointer;
   transition: background .2s;
 }
-.submit-btn:hover { background: var(--accent-2); }
-.submit-btn:disabled { opacity: .5; cursor: not-allowed; }
-.form-status { font-size: .8125rem; color: rgba(244, 241, 234, .6); font-family: var(--font-mono); }
 
-/* Обертка для текстового поля и счетчика */
+.submit-btn:hover {
+  background: var(--accent-2);
+}
+
+.submit-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.form-status {
+  font-size: .8125rem;
+  color: rgba(244, 241, 234, .6);
+  font-family: var(--font-mono);
+}
+
 .textarea-wrapper {
   position: relative;
 }
@@ -466,7 +557,6 @@
   padding-bottom: 1.5rem;
 }
 
-/* Счетчик символов */
 .char-counter {
   position: absolute;
   bottom: 5px;
