@@ -28,6 +28,21 @@ export function initNavigation(renderCallback) {
     }
   });
 
+  const scrollCue = $('scrollCue');
+  const contentArea = $('contentArea');
+  const topbar = $('topbar');
+
+  if (scrollCue) {
+    scrollCue.addEventListener('click', () => {
+      const top = contentArea.getBoundingClientRect().top + window.scrollY;
+      const barH = topbar.offsetHeight;
+      window.scrollTo({
+        top: top - barH + 15,
+        behavior: 'smooth'
+      });
+    });
+  }
+
   const sections = document.querySelectorAll('.content-section, #contact');
   const navLinks = document.querySelectorAll('.nav-link');
 
@@ -45,9 +60,6 @@ export function initNavigation(renderCallback) {
   });
 
   sections.forEach(sec => observer.observe(sec));
-
-  const topbar = $('topbar');
-  const contentArea = $('contentArea');
 
   window.addEventListener('scroll', () => {
     if (contentArea.getBoundingClientRect().top <= topbar.offsetHeight) {

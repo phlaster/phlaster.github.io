@@ -17,6 +17,15 @@ export function renderContent(i18nConfig, lang) {
   if (writeMeLink) writeMeLink.textContent = ui.write_me;
   $('exportPdfBtn').textContent = ui.export_pdf;
 
+  const iframe = $('heroIframe');
+  const heroUrl = i18nConfig.hero?.iframe_url;
+  if (heroUrl && !heroUrl.includes('...')) {
+    iframe.src = heroUrl;
+    iframe.style.display = 'block';
+  } else {
+    iframe.style.display = 'none';
+  }
+
   // --- ABOUT ---
   const sAbout = sections;
   $('about-title').textContent = sAbout.about_title;

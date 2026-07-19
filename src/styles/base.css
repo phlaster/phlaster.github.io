@@ -9,6 +9,8 @@
 html {
   scroll-behavior: smooth;
   background: var(--hero-bg);
+  overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 body {
@@ -19,6 +21,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 a {
