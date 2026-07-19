@@ -167,20 +167,21 @@
           <div class="form-row">
             <div class="field">
               <label for="f-name" id="lbl-name">Name</label>
-              <input id="f-name" name="name" type="text" required>
+              <input id="f-name" name="name" type="text" maxlength="30">
             </div>
             <div class="field">
               <label for="f-email" id="lbl-email">Email</label>
-              <input id="f-email" name="email" type="email" required>
+              <input id="f-email" name="email" type="text" maxlength="30">
             </div>
           </div>
           <div class="field">
             <label for="f-subject" id="lbl-subject">Subject</label>
-            <input id="f-subject" name="subject" type="text">
+            <input id="f-subject" name="subject" type="text" maxlength="60">
           </div>
-          <div class="field">
+          <div class="field textarea-wrapper">
             <label for="f-message" id="lbl-message">Message</label>
-            <textarea id="f-message" name="message" rows="5" required></textarea>
+            <textarea id="f-message" name="message" rows="5" required maxlength="2000"></textarea>
+            <span id="charCounter" class="char-counter">0/2000</span>
           </div>
           <div class="submit-row">
             <button class="submit-btn" type="submit" id="submitBtn">Send message</button>

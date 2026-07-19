@@ -163,6 +163,8 @@ name = "Name"
 email = "Email"
 subject = "Subject"
 message = "Message"
+form_invalid = "Please write a message. Check field length limits."
+form_invalid_email = "Invalid email. Please use Latin letters and a valid domain"
 
 [ui.contact.fr]
 title = "<em>Parlons</em>."
@@ -175,6 +177,8 @@ name = "Nom"
 email = "Email"
 subject = "Sujet"
 message = "Message"
+form_invalid = "Veuillez écrire un message. Vérifiez les limites de longueur."
+form_invalid_email = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide"
 
 [ui.contact.ru]
 title = "<em>Поговорим</em>."
@@ -187,6 +191,8 @@ name = "Имя"
 email = "Email"
 subject = "Тема"
 message = "Сообщение"
+form_invalid = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей."
+form_invalid_email = "Некорректный email. Используйте латиницу и реальный домен"
 
 # ══════════════════════════════════════
 # ABOUT

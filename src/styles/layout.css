@@ -307,7 +307,7 @@
 
 .content-section {
   padding: 2rem 0;
-  scroll-margin-top: calc(var(--bar-h) + 20px); /* Отступ при якорной прокрутке */
+  scroll-margin-top: calc(var(--bar-h) + 20px);
 }
 
 .content-section:first-child { padding-top: 0; }
@@ -406,16 +406,16 @@
   font-family: var(--font-sans);
   font-size: 1rem;
   padding: .55rem 0;
-  width: 100%; /* Гарантирует, что поле займет всю ширину контейнера */
+  width: 100%;
 }
 
 /* Настройки только для текстового поля сообщения */
 .field textarea {
-  resize: vertical;          /* Растягивание только по вертикали */
-  height: 200px;             /* Фиксированная стартовая высота */
-  min-height: 200px;         /* Не может стать меньше 200px */
-  max-height: 500px;         /* Не может стать больше 500px */
-  line-height: 1.5;          /* Межстрочный интервал для читаемости */
+  resize: vertical;
+  height: 200px;
+  min-height: 200px;
+  max-height: 500px;
+  line-height: 1.5;
 }
 
 .field input:focus, .field textarea:focus { 
@@ -423,7 +423,24 @@
   border-bottom-color: var(--accent); 
 }
 
-.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--accent); }
+.field input:focus, .field textarea:focus { 
+  outline: none; 
+  border-bottom-color: var(--accent); 
+}
+
+/* СБРОС АВТОЗАПОЛНЕНИЯ БРАУЗЕРА */
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field textarea:-webkit-autofill,
+.field textarea:-webkit-autofill:hover,
+.field textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--hero-fg);
+  -webkit-box-shadow: 0 0 0px 1000px var(--ink) inset;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: var(--hero-fg);
+}
+
 .submit-row { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
 .submit-btn {
   background: var(--accent);
@@ -439,6 +456,27 @@
 .submit-btn:hover { background: var(--accent-2); }
 .submit-btn:disabled { opacity: .5; cursor: not-allowed; }
 .form-status { font-size: .8125rem; color: rgba(244, 241, 234, .6); font-family: var(--font-mono); }
+
+/* Обертка для текстового поля и счетчика */
+.textarea-wrapper {
+  position: relative;
+}
+
+.textarea-wrapper textarea {
+  padding-bottom: 1.5rem;
+}
+
+/* Счетчик символов */
+.char-counter {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: rgba(244, 241, 234, .4);
+  pointer-events: none;
+}
+
 
 .footer-bottom {
   display: flex;

@@ -77,6 +77,21 @@ export function initContact(i18nConfigGetter) {
     $(id)?.addEventListener('input', prepareFormPoW);
   });
 
+  // Логика счетчика символов
+  const messageInput = $('f-message');
+  const charCounter = $('charCounter');
+  
+  messageInput.addEventListener('input', () => {
+    charCounter.textContent = `${messageInput.value.length}/2000`;
+  });
+
+  // Вспомогательная функция: сбросить хэш и немедленно начать майнить новый
+  function invalidateAndRemine() {
+    formChallenge = null;
+    formNonce = null;
+    prepareFormPoW();
+  }
+
   $('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const status = $('formStatus');
@@ -86,11 +101,23 @@ export function initContact(i18nConfigGetter) {
 
     const name = $('f-name').value.trim();
     const email = $('f-email').value.trim();
-    const message = $('f-message').value.trim();
+    const subject = $('f-subject').value.trim();
+    const message = messageInput.value.trim();
 
-    if (!name || !email || !message) {
+    // 1. Валидация: Message обязательно, проверка длины остальных полей
+    if (!message || message.length > 2000 || name.length > 30 || subject.length > 60) {
       status.textContent = u.form_invalid;
       status.className = 'form-status error';
+      invalidateAndRemine();
+      return;
+    }
+
+    // 2. Валидация Email: только если поле заполнено
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (email && (email.length > 30 || !emailRegex.test(email))) {
+      status.textContent = u.form_invalid_email;
+      status.className = 'form-status error';
+      invalidateAndRemine();
       return;
     }
 
@@ -109,23 +136,31 @@ export function initContact(i18nConfigGetter) {
           challenge: formChallenge,
           nonce: formNonce,
           name, email,
-          subject: $('f-subject').value.trim(),
+          subject: subject,
           message
         })
       });
 
-      formChallenge = null;
-      formNonce = null;
+      const errData = await res.json().catch(() => ({}));
 
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        throw new Error(errData.error || 'Server error');
+      }
+
+      // --- УСПЕХ ---
       status.textContent = u.success;
       status.className = 'form-status success';
       $('contactForm').reset();
-    } catch (err) {
-      status.textContent = u.error;
-      status.className = 'form-status error';
+      charCounter.textContent = '0/2000';
+      
       formChallenge = null;
       formNonce = null;
+
+    } catch (err) {
+      // --- ОШИБКА СЕРВЕРА ---
+      status.textContent = err.message || u.error;
+      status.className = 'form-status error';
+      invalidateAndRemine();
     } finally {
       btn.disabled = false;
     }
