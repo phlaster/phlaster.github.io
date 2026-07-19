@@ -891,8 +891,8 @@ $('contactForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  const workerUrl = config.contact.form_worker_url;
-  if (!workerUrl || workerUrl.includes('your-form-worker-name')) {
+  const workerUrl = config.contact.worker_url;
+  if (!workerUrl || workerUrl.includes('your-combined-worker-name')) {
     status.textContent = u.error || "Worker not configured.";
     status.className = 'form-status error';
     return;
@@ -989,11 +989,10 @@ let formNonce = null;
 let isComputingFormPoW = false;
 
 async function prepareFormPoW() {
-  // Не запускаем, если уже идет майнинг или хэш уже готов
   if (isComputingFormPoW || (formChallenge && formNonce)) return;
-
-  const workerUrl = config.contact.form_worker_url;
-  if (!workerUrl || workerUrl.includes('your-form-worker-name')) return;
+  
+  const workerUrl = config.contact.worker_url;
+  if (!workerUrl || workerUrl.includes('your-combined-worker-name')) return;
 
   isComputingFormPoW = true;
   formChallenge = null;
@@ -1022,11 +1021,10 @@ let isComputingRevealPoW = false;
 let contactsRevealed = false;
 
 async function prepareRevealPoW() {
-  // Если уже вычисляется или контакты уже загружены - выходим
   if (isComputingRevealPoW || contactsRevealed) return;
-
-  const workerUrl = config.contact.pow_worker_url;
-  if (!workerUrl || workerUrl.includes('your-worker-name')) {
+  
+  const workerUrl = config.contact.worker_url;
+  if (!workerUrl || workerUrl.includes('your-combined-worker-name')) {
     setContactError("Worker not configured");
     return;
   }
@@ -1057,8 +1055,8 @@ async function prepareRevealPoW() {
 }
 
 async function fetchRevealedContacts() {
-  if (contactsRevealed) return; // Защита от повторного вызова
-  const workerUrl = config.contact.pow_worker_url;
+  if (contactsRevealed) return;
+  const workerUrl = config.contact.worker_url;
 
   try {
     const resData = await fetch(`${workerUrl}/api/get-email`, {

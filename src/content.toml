@@ -11,15 +11,13 @@ iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA0WYy24cxxW
 # iframe_url_mobile = ""
 
 [social]
-github = "https://github.com/phlaster"
 location_link = "https://www.openstreetmap.org/?query=Berlin"
 
 [contact]
 telegram_bot = "my_portfolio_bot"
 webhook_url = ""
 fallback_telegram = true
-pow_worker_url = "https://hash-task.alex-phlaster.workers.dev"
-form_worker_url = "https://tg-send.alex-phlaster.workers.dev"
+worker_url = "https://cv.alex-phlaster.workers.dev" 
 
 # ══════════════════════════════════════
 # UI ELEMENTS
