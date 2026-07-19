@@ -406,7 +406,23 @@
   font-family: var(--font-sans);
   font-size: 1rem;
   padding: .55rem 0;
+  width: 100%; /* Гарантирует, что поле займет всю ширину контейнера */
 }
+
+/* Настройки только для текстового поля сообщения */
+.field textarea {
+  resize: vertical;          /* Растягивание только по вертикали */
+  height: 200px;             /* Фиксированная стартовая высота */
+  min-height: 200px;         /* Не может стать меньше 200px */
+  max-height: 500px;         /* Не может стать больше 500px */
+  line-height: 1.5;          /* Межстрочный интервал для читаемости */
+}
+
+.field input:focus, .field textarea:focus { 
+  outline: none; 
+  border-bottom-color: var(--accent); 
+}
+
 .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--accent); }
 .submit-row { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
 .submit-btn {

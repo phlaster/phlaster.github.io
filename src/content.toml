@@ -107,6 +107,8 @@ research_conf = "Conferences"
 research_pubs = "Publications"
 edu_title = "Education & Academic Work"
 edu_sub = "Degrees, thesis, and coursework."
+cert_title = "Certifications & Achievements"
+cert_sub = "Proof of continuous learning and skills."
 
 [ui.sections.fr]
 about_title = "À propos"
@@ -126,6 +128,8 @@ research_conf = "Conférences"
 research_pubs = "Publications"
 edu_title = "Formation & Travaux Académiques"
 edu_sub = "Diplômes, mémoire et projets tuteurés."
+cert_title = "Certifications & Réalisations"
+cert_sub = "Preuve d'un apprentissage continu et des compétences."
 
 [ui.sections.ru]
 about_title = "Обо мне"
@@ -145,6 +149,8 @@ research_conf = "Конференции"
 research_pubs = "Публикации"
 edu_title = "Образование и академические работы"
 edu_sub = "Дипломы, ВКР и курсовые проекты."
+cert_title = "Сертификаты и достижения"
+cert_sub = "Подтверждение непрерывного обучения и навыков."
 
 [ui.contact.en]
 title = "Let's <em>talk</em>."
@@ -469,3 +475,37 @@ authors = "Grigory V Gladkov, Anastasiia K Kimeklis, Olga V Orlova, Tatiana O Li
 venue = "Microorganisms 12(8), 1728 (2024)"
 url = "https://www.mdpi.com/2076-2607/12/8/1728"
 pdf_url = "/assets/pdfs/example.pdf"
+
+
+# ══════════════════════════════════════
+# CERTIFICATES & ACHIEVEMENTS
+# ══════════════════════════════════════
+[[certificates.en]]
+title = "Summer School of Mathematics"
+url = "/assets/pdfs/cert_summer_school.pdf"
+description = "Advanced Geometry Course Certificate."
+
+[[certificates.en]]
+title = "Duolingo Language Streak"
+url = "" # URL пустой, значит кнопки PDF не будет, будет просто карточка
+description = "365-day streak in French and German."
+
+[[certificates.fr]]
+title = "École d'été de Mathématiques"
+url = "/assets/pdfs/cert_summer_school.pdf"
+description = "Certificat de cours de géométrie avancée."
+
+[[certificates.fr]]
+title = "Série de langues Duolingo"
+url = ""
+description = "365 jours de série en français et allemand."
+
+[[certificates.ru]]
+title = "Летняя школа математики"
+url = "/assets/pdfs/cert_summer_school.pdf"
+description = "Сертификат прохождения курса по продвинутой геометрии."
+
+[[certificates.ru]]
+title = "Стрик в Duolingo"
+url = ""
+description = "365 дней непрерывного изучения французского и немецкого."

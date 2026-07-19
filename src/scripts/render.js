@@ -177,7 +177,6 @@ export function renderContent(i18nConfig, lang) {
   $('edu-sub').textContent = sAbout.edu_sub;
   const edu = i18nConfig.about.education || [];
   const courses = i18nConfig.about.coursework || [];
-  const certs = i18nConfig.about.certificates || []; 
   
   $('education-content').innerHTML = `
     <div class="research-grid">
@@ -202,17 +201,28 @@ export function renderContent(i18nConfig, lang) {
             <div class="exp-desc">${esc(c.description)}</div>
             <button class="view-pdf-btn" data-pdf="${esc(c.url)}">${esc(ui.view_pdf)}</button>
           </div>`).join('')}
-          
-        ${certs.length > 0 ? `
-          <h3 class="research-col-title" style="margin-top: 2rem;">Certificates & Schools</h3>
-          ${certs.map(c => `
-            <div class="edu-item">
-              <div class="edu-degree">${esc(c.title)}</div>
-              <div class="exp-desc">${esc(c.description)}</div>
-              <button class="view-pdf-btn" data-pdf="${esc(c.url)}">${esc(ui.view_pdf)}</button>
-            </div>`).join('')}
-        ` : ''}
       </div>
+    </div>
+  `;
+
+  // --- CERTIFICATES & ACHIEVEMENTS ---
+  $('cert-title').textContent = sAbout.cert_title;
+  $('cert-sub').textContent = sAbout.cert_sub;
+  const certs = i18nConfig.certificates || [];
+  
+  $('certificates-content').innerHTML = `
+    <div class="projects-grid"> <!-- Используем ту же сетку, что и у проектов для красоты -->
+      ${certs.map(c => `
+        <div class="project-card" style="padding: 1.5rem;">
+          <div class="project-name">${esc(c.title)}</div>
+          <div class="project-desc">${esc(c.description)}</div>
+          ${c.url ? `
+            <button class="view-pdf-btn" data-pdf="${esc(c.url)}" style="margin-top: 1rem;">
+              ${esc(ui.view_pdf)}
+            </button>
+          ` : ''}
+        </div>
+      `).join('')}
     </div>
   `;
 
