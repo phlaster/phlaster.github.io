@@ -1,11 +1,13 @@
 @media print {
+
   /* 1. РАЗМЕР СТРАНИЦЫ */
   @page {
     size: 1920px 1080px;
     margin: 0;
   }
 
-  html, body {
+  html,
+  body {
     background: transparent !important;
     width: 1920px !important;
     margin: 0 !important;
@@ -20,7 +22,7 @@
     width: 1920px;
     height: 1080px;
     z-index: -2;
-    overflow: hidden; /* Обрезает всё лишнее */
+    overflow: hidden;
   }
 
   #printBackground svg {
@@ -54,6 +56,14 @@
     page-break-after: always;
   }
 
+  .hero-text-block::before {
+    top: 40% !important; /* Сдвигаем центр пятна выше */
+    width: 200% !important; /* Растягиваем шире */
+    height: 160% !important; /* Растягиваем по вертикали */
+    background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.95) 0%, rgba(15, 14, 12, 0.75) 40%, rgba(15, 14, 12, 0) 80%) !important;
+    filter: blur(20px) !important; /* Чуть меньше размытие, чтобы не вылезало вниз */
+  }
+
   .hero-overlay {
     position: relative;
     height: 100%;
@@ -75,11 +85,11 @@
   .content-section {
     background: #F4F1EA !important;
     color: #1A1815 !important;
-    width: 2100px; 
-    height: 1350px; 
-    margin: 0 0 -272px 120px !important; /* Запасной вариант для старых браузеров */
-    padding: 7.5rem 10rem !important; /* Увеличено, чтобы после zoom осталось 6rem */
-    transform: scale(0.8); /* Запасной вариант */
+    width: 2100px;
+    height: 1350px;
+    margin: 0 0 -272px 120px !important;
+    padding: 7.5rem 10rem !important;
+    transform: scale(0.8);
     transform-origin: top left;
     page-break-after: always;
     box-sizing: border-box;
@@ -90,12 +100,11 @@
     border: none !important;
   }
 
-  /* РЕШЕНИЕ ДЛЯ CHROME: zoom меняет физический размер, убирая хвосты */
   @supports (zoom: 1) {
     .content-section {
       zoom: 0.8;
       transform: none;
-      margin: 0 0 0 120px !important; /* Отрицательный маржин больше не нужен */
+      margin: 0 0 0 120px !important;
     }
   }
 
@@ -110,7 +119,7 @@
     background: #F4F1EA !important;
     color: #1A1815 !important;
     width: 2100px;
-    max-width: none !important; /* <--- ДОБАВИТЬ ЭТУ СТРОКУ */
+    max-width: none !important;
     height: 1350px;
     margin: 0 0 -272px 120px !important;
     padding: 7.5rem 10rem !important;
@@ -132,7 +141,6 @@
     }
   }
 
-  /* Заголовок "Let's talk" */
   #contactTitle {
     font-family: var(--font-serif) !important;
     font-weight: 400 !important;
@@ -140,6 +148,7 @@
     margin-bottom: 4rem !important;
     color: #1A1815 !important;
   }
+
   #contactTitle em {
     color: #B4502A !important;
     font-style: italic;
@@ -147,28 +156,25 @@
 
   /* 8. ДВУХКОЛОНОЧНАЯ СТРУКТУРА КОНТАКТОВ */
   .contact-grid {
-    display: block !important; /* Отключаем стандартную сетку */
+    display: block !important;
     flex: 1 !important;
     border: none !important;
     padding: 0 !important;
   }
 
-  /* Левая колонка становится горизонтальным flex-контейнером */
   .contact-intro {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
-    align-items: center !important; /* Центрирование по вертикали */
+    align-items: center !important;
     height: 100%;
     gap: 6rem;
   }
 
-  /* Прячем старый текст (он для веб-версии) */
   #contactIntro {
     display: none !important;
   }
 
-  /* Текст для печати занимает левую половину */
   #printContactText {
     display: block !important;
     font-size: 1.8rem;
@@ -178,7 +184,6 @@
     flex-shrink: 0;
   }
 
-  /* Контакты занимают правую половину */
   .contact-channels {
     display: flex;
     flex-direction: column;
