@@ -13,48 +13,54 @@ export function initPdfExport() {
     btn.disabled = true;
 
     try {
-      // 1. Ждем кадр фона
       const framePromise = new Promise((resolve) => {
         const handler = (e) => {
           if (e.data && e.data.type === 'SEND_FRAME') {
             window.removeEventListener('message', handler);
-            resolve(e.data.dataUrl || null);
+            resolve(e.data.svg || e.data.dataUrl || null);
           }
         };
         window.addEventListener('message', handler);
       });
 
       iframe.contentWindow.postMessage({ type: 'REQUEST_FRAME' }, '*');
-      const dataUrl = await Promise.race([
+      const frameData = await Promise.race([
         framePromise,
-        new Promise(r => setTimeout(() => r(null), 2000))
+        new Promise(r => setTimeout(() => r(null), 5000))
       ]);
 
-      if (dataUrl) {
-        printBg.src = dataUrl;
-        await new Promise((resolve) => {
-          if (printBg.complete) return resolve();
-          printBg.onload = resolve;
-          printBg.onerror = resolve;
-        });
+      if (frameData) {
+        if (frameData.startsWith('<svg') || frameData.startsWith('<?xml')) {
+          // Удаляем XML заголовок для безопасности innerHTML
+          let cleanSvg = frameData.replace(/^<\?xml[^>]+\?>/, '').trim();
+          printBg.innerHTML = cleanSvg;
+        } else {
+          printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:cover;">`;
+        }
+        await new Promise(r => setTimeout(r, 100));
+      } else {
+        console.warn("PDF Export: Failed to get background frame.");
       }
 
-      // 2. Ждем получения контактов (PoW)
+      // Ждем получения контактов (PoW)
       if (!window.contactsRevealed) {
         btn.textContent = 'Fetching contacts...';
         let waitCount = 0;
-        while (!window.contactsRevealed && waitCount < 50) { // Ждем максимум 5 секунд
+        while (!window.contactsRevealed && waitCount < 50) {
           await new Promise(r => setTimeout(r, 100));
           waitCount++;
         }
       }
 
-      // 3. Печать
+      // Печать
       btn.textContent = originalText;
       btn.disabled = false;
 
       await new Promise(r => setTimeout(r, 50));
       window.print();
+
+      // Очищаем DOM после печати
+      printBg.innerHTML = '';
 
     } catch (e) {
       console.error("Export failed:", e);

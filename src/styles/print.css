@@ -20,7 +20,13 @@
     width: 1920px;
     height: 1080px;
     z-index: -2;
-    object-fit: cover;
+    overflow: hidden; /* Обрезает всё лишнее */
+  }
+
+  #printBackground svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
   }
 
   /* 3. СКРЫТИЕ ЛИШНЕГО */
@@ -104,6 +110,7 @@
     background: #F4F1EA !important;
     color: #1A1815 !important;
     width: 2100px;
+    max-width: none !important; /* <--- ДОБАВИТЬ ЭТУ СТРОКУ */
     height: 1350px;
     margin: 0 0 -272px 120px !important;
     padding: 7.5rem 10rem !important;
