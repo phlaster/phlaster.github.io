@@ -238,6 +238,7 @@ export function renderContent(i18nConfig, lang) {
   const c = ui.contact || {};
   $('contactTitle').innerHTML = c.title;
   $('contactIntro').textContent = c.intro;
+  $('printContactText').textContent = c.print_contact_text || c.intro;
   $('submitBtn').textContent = c.send;
   $('lbl-name').textContent = c.name;
   $('lbl-email').textContent = c.email;

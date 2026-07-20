@@ -15,6 +15,10 @@
 </head>
 
 <body>
+  <div class="hero-canvas-wrap no-print" id="canvasWrap">
+    <canvas id="heroCanvas"></canvas>
+    <iframe id="heroIframe" src="" frameborder="0" allow="fullscreen" title="Interactive curve canvas"></iframe>
+  </div>
 
   <header class="topbar no-print" id="topbar">
     <div class="topbar-inner">
@@ -51,11 +55,6 @@
   </header>
 
   <section class="hero" id="hero">
-    <div class="hero-canvas-wrap no-print" id="canvasWrap">
-      <canvas id="heroCanvas"></canvas>
-      <iframe id="heroIframe" src="" frameborder="0" allow="fullscreen" title="Interactive curve canvas"></iframe>
-    </div>
-
     <img id="printBackground" class="print-only" src="" alt="">
     
     <div class="hero-overlay" id="heroOverlay">
@@ -152,6 +151,7 @@
       <div class="contact-grid">
         <div class="contact-intro">
           <p id="contactIntro"></p>
+          <p id="printContactText" class="print-only"></p>
           <div class="contact-channels">
             <div class="contact-channel" id="channelTelegramWrap">
               <span class="label">Telegram</span>

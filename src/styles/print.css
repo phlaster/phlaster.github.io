@@ -1,74 +1,211 @@
 @media print {
+  /* 1. РАЗМЕР СТРАНИЦЫ */
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
 
-  .no-print {
+  html, body {
+    background: transparent !important;
+    width: 1920px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 2. ФОН */
+  #printBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: -2;
+    object-fit: cover;
+  }
+
+  /* 3. СКРЫТИЕ ЛИШНЕГО */
+  .no-print,
+  .view-pdf-btn,
+  .scroll-cue,
+  #heroIframe,
+  #canvasWrap,
+  #topbar,
+  .pdf-modal {
     display: none !important;
   }
 
   .print-only {
-    display: block;
+    display: block !important;
   }
 
-  #printBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    object-fit: cover;
-  }
-
-  body,
-  html {
-    background: white !important;
-    color: black !important;
-  }
-
+  /* 4. ПЕРВАЯ СТРАНИЦА (HERO) */
   .hero {
-    height: auto;
-    min-height: auto;
+    position: relative;
+    width: 1920px;
+    height: 1080px;
     color: white;
+    z-index: 1;
+    page-break-after: always;
   }
 
   .hero-overlay {
     position: relative;
-    height: 100vh;
-    page-break-after: always;
+    height: 100%;
+    width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
   }
 
-  .hero-text-block::before {
-    background: rgba(15, 14, 12, 0.7);
-  }
-
+  /* 5. СБРОС КОНТЕЙНЕРА */
   .content-area {
-    background: white !important;
+    background: transparent !important;
     border: none !important;
-    border-radius: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
   }
 
+  /* 6. КОНТЕНТНЫЕ БЛОКИ (ВЕСЬ ЭКРАН ПО ВЫСОТЕ, ФОН ПО БОКАМ) */
   .content-section {
-    page-break-before: always;
-    padding: 1rem 0 !important;
-    border-bottom: none !important;
+    background: #F4F1EA !important;
+    color: #1A1815 !important;
+    width: 2100px; 
+    height: 1350px; 
+    margin: 0 0 -272px 120px !important; /* Запасной вариант для старых браузеров */
+    padding: 7.5rem 10rem !important; /* Увеличено, чтобы после zoom осталось 6rem */
+    transform: scale(0.8); /* Запасной вариант */
+    transform-origin: top left;
+    page-break-after: always;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 !important;
+    border: none !important;
   }
 
-  .project-card,
-  .interest-tag,
-  .skill-tag {
-    border: 1px solid #ccc !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
+  /* РЕШЕНИЕ ДЛЯ CHROME: zoom меняет физический размер, убирая хвосты */
+  @supports (zoom: 1) {
+    .content-section {
+      zoom: 0.8;
+      transform: none;
+      margin: 0 0 0 120px !important; /* Отрицательный маржин больше не нужен */
+    }
   }
 
-  .project-card:hover {
-    transform: none;
+  .content-section:last-of-type {
+    page-break-after: auto;
   }
 
-  .contact-section,
+  /* 7. ПОСЛЕДНЯЯ СТРАНИЦА (КОНТАКТЫ) */
   .site-footer {
+    position: relative;
+    z-index: 1;
+    background: #F4F1EA !important;
+    color: #1A1815 !important;
+    width: 2100px;
+    height: 1350px;
+    margin: 0 0 -272px 120px !important;
+    padding: 7.5rem 10rem !important;
+    transform: scale(0.8);
+    transform-origin: top left;
+    box-sizing: border-box;
+    page-break-before: always;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  @supports (zoom: 1) {
+    .site-footer {
+      zoom: 0.8;
+      transform: none;
+      margin: 0 0 0 120px !important;
+    }
+  }
+
+  /* Заголовок "Let's talk" */
+  #contactTitle {
+    font-family: var(--font-serif) !important;
+    font-weight: 400 !important;
+    font-size: 3.5rem !important;
+    margin-bottom: 4rem !important;
+    color: #1A1815 !important;
+  }
+  #contactTitle em {
+    color: #B4502A !important;
+    font-style: italic;
+  }
+
+  /* 8. ДВУХКОЛОНОЧНАЯ СТРУКТУРА КОНТАКТОВ */
+  .contact-grid {
+    display: block !important; /* Отключаем стандартную сетку */
+    flex: 1 !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* Левая колонка становится горизонтальным flex-контейнером */
+  .contact-intro {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important; /* Центрирование по вертикали */
+    height: 100%;
+    gap: 6rem;
+  }
+
+  /* Прячем старый текст (он для веб-версии) */
+  #contactIntro {
+    display: none !important;
+  }
+
+  /* Текст для печати занимает левую половину */
+  #printContactText {
+    display: block !important;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #54514A !important;
+    max-width: 50% !important;
+    flex-shrink: 0;
+  }
+
+  /* Контакты занимают правую половину */
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    border: none !important;
+    max-width: 50% !important;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .contact-channel {
+    border: none !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-channel .label {
+    font-size: 1rem !important;
+    width: 100% !important;
+    color: #8B8678 !important;
+  }
+
+  .contact-channel .value {
+    font-size: 2rem !important;
+    color: #B4502A !important;
+  }
+
+  /* Прячем форму и футер */
+  #contactForm,
+  .form-status,
+  .reveal-loader,
+  .footer-bottom {
     display: none !important;
   }
 }

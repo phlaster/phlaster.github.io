@@ -10,7 +10,6 @@ html {
   scroll-behavior: smooth;
   background: var(--hero-bg);
   overscroll-behavior: none;
-  touch-action: pan-y;
 }
 
 body {
@@ -22,7 +21,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
-  touch-action: pan-y;
 }
 
 a {

@@ -192,6 +192,7 @@
   overflow: hidden;
   background: transparent;
   color: var(--hero-fg);
+  pointer-events: none;
   touch-action: none;
 }
 

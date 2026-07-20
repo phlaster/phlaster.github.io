@@ -77,6 +77,7 @@ export function initContact(i18nConfigGetter) {
         $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
       }
       contactsRevealed = true;
+      window.contactsRevealed = true;
     } catch (err) {
       console.error('Reveal PoW prep failed:', err);
     }
