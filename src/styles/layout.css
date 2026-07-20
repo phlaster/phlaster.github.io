@@ -264,7 +264,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 160%;
+  width: 140%;
   height: 200%;
   background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 10%, rgba(15, 14, 12, 0) 75%);
   z-index: -1;
