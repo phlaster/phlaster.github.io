@@ -254,6 +254,8 @@
   grid-column: 1;
   padding: 2rem var(--gutter);
   position: relative;
+  min-width: 0; /* Запрещает колонке расширяться из-за длинных слов */
+  text-align: center; /* Центрируем имя и текст */
 }
 
 .hero-text-block::before {
@@ -272,10 +274,29 @@
 .hero-name {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Выравнивание по центру для flex-элементов */
   font-family: var(--font-serif);
   font-weight: 300;
   font-size: clamp(2.75rem, 9vw, 7rem);
   line-height: 1;
+}
+
+.hero-tagline {
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  text-align: center;
+  text-align-last: center;
+  max-width: calc(clamp(2.75rem, 9vw, 7rem) * 6);
+  margin-left: auto; /* Центрируем сам блок текста */
+  margin-right: auto;
+}
+
+html[lang="ru"] .hero-name {
+  font-size: clamp(2.5rem, 8vw, 6.2rem);
+}
+
+html[lang="ru"] .hero-tagline {
+  max-width: calc(clamp(2.5rem, 8vw, 6.2rem) * 6);
 }
 
 .hero-name em {
@@ -284,12 +305,6 @@
   color: var(--accent-soft);
 }
 
-.hero-tagline {
-  margin-top: 1rem;
-  font-size: 1.0625rem;
-  text-align: justify;
-  text-align-last: center;
-}
 
 .hero-photo {
   grid-column: 2;

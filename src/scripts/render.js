@@ -3,6 +3,16 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 
 export function renderContent(i18nConfig, lang) {
   document.documentElement.lang = lang;
+  
+  const brandEl = document.querySelector('.brand');
+  if (brandEl) {
+    if (lang === 'ru') {
+      brandEl.innerHTML = 'А<span class="dot">·</span>Б';
+    } else {
+      brandEl.innerHTML = 'A<span class="dot">·</span>B';
+    }
+  }
+
   const ui = i18nConfig.ui || {};
   const sections = ui.sections || {};
 

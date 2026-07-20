@@ -57,11 +57,11 @@
   }
 
   .hero-text-block::before {
-    top: 40% !important; /* Сдвигаем центр пятна выше */
-    width: 200% !important; /* Растягиваем шире */
-    height: 160% !important; /* Растягиваем по вертикали */
+    top: 40% !important;
+    width: 200% !important;
+    height: 160% !important;
     background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.95) 0%, rgba(15, 14, 12, 0.75) 40%, rgba(15, 14, 12, 0) 80%) !important;
-    filter: blur(20px) !important; /* Чуть меньше размытие, чтобы не вылезало вниз */
+    filter: blur(20px) !important;
   }
 
   .hero-overlay {
@@ -89,7 +89,7 @@
     height: 1350px;
     margin: 0 0 -272px 120px !important;
     padding: 7.5rem 10rem !important;
-    transform: scale(0.8);
+    transform: scale(0.9);
     transform-origin: top left;
     page-break-after: always;
     box-sizing: border-box;

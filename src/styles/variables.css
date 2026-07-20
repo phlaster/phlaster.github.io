@@ -15,7 +15,7 @@
   --maxw: 1350px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --bar-h: 60px;
-  --font-serif: 'Fraunces', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
 }
