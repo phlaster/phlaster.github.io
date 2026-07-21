@@ -1,7 +1,7 @@
 import {
   parse
 } from 'smol-toml';
-import tomlString from '../content.toml?raw';
+import tomlString from '../../CONTENT.toml?raw';
 
 export const config = parse(tomlString);
 const langKeys = ['en', 'fr', 'ru'];
