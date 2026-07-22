@@ -31,9 +31,14 @@ export function initPdfExport() {
 
       if (frameData) {
         if (frameData.startsWith('<svg') || frameData.startsWith('<?xml')) {
-          // Удаляем XML заголовок для безопасности innerHTML
-          let cleanSvg = frameData.replace(/^<\?xml[^>]+\?>/, '').trim();
-          printBg.innerHTML = cleanSvg;
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(frameData, "image/svg+xml");
+          const svgElement = doc.documentElement;
+          
+          printBg.innerHTML = '';
+          printBg.appendChild(svgElement);
+          
+          await new Promise(r => setTimeout(r, 100));
         } else {
           printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:cover;">`;
         }

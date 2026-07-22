@@ -193,7 +193,6 @@
   background: transparent;
   color: var(--hero-fg);
   pointer-events: none;
-  touch-action: none;
 }
 
 .hero-canvas-wrap {
@@ -204,7 +203,6 @@
   height: 100vh;
   z-index: 0;
   pointer-events: auto;
-  touch-action: none;
 }
 
 .hero-canvas-wrap canvas {
@@ -231,7 +229,7 @@
   position: relative;
   z-index: 2;
   height: 100%;
-  max-width: var(--maxw);
+  max-width: calc(var(--maxw) + 10%);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -239,23 +237,28 @@
   padding: calc(var(--bar-h) + 2rem) var(--gutter) 2rem;
   pointer-events: none;
   user-select: none;
-  touch-action: none;
 }
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr; /* Имя 1/3, фото 2/3 */
   align-items: center;
+  justify-items: center;
   width: 100%;
   flex: 1;
+  gap: 2rem;
 }
 
 .hero-text-block {
-  grid-column: 1;
-  padding: 2rem var(--gutter);
+  display: inline-flex; /* Блок сжимается до ширины самого широкого элемента (имени) */
+  flex-direction: column;
+  align-items: center;
+  padding: calc(var(--gutter) * 0.8);
   position: relative;
-  min-width: 0; /* Запрещает колонке расширяться из-за длинных слов */
-  text-align: center; /* Центрируем имя и текст */
+  min-width: 0;
+  max-width: 100%;
+  text-align: center;
+  pointer-events: none;
 }
 
 .hero-text-block::before {
@@ -264,9 +267,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 140%;
+  width: 170%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 10%, rgba(15, 14, 12, 0) 75%);
+  background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 40%, rgba(15, 14, 12, 0) 75%);
   z-index: -1;
   filter: blur(25px);
 }
@@ -274,29 +277,12 @@
 .hero-name {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Выравнивание по центру для flex-элементов */
+  align-items: center;
   font-family: var(--font-serif);
   font-weight: 300;
-  font-size: clamp(2.75rem, 9vw, 7rem);
+  font-size: clamp(1.7rem, 4.8vw, 5.5rem);
   line-height: 1;
-}
-
-.hero-tagline {
-  margin-top: 1rem;
-  font-size: 1.0625rem;
-  text-align: center;
-  text-align-last: center;
-  max-width: calc(clamp(2.75rem, 9vw, 7rem) * 6);
-  margin-left: auto; /* Центрируем сам блок текста */
-  margin-right: auto;
-}
-
-html[lang="ru"] .hero-name {
-  font-size: clamp(2.5rem, 8vw, 6.2rem);
-}
-
-html[lang="ru"] .hero-tagline {
-  max-width: calc(clamp(2.5rem, 8vw, 6.2rem) * 6);
+  width: 100%;
 }
 
 .hero-name em {
@@ -305,16 +291,51 @@ html[lang="ru"] .hero-tagline {
   color: var(--accent-soft);
 }
 
+.hero-tagline {
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  text-align-last: center;
+  width: 100%;
+}
+
+html[lang="ru"] .hero-name {
+  font-size:  clamp(1.6rem, 4.7vw, 5.2rem);
+}
+
+html[lang="ru"] .hero-text-block {
+  padding: calc(var(--gutter) * 0.3);
+}
+
+@media screen and (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .hero-photo {
+    order: 1; /* Фото наверх */
+    max-height: 50vh;
+  }
+  
+  .hero-text-block {
+    order: 2; /* Текст вниз */
+    padding: 0 1rem;
+  }
+}
+
 
 .hero-photo {
   grid-column: 2;
   width: 100%;
   padding: 0 var(--gutter);
-  max-height: 65vh;
-  aspect-ratio: 4/5;
-  object-fit: cover;
+  max-height: 80vh;
+  aspect-ratio: auto; 
+  object-fit: contain;
   border-radius: var(--radius);
   filter: grayscale(.15) contrast(1.05);
+  pointer-events: none;
 }
 
 .hero-foot {
