@@ -8,18 +8,18 @@
 .about-bio p {
   font-size: 1.0625rem;
   margin-bottom: 1rem;
-  color: var(--ink-2);
+  color: var(--color-text-muted);
 }
 
 .about-bio p.lead {
   font-size: 1.375rem;
-  color: var(--ink);
+  color: var(--color-text);
   font-family: var(--font-serif);
   margin-bottom: 1.5rem;
 }
 
 .meta-block {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
   padding-top: 1rem;
   margin-bottom: 2rem;
 }
@@ -27,7 +27,7 @@
 .meta-label {
   font-family: var(--font-mono);
   font-size: .7rem;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
   margin-bottom: .65rem;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .language-item .level {
-  color: var(--ink-3);
+  color: var(--color-text-faded);
   font-family: var(--font-mono);
   font-size: .8125rem;
 }
@@ -63,11 +63,11 @@
 
 .interest-tag {
   padding: .3rem .65rem;
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 100px;
   font-size: .8125rem;
-  color: var(--ink-2);
+  color: var(--color-text-muted);
 }
 
 /* Skills */
@@ -80,7 +80,7 @@
 .skill-group h3 {
   font-family: var(--font-mono);
   font-size: .75rem;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
   margin-bottom: 1rem;
 }
 
@@ -92,15 +92,15 @@
 
 .skill-tag {
   padding: .4rem .85rem;
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 100px;
   font-size: .875rem;
 }
 
 .skill-tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* Experience */
@@ -112,7 +112,7 @@
   font-family: var(--font-serif);
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: var(--ink);
+  color: var(--color-text);
 }
 
 .exp-item {
@@ -120,13 +120,13 @@
   grid-template-columns: 200px 1fr;
   gap: 2rem;
   padding: 1.5rem 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
 }
 
 .exp-period {
   font-family: var(--font-mono);
   font-size: .8125rem;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
 }
 
 .exp-role {
@@ -136,13 +136,13 @@
 }
 
 .exp-company {
-  color: var(--accent);
+  color: var(--color-accent);
   font-size: .9375rem;
   margin-bottom: .75rem;
 }
 
 .exp-desc {
-  color: var(--ink-2);
+  color: var(--color-text-muted);
   font-size: .9375rem;
 }
 
@@ -154,8 +154,8 @@
 }
 
 .project-card {
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
@@ -165,7 +165,7 @@
 
 .project-card:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
+  border-color: var(--color-accent);
 }
 
 .project-cover {
@@ -186,7 +186,7 @@
 
 .project-desc {
   font-size: .9375rem;
-  color: var(--ink-2);
+  color: var(--color-text-muted);
   margin-bottom: 1rem;
 }
 
@@ -198,8 +198,8 @@
 .lang-chip {
   font-family: var(--font-mono);
   font-size: .75rem;
-  background: var(--bg);
-  border: 1px solid var(--line);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: 100px;
   padding: .2rem .5rem;
 }
@@ -210,17 +210,17 @@
   grid-template-columns: 50px 1fr;
   gap: 1rem;
   padding: 1.5rem 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
 }
 
 .pub-item:last-child {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .pub-year {
   font-family: var(--font-mono);
   font-size: .875rem;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
 }
 
 .pub-title {
@@ -231,12 +231,12 @@
 
 .pub-authors {
   font-size: .875rem;
-  color: var(--ink-2);
+  color: var(--color-text-muted);
 }
 
 .pub-venue {
   font-size: .8125rem;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
   font-style: italic;
 }
 
@@ -251,19 +251,19 @@
   grid-template-columns: 100px 1fr;
   gap: 1.5rem;
   padding: 1.5rem 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
   text-decoration: none;
   color: inherit;
   transition: padding-left .25s, border-color .2s;
 }
 
 .conf-item:last-child {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .conf-item:hover {
   padding-left: .5rem;
-  border-top-color: var(--accent);
+  border-top-color: var(--color-accent);
 }
 
 .conf-cover {
@@ -282,7 +282,7 @@
 .conf-date {
   font-family: var(--font-mono);
   font-size: .75rem;
-  color: var(--accent);
+  color: var(--color-accent);
   margin-bottom: .5rem;
 }
 
@@ -296,7 +296,7 @@
 }
 
 .conf-item:hover .conf-title {
-  color: var(--accent);
+  color: var(--color-accent);
 }
 
 .conf-meta {
@@ -304,7 +304,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   font-size: .875rem;
-  color: var(--ink-2);
+  color: var(--color-text-muted);
 }
 
 .conf-location {
@@ -313,7 +313,7 @@
   gap: .35rem;
 }
 
-/* Research Grid (2 columns) */
+/* Research Grid */
 .research-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -332,7 +332,7 @@
   font-size: .75rem;
   letter-spacing: .15em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: var(--color-text-faded);
   margin-bottom: 1.5rem;
   font-weight: 500;
 }
@@ -344,13 +344,13 @@
 }
 
 .pub-title-link:hover .pub-title {
-  color: var(--accent);
+  color: var(--color-accent);
 }
 
 /* Education & Thesis */
 .edu-item {
   margin-bottom: 1.5rem;
-  border-left: 2px solid var(--line);
+  border-left: 2px solid var(--color-border);
   padding-left: 1rem;
 }
 
@@ -360,7 +360,7 @@
 }
 
 .edu-inst {
-  color: var(--ink-2);
+  color: var(--color-text-muted);
   margin-bottom: .5rem;
 }
 
@@ -370,8 +370,8 @@
   gap: .5rem;
   font-family: var(--font-mono);
   font-size: .8125rem;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
   padding: .3rem .8rem;
   border-radius: 100px;
   cursor: pointer;
@@ -381,22 +381,20 @@
 }
 
 .view-pdf-btn:hover {
-  background: var(--accent);
-  color: var(--hero-fg);
+  background: var(--color-accent);
+  color: var(--color-dark-fg);
 }
 
 /* Buttons & Loaders */
 .btn-spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(232, 201, 184, 0.3);
-  border-top-color: var(--accent-soft);
+  border: 2px solid rgba(var(--color-accent-soft-rgb), 0.3);
+  border-top-color: var(--color-accent-soft);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }

@@ -1,15 +1,35 @@
 :root {
-  --bg: #F4F1EA;
-  --bg-elev: #FCFAF5;
-  --ink: #1A1815;
-  --ink-2: #54514A;
-  --ink-3: #8B8678;
-  --line: #DDD7CA;
-  --accent: #B4502A;
-  --accent-2: #8B3A1F;
-  --accent-soft: #E8C9B8;
-  --hero-bg: #0F0E0C;
-  --hero-fg: #F4F1EA;
+  /* === Базовый фон и поверхности === */
+  --color-bg: #F4F1EA;            /* Основной светлый фон */
+  --color-surface: #FCFAF5;       /* Фон карточек и приподнятых элементов */
+  
+  /* === Текст === */
+  --color-text: #1A1815;          /* Основной текст */
+  --color-text-muted: #54514A;    /* Второстепенный текст (описания) */
+  --color-text-faded: #8B8678;    /* Менее важный текст (лейблы, даты) */
+  
+  /* === Границы и линии === */
+  --color-border: #DDD7CA;        /* Стандартные линии и бордеры */
+  
+  /* === Акцентный цвет (Brick Red) === */
+  --color-accent: #B4502A;        /* Основной акцент (ссылки, кнопки) */
+  --color-accent-rgb: 180, 80, 42;
+  --color-accent-hover: #8B3A1F;  /* Темнее для ховера */
+  --color-accent-soft: #E8C9B8;   /* Светлый акцент для фонов */
+  --color-accent-soft-rgb: 232, 201, 184;
+  
+  /* === Темная тема (Hero, Topbar, Footer) === */
+  --color-dark-bg: #0F0E0C;       /* Темный фон */
+  --color-dark-bg-rgb: 15, 14, 12;
+  --color-dark-fg: #F4F1EA;       /* Текст на темном фоне (совпадает с --color-bg) */
+  --color-dark-fg-rgb: 244, 241, 234;
+  
+  /* === Специфичные элементы === */
+  --color-modal-bg: #525659;      /* Фон просмотрщика PDF */
+  --color-shadow: rgba(0, 0, 0, 0.12);
+  --color-shadow-lg: rgba(0, 0, 0, 0.15);
+  
+  /* === Размеры и шрифты (без изменений) === */
   --radius: 4px;
   --radius-lg: 12px;
   --maxw: 1350px;

@@ -11,10 +11,10 @@
   display: flex;
   align-items: center;
   padding: 0 var(--gutter);
-  background: rgba(15, 14, 12, 0.5);
+  background: rgba(var(--color-dark-bg-rgb), 0.5);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
-  color: var(--hero-fg);
+  color: var(--color-dark-fg);
   transition: background .3s, color .3s, border-color .3s;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-top: none;
@@ -22,10 +22,10 @@
 }
 
 .topbar.solid {
-  background: rgba(244, 241, 234, .92);
-  color: var(--ink);
-  border-color: var(--line);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: rgba(var(--color-dark-fg-rgb), .92);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  box-shadow: 0 8px 24px var(--color-shadow);
 }
 
 .topbar-inner {
@@ -42,7 +42,7 @@
 }
 
 .brand .dot {
-  color: var(--accent);
+  color: var(--color-accent);
 }
 
 .nav-links {
@@ -79,13 +79,13 @@
 
 .nav-link.active {
   opacity: 1;
-  color: var(--accent);
-  background: rgba(180, 80, 42, .08);
+  color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), .08);
 }
 
 .topbar:not(.solid) .nav-link.active {
-  color: var(--accent-soft);
-  background: rgba(232, 201, 184, .12);
+  color: var(--color-accent-soft);
+  background: rgba(var(--color-accent-soft-rgb), .12);
 }
 
 .topbar-actions {
@@ -109,9 +109,9 @@
 
 .btn-action:hover {
   opacity: 1;
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--hero-fg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-dark-fg);
 }
 
 /* ============ Language Switcher ============ */
@@ -139,22 +139,22 @@
 
 .lang-trigger:hover {
   opacity: 1;
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--hero-fg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-dark-fg);
 }
 
 .lang-dropdown {
   position: absolute;
   top: calc(100% + .5rem);
   right: 0;
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   list-style: none;
   padding: .35rem 0;
   min-width: 110px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  box-shadow: 0 8px 24px var(--color-shadow);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-5px);
@@ -171,15 +171,15 @@
 .lang-dropdown li {
   padding: .5rem .85rem;
   cursor: pointer;
-  color: var(--ink);
+  color: var(--color-text);
 }
 
 .lang-dropdown li:hover {
-  background: var(--bg);
+  background: var(--color-bg);
 }
 
 .lang-dropdown li.active {
-  color: var(--accent);
+  color: var(--color-accent);
   font-weight: 500;
 }
 
@@ -191,7 +191,7 @@
   min-height: 560px;
   overflow: hidden;
   background: transparent;
-  color: var(--hero-fg);
+  color: var(--color-dark-fg);
   pointer-events: none;
 }
 
@@ -241,7 +241,7 @@
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Имя 1/3, фото 2/3 */
+  grid-template-columns: 1fr 2fr;
   align-items: center;
   justify-items: center;
   width: 100%;
@@ -250,7 +250,7 @@
 }
 
 .hero-text-block {
-  display: inline-flex; /* Блок сжимается до ширины самого широкого элемента (имени) */
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   padding: calc(var(--gutter) * 0.8);
@@ -269,7 +269,7 @@
   transform: translate(-50%, -50%);
   width: 170%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.9) 40%, rgba(15, 14, 12, 0) 75%);
+  background: radial-gradient(ellipse at center, rgba(var(--color-dark-bg-rgb), 0.9) 40%, rgba(var(--color-dark-bg-rgb), 0) 75%);
   z-index: -1;
   filter: blur(25px);
 }
@@ -288,7 +288,7 @@
 .hero-name em {
   font-style: italic;
   font-weight: 400;
-  color: var(--accent-soft);
+  color: var(--color-accent-soft);
 }
 
 .hero-tagline {
@@ -315,16 +315,15 @@ html[lang="ru"] .hero-text-block {
   }
   
   .hero-photo {
-    order: 1; /* Фото наверх */
+    order: 1;
     max-height: 50vh;
   }
   
   .hero-text-block {
-    order: 2; /* Текст вниз */
+    order: 2;
     padding: 0 1rem;
   }
 }
-
 
 .hero-photo {
   grid-column: 2;
@@ -344,16 +343,15 @@ html[lang="ru"] .hero-text-block {
   padding-bottom: 0;
 }
 
-/* ============ Hero ============ */
 .scroll-cue {
   display: inline-flex;
   align-items: center;
   gap: .75rem;
-  background: rgba(244, 241, 234, .08);
-  border: 1px solid rgba(244, 241, 234, .25);
+  background: rgba(var(--color-dark-fg-rgb), .08);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), .25);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: var(--hero-fg);
+  color: var(--color-dark-fg);
   padding: .75rem 1.25rem;
   border-radius: 100px;
   font-family: var(--font-mono);
@@ -365,8 +363,8 @@ html[lang="ru"] .hero-text-block {
 }
 
 .scroll-cue:hover {
-  background: rgba(244, 241, 234, .16);
-  border-color: rgba(244, 241, 234, .4);
+  background: rgba(var(--color-dark-fg-rgb), .16);
+  border-color: rgba(var(--color-dark-fg-rgb), .4);
   transform: translateY(1px);
 }
 
@@ -375,15 +373,8 @@ html[lang="ru"] .hero-text-block {
 }
 
 @keyframes bob {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(3px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
 }
 
 /* ============ Main Content Area ============ */
@@ -394,10 +385,10 @@ html[lang="ru"] .hero-text-block {
   margin: 0 auto;
   padding: 4rem var(--gutter) 5rem;
   min-height: 60vh;
-  background: var(--bg);
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
-  border-top: 1px solid var(--line);
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 }
 
@@ -411,7 +402,7 @@ html[lang="ru"] .hero-text-block {
 }
 
 .content-section:not(:last-child) {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .panel-head {
@@ -430,7 +421,7 @@ html[lang="ru"] .hero-text-block {
 }
 
 .panel-subtitle {
-  color: var(--ink-2);
+  color: var(--color-text-muted);
   font-size: .9375rem;
   font-family: var(--font-mono);
 }
@@ -441,12 +432,12 @@ html[lang="ru"] .hero-text-block {
   z-index: 3;
   max-width: var(--maxw);
   margin: 0 auto;
-  background: var(--ink);
-  color: var(--hero-fg);
+  background: var(--color-text); /* Используем самый темный цвет из палитры */
+  color: var(--color-dark-fg);
   padding: 4rem var(--gutter) 2rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(var(--color-dark-fg-rgb), 0.08);
+  border-right: 1px solid rgba(var(--color-dark-fg-rgb), 0.08);
+  border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), 0.08);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   scroll-margin-top: calc(var(--bar-h) + 20px);
 }
@@ -465,7 +456,7 @@ html[lang="ru"] .hero-text-block {
 }
 
 #contactTitle em {
-  color: var(--accent-soft);
+  color: var(--color-accent-soft);
   font-style: italic;
 }
 
@@ -475,11 +466,11 @@ html[lang="ru"] .hero-text-block {
   gap: 4rem;
   align-items: start;
   padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(244, 241, 234, .1);
+  border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }
 
 .contact-intro p {
-  color: rgba(244, 241, 234, .72);
+  color: rgba(var(--color-dark-fg-rgb), .72);
   font-size: 1.0625rem;
   line-height: 1.6;
   margin-bottom: 2.5rem;
@@ -495,23 +486,23 @@ html[lang="ru"] .hero-text-block {
   display: flex;
   gap: 1rem;
   padding: .85rem 0;
-  border-top: 1px solid rgba(244, 241, 234, .1);
+  border-top: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }
 
 .contact-channel:last-child {
-  border-bottom: 1px solid rgba(244, 241, 234, .1);
+  border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }
 
 .contact-channel .label {
   font-family: var(--font-mono);
   font-size: .7rem;
-  color: rgba(244, 241, 234, .5);
+  color: rgba(var(--color-dark-fg-rgb), .5);
   width: 80px;
   flex-shrink: 0;
 }
 
 .contact-channel .value {
-  color: var(--accent-soft);
+  color: var(--color-accent-soft);
 }
 
 .contact-form {
@@ -535,15 +526,15 @@ html[lang="ru"] .hero-text-block {
 .field label {
   font-family: var(--font-mono);
   font-size: .7rem;
-  color: rgba(244, 241, 234, .5);
+  color: rgba(var(--color-dark-fg-rgb), .5);
 }
 
 .field input,
 .field textarea {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(244, 241, 234, .18);
-  color: var(--hero-fg);
+  border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), .18);
+  color: var(--color-dark-fg);
   font-family: var(--font-sans);
   font-size: 1rem;
   padding: .55rem 0;
@@ -561,13 +552,7 @@ html[lang="ru"] .hero-text-block {
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-bottom-color: var(--accent);
-}
-
-.field input:focus,
-.field textarea:focus {
-  outline: none;
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--color-accent);
 }
 
 .field input:-webkit-autofill,
@@ -576,10 +561,10 @@ html[lang="ru"] .hero-text-block {
 .field textarea:-webkit-autofill,
 .field textarea:-webkit-autofill:hover,
 .field textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--hero-fg);
-  -webkit-box-shadow: 0 0 0px 1000px var(--ink) inset;
+  -webkit-text-fill-color: var(--color-dark-fg);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-text) inset;
   transition: background-color 5000s ease-in-out 0s;
-  caret-color: var(--hero-fg);
+  caret-color: var(--color-dark-fg);
 }
 
 .submit-row {
@@ -590,8 +575,8 @@ html[lang="ru"] .hero-text-block {
 }
 
 .submit-btn {
-  background: var(--accent);
-  color: var(--hero-fg);
+  background: var(--color-accent);
+  color: var(--color-dark-fg);
   border: 0;
   padding: .85rem 1.75rem;
   font-family: var(--font-mono);
@@ -602,7 +587,7 @@ html[lang="ru"] .hero-text-block {
 }
 
 .submit-btn:hover {
-  background: var(--accent-2);
+  background: var(--color-accent-hover);
 }
 
 .submit-btn:disabled {
@@ -612,7 +597,7 @@ html[lang="ru"] .hero-text-block {
 
 .form-status {
   font-size: .8125rem;
-  color: rgba(244, 241, 234, .6);
+  color: rgba(var(--color-dark-fg-rgb), .6);
   font-family: var(--font-mono);
 }
 
@@ -630,10 +615,9 @@ html[lang="ru"] .hero-text-block {
   left: 0;
   font-family: var(--font-mono);
   font-size: .75rem;
-  color: rgba(244, 241, 234, .4);
+  color: rgba(var(--color-dark-fg-rgb), .4);
   pointer-events: none;
 }
-
 
 .footer-bottom {
   display: flex;
@@ -643,5 +627,5 @@ html[lang="ru"] .hero-text-block {
   padding-top: 2rem;
   font-size: .75rem;
   font-family: var(--font-mono);
-  color: rgba(244, 241, 234, .5);
+  color: rgba(var(--color-dark-fg-rgb), .5);
 }

@@ -8,13 +8,13 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--hero-bg);
+  background: var(--color-dark-bg);
   overscroll-behavior: none;
 }
 
 body {
-  background: var(--hero-bg);
-  color: var(--ink);
+  background: var(--color-dark-bg);
+  color: var(--color-text);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;

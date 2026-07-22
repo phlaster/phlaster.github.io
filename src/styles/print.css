@@ -1,6 +1,4 @@
 @media print {
-
-  /* 1. РАЗМЕР СТРАНИЦЫ */
   @page {
     size: 1920px 1080px;
     margin: 0;
@@ -15,7 +13,6 @@
     padding: 0 !important;
   }
 
-  /* 2. ФОН */
   #printBackground {
     position: fixed;
     top: 0;
@@ -33,7 +30,6 @@
     display: block;
   }
 
-  /* 3. СКРЫТИЕ ЛИШНЕГО */
   .no-print,
   .view-pdf-btn,
   .scroll-cue,
@@ -49,12 +45,11 @@
     display: block !important;
   }
 
-  /* 4. ПЕРВАЯ СТРАНИЦА (HERO) */
   .hero {
     position: relative;
     width: 1920px;
     height: 1080px;
-    color: white;
+    color: var(--color-dark-fg);
     z-index: 1;
     page-break-after: always;
     overflow: hidden;
@@ -98,7 +93,7 @@
     transform: translate(-50%, -50%) !important;
     width: 200% !important;
     height: 200% !important;
-    background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.95) 0%, rgba(15, 14, 12, 0.75) 40%, rgba(15, 14, 12, 0) 80%) !important;
+    background: radial-gradient(ellipse at center, rgba(var(--color-dark-bg-rgb), 0.95) 0%, rgba(var(--color-dark-bg-rgb), 0.75) 40%, rgba(var(--color-dark-bg-rgb), 0) 80%) !important;
     filter: blur(25px) !important;
   }
 
@@ -133,7 +128,6 @@
     justify-self: center;
   }
 
-  /* 5. СБРОС КОНТЕЙНЕРА */
   .content-area {
     background: transparent !important;
     border: none !important;
@@ -143,13 +137,12 @@
     display: block !important;
   }
 
-  /* 6. КОНТЕНТНЫЕ БЛОКИ (РАСТЯНУТЫ ПО ВЕРТИКАЛИ, ФОН ВИДЕН ПО БОКАМ) */
   .content-section {
-    background: #F4F1EA !important;
-    color: #1A1815 !important;
-    width: 1600px; /* Уменьшенная ширина оставляет 160px фона слева и справа */
-    height: 1080px; /* Растянуто от верха до низа */
-    margin: 0 auto !important; /* Выравнивание по центру (по горизонтали) */
+    background: var(--color-bg) !important;
+    color: var(--color-text) !important;
+    width: 1600px;
+    height: 1080px;
+    margin: 0 auto !important;
     padding: 6rem 5rem !important;
     box-sizing: border-box;
     page-break-after: always;
@@ -166,12 +159,11 @@
     page-break-after: auto;
   }
 
-  /* 7. ПОСЛЕДНЯЯ СТРАНИЦА (КОНТАКТЫ КАК ОБЫЧНЫЙ РАЗДЕЛ) */
   .site-footer {
     position: relative;
     z-index: 1;
-    background: #F4F1EA !important;
-    color: #1A1815 !important;
+    background: var(--color-bg) !important;
+    color: var(--color-text) !important;
     width: 1600px !important;
     max-width: 1600px !important;
     height: 1080px !important;
@@ -195,21 +187,19 @@
     max-width: 100% !important;
   }
 
-  /* Заголовок "Let's talk" теперь идентичен заголовкам .panel-title */
   #contactTitle {
     font-family: var(--font-serif) !important;
     font-weight: 400 !important;
-    font-size: 2.5rem !important; /* Такой же размер, как у panel-title */
+    font-size: 2.5rem !important;
     margin-bottom: 2.5rem !important;
-    color: #1A1815 !important;
+    color: var(--color-text) !important;
   }
 
   #contactTitle em {
-    color: #B4502A !important;
+    color: var(--color-accent) !important;
     font-style: italic;
   }
 
-  /* 8. ДВУХКОЛОНОЧНАЯ СТРУКТУРА КОНТАКТОВ */
   .contact-grid {
     display: flex !important;
     flex: 1 !important;
@@ -237,7 +227,7 @@
     display: block !important;
     font-size: 1.5rem !important;
     line-height: 1.6 !important;
-    color: #54514A !important;
+    color: var(--color-text-muted) !important;
     width: 50% !important;
     max-width: 50% !important;
     flex-shrink: 0;
@@ -265,15 +255,14 @@
   .contact-channel .label {
     font-size: 1rem !important;
     width: 100% !important;
-    color: #8B8678 !important;
+    color: var(--color-text-faded) !important;
   }
 
   .contact-channel .value {
     font-size: 1.8rem !important;
-    color: #B4502A !important;
+    color: var(--color-accent) !important;
   }
 
-  /* Прячем форму и футер */
   #contactForm,
   .form-status,
   .reveal-loader,
