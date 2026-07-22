@@ -51,7 +51,9 @@ export function initContact(i18nConfigGetter) {
     isComputingFormPoW = true;
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const { challenge } = await resCh.json();
+      const {
+        challenge
+      } = await resCh.json();
       formChallenge = challenge;
       formNonce = await solvePoW(challenge);
     } catch (err) {
@@ -87,17 +89,27 @@ export function initContact(i18nConfigGetter) {
 
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const { challenge } = await resCh.json();
+      const {
+        challenge
+      } = await resCh.json();
       const nonce = await solvePoW(challenge);
 
       const resData = await fetch(`${workerUrl}/api/get-email`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ challenge, nonce })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          challenge,
+          nonce
+        })
       });
 
       if (!resData.ok) throw new Error('Verification failed');
-      const { email, telegram } = await resData.json();
+      const {
+        email,
+        telegram
+      } = await resData.json();
 
       // Применяем полученные контакты
       applyContacts(email, telegram);
@@ -179,11 +191,16 @@ export function initContact(i18nConfigGetter) {
 
       const res = await fetch(`${config.contact.worker_url}/api/submit`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           challenge: formChallenge,
           nonce: formNonce,
-          name, email, subject, message
+          name,
+          email,
+          subject,
+          message
         })
       });
 

@@ -1,9 +1,23 @@
-import { config, detectInitialLang, resolveTranslations } from './i18n.js';
-import { initNavigation } from './navigation.js';
-import { renderContent } from './render.js';
-import { initContact } from './contact.js';
-import { initPdfModal } from './pdf-modal.js';
-import { initPdfExport } from './pdf-export.js';
+import {
+  config,
+  detectInitialLang,
+  resolveTranslations
+} from './i18n.js';
+import {
+  initNavigation
+} from './navigation.js';
+import {
+  renderContent
+} from './render.js';
+import {
+  initContact
+} from './contact.js';
+import {
+  initPdfModal
+} from './pdf-modal.js';
+import {
+  initPdfExport
+} from './pdf-export.js';
 
 let currentLang = detectInitialLang();
 let i18nConfig = resolveTranslations(config, currentLang);
@@ -16,7 +30,7 @@ function rerender(newLang) {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContent(i18nConfig, currentLang);
-  
+
   initNavigation(rerender);
   initContact(() => i18nConfig);
   initPdfModal(() => i18nConfig);

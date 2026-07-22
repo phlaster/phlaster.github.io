@@ -499,23 +499,23 @@
   border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }
 
-  .contact-intro p {
-    color: rgba(var(--color-dark-fg-rgb), .72);
-    font-size: 1.0625rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    max-width: 28rem;
-  }
+.contact-intro p {
+  color: rgba(var(--color-dark-fg-rgb), .72);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 28rem;
+}
 
-  .contact-photo {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: var(--radius);
-    margin: 1rem 0 2.5rem 0;
-    filter: grayscale(.15) contrast(1.05);
-  }
+.contact-photo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin: 1rem 0 2.5rem 0;
+  filter: grayscale(.15) contrast(1.05);
+}
 
 .contact-channels {
   display: flex;
