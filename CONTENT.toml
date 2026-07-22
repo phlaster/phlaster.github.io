@@ -410,7 +410,7 @@ tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
 [[projects]]
 name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
-cover = "/assets/projects/deppa_social.png"
+cover = "/assets/projects/deppa_social.jpg"
 languages = ["Julia"]
 
 [projects.en]
@@ -423,7 +423,7 @@ description = "Высопроизводительный пакет на Julia д
 [[projects]]
 name = "Pannagram"
 url = "https://github.com/iganna/pannagram"
-cover = "/assets/projects/pannagram_social.png"
+cover = "/assets/projects/pannagram_social.jpg"
 languages = ["R", "Bash"]
 
 [projects.en]
@@ -434,9 +434,22 @@ description = "Une boîte à outils pour les alignements pangénomiques linéair
 description = "Инструментарий для построения линейных пангеномных выравниваний без референса."
 
 [[projects]]
+name = "SeqFold.jl"
+url = "https://github.com/phlaster/SeqFold.jl"
+cover = "/assets/projects/seqfold_social.jpg"
+languages = ["Julia"]
+
+[projects.en]
+description = "..."
+[projects.fr]
+description = "..."
+[projects.ru]
+description = "..."
+
+[[projects]]
 name = "hextiles"
 url = "https://github.com/phlaster/hextiles"
-cover = "/assets/projects/hextiles_social.png"
+cover = "/assets/projects/hextiles_social.jpg"
 languages = ["Vanilla JS", "WebGL", "CSS"]
 
 [projects.en]
@@ -446,6 +459,31 @@ description = "Terrain de jeu interactif pour le pavage hexagonal avec générat
 [projects.ru]
 description = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
 
+[[projects]]
+name = "RGBZones"
+url = "https://github.com/phlaster/RGBZones"
+cover = "/assets/projects/rgbzones_social.jpg"
+languages = ["Python", "JS", "CSS"]
+
+[projects.en]
+description = "..."
+[projects.fr]
+description = "..."
+[projects.ru]
+description = "..."
+
+[[projects]]
+name = "SMILES-DASS"
+url = "https://github.com/phlaster/SMILES-DASS"
+cover = "/assets/projects/smiles_dass_social.jpg"
+languages = ["Python", "Torch"]
+
+[projects.en]
+description = "..."
+[projects.fr]
+description = "..."
+[projects.ru]
+description = "..."
 
 # ═══════════════════════════════════════════════════════════
 # RESEARCH: CONFERENCES
