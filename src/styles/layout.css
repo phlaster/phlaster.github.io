@@ -98,6 +98,7 @@
 .lang-trigger {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: .4rem;
   background: transparent;
   border: 1px solid currentColor;
@@ -109,6 +110,8 @@
   cursor: pointer;
   opacity: .8;
   transition: all .2s;
+  width: 90px;
+  text-align: center;
 }
 
 .btn-action:hover,
@@ -683,7 +686,7 @@
   .topbar-actions {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: stretch;
     justify-content: center;
     gap: 0.5rem;
     flex-shrink: 0;
@@ -691,6 +694,7 @@
 
   .btn-action,
   .lang-trigger {
+    width: 100%;
     padding: 0.3rem 0.6rem;
   }
 
@@ -718,10 +722,10 @@
   .hero-photo {
     order: 1;
     flex: 1;
-    min-height: 150px;
+    min-height: 100px;
     width: 100%;
     max-height: 45vh;
-    object-fit: cover;
+    object-fit: contain !important;
     border-radius: 12px;
     padding: 0;
   }
@@ -750,13 +754,11 @@
   .career-grid,
   .research-grid,
   .documents-grid,
-  .projects-grid,
-  .contact-grid {
+  .projects-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
 
-  /* Override inline style for About Meta */
   .about-meta[style] {
     grid-template-columns: 1fr !important;
   }
@@ -778,7 +780,36 @@
     gap: 0.75rem !important;
   }
 
-  /* Contact Form */
+  .contact-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  .contact-intro {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  #contactIntro {
+    order: 1;
+    margin-bottom: 0;
+  }
+
+  .contact-channels {
+    order: 2;
+  }
+
+  #contactPhoto {
+    order: 3;
+    margin: 0;
+  }
+
+  .contact-form {
+    order: 4;
+  }
+
   .form-row {
     grid-template-columns: 1fr !important;
     gap: 1.25rem !important;

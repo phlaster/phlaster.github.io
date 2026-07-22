@@ -50,10 +50,6 @@ export function renderContent(i18nConfig, lang) {
   const interests = a.interests || { items: [] };
   const interestsHtml = interests.items.map(i => `<li>${esc(i)}</li>`).join('');
 
-  // Use hero_icons for About section as well, excluding internal links
-  const socialsHtml = heroIcons.filter(i => !i.url.startsWith('#')).map(i => 
-    `<a href="${esc(i.url)}" target="_blank" class="social-icon" title="${esc(i.key)}"><img src="${esc(i.icon)}" alt="${esc(i.key)}" style="width:20px; height:20px;"></a>`).join('');
-
   const edu = a.education || [];
   const eduHtml = edu.map(e => `<li><strong>${esc(e.degree)}</strong> — ${esc(e.institution)} (${esc(e.period)})</li>`).join('');
 
@@ -79,14 +75,10 @@ export function renderContent(i18nConfig, lang) {
           <ul class="meta-list">${eduHtml}</ul>
         </div>
       </div>
-      <div class="about-meta" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div class="about-meta" style="grid-column: 1 / -1;">
         <div class="meta-block">
           <div class="meta-label">${esc(interests.title)}</div>
           <ul class="meta-list interests-list">${interestsHtml}</ul>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">Public Profiles</div>
-          <div class="socials-icons">${socialsHtml}</div>
         </div>
       </div>
     </div>
