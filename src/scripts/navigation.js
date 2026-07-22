@@ -28,65 +28,78 @@ export function initNavigation(renderCallback) {
     }
   });
 
-  const scrollCue = $('scrollCue');
-  const contentArea = $('contentArea');
   const topbar = $('topbar');
-  const footer = document.querySelector('.site-footer');
+  const contentArea = $('contentArea');
+  const footer = document.getElementById('contact');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
 
+  // === Клик по логотипу A.M — проматывает в самый верх ===
+  const brandEl = document.querySelector('.brand');
+  if (brandEl) {
+    brandEl.style.cursor = 'pointer';
+    brandEl.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // === Функция точного расчета позиции скролла ===
+  function getTargetScrollTop(targetId) {
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return 0;
+
+    // Для футера (контактов) выравниваем верхнюю границу вплотную к топ-бару,
+    // и опускаем еще на 30px ниже, как было запрошено.
+    if (targetId === 'contact') {
+      return targetEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 50;
+    }
+
+    // Для остальных секций таргетимся на заголовок (.panel-head), 
+    // чтобы скрыть горизонтальный разделитель и убрать лишние отступы.
+    const panelHead = targetEl.querySelector('.panel-head');
+    const anchorEl = panelHead || targetEl;
+
+    // Оставляем 20px воздуха между топ-баром и заголовком
+    return anchorEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight - 10;
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      window.scrollTo({
+        top: getTargetScrollTop(targetId),
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  const scrollCue = $('scrollCue');
   if (scrollCue) {
     scrollCue.addEventListener('click', () => {
-      const top = contentArea.getBoundingClientRect().top + window.scrollY;
-      const barH = topbar.offsetHeight;
       window.scrollTo({
-        top: top - barH + 15,
+        top: getTargetScrollTop('about'),
         behavior: 'smooth'
       });
     });
   }
-
-  const writeMeLink = document.querySelector('.nav-link[href="#contact"]');
-  if (writeMeLink && footer && topbar) {
-    writeMeLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetY = footer.offsetTop - topbar.offsetHeight + 50;
-      window.scrollTo({
-        top: targetY,
-        behavior: 'smooth'
-      });
-    });
-  }
-
-  // === Клавиатурная навигация ===
-  const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
-  let isScrolling = false;
 
   function getActiveSectionIndex() {
-    const scrollPos = window.scrollY + window.innerHeight / 3;
-    let activeIndex = 0;
-    sections.forEach((sec, i) => {
-      if (sec.offsetTop <= scrollPos) {
+    const scrollPos = window.scrollY + topbar.offsetHeight + 50; // 50px запас для корректного определения
+    let activeIndex = -1;
+
+    for (let i = 0; i < sections.length; i++) {
+      const secTop = sections[i].getBoundingClientRect().top + window.scrollY;
+      if (secTop <= scrollPos) {
         activeIndex = i;
+      } else {
+        break;
       }
-    });
+    }
     return activeIndex;
-  }
-
-  function scrollToSection(index) {
-    if (index < 0 || index >= sections.length) return;
-
-    isScrolling = true;
-    const target = sections[index];
-    const top = target.getBoundingClientRect().top + window.scrollY;
-    const barH = topbar.offsetHeight;
-
-    window.scrollTo({
-      top: top - barH + 15,
-      behavior: 'smooth'
-    });
-
-    setTimeout(() => {
-      isScrolling = false;
-    }, 700);
   }
 
   window.addEventListener('keydown', (e) => {
@@ -98,21 +111,39 @@ export function initNavigation(renderCallback) {
 
     e.preventDefault();
 
-    if (isScrolling) return;
+    if (e.repeat) return;
 
-    const currentIndex = getActiveSectionIndex();
-    let nextIndex = currentIndex;
+    let currentIndex = getActiveSectionIndex();
 
-    if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
-      nextIndex = currentIndex + 1;
-    } else if (['PageUp', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
-      nextIndex = currentIndex - 1;
+    if (currentIndex === -1 && ['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
+      currentIndex = 0;
+    } else if (currentIndex === -1) {
+      return;
     }
 
-    scrollToSection(nextIndex);
+    if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
+      const nextIndex = Math.min(currentIndex + 1, sections.length - 1);
+      if (sections[nextIndex]) {
+        window.scrollTo({
+          top: getTargetScrollTop(sections[nextIndex].id),
+          behavior: 'smooth'
+        });
+      }
+    } else if (['PageUp', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      if (currentIndex <= 0) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        const prevIndex = currentIndex - 1;
+        window.scrollTo({
+          top: getTargetScrollTop(sections[prevIndex].id),
+          behavior: 'smooth'
+        });
+      }
+    }
   });
-
-  const navLinks = document.querySelectorAll('.nav-link');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -129,7 +160,7 @@ export function initNavigation(renderCallback) {
 
   sections.forEach(sec => observer.observe(sec));
 
-  window.addEventListener('scroll', () => {
+  const updateTopbar = () => {
     const contentTop = contentArea.getBoundingClientRect().top;
     const footerTop = footer.getBoundingClientRect().top;
     const barHeight = topbar.offsetHeight;
@@ -139,7 +170,10 @@ export function initNavigation(renderCallback) {
     } else {
       topbar.classList.remove('solid');
     }
-  }, {
+  };
+
+  window.addEventListener('scroll', updateTopbar, {
     passive: true
   });
+  updateTopbar();
 }
