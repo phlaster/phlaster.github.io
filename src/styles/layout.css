@@ -94,12 +94,16 @@
   gap: 1rem;
 }
 
-.btn-action {
+.btn-action,
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
   background: transparent;
   border: 1px solid currentColor;
   color: inherit;
-  padding: .4rem .8rem;
-  border-radius: 100px;
+  padding: .4rem .75rem;
+  border-radius: var(--radius);
   font-family: var(--font-mono);
   font-size: .75rem;
   cursor: pointer;
@@ -107,7 +111,8 @@
   transition: all .2s;
 }
 
-.btn-action:hover {
+.btn-action:hover,
+.lang-trigger:hover {
   opacity: 1;
   background: var(--color-accent);
   border-color: var(--color-accent);
@@ -117,31 +122,6 @@
 /* ============ Language Switcher ============ */
 .lang-switch {
   position: relative;
-  font-family: var(--font-mono);
-  font-size: .75rem;
-}
-
-.lang-trigger {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-  background: transparent;
-  border: 1px solid currentColor;
-  color: inherit;
-  padding: .4rem .8rem;
-  border-radius: 100px;
-  font-family: var(--font-mono);
-  font-size: .75rem;
-  cursor: pointer;
-  opacity: .8;
-  transition: all .2s;
-}
-
-.lang-trigger:hover {
-  opacity: 1;
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-dark-fg);
 }
 
 .lang-dropdown {
@@ -299,12 +279,55 @@
   width: 100%;
 }
 
-html[lang="ru"] .hero-name {
-  font-size:  clamp(1.6rem, 4.7vw, 5.2rem);
+/* ============ Hero Socials ============ */
+.hero-socials {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  z-index: 1;
+  pointer-events: auto;
 }
 
-html[lang="ru"] .hero-text-block {
-  padding: calc(var(--gutter) * 0.3);
+.hero-socials::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 220%;
+  background: radial-gradient(ellipse at center, rgba(var(--color-dark-bg-rgb), 0.95) 20%, rgba(var(--color-dark-bg-rgb), 0) 70%);
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: transform .2s ease;
+}
+
+.hero-social-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity .2s, transform .2s;
+}
+
+.hero-social-link:hover {
+  transform: translateY(-3px);
+}
+
+.hero-social-link:hover img {
+  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {
@@ -313,12 +336,12 @@ html[lang="ru"] .hero-text-block {
     gap: 2rem;
     padding-bottom: 2rem;
   }
-  
+
   .hero-photo {
     order: 1;
     max-height: 50vh;
   }
-  
+
   .hero-text-block {
     order: 2;
     padding: 0 1rem;
@@ -330,9 +353,9 @@ html[lang="ru"] .hero-text-block {
   width: 100%;
   padding: 0 var(--gutter);
   max-height: 80vh;
-  aspect-ratio: auto; 
+  aspect-ratio: auto;
   object-fit: contain;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   filter: grayscale(.15) contrast(1.05);
   pointer-events: none;
 }
@@ -353,7 +376,7 @@ html[lang="ru"] .hero-text-block {
   -webkit-backdrop-filter: blur(8px);
   color: var(--color-dark-fg);
   padding: .75rem 1.25rem;
-  border-radius: 100px;
+  border-radius: var(--radius);
   font-family: var(--font-mono);
   font-size: .75rem;
   text-transform: uppercase;
@@ -373,8 +396,15 @@ html[lang="ru"] .hero-text-block {
 }
 
 @keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
 }
 
 /* ============ Main Content Area ============ */
@@ -389,11 +419,11 @@ html[lang="ru"] .hero-text-block {
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
   border-top: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .content-section {
-  padding: 2rem 0;
+  padding: 3rem 0;
   scroll-margin-top: calc(var(--bar-h) + 20px);
 }
 
@@ -432,7 +462,7 @@ html[lang="ru"] .hero-text-block {
   z-index: 3;
   max-width: var(--maxw);
   margin: 0 auto;
-  background: var(--color-text); /* Используем самый темный цвет из палитры */
+  background: var(--color-text);
   color: var(--color-dark-fg);
   padding: 4rem var(--gutter) 2rem;
   border-left: 1px solid rgba(var(--color-dark-fg-rgb), 0.08);
@@ -555,18 +585,6 @@ html[lang="ru"] .hero-text-block {
   border-bottom-color: var(--color-accent);
 }
 
-.field input:-webkit-autofill,
-.field input:-webkit-autofill:hover,
-.field input:-webkit-autofill:focus,
-.field textarea:-webkit-autofill,
-.field textarea:-webkit-autofill:hover,
-.field textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--color-dark-fg);
-  -webkit-box-shadow: 0 0 0px 1000px var(--color-text) inset;
-  transition: background-color 5000s ease-in-out 0s;
-  caret-color: var(--color-dark-fg);
-}
-
 .submit-row {
   display: flex;
   align-items: center;
@@ -581,7 +599,7 @@ html[lang="ru"] .hero-text-block {
   padding: .85rem 1.75rem;
   font-family: var(--font-mono);
   font-size: .8125rem;
-  border-radius: 100px;
+  border-radius: var(--radius);
   cursor: pointer;
   transition: background .2s;
 }

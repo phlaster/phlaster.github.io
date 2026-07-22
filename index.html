@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
 
@@ -25,16 +25,21 @@
       <div class="brand">A<span class="dot">·</span>M</div>
       <nav class="nav-links" id="navLinks" role="navigation">
         <a href="#about" class="nav-link active" data-nav="about">About</a>
-        <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
-        <a href="#experience" class="nav-link" data-nav="experience">Experience</a>
+        <a href="#career" class="nav-link" data-nav="career">Career & Skills</a>
         <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
         <a href="#research" class="nav-link" data-nav="research">Research</a>
-        <a href="#education" class="nav-link" data-nav="education">Education</a>
-        <a href="#certificates" class="nav-link" data-nav="certificates">Certificates</a>
+        <a href="#documents" class="nav-link" data-nav="documents">Documents</a>
         <a href="#contact" class="nav-link" data-nav="contact">Write me</a>
       </nav>
       <div class="topbar-actions">
-        <button class="btn-action" id="exportPdfBtn">Export PDF</button>
+        <button class="btn-action btn-pdf" id="exportPdfBtn" aria-label="Export to PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>PDF</span>
+        </button>
         <div class="lang-switch" id="langSwitch">
           <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -64,6 +69,7 @@
         <div class="hero-text-block">
           <h1 class="hero-name" id="heroName">—</h1>
           <p class="hero-tagline" id="heroTagline"></p>
+          <div class="hero-socials" id="heroSocials"></div>
         </div>
         <img class="hero-photo" id="heroPhoto" src="" alt="">
       </div>
@@ -79,7 +85,6 @@
 
   <main class="content-area" id="contentArea">
     
-    <!-- ABOUT -->
     <section id="about" class="content-section">
       <div class="panel-head">
         <h2 class="panel-title" id="about-title"></h2>
@@ -88,25 +93,14 @@
       <div id="about-content"></div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="content-section">
+    <section id="career" class="content-section">
       <div class="panel-head">
-        <h2 class="panel-title" id="skills-title"></h2>
-        <span class="panel-subtitle" id="skills-sub"></span>
+        <h2 class="panel-title" id="career-title"></h2>
+        <span class="panel-subtitle" id="career-sub"></span>
       </div>
-      <div id="skills-content"></div>
+      <div id="career-content"></div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="content-section">
-      <div class="panel-head">
-        <h2 class="panel-title" id="exp-title"></h2>
-        <span class="panel-subtitle" id="exp-sub"></span>
-      </div>
-      <div id="experience-content"></div>
-    </section>
-
-    <!-- PROJECTS -->
     <section id="projects" class="content-section">
       <div class="panel-head">
         <h2 class="panel-title" id="proj-title"></h2>
@@ -115,7 +109,6 @@
       <div id="projects-content"></div>
     </section>
 
-    <!-- RESEARCH -->
     <section id="research" class="content-section">
       <div class="panel-head">
         <h2 class="panel-title" id="research-title"></h2>
@@ -124,27 +117,16 @@
       <div id="research-content"></div>
     </section>
 
-    <!-- EDUCATION -->
-    <section id="education" class="content-section">
+    <section id="documents" class="content-section">
       <div class="panel-head">
-        <h2 class="panel-title" id="edu-title"></h2>
-        <span class="panel-subtitle" id="edu-sub"></span>
+        <h2 class="panel-title" id="docs-title"></h2>
+        <span class="panel-subtitle" id="docs-sub"></span>
       </div>
-      <div id="education-content"></div>
-    </section>
-
-    <!-- CERTIFICATES -->
-    <section id="certificates" class="content-section">
-      <div class="panel-head">
-        <h2 class="panel-title" id="cert-title"></h2>
-        <span class="panel-subtitle" id="cert-sub"></span>
-      </div>
-      <div id="certificates-content"></div>
+      <div id="documents-content"></div>
     </section>
 
   </main>
 
-  <!-- CONTACT & FOOTER -->
   <footer class="site-footer" id="contact">
     <div class="footer-inner">
       <h2 id="contactTitle">Let's <em>talk</em>.</h2>
@@ -197,7 +179,6 @@
     </div>
   </footer>
 
-  <!-- PDF MODAL -->
   <div id="pdfModal" class="pdf-modal no-print">
     <div class="pdf-modal-content">
       <button id="closePdfModal" class="pdf-modal-close" aria-label="Close PDF viewer">
@@ -206,7 +187,6 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-      
       <div class="pdf-viewer-wrapper" id="pdf-viewer-wrapper">
         <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
       </div>

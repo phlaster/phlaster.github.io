@@ -1,8 +1,9 @@
 /* About */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 4rem;
+  margin-bottom: 2rem;
 }
 
 .about-bio p {
@@ -21,7 +22,7 @@
 .meta-block {
   border-top: 1px solid var(--color-border);
   padding-top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .meta-label {
@@ -36,91 +37,65 @@
   margin-bottom: .5rem;
 }
 
-.languages-list {
+.meta-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: .4rem;
 }
 
-.language-item {
+.meta-list li {
+  font-size: .9375rem;
   display: flex;
   justify-content: space-between;
-  font-size: .9375rem;
-}
-
-.language-item .level {
-  color: var(--color-text-faded);
-  font-family: var(--font-mono);
-  font-size: .8125rem;
-}
-
-.interests-list,
-.hobbies-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
-}
-
-.interest-tag {
-  padding: .3rem .65rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  font-size: .8125rem;
   color: var(--color-text-muted);
 }
 
-/* Skills */
-.skills-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2.5rem 2rem;
+.meta-list.interests-list li {
+  display: list-item;
+  justify-content: initial;
 }
 
-.skill-group h3 {
-  font-family: var(--font-mono);
-  font-size: .75rem;
+.lang-level {
   color: var(--color-text-faded);
-  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: .8125rem;
 }
 
-.skill-tags {
+.socials-icons {
   display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
+  gap: 1rem;
 }
 
-.skill-tag {
-  padding: .4rem .85rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  font-size: .875rem;
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: color .2s;
 }
 
-.skill-tag:hover {
-  border-color: var(--color-accent);
+.social-icon:hover {
   color: var(--color-accent);
 }
 
-/* Experience */
-.exp-category {
-  margin-bottom: 3rem;
-}
-
-.exp-category-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: var(--color-text);
+/* Career & Skills */
+.career-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
 }
 
 .exp-item {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 2rem;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
   padding: 1.5rem 0;
   border-top: 1px solid var(--color-border);
+}
+
+.exp-item:last-child {
+  border-bottom: 1px solid var(--color-border);
 }
 
 .exp-period {
@@ -146,10 +121,52 @@
   font-size: .9375rem;
 }
 
-/* Projects & Research */
+.exp-skills {
+  margin-top: 1rem;
+}
+
+.skills-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin-bottom: .35rem;
+}
+
+.skill-desc {
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  margin-bottom: .65rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.skill-tag {
+  padding: .3rem .65rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: .8125rem;
+  color: var(--color-text-muted);
+}
+
+.skill-tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Projects */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -160,7 +177,7 @@
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: transform .2s;
+  transition: transform .2s, border-color .2s;
 }
 
 .project-card:hover {
@@ -170,12 +187,12 @@
 
 .project-cover {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
 .project-info {
-  padding: 1.5rem;
+  padding: 1.25rem;
 }
 
 .project-name {
@@ -200,16 +217,32 @@
   font-size: .75rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 100px;
+  border-radius: var(--radius);
   padding: .2rem .5rem;
 }
 
-/* Publications */
+/* Research & Publications */
+.research-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.research-col-title {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--color-text-faded);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
 .pub-item {
   display: grid;
   grid-template-columns: 50px 1fr;
   gap: 1rem;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
   border-top: 1px solid var(--color-border);
 }
 
@@ -225,8 +258,18 @@
 
 .pub-title {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   margin-bottom: .25rem;
+}
+
+.pub-title-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pub-title-link:hover .pub-title {
+  color: var(--color-accent);
 }
 
 .pub-authors {
@@ -240,7 +283,7 @@
   font-style: italic;
 }
 
-/* Conferences List */
+/* Conferences */
 .conf-list {
   display: flex;
   flex-direction: column;
@@ -249,21 +292,19 @@
 .conf-item {
   display: grid;
   grid-template-columns: 100px 1fr;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--color-border);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  margin-bottom: .75rem;
   text-decoration: none;
   color: inherit;
-  transition: padding-left .25s, border-color .2s;
-}
-
-.conf-item:last-child {
-  border-bottom: 1px solid var(--color-border);
+  transition: background .2s, border-color .2s;
 }
 
 .conf-item:hover {
-  padding-left: .5rem;
-  border-top-color: var(--color-accent);
+  background: var(--color-surface);
+  border-color: var(--color-border);
 }
 
 .conf-cover {
@@ -288,15 +329,10 @@
 
 .conf-title {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 500;
   line-height: 1.3;
   margin-bottom: .5rem;
-  transition: color .2s;
-}
-
-.conf-item:hover .conf-title {
-  color: var(--color-accent);
 }
 
 .conf-meta {
@@ -307,64 +343,42 @@
   color: var(--color-text-muted);
 }
 
-.conf-location {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-}
-
-/* Research Grid */
-.research-grid {
+/* Documents */
+.documents-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 1.5rem 3rem;
 }
 
-@media (max-width: 768px) {
-  .research-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
+.doc-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
-.research-col-title {
+.doc-meta {
+  display: flex;
+  justify-content: space-between;
   font-family: var(--font-mono);
   font-size: .75rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
   color: var(--color-text-faded);
-  margin-bottom: 1.5rem;
-  font-weight: 500;
+  text-transform: uppercase;
 }
 
-.pub-title-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.pub-title-link:hover .pub-title {
-  color: var(--color-accent);
-}
-
-/* Education & Thesis */
-.edu-item {
-  margin-bottom: 1.5rem;
-  border-left: 2px solid var(--color-border);
-  padding-left: 1rem;
-}
-
-.edu-degree {
+.doc-title {
+  font-family: var(--font-serif);
   font-size: 1.125rem;
-  font-weight: 500;
 }
 
-.edu-inst {
+.doc-desc {
+  font-size: .9375rem;
   color: var(--color-text-muted);
-  margin-bottom: .5rem;
 }
 
 .view-pdf-btn {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: .5rem;
@@ -373,9 +387,8 @@
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
   padding: .3rem .8rem;
-  border-radius: 100px;
+  border-radius: var(--radius);
   cursor: pointer;
-  margin-top: .5rem;
   background: transparent;
   transition: all 0.2s;
 }
@@ -393,8 +406,11 @@
   border-top-color: var(--color-accent-soft);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

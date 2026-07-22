@@ -7,16 +7,16 @@ export function renderContent(i18nConfig, lang) {
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
     if (lang === 'ru') {
-      brandEl.innerHTML = 'А<span class="dot">·</span>Б';
+      brandEl.innerHTML = 'А<span class="dot">·</span>М';
     } else {
-      brandEl.innerHTML = 'A<span class="dot">·</span>B';
+      brandEl.innerHTML = 'A<span class="dot">·</span>M';
     }
   }
 
   const ui = i18nConfig.ui || {};
   const sections = ui.sections || {};
 
-  // --- HERO ---
+  // HERO
   const a = i18nConfig.about || {};
   const nameParts = (a.name || '—').split(' ');
   $('heroName').innerHTML = nameParts.length > 1 ? `<span>${esc(nameParts[0])}</span><em>${esc(nameParts.slice(1).join(' '))}</em>` : `<span>${esc(a.name)}</span>`;
@@ -25,7 +25,6 @@ export function renderContent(i18nConfig, lang) {
   $('scrollCueText').textContent = ui.scroll_cue;
   const writeMeLink = document.querySelector('.nav-link[href="#contact"]');
   if (writeMeLink) writeMeLink.textContent = ui.write_me;
-  $('exportPdfBtn').textContent = ui.export_pdf;
 
   const iframe = $('heroIframe');
   const heroUrl = i18nConfig.hero?.iframe_url;
@@ -36,96 +35,110 @@ export function renderContent(i18nConfig, lang) {
     iframe.style.display = 'none';
   }
 
-  // --- ABOUT ---
-  const sAbout = sections;
-  $('about-title').textContent = sAbout.about_title;
-  $('about-sub').textContent = sAbout.about_sub;
+  // HERO SOCIALS
+  const heroIcons = i18nConfig.hero_icons || [];
+  $('heroSocials').innerHTML = heroIcons.map(icon => `
+    <a href="${esc(icon.url)}" class="hero-social-link" data-key="${esc(icon.key)}" target="${icon.url.startsWith('#') ? '_self' : '_blank'}" rel="noopener noreferrer">
+      <img src="${esc(icon.icon)}" alt="${esc(icon.key)}">
+    </a>
+  `).join('');
+
+  // ABOUT
+  $('about-title').textContent = sections.about_title;
+  $('about-sub').textContent = sections.about_sub;
   
   const interests = a.interests || { items: [] };
-  const interestTags = interests.items.map(i => `<span class="interest-tag">${esc(i)}</span>`).join('');
+  const interestsHtml = interests.items.map(i => `<li>${esc(i)}</li>`).join('');
 
-  const socials = i18nConfig.socials || {};
-  const socialsHtml = Object.entries(socials).filter(([k]) => k !== 'location_link').map(([k, v]) => 
-    `<a href="https://${k}.com/${v}" target="_blank" class="interest-tag">${esc(k)}</a>`).join('');
+  // Use hero_icons for About section as well, excluding internal links
+  const socialsHtml = heroIcons.filter(i => !i.url.startsWith('#')).map(i => 
+    `<a href="${esc(i.url)}" target="_blank" class="social-icon" title="${esc(i.key)}"><img src="${esc(i.icon)}" alt="${esc(i.key)}" style="width:20px; height:20px;"></a>`).join('');
+
+  const edu = a.education || [];
+  const eduHtml = edu.map(e => `<li><strong>${esc(e.degree)}</strong> — ${esc(e.institution)} (${esc(e.period)})</li>`).join('');
 
   $('about-content').innerHTML = `
     <div class="about-grid">
       <div class="about-bio">
         <p class="lead">${esc(a.bio_lead)}</p>
         <p>${esc(a.bio)}</p>
-        <div class="meta-block" style="margin-top:2rem;">
-          <div class="meta-label">${esc(interests.title)}</div>
-          <div class="interests-list">${interestTags}</div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">Public Profiles</div>
-          <div class="interests-list">${socialsHtml}</div>
-        </div>
       </div>
       <div class="about-meta">
         <div class="meta-block">
           <div class="meta-label">${esc(ui.based_in)}</div>
-          <div class="meta-value"><a href="${esc(socials.location_link)}" target="_blank">${esc(a.location)}</a></div>
+          <div class="meta-value"><a href="https://www.openstreetmap.org/?query=${esc(a.location)}" target="_blank">${esc(a.location)}</a></div>
         </div>
         <div class="meta-block">
           <div class="meta-label">${esc(ui.spoken_languages)}</div>
-          <div class="languages-list">
-            ${Object.entries(a.spoken_languages || {}).map(([n, l]) => `<div class="language-item"><span>${esc(n)}</span><span class="level">${esc(l)}</span></div>`).join('')}
-          </div>
+          <ul class="meta-list">
+            ${Object.entries(a.spoken_languages || {}).map(([n, l]) => `<li><span>${esc(n)}</span><span class="lang-level">${esc(l)}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">${esc(ui.education)}</div>
+          <ul class="meta-list">${eduHtml}</ul>
+        </div>
+      </div>
+      <div class="about-meta" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div class="meta-block">
+          <div class="meta-label">${esc(interests.title)}</div>
+          <ul class="meta-list interests-list">${interestsHtml}</ul>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">Public Profiles</div>
+          <div class="socials-icons">${socialsHtml}</div>
         </div>
       </div>
     </div>
   `;
 
-  // --- SKILLS ---
-  $('skills-title').textContent = sAbout.skills_title;
-  $('skills-sub').textContent = sAbout.skills_sub;
-  const s = i18nConfig.skills || {};
-  const skillGroups = [
-    ['bioinformatics', 'Bioinformatics'],
-    ['math', 'Mathematics'],
-    ['wet_lab', 'Wet Lab'],
-    ['devops', 'DevOps & Infra'],
-    ['frontend', 'Frontend & Design']
-  ].filter(([k]) => s[k] && s[k].length);
-  
-  $('skills-content').innerHTML = `
-    <div class="skills-groups">
-      ${skillGroups.map(([k, label]) => `
-        <div class="skill-group">
-          <h3>${esc(label)}</h3>
-          <div class="skill-tags">${s[k].map(t => `<span class="skill-tag">${esc(t)}</span>`).join('')}</div>
-        </div>`).join('')}
+  // CAREER & SKILLS
+  $('career-title').textContent = sections.career_title;
+  $('career-sub').textContent = sections.career_sub;
+  const exps = i18nConfig.experience || [];
+  const skills = i18nConfig.skills || [];
+
+  const expHtml = exps.map(e => `
+    <div class="exp-item">
+      <div class="exp-period">${esc(e.period)}</div>
+      <div class="exp-content">
+        <div class="exp-role">${esc(e.role)}</div>
+        <div class="exp-company">${esc(e.company)}</div>
+        <div class="exp-desc">${esc(e.description)}</div>
+        ${e.skills_gained ? `
+          <div class="exp-skills">
+            <span class="meta-label">Skills gained:</span>
+            <div class="skill-tags">${e.skills_gained.map(t => `<span class="skill-tag">${esc(t)}</span>`).join('')}</div>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const skillsHtml = skills.map(s => `
+    <div class="skill-item">
+      <h3>${esc(s.title)}</h3>
+      <p class="skill-desc">${esc(s.description)}</p>
+      <div class="skill-tags">${(s.tags||[]).map(t => `<span class="skill-tag">${esc(t)}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  $('career-content').innerHTML = `
+    <div class="career-grid">
+      <div class="career-col">
+        <h3 class="research-col-title">Experience</h3>
+        ${expHtml}
+      </div>
+      <div class="career-col">
+        <h3 class="research-col-title">Expertise</h3>
+        <div class="skills-groups">${skillsHtml}</div>
+      </div>
     </div>
   `;
 
-  // --- EXPERIENCE ---
-  $('exp-title').textContent = sAbout.exp_title;
-  $('exp-sub').textContent = sAbout.exp_sub;
-  const exps = i18nConfig.experience || [];
-  const categories = { lab: sAbout.exp_lab, mgmt: sAbout.exp_mgmt, dev: sAbout.exp_dev };
-  
-  $('experience-content').innerHTML = Object.keys(categories).map(catKey => {
-    const items = exps.filter(e => e.category === catKey);
-    if (!items.length) return '';
-    return `
-      <div class="exp-category">
-        <h3 class="exp-category-title">${esc(categories[catKey])}</h3>
-        ${items.map(e => `
-          <div class="exp-item">
-            <div class="exp-period">${esc(e.period)}</div>
-            <div>
-              <div class="exp-role">${esc(e.role)}</div>
-              <div class="exp-company">${esc(e.company)}</div>
-              <div class="exp-desc">${esc(e.description)}</div>
-            </div>
-          </div>`).join('')}
-      </div>`;
-  }).join('');
-
-  // --- PROJECTS ---
-  $('proj-title').textContent = sAbout.proj_title;
-  $('proj-sub').textContent = sAbout.proj_sub;
+  // PROJECTS
+  $('proj-title').textContent = sections.proj_title;
+  $('proj-sub').textContent = sections.proj_sub;
   $('projects-content').innerHTML = `
     <div class="projects-grid">
       ${(i18nConfig.projects || []).map(p => `
@@ -140,14 +153,15 @@ export function renderContent(i18nConfig, lang) {
     </div>
   `;
 
-  // --- RESEARCH ---
-  $('research-title').textContent = sAbout.research_title;
-  $('research-sub').textContent = sAbout.research_sub;
+  // RESEARCH
+  $('research-title').textContent = sections.research_title;
+  $('research-sub').textContent = sections.research_sub;
   const pubs = i18nConfig.publications || [];
   const confs = i18nConfig.conferences || [];
+  const grants = i18nConfig.grants || [];
   
   const confHtml = confs.map(c => `
-    <a class="conf-item" href="${esc(c.url)}" target="_blank" rel="noopener">
+    <a class="conf-item ${c.pdf_url ? 'has-pdf' : ''}" ${c.url ? `href="${esc(c.url)}" target="_blank" rel="noopener"` : ''}>
       <img src="${esc(c.cover)}" class="conf-cover" alt="${esc(c.title)}" onerror="this.style.display='none'">
       <div class="conf-details">
         <div class="conf-date">${esc(c.date)}</div>
@@ -169,11 +183,19 @@ export function renderContent(i18nConfig, lang) {
         </a>
         <div class="pub-authors">${esc(p.authors)}</div>
         <div class="pub-venue">${esc(p.venue)}</div>
-        ${p.pdf_url ? `
-          <button class="view-pdf-btn" data-pdf="${esc(p.pdf_url)}" style="margin-top: .75rem;">
-            ${esc(ui.view_pdf || 'View PDF')}
-          </button>
-        ` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const grantsHtml = grants.map(g => `
+    <div class="pub-item">
+      <div class="pub-year">${esc(g.year)}</div>
+      <div class="pub-content">
+        <a href="${esc(g.url)}" target="_blank" rel="noopener" class="pub-title-link">
+          <div class="pub-title">${esc(g.title)}</div>
+        </a>
+        <div class="pub-authors">${esc(g.role)}</div>
+        <div class="pub-venue">${esc(g.description)}</div>
       </div>
     </div>
   `).join('');
@@ -181,62 +203,40 @@ export function renderContent(i18nConfig, lang) {
   $('research-content').innerHTML = `
     <div class="research-grid">
       <div class="research-col">
-        <h3 class="research-col-title">${esc(sAbout.research_conf)}</h3>
+        <h3 class="research-col-title">${esc(sections.research_conf)}</h3>
         <div class="conf-list">${confHtml}</div>
       </div>
       <div class="research-col">
-        <h3 class="research-col-title">${esc(sAbout.research_pubs)}</h3>
+        <h3 class="research-col-title">${esc(sections.research_pubs)}</h3>
         <div class="pub-list">${pubHtml}</div>
       </div>
-    </div>
-  `;
-
-  // --- EDUCATION ---
-  $('edu-title').textContent = sAbout.edu_title;
-  $('edu-sub').textContent = sAbout.edu_sub;
-  const edu = i18nConfig.about.education || [];
-  const courses = i18nConfig.about.coursework || [];
-  
-  $('education-content').innerHTML = `
-    <div class="research-grid">
       <div class="research-col">
-        ${edu.map(e => `
-          <div class="edu-item">
-            <div class="edu-degree">${esc(e.degree)}</div>
-            <div class="edu-inst">${esc(e.institution)} (${esc(e.period)})</div>
-            ${e.thesis_title ? `
-              <div class="exp-desc" style="margin-top:.5rem;"><strong>${esc(e.thesis_title)}</strong></div>
-            ` : ''}
-            ${e.thesis_url ? `
-              <button class="view-pdf-btn" data-pdf="${esc(e.thesis_url)}">${esc(ui.view_pdf)}</button>
-            ` : ''}
-          </div>`).join('')}
-      </div>
-      <div class="research-col">
-        <h3 class="research-col-title">Coursework</h3>
-        ${courses.map(c => `
-          <div class="edu-item">
-            <div class="edu-degree">${esc(c.title)}</div>
-            <div class="exp-desc">${esc(c.description)}</div>
-            <button class="view-pdf-btn" data-pdf="${esc(c.url)}">${esc(ui.view_pdf)}</button>
-          </div>`).join('')}
+        <h3 class="research-col-title">${esc(sections.research_grants)}</h3>
+        <div class="pub-list">${grantsHtml}</div>
       </div>
     </div>
   `;
 
-  $('cert-title').textContent = sAbout.cert_title;
-  $('cert-sub').textContent = sAbout.cert_sub;
-  const certs = i18nConfig.certificates || [];
+  // DOCUMENTS
+  $('docs-title').textContent = sections.docs_title;
+  $('docs-sub').textContent = sections.docs_sub;
+  const docs = i18nConfig.documents || [];
   
-  $('certificates-content').innerHTML = `
-    <div class="projects-grid">
-      ${certs.map(c => `
-        <div class="project-card" style="padding: 1.5rem;">
-          <div class="project-name">${esc(c.title)}</div>
-          <div class="project-desc">${esc(c.description)}</div>
-          ${c.url ? `
-            <button class="view-pdf-btn" data-pdf="${esc(c.url)}" style="margin-top: 1rem;">
-              ${esc(ui.view_pdf)}
+  $('documents-content').innerHTML = `
+    <div class="documents-grid">
+      ${docs.map(d => `
+        <div class="doc-item">
+          <div class="doc-meta">
+            <span class="doc-category">${esc(d.category)}</span>
+            <span class="doc-date">${esc(d.date)}</span>
+          </div>
+          <div class="doc-content">
+            <div class="doc-title">${esc(d.title)}</div>
+            <div class="doc-desc">${esc(d.description)}</div>
+          </div>
+          ${d.url ? `
+            <button class="view-pdf-btn" data-pdf="${esc(d.url)}">
+              ${esc(ui.view_pdf || 'Open PDF')}
             </button>
           ` : ''}
         </div>
@@ -244,7 +244,7 @@ export function renderContent(i18nConfig, lang) {
     </div>
   `;
 
-  // --- CONTACT UI ---
+  // CONTACT UI
   const c = ui.contact || {};
   $('contactTitle').innerHTML = c.title;
   $('contactIntro').textContent = c.intro;

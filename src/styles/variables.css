@@ -29,9 +29,9 @@
   --color-shadow: rgba(0, 0, 0, 0.12);
   --color-shadow-lg: rgba(0, 0, 0, 0.15);
   
-  /* === Размеры и шрифты (без изменений) === */
-  --radius: 4px;
-  --radius-lg: 12px;
+  /* === Размеры и шрифты === */
+  --radius: 8px;
+  --radius-lg: 16px;
   --maxw: 1350px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --bar-h: 60px;

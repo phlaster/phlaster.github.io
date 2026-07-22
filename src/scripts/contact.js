@@ -71,10 +71,19 @@ export function initContact(i18nConfigGetter) {
 
       if (telegram) {
         const tgUsername = telegram.replace(/@/g, '');
-        $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="https://telegram.me/${tgUsername}">@${tgUsername}</a>`;
+        const tgUrl = `https://telegram.me/${tgUsername}`;
+        $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="${tgUrl}">@${tgUsername}</a>`;
+        document.querySelectorAll('.hero-social-link[data-key="telegram"]').forEach(el => {
+          el.href = tgUrl;
+          el.target = "_blank";
+        });
       }
       if (email) {
         $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+        document.querySelectorAll('.hero-social-link[data-key="email"]').forEach(el => {
+          el.href = `mailto:${email}`;
+          el.target = "_blank";
+        });
       }
       contactsRevealed = true;
       window.contactsRevealed = true;
@@ -147,7 +156,7 @@ export function initContact(i18nConfigGetter) {
           nonce: formNonce,
           name,
           email,
-          subject: subject,
+          subject,
           message
         })
       });

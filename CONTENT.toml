@@ -1,18 +1,45 @@
 [site]
-author = "Alexander Bezlepsky"
+author = "Alexander Morozov"
 default_lang = "en"
 photo = "/assets/me.png"
 
 [hero]
-# Replace with your real embed URL.
-iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA0WYy24cxxWG36W1LQ_Otauby2SRTYAESZDIEbQYmyOLiCwGQ9oGEuTdg-_vGdEChzXddTnnv5Xk_y6_LQ9pZmP5vDx45xzLf56ff14e7DRXj7H8-_z1_fKwrnM7bfr2_fLQnvvJx_J8ffrpn7fZHVVjefn8_Nsfrk-Py8On85eXy1h-Pl__dbm-_P3p5emHL5fl4fX6y-WY9ruf_vp6vr58m_nyer7--fz1fS8PvvXktNuj73mUNU_zbVZQ7WanepvFI5tvD97n8uC15ml9m5PLw2516m-FLQ8fPkSZneZwNzvFWN49zsf98XH5OD50Mddzm6ccyztLW23nhYfN0zoyp1bkeT2f9-Xjx7H8-Mv118vvn788a-9va8by7tPOH0a9zk8_GiPf8rLW8nEs1-fXP_16uV6fHi8s_G7fxnflo_axlHVVdbanV5VlZrebpZVbZFS4d3ZmdJjxJjq9vK0dWqwtuqq9LKKiOyLarMOtrbyzPDKrMzutsryrLdPdPSsykvXelVbayLP5L7ucJ_zxygy3oMLwMk8Py3CPdn45y7zDOivCzcMivD2ry7SuonjoYV1UaGHexrswq4imT0q2NM_yBIeuLnaq8uimsGD3LHe3qCzz5nlYmTY19yqzzojItI5sp51Ms8rwqih6Khpxa3YEdsoBoGpP87KManVm0dbFDm1JvdlqJ8OqUoR1WGWnZ3qIQMqj7fYIYO92D_ij5jBPWLLjRAuA9SinFWZkVQJOengGS7uPupqWUqvc2x0U3BveO6qrguoC9tsrkvqhA_otzKzhJrwNbIGaDsAqqw00zLodFBEVq9OyjsORhkNLVR67eCAOgEFo0q-xW4c3PwgU9aZHhYRpVsgEFRm7cnxleodHJfg6R0q-bSntBbpHFdBcTElki3wBMKhJFIOE0QezBARMNocl_KCLpENAybSiTLHd0sONLUqWYBBhN_KgvYBPQ-GijOLpzyGE1agWdQM_2BtuEo-NzE0eaRCQIlO67sDWpQMRpaUs3IVWGy-h7nLwyPLjoaQPCooAOgFtdpCxhG_AI91idMzvBbn4FuDAEh2xN8JgL-QU2MYDDJELJ4My7pdKCBtMBwjoD1uFN8oMoManwMz3w2_Iq5iNfRVMMMhvQquSyq3KCppRfGXCUzSSUlCV4gas0CUWRgvt6IKSi0ITGzVKYhY_HOJNvCHUA0Pa8bYMaIGDpGEAKHwii-PMkuMwCswEqsSOKBSJR8MRqc27JAiNwDziFvNnya0wgqvFqyEvokqEFEGl0pXYoIAvpQzsrODBR0HN6M1pIdQ7E5VxfLMKI10JMyqIwAQIRrGBotAzm-FhBUmSFcCMjQsYiGElh2ormiJlIDRx7mEQTHPIlRQOloEId0y6uKOq4oYi0oGAIwkKUcEb5FaK1uSeQNoYR2oBrps0Si5nMsFGgEgwSKawMYpFIplK4Ejq0z1EdYQfFNoBDN5wEIZUXWpkeUvUYlaelU90gRCalE1aE3tcoYS7nF9NGkncpITdYpguQOmAi0uINdxw0pOIJZQ5khiklsDLSNJJTSdavKgTHHmDCJBvpZOsiiMsj0u0oTSNpAl_fYbdQkCCQOG6GQgicCTxGuHpbuHGNoiFPtpkJ_AmFyg-S9mha62hg1gGVcGp-zjdDeq5vrkbdBsq2rGucQTImIMKugRD8oq5XKO64SiTFNUVRyEdyJm4MAjSAUUEEFUG6bpLuV2oGfXoclRqURP3BgrCK6g-AY0uAai4PBq3WmJN4v1wDOQt97_o8Ve1yJjDh5fz2XOOGjF87HuPHs3QY1tHjY0h82r4XIePrUYODWLE2BnYyOE1fMx9xAiWzDliJKN2Gz2Siens2MNH-D5Ki2eP1CHhG8fGfWh6HTH5xeaR6zZspGk8mZFsQOX8mdvIkepiHamNNvZrhquxTE_DWepGhRtPVuNx2TrigIGhD3rxbHBi1jaFCnO3uJ-5UwODTZ3zeE8ecfAet5c7kAUr88BBc49uOQ5EqHLng5e7ZlCxzzn6qGo7luZI4erCMSBQryfM8ZolNjjS0_ZhYyb9MqY_Gx6rthYO-20HGxheJQHOCgLaaE0blG6jN6Y2m-fKm-02pAsbtcGSJ3vthaK067oLwbyPbUxnta-BGjSckZIDw-m3lbHZnXkp4xjxyU_6NnpAdPquEegyD-xKKnFJZeO1cJvoBWAqdCxf4dJHUVe-bb7qk6acymiwxD_PeoUJDuwbeD62HfU1H5sdbOZYDRQ4vBu9U63nxo55Hx5feh4HJv-iyxuMMdZgzM8achGjPuj1MQOSNOpjm9DIZM_pfndIsEJ-MNhT2_t2t3yJRlS3ozS-uTWgSUNuh-4QTPedB9vUYkivOaWB2xgdMlSAHP7wlGDEh9dOefyQwndX9s2gmoDiNMS2R9u-TrbYJHVJ0nXIKh8dM_ZDMMyQp3a5IekIBHwWkKjBKVNIZrnq6TF5P8imEWEqVMMAy6dcvGIiJoc5748ydpfgmeL7KujyPr4Bue2YS55geDgtciWh5G1Vcut2Txo4TrxRbwzFLMPDrMeyyQS5OVLnwXKkOHRcFblKuFpJpH2bcuhBw3X0sXXaUbFO0TUBQNzC9zpy1YkKBrxyy61cj7DUkMO_qUMBcr-A_vj09fKPp8fXz_o_NmM5f3m9XP_29OXy8pfz69MzT3393_8BCnNb_OcRAAA"
+iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA02YW29cxxGE_8vR65jo67nsY4IgLwkSxEZix_DDSlxZRGgxWNI2kCD_PfhqlpQliJydMzOnp7qqulf_XX5dTtGrjeXTcvKKfSz_eXr6aTn5nXX0WP59_vztcvI99rvQp--Wk69Rdz6Wp-vDj__Uartbo3ssjw-_XL759eH55fkPn8_vHy_3y-nl-vNlLM-fnn794_Xhfjl9PD8-X8by0_n6r8v1-e8Pzw_vHy-_Xfa7H79-OV-f31Y-v5yvfz1__rYJsOqu36a-6-W0H_6bmW9jOXmuQXSvi2I57eV365dFyaLY7vYvi3I57d5suwW2nL7__qvKu2P4Ws3ud-5xrlx-GN9773fH-MrutrG8-3jwl-lYHVwqj7say7vtOLYP5-WHH8by4efrL5ffPz0-6eDlnd37Eb182T2Wd71uHz8Yo_f7-48f7hlFtO-p0eVDbJfly7FjeZfn9Xzmzcv16eUvv1yu14f7Cy_4Knvwj7yGJ5msdGvLrsxsju02RmVd1WllFeHRVtXhlZGMs7PL3LPTo7yzzc3K3bTD0yIrvdK6zCzKyyO7vTmiwjzMvNo82FNdYZ2dnJLVkcaZblGd5VbRFV7dbZHJviACc7dKnkWFe7sXLy03T8-sDOdlwVG8o9s6zDiqNN9VWd6W3mYR7h7empj7s4jYmucVFgCV4ZERkdZpFlwAoDr4m1EWzsWrw6rMnC0ebglOQOe6PLFYRXJLC9AHM87UjuKI4F5KiztT3mltwepgF5MGzk3k0VlpHuSudLeOSK8ojwJ7UpWAmE7uiIn1BoZVVtpgVhVc1kmF4itLhUr60_Tm-ZPVTg6BgYSEl8JzJ1nFBSy6mxWZpDQKYKM9MzqJyisc7gE9wYKi6UF7l0EAGAd-0NXbGhjgC3n3CGOxAJjPdXloCnFT5IGTBhzg2lkcaOJzlZZUtYEth7qZLpBh5SJXVwCCJKIkkk5z-J3GFUgrvCQjGc01JSBLD-uAf-HWzVVIj5OMbJMKMq0bRhFJIbEylNUOMIE8yRJQhkFkoAL2IqOV-mkOvQoARJLirExHKUGSCJs_yV-E5YgryT6TqAYl8SNFAzzBxSFLyEWOWukjZK5gJNrhHzGHo0IICXxazUKIVwmkN66ZWZdHJ_kyEk5C0WChUeXGSU-TgrLOAEBQx0JQs1miTYMvoCfBGQ7CbvEMLVVxc5jgjo1ECQa2dRG4LAb8GlCgEnjeKBmNRoq8eLscycuJBGsg5ShQMoObDlsTpeKgZSmJ8QhuRE3vyI7M4FXo20EKChFU4Kh4hSiCdREhiUfuMjD263QgdRycm0aDgLiim4V8A5sz8o5AYCs4FwYLdRJkPQQaZDBSy-ZJRkCEbAQiDWKIJuLhMfwBWOKBOxhJc480gOIQT95cjfVgkXIhjAndV-BD5U1l4QYgjJjRK69DfogV6fKIO8M-INCbAqioODHLQ0AWEZJAMV8qmWyEFEKFgjtQSTE4ayVdlDmdmUyFlB7SHxRtsmuOw-G3HIipCxcVB2wALwGOKnxP8FPX5EXwGl3xTJJP1mKAieqMTXhEqUzGBIsjAZVgahousmu92FOO5ZRY8J0QGU5LkaFMydTqpi4HLALtUp2WGCUYcoq33yprySLxcGyRdFC2DVlATJduoQR2Bi8hrAyVfE9lFlKZxyYeYnOpLLSRG8dJSYYAsF1Da1y4YSzGxVMjfIAXMblJqO5wSWoX_JWXizZUQgQGu6EBjg7LYCtEhnySnCrPtN2CXDQJE-zJfsiDZZkczKQEzoNM6h5k_lzL8QCKuBKqpkk0IjCHXOBIEQM41SsKKrRAgXAIK3G1XGA2yxC9hIoDGhVjpCgXKAREcZGpgCkyTQBSS2QQG6d00wUhNoaIBrk0rQd9B0yiQQE2Wh1V83lhyis8ZPfNwHBldX-kTT2OFNrKfJn6PVKTuBgJQvitSkNC5ap4BGai7k_Npnq8rCBrGA_8AicpfVK85Ivq1pyOCx3IO6m2cABg1KqI0NibLhVQDaSkcPiiMd0aLEAOYKXA1G3hCco6_gPz9E6VEmoWPkPemVA_xueAMagTz6Osgzbakf9OvkAgfAnfUAfGubLbol4gVuqrUxPUMBCSVIhFq_ei-tTsSvARzU5zxW50hdlh8kxGKN1ilCpPM38Bd4AQGNSOsuLW-c02Wi5HlHgUnFW7S0lTSiCZ-INU1BPjBdABQk3UC5rR_N8KmMxMVVmsV9lWqZpfF8gvYqF10P1m96Z2VwRR20oV4y6z0SLpuj6GCQ_oaQhPsXMWvJjfaiiHLKKHFrSqliSQsvsWABqnBtKVYAKUfcoKVV6K5mKKTA1K4nb6DoNZSCUYG8V3dpkIQcJLde-uxk79PiGp_1IueJ18ANnSh79GLXXNtOsbFhDRl1At1cVCBL4O8GqKj7gK5rceHcshnNmSzs6W1pYvPJRkqjbflPT9DANTu3n7uvjnp_vLclo-nZ8_LZr4-sK3dRvL9fz5_umnt4_66sqXyrZ19OgYNraqkWMfNmLdR420YePIkcO3YWONHjV62PA6eMxTGzFibKPXddSIbRs1vLdt5CiG66H5ZGt0sI8hkfNahh7MRTDOlV_O1qxd83Po7J9Dtun04mWMMgjXWXPEyMErD9az49AZvNhN0TZL3I6RIznJzUewO8ehSc2xaC7U57lwfZvcRww--XyizcztnHCsb8cQRQ4fboQBypzig39um-ZWnaf1Y-0aPiL52Qc__YjhY9t4ymg_2OPOI09jZqya5Xbr2JNVrmN5bqMYbjuzrVmGPI9jUxhjHZ09fORxG95Q9PV2KCvniINiNHvcWdabhmScPe7z6uvwTiV4G7ER7cplt2300Fn7oacxcodyObZRK9chozDFxj624avwipWfWbrm27BHcIOsAxKvznavBkyBkMlLgvXHDhmK6SNu5Bxbs8-LtByr8BeB_DAlDXqF7WwK8owXcLJeEMatNnudt7G9DskXKNjBMZNpCi5eh3YbGvd08aV2xkKvDsSl12TtO0ohFIyeyCUyaFsD4sONII09dueFfNyDC6IE34LchoPmXuJX8SGO4vnKcN_FbaQsQZKYbWCo0tg2Yt2AupWT2gX7xjhKqdLYCnFKfsdMLyR1LgOTHLwLjfjwfeP5ZPgxBS-GykKEfhYE0sZc4SxH6t0oAMu48aXh2iRbDN_M2SIj2eQh5Bcfh1jifvlNFSPi8NdAj6zfDmdwfHfjXPFp3-atbIStPJ0rgllJxcRv7hu2zXRu8wi_RXEwkCh8AwcWUOqE1HTJRg8ARanBvKZN9nQAzDN1lgz34BaCLzbx9HUY4gZf_W48oIDc7kfnKL4iLFFQ2e8DdKTGniBuYE1HoNjBHaLIa9HebStq_nL2sbKVCNN2HorSnjI_UpslN5G5ZB2sFlRY-5dpfvE56-AXu7VxIp11THhvwwm6wr4NQ-wBkqTG2QhJo3adNIecFsNe_yv3Tw-fL_94uH_hP83Hcn58uVy_eXi8PP_t_PLwtJzsf_8HrNQuE1kXAAA"
 
-[socials]
-github = "phlaster"
-gitlab = "phlaster"
-codeforces = "phlaster"
-stepic = "phlaster"
-location_link = "https://www.openstreetmap.org/?query=Berlin"
+[[hero_icons]]
+key = "github"
+icon = "/assets/icons/github-logo.svg"
+url = "https://github.com/phlaster"
+
+[[hero_icons]]
+key = "gitlab"
+icon = "/assets/icons/gitlab-logo.svg"
+url = "https://gitlab.com/phlaster"
+
+[[hero_icons]]
+key = "stepik"
+icon = "/assets/icons/stepik-logo.svg"
+url = "https://stepik.org/users/346140343/profile"
+
+[[hero_icons]]
+key = "codewars"
+icon = "/assets/icons/codewars-logo.svg"
+url = "https://www.codewars.com/users/phlaster"
+
+[[hero_icons]]
+key = "rosalind"
+icon = "/assets/icons/rosalind-logo.png"
+url = "https://rosalind.info/users/alex_feb2021/"
+
+[[hero_icons]]
+key = "telegram"
+icon = "/assets/icons/telegram-logo.svg"
+url = "#contact"
+
+[[hero_icons]]
+key = "email"
+icon = "/assets/icons/email-logo.svg"
+url = "#contact"
 
 [contact]
 telegram_bot = "my_portfolio_bot"
@@ -20,137 +47,99 @@ webhook_url = ""
 fallback_telegram = true
 worker_url = "https://cv.alex-phlaster.workers.dev" 
 
-# ══════════════════════════════════════
 # UI ELEMENTS
-# ══════════════════════════════════════
 [ui.en]
 scroll_cue = "Scroll to explore"
-hero_interact = "Drag to draw · tap & drag on touch"
-hero_label = "Portfolio · 2024"
 based_in = "Based in"
 education = "Education"
 spoken_languages = "Spoken languages"
-form_invalid = "Please fill in name, email and message."
-export_pdf = "Export PDF"
+export_pdf = "PDF"
 write_me = "Write me"
-close_modal = "Close"
-loading_pdf = "Loading PDF..."
-view_pdf = "View PDF"
+view_pdf = "Open PDF"
 
 [ui.fr]
 scroll_cue = "Défiler pour explorer"
-hero_interact = "Glisser pour dessiner · taper & glisser sur tactile"
-hero_label = "Portfolio · 2024"
 based_in = "Basé à"
 education = "Formation"
 spoken_languages = "Langues parlées"
-form_invalid = "Veuillez remplir nom, email et message."
-export_pdf = "Exporter en PDF"
+export_pdf = "PDF"
 write_me = "M'écrire"
-close_modal = "Fermer"
-loading_pdf = "Chargement du PDF..."
-view_pdf = "Voir PDF"
+view_pdf = "Ouvrir PDF"
 
 [ui.ru]
 scroll_cue = "Прокрутите вниз"
-hero_interact = "Тяните, чтобы рисовать · касание и перетаскивание"
-hero_label = "Портфолио · 2024"
 based_in = "Местонахождение"
 education = "Образование"
 spoken_languages = "Разговорные языки"
-form_invalid = "Пожалуйста, заполните имя, email и сообщение."
-export_pdf = "Экспорт в PDF"
+export_pdf = "PDF"
 write_me = "Написать мне"
-close_modal = "Закрыть"
-loading_pdf = "Загрузка PDF..."
 view_pdf = "Открыть PDF"
 
 [ui.nav.en]
 about = "About"
-skills = "Skills"
-experience = "Experience"
+career = "Career & Skills"
 projects = "Projects"
 research = "Research"
-education = "Education"
+documents = "Documents"
 
 [ui.nav.fr]
 about = "À propos"
-skills = "Compétences"
-experience = "Expérience"
+career = "Carrière & Comp."
 projects = "Projets"
 research = "Recherche"
-education = "Formation"
+documents = "Documents"
 
 [ui.nav.ru]
 about = "Обо мне"
-skills = "Навыки"
-experience = "Опыт"
+career = "Карьера и навыки"
 projects = "Проекты"
 research = "Научная работа"
-education = "Учеба"
+documents = "Документы"
 
 [ui.sections.en]
 about_title = "About"
 about_sub = "A short introduction."
-skills_title = "Skills & Expertise"
-skills_sub = "Cross-disciplinary toolkit spanning wet lab, math, and software."
-exp_title = "Experience"
-exp_sub = "Professional and academic trajectory."
-exp_lab = "Laboratory & Field"
-exp_mgmt = "Team & Project Management"
-exp_dev = "Software, DevOps & Design"
+career_title = "Career & Skills"
+career_sub = "Professional track and cross-disciplinary expertise."
 proj_title = "Featured projects"
-proj_sub = "Open-source work and design experiments worth a look."
+proj_sub = "Open-source work and design experiments."
 research_title = "Research & Publications"
-research_sub = "Academic work and conferences."
+research_sub = "Academic work, conferences, and grants."
 research_conf = "Conferences"
 research_pubs = "Publications"
-edu_title = "Education & Academic Work"
-edu_sub = "Degrees, thesis, and coursework."
-cert_title = "Certifications & Achievements"
-cert_sub = "Proof of continuous learning and skills."
+research_grants = "Grants"
+docs_title = "Documents & Achievements"
+docs_sub = "Degrees, thesis, coursework, and certificates."
 
 [ui.sections.fr]
 about_title = "À propos"
 about_sub = "Une brève introduction."
-skills_title = "Compétences & Expertise"
-skills_sub = "Outils interdisciplinaires couvrant labo humide, math et logiciel."
-exp_title = "Expérience"
-exp_sub = "Trajectoire professionnelle et académique."
-exp_lab = "Laboratoire & Terrain"
-exp_mgmt = "Gestion d'Équipe & de Projet"
-exp_dev = "Logiciel, DevOps & Design"
+career_title = "Carrière & Compétences"
+career_sub = "Parcours professionnel et expertise interdisciplinaire."
 proj_title = "Projets en vedette"
-proj_sub = "Travail open-source et expériences de design à découvrir."
+proj_sub = "Travail open-source et expériences de design."
 research_title = "Recherche & Publications"
-research_sub = "Travail académique et conférences."
+research_sub = "Travail académique, conférences et subventions."
 research_conf = "Conférences"
 research_pubs = "Publications"
-edu_title = "Formation & Travaux Académiques"
-edu_sub = "Diplômes, mémoire et projets tuteurés."
-cert_title = "Certifications & Réalisations"
-cert_sub = "Preuve d'un apprentissage continu et des compétences."
+research_grants = "Subventions"
+docs_title = "Documents & Réalisations"
+docs_sub = "Diplômes, mémoires, projets et certificats."
 
 [ui.sections.ru]
 about_title = "Обо мне"
 about_sub = "Краткое введение."
-skills_title = "Навыки и экспертиза"
-skills_sub = "Междисциплинарный инструментарий: мокрая лаборатория, математика и разработка."
-exp_title = "Опыт"
-exp_sub = "Профессиональный и академический путь."
-exp_lab = "Лабораторная работа"
-exp_mgmt = "Управление проектами и командой"
-exp_dev = "Разработка, DevOps и Дизайн"
+career_title = "Карьера и навыки"
+career_sub = "Профессиональный путь и междисциплинарная экспертиза."
 proj_title = "Избранные проекты"
 proj_sub = "Open-source проекты и дизайнерские эксперименты."
 research_title = "Научная работа"
-research_sub = "Исследования и конференции."
+research_sub = "Исследования, конференции и гранты."
 research_conf = "Конференции"
 research_pubs = "Публикации"
-edu_title = "Образование и академические работы"
-edu_sub = "Дипломы, ВКР и курсовые проекты."
-cert_title = "Сертификаты и достижения"
-cert_sub = "Подтверждение непрерывного обучения и навыков."
+research_grants = "Гранты"
+docs_title = "Документы и достижения"
+docs_sub = "Дипломы, ВКР, курсовые и сертификаты."
 
 [ui.contact.en]
 title = "Let's <em>talk</em>."
@@ -197,101 +186,58 @@ message = "Сообщение"
 form_invalid = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей."
 form_invalid_email = "Некорректный email. Используйте латиницу и реальный домен"
 
-# ══════════════════════════════════════
 # ABOUT
-# ══════════════════════════════════════
 [about.en]
-name = "Alexander Bezlepsky"
+name = "Alexander Morozov"
 tagline = "Bioinformatician, wet-lab researcher, and software developer working at the intersection of computational biology and interactive systems."
-bio_lead = "[EN STUB] Turning biological data into structured, actionable insights."
-bio = "[EN STUB] Based in Berlin, splitting time between wet lab work, team management, and building visual/data tools. Freshly graduated Bachelor."
-location = "Berlin, Germany"
+bio_lead = "Turning biological data into structured, actionable insights."
+bio = "Based in Cityname, splitting time between wet lab work, team management, and building visual/data tools. Freshly graduated Bachelor."
+location = "Cityname, Germany"
 
 [about.fr]
-name = "Alexander Bezlepsky"
+name = "Alexander Morozov"
 tagline = "Bioinformaticien, chercheur en laboratoire et développeur de logiciels travaillant à l'intersection de la biologie computationnelle et des systèmes interactifs."
-bio_lead = "[FR STUB] Transformer les données biologiques en informations structurées et exploitables."
-bio = "[FR STUB] Basé à Berlin, partageant mon temps entre le travail en laboratoire, la gestion d'équipe et la création d'outils visuels et de données. Nouvellement diplômé."
-location = "Berlin, Allemagne"
+bio_lead = "Transformer les données biologiques en informations structurées et exploitables."
+bio = "Basé à Cityname, partageant mon temps entre le travail en laboratoire, la gestion d'équipe et la création d'outils visuels et de données. Nouvellement diplômé."
+location = "Cityname, Allemagne"
 
 [about.ru]
-name = "Александр Безлепский"
+name = "Александр Морозов"
 tagline = "Биоинформатик, лаборант-исследователь и разработчик на стыке вычислительной биологии и интерактивных систем."
-bio_lead = "[RU STUB] Превращаю биологические данные в структурированные и применимые на практике инсайты."
-bio = "[RU STUB] Живу в Берлине, разделяя время между мокрой лабораторией, управлением командой и созданием визуальных/данных инструментов. Недавно закончил бакалавриат."
+bio_lead = "Превращаю биологические данные в структурированные и применимые на практике инсайты."
+bio = "Живу в Берлине, разделяя время между мокрой лабораторией, управлением командой и созданием визуальных/данных инструментов. Недавно закончил бакалавриат."
 location = "Берлин, Германия"
 
 [about.spoken_languages.en]
-"English" = "Fluent (C2)"
-"French" = "Intermediate (B2)"
-"German" = "Basic (A2)"
 "Russian" = "Native"
+"English" = "Upper-Intermediate (B2)"
+"French" = "Intermediate (B1)"
 
 [about.spoken_languages.fr]
-"Anglais" = "Courant (C2)"
-"Français" = "Intermédiaire (B2)"
-"Allemand" = "Notions (A2)"
-"Russe" = "Langue maternelle"
+"Russe" = "Niveau natif"
+"Anglais" = "Niveau avancé (B2)"
+"Français" = "Niveau seuil (B1)"
 
 [about.spoken_languages.ru]
-"Английский" = "Свободно (C2)"
-"Французский" = "Средний (B2)"
-"Немецкий" = "Базовый (A2)"
 "Русский" = "Родной"
+"Английский" = "Выше среднего (B2)"
+"Французский" = "Средний уровень (B1)"
 
-# ══════════════════════════════════════
-# EDUCATION & COURSEWORK
-# ══════════════════════════════════════
+# EDUCATION (Listed in About)
 [[about.education.en]]
 institution = "University Name"
 degree = "B.Sc. Bioinformatics"
 period = "2020 — 2024"
-thesis_title = "Title of the Bachelor Thesis"
-thesis_url = "/assets/pdfs/example.pdf"
 
 [[about.education.fr]]
 institution = "Nom de l'Université"
 degree = "Licence en Bioinformatique"
 period = "2020 — 2024"
-thesis_title = "Titre du mémoire de licence"
-thesis_url = "/assets/pdfs/example.pdf"
 
 [[about.education.ru]]
 institution = "Название ВУЗа"
 degree = "Бакалавр биоинформатики"
 period = "2020 — 2024"
-thesis_title = "Тема выпускной квалификационной работы"
-thesis_url = "/assets/pdfs/example.pdf"
-
-[[about.coursework.en]]
-title = "Coursework 1 Title"
-url = "/assets/pdfs/example.pdf"
-description = "[EN STUB] Short description of the coursework."
-
-[[about.coursework.fr]]
-title = "Titre du projet tuteuré 1"
-url = "/assets/pdfs/example.pdf"
-description = "[FR STUB] Courte description du projet."
-
-[[about.coursework.ru]]
-title = "Тема курсовой 1"
-url = "/assets/pdfs/example.pdf"
-description = "[RU STUB] Краткое описание курсовой работы."
-
-[[about.certificates.en]]
-title = "Summer School of Mathematics"
-url = "/assets/pdfs/example.pdf"
-description = "[EN STUB] Advanced Geometry Course Certificate."
-
-[[about.certificates.fr]]
-title = "École d'été de Mathématiques"
-url = "/assets/pdfs/example.pdf"
-description = "[FR STUB] Certificat de cours de géométrie avancée."
-
-[[about.certificates.ru]]
-title = "Летняя школа математики"
-url = "/assets/pdfs/example.pdf"
-description = "[RU STUB] Сертификат прохождения курса по продвинутой геометрии."
 
 [about.interests.en]
 title = "Scientific Interests"
@@ -320,79 +266,106 @@ items = [
   "Научная визуализация данных"
 ]
 
-# ══════════════════════════════════════
 # EXPERIENCE
-# ══════════════════════════════════════
 [[experience]]
-category = "lab" # lab, mgmt, dev
+category = "lab" 
 period = "2022 — Present"
 
 [experience.en]
 role = "Laboratory Researcher"
 company = "Institute / Lab Name"
-description = "[EN STUB] DNA/RNA extraction, PCR, sample collection, library prep, and data analysis integration."
+description = "DNA/RNA extraction, PCR, sample collection, library prep, and data analysis integration."
+skills_gained = ["PCR", "Library Prep", "Data Analysis"]
 
 [experience.fr]
 role = "Chercheur en Laboratoire"
 company = "Institut / Nom du Labo"
-description = "[FR STUB] Extraction ADN/ARN, PCR, collecte d'échantillons, préparation de banques et intégration d'analyse de données."
+description = "Extraction ADN/ARN, PCR, collecte d'échantillons, préparation de banques et intégration d'analyse de données."
+skills_gained = ["PCR", "Préparation de banques", "Analyse de données"]
 
 [experience.ru]
 role = "Лаборант-исследователь"
 company = "Название института / лаборатории"
-description = "[RU STUB] Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных."
+description = "Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных."
+skills_gained = ["ПЦР", "Подготовка библиотек", "Анализ данных"]
 
-[[experience]]
-category = "mgmt"
-period = "2022 — 2023"
+# SKILLS (Now with descriptions)
+[[skills.en]]
+title = "Mathematics"
+description = "Applied statistics, linear algebra, and computational geometry."
+tags = ["Statistics", "Linear Algebra", "Geometry"]
 
-[experience.en]
-role = "Student Project Team Lead"
-company = "University Project"
-description = "[EN STUB] Led a team for 2 semesters. Managed GitHub repos, handled access keys, coordinated development and research tasks."
+[[skills.en]]
+title = "Programming"
+description = "Data analysis scripts and high-performance packages."
+tags = ["Julia", "Python", "R", "Bash"]
 
-[experience.fr]
-role = "Chef d'Équipe de Projet Étudiant"
-company = "Projet Universitaire"
-description = "[FR STUB] Dirigé une équipe pendant 2 semestres. Géré les dépôts GitHub, les clés d'accès, coordonné les tâches de développement et de recherche."
+[[skills.en]]
+title = "Wet Lab"
+description = "Molecular biology workflows and sample processing."
+tags = ["PCR", "DNA/RNA Extraction", "Library Prep"]
 
-[experience.ru]
-role = "Тимлид студенческого проекта"
-company = "Университетский проект"
-description = "[RU STUB] В течение двух семестров руководил командой. Админстрировал GitHub-репозитории, выдавал ключи доступа, координировал задачи по разработке и исследованию."
+[[skills.en]]
+title = "DevOps & Infra"
+description = "Infrastructure management and continuous integration."
+tags = ["Git", "Docker", "Linux", "CI/CD"]
 
-[[experience]]
-category = "dev"
-period = "2023 — Present"
+[[skills.en]]
+title = "Frontend & Design"
+description = "Interactive data visualization and web tools."
+tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
 
-[experience.en]
-role = "Frontend & DevOps Developer"
-company = "Freelance / Open Source"
-description = "[EN STUB] Built interactive web tools (like Hextiles and this portfolio), configured CI/CD, and managed deployments."
+[[skills.fr]]
+title = "Mathématiques"
+description = "Statistiques appliquées, algèbre linéaire et géométrie computationnelle."
+tags = ["Statistiques", "Algèbre Linéaire", "Géométrie"]
 
-[experience.fr]
-role = "Développeur Frontend & DevOps"
-company = "Freelance / Open Source"
-description = "[FR STUB] Création d'outils web interactifs (comme Hextiles et ce portfolio), configuration CI/CD et gestion des déploiements."
+[[skills.fr]]
+title = "Programmation"
+description = "Scripts d'analyse de données et packages haute performance."
+tags = ["Julia", "Python", "R", "Bash"]
 
-[experience.ru]
-role = "Фронтенд и DevOps разработчик"
-company = "Фриланс / Open Source"
-description = "[RU STUB] Разработка интерактивных веб-инструментов (например, Hextiles и это портфолио), настройка CI/CD и управление деплоем."
+[[skills.fr]]
+title = "Laboratoire Humide"
+description = "Flux de travail en biologie moléculaire et traitement des échantillons."
+tags = ["PCR", "Extraction ADN/ARN", "Préparation de banques"]
 
-# ══════════════════════════════════════
-# SKILLS
-# ══════════════════════════════════════
-[skills]
-bioinformatics = ["Julia", "R", "Python", "Pannagram", "DePPA.jl"]
-math = ["Statistics", "Computational Geometry", "Linear Algebra"]
-wet_lab = ["PCR", "DNA/RNA Extraction", "Sample Collection", "Library Prep"]
-devops = ["Git", "GitHub Actions", "Docker", "Cloudflare Workers", "Linux"]
-frontend = ["JavaScript", "TypeScript", "WebGL", "Canvas API", "CSS"]
+[[skills.fr]]
+title = "DevOps & Infra"
+description = "Gestion de l'infrastructure et intégration continue."
+tags = ["Git", "Docker", "Linux", "CI/CD"]
 
-# ══════════════════════════════════════
+[[skills.fr]]
+title = "Frontend & Design"
+description = "Visualisation interactive des données et outils web."
+tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
+
+[[skills.ru]]
+title = "Математика"
+description = "Прикладная статистика, линейная алгебра и вычислительная геометрия."
+tags = ["Статистика", "Линейная алгебра", "Геометрия"]
+
+[[skills.ru]]
+title = "Программирование"
+description = "Скрипты для анализа данных и высокопроизводительные пакеты."
+tags = ["Julia", "Python", "R", "Bash"]
+
+[[skills.ru]]
+title = "Мокрая лаборатория"
+description = "Молекулярная биология и подготовка образцов."
+tags = ["ПЦР", "Выделение ДНК/РНК", "Подготовка библиотек"]
+
+[[skills.ru]]
+title = "DevOps и Инфраструктура"
+description = "Управление серверами и непрерывная интеграция."
+tags = ["Git", "Docker", "Linux", "CI/CD"]
+
+[[skills.ru]]
+title = "Фронтенд и Дизайн"
+description = "Интерактивная визуализация данных и веб-инструменты."
+tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
+
 # PROJECTS
-# ══════════════════════════════════════
 [[projects]]
 name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
@@ -400,13 +373,11 @@ cover = "/assets/projects/deppa_social.png"
 languages = ["Julia"]
 
 [projects.en]
-description = "[EN STUB] A high-performance pure Julia package for MSA and degenerate PCR primer design."
-
+description = "A high-performance pure Julia package for MSA and degenerate PCR primer design."
 [projects.fr]
-description = "[FR STUB] Un package Julia pur et haute performance pour l'alignement MSA et la conception d'amorces PCR dégénérées."
-
+description = "Un package Julia pur et haute performance pour l'alignement MSA et la conception d'amorces PCR dégénérées."
 [projects.ru]
-description = "[RU STUB] Высопроизводительный пакет на Julia для анализа множественного выравнивания и дизайна праймеров."
+description = "Высопроизводительный пакет на Julia для анализа множественного выравнивания и дизайна праймеров."
 
 [[projects]]
 name = "Pannagram"
@@ -415,13 +386,11 @@ cover = "/assets/projects/pannagram_social.png"
 languages = ["R", "Bash"]
 
 [projects.en]
-description = "[EN STUB] A toolkit for reference-free linear pangenome alignments."
-
+description = "A toolkit for reference-free linear pangenome alignments."
 [projects.fr]
-description = "[FR STUB] Une boîte à outils pour les alignements pangénomiques linéaires sans référence."
-
+description = "Une boîte à outils pour les alignements pangénomiques linéaires sans référence."
 [projects.ru]
-description = "[RU STUB] Инструментарий для построения линейных пангеномных выравниваний без референса."
+description = "Инструментарий для построения линейных пангеномных выравниваний без референса."
 
 [[projects]]
 name = "hextiles"
@@ -430,25 +399,21 @@ cover = "/assets/projects/hextiles_social.png"
 languages = ["Vanilla JS", "WebGL", "CSS"]
 
 [projects.en]
-description = "[EN STUB] Interactive hexagonal tiling playground with procedural generation. Used as the background for this portfolio."
-
+description = "Interactive hexagonal tiling playground with procedural generation. Used as the background for this portfolio."
 [projects.fr]
-description = "[FR STUB] Terrain de jeu interactif pour le pavage hexagonal avec génération procédurale. Utilisé comme fond pour ce portfolio."
-
+description = "Terrain de jeu interactif pour le pavage hexagonal avec génération procédurale. Utilisé comme fond pour ce portfolio."
 [projects.ru]
-description = "[RU STUB] Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
+description = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
 
-
-# ══════════════════════════════════════
 # CONFERENCES
-# ══════════════════════════════════════
 [[conferences]]
 cover = "https://picsum.photos/seed/conference5/200/300"
 date = "June 2023"
 url = "https://example.com/conf1"
 title = "Symposium on Computational Geometry"
-location = "Berlin, Germany"
+location = "Cityname, Germany"
 role = "Speaker"
+pdf_url = "/assets/pdfs/example.pdf"
 
 [[conferences]]
 cover = "https://picsum.photos/seed/conference1/200/300"
@@ -458,9 +423,7 @@ title = "International Conference on Bioinformatics"
 location = "Paris, France"
 role = "Participant"
 
-# ══════════════════════════════════════
 # PUBLICATIONS
-# ══════════════════════════════════════
 [[publications]]
 title = "A comparison of 27 Arabidopsis thaliana genomes and the path toward an unbiased characterization of genetic polymorphism"
 year = 2025
@@ -472,49 +435,89 @@ pdf_url = "/assets/pdfs/example.pdf"
 [[publications]]
 title = "Pannagram: unbiased pangenome alignment and the Mobilome calling"
 year = 2024
-authors = "Anna A. Igolkina, Alexander D. Bezlepsky, Magnus Nordborg"
+authors = "Anna A. Igolkina, Alexander D. Morozov, Magnus Nordborg"
 venue = "bioRxiv 2025.02.07.637071 (2025)"
 url = "https://www.biorxiv.org/content/10.1101/2025.02.07.637071v1"
 pdf_url = "/assets/pdfs/example.pdf"
 
-[[publications]]
-title = "Dynamics of cellulose degradation by soil microorganisms from two contrasting soil types"
-year = 2024
-authors = "Grigory V Gladkov, Anastasiia K Kimeklis, Olga V Orlova, Tatiana O Lisina, Arina A Kichko, Alexander D Bezlepsky, Evgeny E Andronov"
-venue = "Microorganisms 12(8), 1728 (2024)"
-url = "https://www.mdpi.com/2076-2607/12/8/1728"
-pdf_url = "/assets/pdfs/example.pdf"
+# GRANTS
+[[grants]]
+year = "2024"
+title = "RSF Grant No. 24-24-00123"
+url = "https://example.com/grant1"
 
+[grants.en]
+description = "Pangenome dynamics and structural variations."
+role = "Key Researcher"
 
-# ══════════════════════════════════════
-# CERTIFICATES & ACHIEVEMENTS
-# ══════════════════════════════════════
-[[certificates.en]]
+[grants.fr]
+description = "Dynamique du pangénome et variations structurelles."
+role = "Chercheur Principal"
+
+[grants.ru]
+description = "Динамика пангеномы и структурные вариации."
+role = "Ведущий научный сотрудник"
+
+# DOCUMENTS & ACHIEVEMENTS (Unified)
+[[documents.en]]
+category = "Thesis"
+date = "2024"
+title = "Bachelor Thesis: Title of the Thesis"
+description = "Final qualification work submitted for B.Sc. degree."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.en]]
+category = "Coursework"
+date = "2023"
+title = "Advanced Algorithms Coursework"
+description = "Implementation of pangenome alignment algorithms."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.en]]
+category = "Certificate"
+date = "2022"
 title = "Summer School of Mathematics"
-url = "/assets/pdfs/example.pdf"
 description = "Advanced Geometry Course Certificate."
-
-[[certificates.en]]
-title = "Duolingo Language Streak"
 url = "/assets/pdfs/example.pdf"
-description = "365-day streak in French and German."
 
-[[certificates.fr]]
+[[documents.fr]]
+category = "Mémoire"
+date = "2024"
+title = "Mémoire de Licence : Titre du mémoire"
+description = "Travail de fin d'études soumis pour le grade de Licence."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.fr]]
+category = "Projet"
+date = "2023"
+title = "Projet Algorithmes Avancés"
+description = "Implémentation d'algorithmes d'alignement pangénomique."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.fr]]
+category = "Certificat"
+date = "2022"
 title = "École d'été de Mathématiques"
-url = "/assets/pdfs/example.pdf"
 description = "Certificat de cours de géométrie avancée."
-
-[[certificates.fr]]
-title = "Série de langues Duolingo"
 url = "/assets/pdfs/example.pdf"
-description = "365 jours de série en français et allemand."
 
-[[certificates.ru]]
+[[documents.ru]]
+category = "ВКР"
+date = "2024"
+title = "Бакалаврская ВКР: Тема работы"
+description = "Выпускная квалификационная работа на соискание степени бакалавра."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.ru]]
+category = "Курсовая"
+date = "2023"
+title = "Курсовая по продвинутым алгоритмам"
+description = "Реализация алгоритмов пангеномного выравнивания."
+url = "/assets/pdfs/example.pdf"
+
+[[documents.ru]]
+category = "Сертификат"
+date = "2022"
 title = "Летняя школа математики"
-url = "/assets/pdfs/example.pdf"
 description = "Сертификат прохождения курса по продвинутой геометрии."
-
-[[certificates.ru]]
-title = "Стрик в Duolingo"
 url = "/assets/pdfs/example.pdf"
-description = "365 дней непрерывного изучения французского и немецкого."

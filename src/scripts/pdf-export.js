@@ -8,8 +8,8 @@ export function initPdfExport() {
 
     if (!iframe.contentWindow) return;
 
-    const originalText = btn.textContent;
-    btn.textContent = 'Loading PDF...';
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span class="btn-spinner"></span>';
     btn.disabled = true;
 
     try {
@@ -23,7 +23,9 @@ export function initPdfExport() {
         window.addEventListener('message', handler);
       });
 
-      iframe.contentWindow.postMessage({ type: 'REQUEST_FRAME' }, '*');
+      iframe.contentWindow.postMessage({
+        type: 'REQUEST_FRAME'
+      }, '*');
       const frameData = await Promise.race([
         framePromise,
         new Promise(r => setTimeout(() => r(null), 5000))
@@ -34,10 +36,10 @@ export function initPdfExport() {
           const parser = new DOMParser();
           const doc = parser.parseFromString(frameData, "image/svg+xml");
           const svgElement = doc.documentElement;
-          
+
           printBg.innerHTML = '';
           printBg.appendChild(svgElement);
-          
+
           await new Promise(r => setTimeout(r, 100));
         } else {
           printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:cover;">`;
@@ -47,9 +49,7 @@ export function initPdfExport() {
         console.warn("PDF Export: Failed to get background frame.");
       }
 
-      // Ждем получения контактов (PoW)
       if (!window.contactsRevealed) {
-        btn.textContent = 'Fetching contacts...';
         let waitCount = 0;
         while (!window.contactsRevealed && waitCount < 50) {
           await new Promise(r => setTimeout(r, 100));
@@ -57,19 +57,17 @@ export function initPdfExport() {
         }
       }
 
-      // Печать
-      btn.textContent = originalText;
+      btn.innerHTML = originalHTML;
       btn.disabled = false;
 
       await new Promise(r => setTimeout(r, 50));
       window.print();
 
-      // Очищаем DOM после печати
       printBg.innerHTML = '';
 
     } catch (e) {
       console.error("Export failed:", e);
-      btn.textContent = originalText;
+      btn.innerHTML = originalHTML;
       btn.disabled = false;
     }
   });
