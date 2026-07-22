@@ -10,6 +10,7 @@
   body {
     background: transparent !important;
     width: 1920px !important;
+    height: 1080px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -25,7 +26,8 @@
     overflow: hidden;
   }
 
-  #printBackground svg {
+  #printBackground svg,
+  #printBackground img {
     width: 100% !important;
     height: 100% !important;
     display: block;
@@ -38,7 +40,8 @@
   #heroIframe,
   #canvasWrap,
   #topbar,
-  .pdf-modal {
+  .pdf-modal,
+  .hero-foot {
     display: none !important;
   }
 
@@ -54,22 +57,80 @@
     color: white;
     z-index: 1;
     page-break-after: always;
-  }
-
-  .hero-text-block::before {
-    top: 40% !important;
-    width: 200% !important;
-    height: 160% !important;
-    background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.95) 0%, rgba(15, 14, 12, 0.75) 40%, rgba(15, 14, 12, 0) 80%) !important;
-    filter: blur(20px) !important;
+    overflow: hidden;
   }
 
   .hero-overlay {
     position: relative;
     height: 100%;
-    width: 100%;
-    max-width: 1350px;
-    margin: 0 auto;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 4rem 8rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-content {
+    display: grid !important;
+    grid-template-columns: 1fr 2fr !important;
+    align-items: center !important;
+    justify-items: center !important;
+    width: 100% !important;
+    flex: 1;
+    gap: 2rem !important;
+  }
+
+  .hero-text-block {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 !important;
+    text-align: center !important;
+    justify-self: center;
+    max-width: 100%;
+  }
+
+  .hero-text-block::before {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: radial-gradient(ellipse at center, rgba(15, 14, 12, 0.95) 0%, rgba(15, 14, 12, 0.75) 40%, rgba(15, 14, 12, 0) 80%) !important;
+    filter: blur(25px) !important;
+  }
+
+  .hero-name {
+    font-size: 5.5rem !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.1 !important;
+    width: auto !important;
+    text-align: center !important;
+  }
+
+  html[lang="ru"] .hero-name {
+    font-size: 4.5rem !important;
+  }
+
+  .hero-tagline {
+    margin-top: 1.5rem !important;
+    font-size: 1.25rem !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    max-width: 100% !important;
+  }
+
+  .hero-photo {
+    grid-column: 2 !important;
+    width: 100% !important;
+    max-height: 700px !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+    filter: grayscale(.15) contrast(1.05) !important;
+    justify-self: center;
   }
 
   /* 5. СБРОС КОНТЕЙНЕРА */
@@ -79,73 +140,67 @@
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
+    display: block !important;
   }
 
-  /* 6. КОНТЕНТНЫЕ БЛОКИ (ВЕСЬ ЭКРАН ПО ВЫСОТЕ, ФОН ПО БОКАМ) */
+  /* 6. КОНТЕНТНЫЕ БЛОКИ (РАСТЯНУТЫ ПО ВЕРТИКАЛИ, ФОН ВИДЕН ПО БОКАМ) */
   .content-section {
     background: #F4F1EA !important;
     color: #1A1815 !important;
-    width: 2100px;
-    height: 1350px;
-    margin: 0 0 -272px 120px !important;
-    padding: 7.5rem 10rem !important;
-    transform: scale(0.9);
-    transform-origin: top left;
-    page-break-after: always;
+    width: 1600px; /* Уменьшенная ширина оставляет 160px фона слева и справа */
+    height: 1080px; /* Растянуто от верха до низа */
+    margin: 0 auto !important; /* Выравнивание по центру (по горизонтали) */
+    padding: 6rem 5rem !important;
     box-sizing: border-box;
+    page-break-after: always;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     border-radius: 0 !important;
     border: none !important;
-  }
-
-  @supports (zoom: 1) {
-    .content-section {
-      zoom: 0.8;
-      transform: none;
-      margin: 0 0 0 120px !important;
-    }
+    transform: none !important;
+    zoom: 1 !important;
   }
 
   .content-section:last-of-type {
     page-break-after: auto;
   }
 
-  /* 7. ПОСЛЕДНЯЯ СТРАНИЦА (КОНТАКТЫ) */
+  /* 7. ПОСЛЕДНЯЯ СТРАНИЦА (КОНТАКТЫ КАК ОБЫЧНЫЙ РАЗДЕЛ) */
   .site-footer {
     position: relative;
     z-index: 1;
     background: #F4F1EA !important;
     color: #1A1815 !important;
-    width: 2100px;
-    max-width: none !important;
-    height: 1350px;
-    margin: 0 0 -272px 120px !important;
-    padding: 7.5rem 10rem !important;
-    transform: scale(0.8);
-    transform-origin: top left;
+    width: 1600px !important;
+    max-width: 1600px !important;
+    height: 1080px !important;
+    margin: 0 auto !important;
+    padding: 6rem 5rem !important;
     box-sizing: border-box;
     page-break-before: always;
     display: flex;
     flex-direction: column;
     border-radius: 0 !important;
     border: none !important;
+    transform: none !important;
+    zoom: 1 !important;
   }
 
-  @supports (zoom: 1) {
-    .site-footer {
-      zoom: 0.8;
-      transform: none;
-      margin: 0 0 0 120px !important;
-    }
+  .footer-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
+  /* Заголовок "Let's talk" теперь идентичен заголовкам .panel-title */
   #contactTitle {
     font-family: var(--font-serif) !important;
     font-weight: 400 !important;
-    font-size: 3.5rem !important;
-    margin-bottom: 4rem !important;
+    font-size: 2.5rem !important; /* Такой же размер, как у panel-title */
+    margin-bottom: 2.5rem !important;
     color: #1A1815 !important;
   }
 
@@ -156,10 +211,12 @@
 
   /* 8. ДВУХКОЛОНОЧНАЯ СТРУКТУРА КОНТАКТОВ */
   .contact-grid {
-    display: block !important;
+    display: flex !important;
     flex: 1 !important;
     border: none !important;
     padding: 0 !important;
+    gap: 4rem !important;
+    align-items: center !important;
   }
 
   .contact-intro {
@@ -167,8 +224,9 @@
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
-    height: 100%;
-    gap: 6rem;
+    width: 100% !important;
+    height: 100% !important;
+    gap: 6rem !important;
   }
 
   #contactIntro {
@@ -177,29 +235,31 @@
 
   #printContactText {
     display: block !important;
-    font-size: 1.8rem;
-    line-height: 1.6;
+    font-size: 1.5rem !important;
+    line-height: 1.6 !important;
     color: #54514A !important;
+    width: 50% !important;
     max-width: 50% !important;
     flex-shrink: 0;
   }
 
   .contact-channels {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
     border: none !important;
+    width: 50% !important;
     max-width: 50% !important;
     flex-shrink: 0;
-    text-align: right;
+    text-align: right !important;
   }
 
   .contact-channel {
     border: none !important;
     padding: 0 !important;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
   }
 
   .contact-channel .label {
@@ -209,7 +269,7 @@
   }
 
   .contact-channel .value {
-    font-size: 2rem !important;
+    font-size: 1.8rem !important;
     color: #B4502A !important;
   }
 
