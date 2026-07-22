@@ -13,7 +13,6 @@
     padding: 0 !important;
   }
 
-  /* Фоновый рендер кривых: растягивается на всю страницу и виден по краям */
   #printBackground {
     position: fixed;
     top: 0;
@@ -116,7 +115,6 @@
     display: block !important;
   }
 
-  /* Сами секции занимают ровно 1 страницу без отступов, чтобы избежать схлопывания margin */
   .content-section {
     position: relative;
     z-index: 1;
@@ -133,7 +131,6 @@
     flex-direction: column;
   }
 
-  /* Визуальная карточка с точными отступами 50px и 150px */
   .content-section::before {
     content: '';
     position: absolute;
@@ -153,7 +150,6 @@
     z-index: 1;
   }
 
-  /* Поднимаем заголовки секций выше к верхнему краю карточки */
   .content-section .panel-head {
     margin-top: 0;
     margin-bottom: 3rem;
@@ -168,7 +164,7 @@
     position: relative;
     z-index: 1;
     width: 1920px !important;
-    max-width: 100% !important; /* Сброс ограничения ширины из layout.css */
+    max-width: 100% !important;
     height: 1080px !important;
     margin: 0 !important;
     padding: 70px 190px 70px 190px !important;
@@ -224,8 +220,7 @@
 
   #contactForm,
   .form-status,
-  .reveal-loader,
-  .footer-bottom {
+  .reveal-loader {
     display: none !important;
   }
 
@@ -293,7 +288,6 @@
     width: 100% !important;
   }
 
-  /* Стилизация списка контактов идентично сайту, но адаптировано под светлый фон карточки PDF */
   .contact-channel {
     display: flex !important;
     flex-direction: row !important;
@@ -323,7 +317,21 @@
     font-family: var(--font-serif) !important;
   }
 
-  /* Внутренние сетки внутри блоков остаются теми же */
+  .footer-bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding-top: 2rem !important;
+    border-top: 1px solid var(--color-border) !important;
+    font-size: .75rem !important;
+    font-family: var(--font-mono) !important;
+    color: var(--color-text-faded) !important;
+  }
+
+  .footer-bottom a {
+    color: var(--color-accent) !important;
+    text-decoration: none !important;
+  }
+
   .about-grid,
   .career-grid,
   .research-grid,

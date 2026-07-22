@@ -61,7 +61,7 @@
 
   <section class="hero" id="hero">
     <div id="printBackground" class="print-only"></div>
-    
+
     <div class="hero-overlay" id="heroOverlay">
       <div class="hero-top"></div>
 
@@ -84,7 +84,7 @@
   </section>
 
   <main class="content-area" id="contentArea">
-    
+
     <section id="about" class="content-section">
       <div class="panel-head">
         <h2 class="panel-title" id="about-title"></h2>
@@ -175,7 +175,8 @@
 
       <div class="footer-bottom">
         <span>© <span id="footerYear">2026</span> <span id="footerAuthor">Alexander Morozov</span></span>
-        <span>Static · GitHub Pages</span>
+        <span class="no-print">Static · <a href="#" id="ghPagesLink" target="_blank" rel="noopener">GitHub Pages</a><span id="deployDateText"></span></span>
+        <span class="print-only" id="pdfFooterInfo"></span>
       </div>
     </div>
   </footer>
@@ -196,5 +197,3 @@
 
   <script type="module" src="/src/scripts/main.js"></script>
 </body>
-
-</html>

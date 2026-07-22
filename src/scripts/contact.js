@@ -7,9 +7,8 @@ export function initContact(i18nConfigGetter) {
   let contactsRevealed = false;
 
   const CACHE_KEY = 'portfolio_contacts_cache';
-  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
+  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
-  // Универсальная функция для применения контактов в DOM
   function applyContacts(email, telegram) {
     if (telegram) {
       const tgUsername = telegram.replace(/@/g, '');
@@ -66,7 +65,6 @@ export function initContact(i18nConfigGetter) {
   async function prepareRevealPoW() {
     if (contactsRevealed) return;
 
-    // 1. Пытаемся взять контакты из локального хранилища
     try {
       const cachedRaw = localStorage.getItem(CACHE_KEY);
       if (cachedRaw) {
@@ -83,7 +81,6 @@ export function initContact(i18nConfigGetter) {
       console.warn('Cache read failed:', e);
     }
 
-    // 2. Если кэша нет, идем на сервер
     const config = i18nConfigGetter();
     const workerUrl = config.contact.worker_url;
 
@@ -111,12 +108,10 @@ export function initContact(i18nConfigGetter) {
         telegram
       } = await resData.json();
 
-      // Применяем полученные контакты
       applyContacts(email, telegram);
       contactsRevealed = true;
       window.contactsRevealed = true;
 
-      // 3. Сохраняем в локальное хранилище на 24 часа
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({
           email,
@@ -132,7 +127,6 @@ export function initContact(i18nConfigGetter) {
     }
   }
 
-  // Экспортируем в глобальную область для кнопки PDF
   window.retryRevealContacts = prepareRevealPoW;
 
   prepareRevealPoW();

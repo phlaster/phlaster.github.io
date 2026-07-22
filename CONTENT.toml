@@ -208,6 +208,18 @@ message = "Сообщение"
 form_invalid = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей."
 form_invalid_email = "Некорректный email. Используйте латиницу и реальный домен"
 
+# ═══════════════════════════════════════════════════════════
+# PDF FOOTER TRANSLATIONS
+# ═══════════════════════════════════════════════════════════
+[ui.pdf.en]
+footer_text = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}"
+
+[ui.pdf.fr]
+footer_text = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date} · Dernière mise à jour : {deploy_date}"
+
+[ui.pdf.ru]
+footer_text = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date} · Последнее обновление: {deploy_date}"
+
 
 # ═══════════════════════════════════════════════════════════
 # ABOUT: ENGLISH

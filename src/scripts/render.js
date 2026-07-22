@@ -262,4 +262,35 @@ export function renderContent(i18nConfig, lang) {
 
   $('footerAuthor').textContent = a.name || '';
   $('footerYear').textContent = new Date().getFullYear();
+
+  // === DEPLOY INFO ===
+  const deployDate = import.meta.env.VITE_DEPLOY_DATE || 'Local Dev';
+  const repoUrl = import.meta.env.VITE_REPO_URL || '#';
+  
+  const ghPagesLink = $('ghPagesLink');
+  if (ghPagesLink) ghPagesLink.href = repoUrl;
+  
+  const deployDateText = $('deployDateText');
+  if (deployDateText) deployDateText.textContent = ` · ${deployDate}`;
+  
+  // === PDF FOOTER ===
+  const genDate = new Date().toLocaleString('sv-SE', { 
+    year: 'numeric', 
+    month: '2-digit', 
+    day: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    timeZoneName: 'short' 
+  });
+  
+  const siteUrl = window.location.origin;
+  
+  const pdfFooterTemplate = ui.pdf?.footer_text || "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}";
+  const pdfFooterText = pdfFooterTemplate
+    .replace('{url}', siteUrl)
+    .replace('{gen_date}', genDate)
+    .replace('{deploy_date}', deployDate);
+      
+  const pdfFooterInfo = $('pdfFooterInfo');
+  if (pdfFooterInfo) pdfFooterInfo.innerHTML = pdfFooterText;
 }
