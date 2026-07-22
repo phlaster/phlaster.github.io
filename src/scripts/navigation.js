@@ -31,6 +31,7 @@ export function initNavigation(renderCallback) {
   const scrollCue = $('scrollCue');
   const contentArea = $('contentArea');
   const topbar = $('topbar');
+  const footer = document.querySelector('.site-footer');
 
   if (scrollCue) {
     scrollCue.addEventListener('click', () => {
@@ -71,14 +72,12 @@ export function initNavigation(renderCallback) {
       behavior: 'smooth'
     });
 
-    // Блокируем навигацию на время анимации прокрутки
     setTimeout(() => {
       isScrolling = false;
     }, 700);
   }
 
   window.addEventListener('keydown', (e) => {
-    // Игнорируем, если фокус в поле ввода
     const activeTag = document.activeElement.tagName;
     if (['INPUT', 'TEXTAREA'].includes(activeTag)) return;
 
@@ -101,7 +100,6 @@ export function initNavigation(renderCallback) {
     scrollToSection(nextIndex);
   });
 
-  // === Подсветка активного раздела при обычной прокрутке мышью ===
   const navLinks = document.querySelectorAll('.nav-link');
 
   const observer = new IntersectionObserver((entries) => {
@@ -119,10 +117,17 @@ export function initNavigation(renderCallback) {
 
   sections.forEach(sec => observer.observe(sec));
 
+  // === Логика цвета топ-бара ===
   window.addEventListener('scroll', () => {
-    if (contentArea.getBoundingClientRect().top <= topbar.offsetHeight) {
+    const contentTop = contentArea.getBoundingClientRect().top;
+    const footerTop = footer.getBoundingClientRect().top;
+    const barHeight = topbar.offsetHeight;
+
+    // Если основной контент ушел вверх (мы проскроллили Hero) И футер еще не достиг топ-бара
+    if (contentTop <= barHeight && footerTop > barHeight) {
       topbar.classList.add('solid');
     } else {
+      // Иначе (мы в Hero или мы доскроллили до футера) — возвращаем темный прозрачный фон
       topbar.classList.remove('solid');
     }
   }, {
