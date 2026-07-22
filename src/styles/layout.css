@@ -679,7 +679,6 @@
   }
 
   .nav-link {
-    /* Делим на 2 ряда по 3 кнопки (примерно по 30% ширины) */
     flex: 1 1 30%;
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
@@ -696,7 +695,6 @@
     gap: 0.5rem;
     flex-shrink: 0;
     width: 90px;
-    /* Фиксированная ширина контейнера */
   }
 
   .btn-action,
@@ -718,48 +716,55 @@
   }
 
   .hero-content {
-    display: flex !important;
-    flex-direction: column;
+    display: block !important;
+    position: relative;
     flex: 1;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding-bottom: 1rem;
     min-height: 0;
-    /* Важно для корректной работы flexbox внутри grid/flex */
+    width: 100%;
   }
 
   .hero-photo {
-    order: 1;
-    /* Занимает 75% высоты экрана */
-    flex: 0 0 75%;
-    min-height: 0;
-    width: 100%;
-    max-height: none !important;
-    object-fit: cover !important;
-    /* Вписываем фото в отведенное пространство */
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: auto;
+    max-width: 85%;
+    max-height: 50%;
+    object-fit: contain !important;
     border-radius: 12px;
     padding: 0;
+    margin: 0 auto;
   }
 
   .hero-text-block {
-    order: 2;
-    /* Занимает оставшиеся 25% высоты */
-    flex: 1 1 25%;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 1rem;
+    position: absolute;
+    top: 66.66%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: fit-content;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
   }
 
   .hero-name {
-    /* Увеличен размер шрифта имени */
-    font-size: clamp(2rem, 8vw, 3.5rem) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: clamp(1.8rem, 10vw, 3.8rem) !important;
+    gap: 0.3em;
   }
 
   .hero-tagline {
-    font-size: 0.9rem;
+    text-align: center;
+    max-width: 100%;
     margin-top: 0.5rem;
+    font-size: 0.9rem;
   }
 
   .hero-socials {
@@ -834,10 +839,8 @@
   .contact-form {
     order: 4;
     width: 100% !important;
-    /* Растягиваем форму на всю ширину */
   }
 
-  /* Поля ввода на всю ширину */
   .form-row {
     display: flex !important;
     flex-direction: column !important;

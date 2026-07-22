@@ -44,6 +44,18 @@ export function initNavigation(renderCallback) {
     });
   }
 
+  const writeMeLink = document.querySelector('.nav-link[href="#contact"]');
+  if (writeMeLink && footer && topbar) {
+    writeMeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetY = footer.offsetTop - topbar.offsetHeight + 50;
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth'
+      });
+    });
+  }
+
   // === Клавиатурная навигация ===
   const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
   let isScrolling = false;
@@ -117,17 +129,14 @@ export function initNavigation(renderCallback) {
 
   sections.forEach(sec => observer.observe(sec));
 
-  // === Логика цвета топ-бара ===
   window.addEventListener('scroll', () => {
     const contentTop = contentArea.getBoundingClientRect().top;
     const footerTop = footer.getBoundingClientRect().top;
     const barHeight = topbar.offsetHeight;
 
-    // Если основной контент ушел вверх (мы проскроллили Hero) И футер еще не достиг топ-бара
     if (contentTop <= barHeight && footerTop > barHeight) {
       topbar.classList.add('solid');
     } else {
-      // Иначе (мы в Hero или мы доскроллили до футера) — возвращаем темный прозрачный фон
       topbar.classList.remove('solid');
     }
   }, {
