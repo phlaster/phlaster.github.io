@@ -6,6 +6,29 @@ export function initContact(i18nConfigGetter) {
   let isComputingFormPoW = false;
   let contactsRevealed = false;
 
+  const CACHE_KEY = 'portfolio_contacts_cache';
+  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
+
+  // Универсальная функция для применения контактов в DOM
+  function applyContacts(email, telegram) {
+    if (telegram) {
+      const tgUsername = telegram.replace(/@/g, '');
+      const tgUrl = `https://telegram.me/${tgUsername}`;
+      $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="${tgUrl}">@${tgUsername}</a>`;
+      document.querySelectorAll('.hero-social-link[data-key="telegram"]').forEach(el => {
+        el.href = tgUrl;
+        el.target = "_blank";
+      });
+    }
+    if (email) {
+      $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+      document.querySelectorAll('.hero-social-link[data-key="email"]').forEach(el => {
+        el.href = `mailto:${email}`;
+        el.target = "_blank";
+      });
+    }
+  }
+
   async function solvePoW(challenge) {
     const enc = new TextEncoder();
     let nonce = 0;
@@ -28,9 +51,7 @@ export function initContact(i18nConfigGetter) {
     isComputingFormPoW = true;
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const {
-        challenge
-      } = await resCh.json();
+      const { challenge } = await resCh.json();
       formChallenge = challenge;
       formNonce = await solvePoW(challenge);
     } catch (err) {
@@ -42,55 +63,65 @@ export function initContact(i18nConfigGetter) {
 
   async function prepareRevealPoW() {
     if (contactsRevealed) return;
+
+    // 1. Пытаемся взять контакты из локального хранилища
+    try {
+      const cachedRaw = localStorage.getItem(CACHE_KEY);
+      if (cachedRaw) {
+        const cached = JSON.parse(cachedRaw);
+        // Проверяем, не истекли ли 24 часа
+        if (cached && cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL)) {
+          applyContacts(cached.email, cached.telegram);
+          contactsRevealed = true;
+          window.contactsRevealed = true;
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Cache read failed:', e);
+    }
+
+    // 2. Если кэша нет, идем на сервер
     const config = i18nConfigGetter();
     const workerUrl = config.contact.worker_url;
 
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      const {
-        challenge
-      } = await resCh.json();
+      const { challenge } = await resCh.json();
       const nonce = await solvePoW(challenge);
 
       const resData = await fetch(`${workerUrl}/api/get-email`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          challenge,
-          nonce
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ challenge, nonce })
       });
 
       if (!resData.ok) throw new Error('Verification failed');
-      const {
-        email,
-        telegram
-      } = await resData.json();
+      const { email, telegram } = await resData.json();
 
-      if (telegram) {
-        const tgUsername = telegram.replace(/@/g, '');
-        const tgUrl = `https://telegram.me/${tgUsername}`;
-        $('channelTelegramWrap').innerHTML = `<span class="label">Telegram</span><a class="value" href="${tgUrl}">@${tgUsername}</a>`;
-        document.querySelectorAll('.hero-social-link[data-key="telegram"]').forEach(el => {
-          el.href = tgUrl;
-          el.target = "_blank";
-        });
-      }
-      if (email) {
-        $('channelEmailWrap').innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
-        document.querySelectorAll('.hero-social-link[data-key="email"]').forEach(el => {
-          el.href = `mailto:${email}`;
-          el.target = "_blank";
-        });
-      }
+      // Применяем полученные контакты
+      applyContacts(email, telegram);
       contactsRevealed = true;
       window.contactsRevealed = true;
+
+      // 3. Сохраняем в локальное хранилище на 24 часа
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          email,
+          telegram,
+          timestamp: Date.now()
+        }));
+      } catch (e) {
+        console.warn('Cache save failed:', e);
+      }
+
     } catch (err) {
       console.error('Reveal PoW prep failed:', err);
     }
   }
+
+  // Экспортируем в глобальную область для кнопки PDF
+  window.retryRevealContacts = prepareRevealPoW;
 
   prepareRevealPoW();
 
@@ -148,16 +179,11 @@ export function initContact(i18nConfigGetter) {
 
       const res = await fetch(`${config.contact.worker_url}/api/submit`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           challenge: formChallenge,
           nonce: formNonce,
-          name,
-          email,
-          subject,
-          message
+          name, email, subject, message
         })
       });
 

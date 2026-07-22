@@ -49,12 +49,24 @@ export function initPdfExport() {
         console.warn("PDF Export: Failed to get background frame.");
       }
 
-      if (!window.contactsRevealed) {
-        let waitCount = 0;
-        while (!window.contactsRevealed && waitCount < 50) {
-          await new Promise(r => setTimeout(r, 100));
-          waitCount++;
-        }
+      btn.innerHTML = '<span class="btn-spinner"></span> Fetching contacts...';
+
+      const emailHasLink = () => document.querySelector('#channelEmailWrap a[href^="mailto:"]');
+      const tgHasLink = () => document.querySelector('#channelTelegramWrap a[href*="telegram.me"]');
+
+      let waitCount = 0;
+
+      if ((!emailHasLink() || !tgHasLink()) && window.retryRevealContacts) {
+        window.retryRevealContacts();
+      }
+
+      while ((!emailHasLink() || !tgHasLink()) && waitCount < 200) {
+        await new Promise(r => setTimeout(r, 100));
+        waitCount++;
+      }
+
+      if (!emailHasLink() || !tgHasLink()) {
+        console.warn("PDF Export: Contacts could not be fetched in time.");
       }
 
       btn.innerHTML = originalHTML;

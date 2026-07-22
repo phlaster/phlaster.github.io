@@ -21,7 +21,7 @@ export function renderContent(i18nConfig, lang) {
   const nameParts = (a.name || '—').split(' ');
   $('heroName').innerHTML = nameParts.length > 1 ? `<span>${esc(nameParts[0])}</span><em>${esc(nameParts.slice(1).join(' '))}</em>` : `<span>${esc(a.name)}</span>`;
   $('heroTagline').textContent = a.tagline || '';
-  $('heroPhoto').src = i18nConfig.site.photo;
+  $('heroPhoto').src = i18nConfig.site.photo_top;
   $('scrollCueText').textContent = ui.scroll_cue;
   const writeMeLink = document.querySelector('.nav-link[href="#contact"]');
   if (writeMeLink) writeMeLink.textContent = ui.write_me;
@@ -254,6 +254,11 @@ export function renderContent(i18nConfig, lang) {
   $('lbl-email').textContent = c.email;
   $('lbl-subject').textContent = c.subject;
   $('lbl-message').textContent = c.message;
+
+  const contactPhoto = $('contactPhoto');
+  if (contactPhoto) {
+    contactPhoto.src = i18nConfig.site.photo_bottom;
+  }
 
   $('footerAuthor').textContent = a.name || '';
   $('footerYear').textContent = new Date().getFullYear();

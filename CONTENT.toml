@@ -1,11 +1,18 @@
+# ═══════════════════════════════════════════════════════════
+# SITE & HERO
+# ═══════════════════════════════════════════════════════════
 [site]
 author = "Alexander Morozov"
 default_lang = "en"
-photo = "/assets/me.png"
+photo_top = "/assets/me/me_top.png"
+photo_bottom = "/assets/me/me_bottom.png"
 
 [hero]
 iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA02YW29cxxGE_8vR65jo67nsY4IgLwkSxEZix_DDSlxZRGgxWNI2kCD_PfhqlpQliJydMzOnp7qqulf_XX5dTtGrjeXTcvKKfSz_eXr6aTn5nXX0WP59_vztcvI99rvQp--Wk69Rdz6Wp-vDj__Uartbo3ssjw-_XL759eH55fkPn8_vHy_3y-nl-vNlLM-fnn794_Xhfjl9PD8-X8by0_n6r8v1-e8Pzw_vHy-_Xfa7H79-OV-f31Y-v5yvfz1__rYJsOqu36a-6-W0H_6bmW9jOXmuQXSvi2I57eV365dFyaLY7vYvi3I57d5suwW2nL7__qvKu2P4Ws3ud-5xrlx-GN9773fH-MrutrG8-3jwl-lYHVwqj7say7vtOLYP5-WHH8by4efrL5ffPz0-6eDlnd37Eb182T2Wd71uHz8Yo_f7-48f7hlFtO-p0eVDbJfly7FjeZfn9Xzmzcv16eUvv1yu14f7Cy_4Knvwj7yGJ5msdGvLrsxsju02RmVd1WllFeHRVtXhlZGMs7PL3LPTo7yzzc3K3bTD0yIrvdK6zCzKyyO7vTmiwjzMvNo82FNdYZ2dnJLVkcaZblGd5VbRFV7dbZHJviACc7dKnkWFe7sXLy03T8-sDOdlwVG8o9s6zDiqNN9VWd6W3mYR7h7empj7s4jYmucVFgCV4ZERkdZpFlwAoDr4m1EWzsWrw6rMnC0ebglOQOe6PLFYRXJLC9AHM87UjuKI4F5KiztT3mltwepgF5MGzk3k0VlpHuSudLeOSK8ojwJ7UpWAmE7uiIn1BoZVVtpgVhVc1kmF4itLhUr60_Tm-ZPVTg6BgYSEl8JzJ1nFBSy6mxWZpDQKYKM9MzqJyisc7gE9wYKi6UF7l0EAGAd-0NXbGhjgC3n3CGOxAJjPdXloCnFT5IGTBhzg2lkcaOJzlZZUtYEth7qZLpBh5SJXVwCCJKIkkk5z-J3GFUgrvCQjGc01JSBLD-uAf-HWzVVIj5OMbJMKMq0bRhFJIbEylNUOMIE8yRJQhkFkoAL2IqOV-mkOvQoARJLirExHKUGSCJs_yV-E5YgryT6TqAYl8SNFAzzBxSFLyEWOWukjZK5gJNrhHzGHo0IICXxazUKIVwmkN66ZWZdHJ_kyEk5C0WChUeXGSU-TgrLOAEBQx0JQs1miTYMvoCfBGQ7CbvEMLVVxc5jgjo1ECQa2dRG4LAb8GlCgEnjeKBmNRoq8eLscycuJBGsg5ShQMoObDlsTpeKgZSmJ8QhuRE3vyI7M4FXo20EKChFU4Kh4hSiCdREhiUfuMjD263QgdRycm0aDgLiim4V8A5sz8o5AYCs4FwYLdRJkPQQaZDBSy-ZJRkCEbAQiDWKIJuLhMfwBWOKBOxhJc480gOIQT95cjfVgkXIhjAndV-BD5U1l4QYgjJjRK69DfogV6fKIO8M-INCbAqioODHLQ0AWEZJAMV8qmWyEFEKFgjtQSTE4ayVdlDmdmUyFlB7SHxRtsmuOw-G3HIipCxcVB2wALwGOKnxP8FPX5EXwGl3xTJJP1mKAieqMTXhEqUzGBIsjAZVgahousmu92FOO5ZRY8J0QGU5LkaFMydTqpi4HLALtUp2WGCUYcoq33yprySLxcGyRdFC2DVlATJduoQR2Bi8hrAyVfE9lFlKZxyYeYnOpLLSRG8dJSYYAsF1Da1y4YSzGxVMjfIAXMblJqO5wSWoX_JWXizZUQgQGu6EBjg7LYCtEhnySnCrPtN2CXDQJE-zJfsiDZZkczKQEzoNM6h5k_lzL8QCKuBKqpkk0IjCHXOBIEQM41SsKKrRAgXAIK3G1XGA2yxC9hIoDGhVjpCgXKAREcZGpgCkyTQBSS2QQG6d00wUhNoaIBrk0rQd9B0yiQQE2Wh1V83lhyis8ZPfNwHBldX-kTT2OFNrKfJn6PVKTuBgJQvitSkNC5ap4BGai7k_Npnq8rCBrGA_8AicpfVK85Ivq1pyOCx3IO6m2cABg1KqI0NibLhVQDaSkcPiiMd0aLEAOYKXA1G3hCco6_gPz9E6VEmoWPkPemVA_xueAMagTz6Osgzbakf9OvkAgfAnfUAfGubLbol4gVuqrUxPUMBCSVIhFq_ei-tTsSvARzU5zxW50hdlh8kxGKN1ilCpPM38Bd4AQGNSOsuLW-c02Wi5HlHgUnFW7S0lTSiCZ-INU1BPjBdABQk3UC5rR_N8KmMxMVVmsV9lWqZpfF8gvYqF10P1m96Z2VwRR20oV4y6z0SLpuj6GCQ_oaQhPsXMWvJjfaiiHLKKHFrSqliSQsvsWABqnBtKVYAKUfcoKVV6K5mKKTA1K4nb6DoNZSCUYG8V3dpkIQcJLde-uxk79PiGp_1IueJ18ANnSh79GLXXNtOsbFhDRl1At1cVCBL4O8GqKj7gK5rceHcshnNmSzs6W1pYvPJRkqjbflPT9DANTu3n7uvjnp_vLclo-nZ8_LZr4-sK3dRvL9fz5_umnt4_66sqXyrZ19OgYNraqkWMfNmLdR420YePIkcO3YWONHjV62PA6eMxTGzFibKPXddSIbRs1vLdt5CiG66H5ZGt0sI8hkfNahh7MRTDOlV_O1qxd83Po7J9Dtun04mWMMgjXWXPEyMErD9az49AZvNhN0TZL3I6RIznJzUewO8ehSc2xaC7U57lwfZvcRww--XyizcztnHCsb8cQRQ4fboQBypzig39um-ZWnaf1Y-0aPiL52Qc__YjhY9t4ymg_2OPOI09jZqya5Xbr2JNVrmN5bqMYbjuzrVmGPI9jUxhjHZ09fORxG95Q9PV2KCvniINiNHvcWdabhmScPe7z6uvwTiV4G7ER7cplt2300Fn7oacxcodyObZRK9chozDFxj624avwipWfWbrm27BHcIOsAxKvznavBkyBkMlLgvXHDhmK6SNu5Bxbs8-LtByr8BeB_DAlDXqF7WwK8owXcLJeEMatNnudt7G9DskXKNjBMZNpCi5eh3YbGvd08aV2xkKvDsSl12TtO0ohFIyeyCUyaFsD4sONII09dueFfNyDC6IE34LchoPmXuJX8SGO4vnKcN_FbaQsQZKYbWCo0tg2Yt2AupWT2gX7xjhKqdLYCnFKfsdMLyR1LgOTHLwLjfjwfeP5ZPgxBS-GykKEfhYE0sZc4SxH6t0oAMu48aXh2iRbDN_M2SIj2eQh5Bcfh1jifvlNFSPi8NdAj6zfDmdwfHfjXPFp3-atbIStPJ0rgllJxcRv7hu2zXRu8wi_RXEwkCh8AwcWUOqE1HTJRg8ARanBvKZN9nQAzDN1lgz34BaCLzbx9HUY4gZf_W48oIDc7kfnKL4iLFFQ2e8DdKTGniBuYE1HoNjBHaLIa9HebStq_nL2sbKVCNN2HorSnjI_UpslN5G5ZB2sFlRY-5dpfvE56-AXu7VxIp11THhvwwm6wr4NQ-wBkqTG2QhJo3adNIecFsNe_yv3Tw-fL_94uH_hP83Hcn58uVy_eXi8PP_t_PLwtJzsf_8HrNQuE1kXAAA"
 
+# ═══════════════════════════════════════════════════════════
+# HERO SOCIAL ICONS
+# ═══════════════════════════════════════════════════════════
 [[hero_icons]]
 key = "github"
 icon = "/assets/icons/github-logo.svg"
@@ -41,13 +48,20 @@ key = "email"
 icon = "/assets/icons/email-logo.svg"
 url = "#contact"
 
+
+# ═══════════════════════════════════════════════════════════
+# CONTACT (WORKER & FORM)
+# ═══════════════════════════════════════════════════════════
 [contact]
 telegram_bot = "my_portfolio_bot"
 webhook_url = ""
 fallback_telegram = true
 worker_url = "https://cv.alex-phlaster.workers.dev" 
 
-# UI ELEMENTS
+
+# ═══════════════════════════════════════════════════════════
+# UI ELEMENTS: ENGLISH
+# ═══════════════════════════════════════════════════════════
 [ui.en]
 scroll_cue = "Scroll to explore"
 based_in = "Based in"
@@ -57,44 +71,12 @@ export_pdf = "PDF"
 write_me = "Write me"
 view_pdf = "Open PDF"
 
-[ui.fr]
-scroll_cue = "Défiler pour explorer"
-based_in = "Basé à"
-education = "Formation"
-spoken_languages = "Langues parlées"
-export_pdf = "PDF"
-write_me = "M'écrire"
-view_pdf = "Ouvrir PDF"
-
-[ui.ru]
-scroll_cue = "Прокрутите вниз"
-based_in = "Местонахождение"
-education = "Образование"
-spoken_languages = "Разговорные языки"
-export_pdf = "PDF"
-write_me = "Написать мне"
-view_pdf = "Открыть PDF"
-
 [ui.nav.en]
 about = "About"
 career = "Career & Skills"
 projects = "Projects"
 research = "Research"
 documents = "Documents"
-
-[ui.nav.fr]
-about = "À propos"
-career = "Carrière & Comp."
-projects = "Projets"
-research = "Recherche"
-documents = "Documents"
-
-[ui.nav.ru]
-about = "Обо мне"
-career = "Карьера и навыки"
-projects = "Проекты"
-research = "Научная работа"
-documents = "Документы"
 
 [ui.sections.en]
 about_title = "About"
@@ -111,36 +93,6 @@ research_grants = "Grants"
 docs_title = "Documents & Achievements"
 docs_sub = "Degrees, thesis, coursework, and certificates."
 
-[ui.sections.fr]
-about_title = "À propos"
-about_sub = "Une brève introduction."
-career_title = "Carrière & Compétences"
-career_sub = "Parcours professionnel et expertise interdisciplinaire."
-proj_title = "Projets en vedette"
-proj_sub = "Travail open-source et expériences de design."
-research_title = "Recherche & Publications"
-research_sub = "Travail académique, conférences et subventions."
-research_conf = "Conférences"
-research_pubs = "Publications"
-research_grants = "Subventions"
-docs_title = "Documents & Réalisations"
-docs_sub = "Diplômes, mémoires, projets et certificats."
-
-[ui.sections.ru]
-about_title = "Обо мне"
-about_sub = "Краткое введение."
-career_title = "Карьера и навыки"
-career_sub = "Профессиональный путь и междисциплинарная экспертиза."
-proj_title = "Избранные проекты"
-proj_sub = "Open-source проекты и дизайнерские эксперименты."
-research_title = "Научная работа"
-research_sub = "Исследования, конференции и гранты."
-research_conf = "Конференции"
-research_pubs = "Публикации"
-research_grants = "Гранты"
-docs_title = "Документы и достижения"
-docs_sub = "Дипломы, ВКР, курсовые и сертификаты."
-
 [ui.contact.en]
 title = "Let's <em>talk</em>."
 intro = "For collaborations, questions, or just to say hello — drop a message below. It lands in my Telegram via a private bot."
@@ -155,6 +107,41 @@ subject = "Subject"
 message = "Message"
 form_invalid = "Please write a message. Check field length limits."
 form_invalid_email = "Invalid email. Please use Latin letters and a valid domain"
+
+
+# ═══════════════════════════════════════════════════════════
+# UI ELEMENTS: FRENCH
+# ═══════════════════════════════════════════════════════════
+[ui.fr]
+scroll_cue = "Défiler pour explorer"
+based_in = "Basé à"
+education = "Formation"
+spoken_languages = "Langues parlées"
+export_pdf = "PDF"
+write_me = "M'écrire"
+view_pdf = "Ouvrir PDF"
+
+[ui.nav.fr]
+about = "À propos"
+career = "Carrière & Comp."
+projects = "Projets"
+research = "Recherche"
+documents = "Documents"
+
+[ui.sections.fr]
+about_title = "À propos"
+about_sub = "Une brève introduction."
+career_title = "Carrière & Compétences"
+career_sub = "Parcours professionnel et expertise interdisciplinaire."
+proj_title = "Projets en vedette"
+proj_sub = "Travail open-source et expériences de design."
+research_title = "Recherche & Publications"
+research_sub = "Travail académique, conférences et subventions."
+research_conf = "Conférences"
+research_pubs = "Publications"
+research_grants = "Subventions"
+docs_title = "Documents & Réalisations"
+docs_sub = "Diplômes, mémoires, projets et certificats."
 
 [ui.contact.fr]
 title = "<em>Parlons</em>."
@@ -171,6 +158,41 @@ message = "Message"
 form_invalid = "Veuillez écrire un message. Vérifiez les limites de longueur."
 form_invalid_email = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide"
 
+
+# ═══════════════════════════════════════════════════════════
+# UI ELEMENTS: RUSSIAN
+# ═══════════════════════════════════════════════════════════
+[ui.ru]
+scroll_cue = "Прокрутите вниз"
+based_in = "Местонахождение"
+education = "Образование"
+spoken_languages = "Разговорные языки"
+export_pdf = "PDF"
+write_me = "Написать мне"
+view_pdf = "Открыть PDF"
+
+[ui.nav.ru]
+about = "Обо мне"
+career = "Карьера и навыки"
+projects = "Проекты"
+research = "Научная работа"
+documents = "Документы"
+
+[ui.sections.ru]
+about_title = "Обо мне"
+about_sub = "Краткое введение."
+career_title = "Карьера и навыки"
+career_sub = "Профессиональный путь и междисциплинарная экспертиза."
+proj_title = "Избранные проекты"
+proj_sub = "Open-source проекты и дизайнерские эксперименты."
+research_title = "Научная работа"
+research_sub = "Исследования, конференции и гранты."
+research_conf = "Конференции"
+research_pubs = "Публикации"
+research_grants = "Гранты"
+docs_title = "Документы и достижения"
+docs_sub = "Дипломы, ВКР, курсовые и сертификаты."
+
 [ui.contact.ru]
 title = "<em>Поговорим</em>."
 intro = "Для сотрудничества, вопросов или просто чтобы поздороваться — оставьте сообщение ниже. Оно попадет в мой Telegram через приватного бота."
@@ -186,7 +208,10 @@ message = "Сообщение"
 form_invalid = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей."
 form_invalid_email = "Некорректный email. Используйте латиницу и реальный домен"
 
-# ABOUT
+
+# ═══════════════════════════════════════════════════════════
+# ABOUT: ENGLISH
+# ═══════════════════════════════════════════════════════════
 [about.en]
 name = "Alexander Morozov"
 tagline = "Bioinformatician, wet-lab researcher, and software developer working at the intersection of computational biology and interactive systems."
@@ -194,49 +219,14 @@ bio_lead = "Turning biological data into structured, actionable insights."
 bio = "Based in Cityname, splitting time between wet lab work, team management, and building visual/data tools. Freshly graduated Bachelor."
 location = "Cityname, Germany"
 
-[about.fr]
-name = "Alexander Morozov"
-tagline = "Bioinformaticien, chercheur en laboratoire et développeur de logiciels travaillant à l'intersection de la biologie computationnelle et des systèmes interactifs."
-bio_lead = "Transformer les données biologiques en informations structurées et exploitables."
-bio = "Basé à Cityname, partageant mon temps entre le travail en laboratoire, la gestion d'équipe et la création d'outils visuels et de données. Nouvellement diplômé."
-location = "Cityname, Allemagne"
-
-[about.ru]
-name = "Александр Морозов"
-tagline = "Биоинформатик, лаборант-исследователь и разработчик на стыке вычислительной биологии и интерактивных систем."
-bio_lead = "Превращаю биологические данные в структурированные и применимые на практике инсайты."
-bio = "Живу в Берлине, разделяя время между мокрой лабораторией, управлением командой и созданием визуальных/данных инструментов. Недавно закончил бакалавриат."
-location = "Берлин, Германия"
-
 [about.spoken_languages.en]
 "Russian" = "Native"
 "English" = "Upper-Intermediate (B2)"
 "French" = "Intermediate (B1)"
 
-[about.spoken_languages.fr]
-"Russe" = "Niveau natif"
-"Anglais" = "Niveau avancé (B2)"
-"Français" = "Niveau seuil (B1)"
-
-[about.spoken_languages.ru]
-"Русский" = "Родной"
-"Английский" = "Выше среднего (B2)"
-"Французский" = "Средний уровень (B1)"
-
-# EDUCATION (Listed in About)
 [[about.education.en]]
 institution = "University Name"
 degree = "B.Sc. Bioinformatics"
-period = "2020 — 2024"
-
-[[about.education.fr]]
-institution = "Nom de l'Université"
-degree = "Licence en Bioinformatique"
-period = "2020 — 2024"
-
-[[about.education.ru]]
-institution = "Название ВУЗа"
-degree = "Бакалавр биоинформатики"
 period = "2020 — 2024"
 
 [about.interests.en]
@@ -248,6 +238,27 @@ items = [
   "Scientific Data Visualization"
 ]
 
+
+# ═══════════════════════════════════════════════════════════
+# ABOUT: FRENCH
+# ═══════════════════════════════════════════════════════════
+[about.fr]
+name = "Alexander Morozov"
+tagline = "Bioinformaticien, chercheur en laboratoire et développeur de logiciels travaillant à l'intersection de la biologie computationnelle et des systèmes interactifs."
+bio_lead = "Transformer les données biologiques en informations structurées et exploitables."
+bio = "Basé à Cityname, partageant mon temps entre le travail en laboratoire, la gestion d'équipe et la création d'outils visuels et de données. Nouvellement diplômé."
+location = "Cityname, Allemagne"
+
+[about.spoken_languages.fr]
+"Russe" = "Niveau natif"
+"Anglais" = "Niveau avancé (B2)"
+"Français" = "Niveau seuil (B1)"
+
+[[about.education.fr]]
+institution = "Nom de l'Université"
+degree = "Licence en Bioinformatique"
+period = "2020 — 2024"
+
 [about.interests.fr]
 title = "Intérêts Scientifiques"
 items = [
@@ -256,6 +267,27 @@ items = [
   "Intégration Labo Humide / Labo Sec",
   "Visualisation de Données Scientifiques"
 ]
+
+
+# ═══════════════════════════════════════════════════════════
+# ABOUT: RUSSIAN
+# ═══════════════════════════════════════════════════════════
+[about.ru]
+name = "Александр Морозов"
+tagline = "Биоинформатик, лаборант-исследователь и разработчик на стыке вычислительной биологии и интерактивных систем."
+bio_lead = "Превращаю биологические данные в структурированные и применимые на практике инсайты."
+bio = "Живу в Берлине, разделяя время между мокрой лабораторией, управлением командой и созданием визуальных/данных инструментов. Недавно закончил бакалавриат."
+location = "Берлин, Германия"
+
+[about.spoken_languages.ru]
+"Русский" = "Родной"
+"Английский" = "Выше среднего (B2)"
+"Французский" = "Средний уровень (B1)"
+
+[[about.education.ru]]
+institution = "Название ВУЗа"
+degree = "Бакалавр биоинформатики"
+period = "2020 — 2024"
 
 [about.interests.ru]
 title = "Научные интересы"
@@ -266,7 +298,10 @@ items = [
   "Научная визуализация данных"
 ]
 
+
+# ═══════════════════════════════════════════════════════════
 # EXPERIENCE
+# ═══════════════════════════════════════════════════════════
 [[experience]]
 category = "lab" 
 period = "2022 — Present"
@@ -289,7 +324,10 @@ company = "Название института / лаборатории"
 description = "Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных."
 skills_gained = ["ПЦР", "Подготовка библиотек", "Анализ данных"]
 
-# SKILLS (Now with descriptions)
+
+# ═══════════════════════════════════════════════════════════
+# SKILLS
+# ═══════════════════════════════════════════════════════════
 [[skills.en]]
 title = "Mathematics"
 description = "Applied statistics, linear algebra, and computational geometry."
@@ -365,7 +403,10 @@ title = "Фронтенд и Дизайн"
 description = "Интерактивная визуализация данных и веб-инструменты."
 tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
 
+
+# ═══════════════════════════════════════════════════════════
 # PROJECTS
+# ═══════════════════════════════════════════════════════════
 [[projects]]
 name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
@@ -405,7 +446,10 @@ description = "Terrain de jeu interactif pour le pavage hexagonal avec générat
 [projects.ru]
 description = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
 
-# CONFERENCES
+
+# ═══════════════════════════════════════════════════════════
+# RESEARCH: CONFERENCES
+# ═══════════════════════════════════════════════════════════
 [[conferences]]
 cover = "https://picsum.photos/seed/conference5/200/300"
 date = "June 2023"
@@ -423,7 +467,10 @@ title = "International Conference on Bioinformatics"
 location = "Paris, France"
 role = "Participant"
 
-# PUBLICATIONS
+
+# ═══════════════════════════════════════════════════════════
+# RESEARCH: PUBLICATIONS
+# ═══════════════════════════════════════════════════════════
 [[publications]]
 title = "A comparison of 27 Arabidopsis thaliana genomes and the path toward an unbiased characterization of genetic polymorphism"
 year = 2025
@@ -440,7 +487,10 @@ venue = "bioRxiv 2025.02.07.637071 (2025)"
 url = "https://www.biorxiv.org/content/10.1101/2025.02.07.637071v1"
 pdf_url = "/assets/pdfs/example.pdf"
 
-# GRANTS
+
+# ═══════════════════════════════════════════════════════════
+# RESEARCH: GRANTS
+# ═══════════════════════════════════════════════════════════
 [[grants]]
 year = "2024"
 title = "RSF Grant No. 24-24-00123"
@@ -458,7 +508,10 @@ role = "Chercheur Principal"
 description = "Динамика пангеномы и структурные вариации."
 role = "Ведущий научный сотрудник"
 
-# DOCUMENTS & ACHIEVEMENTS (Unified)
+
+# ═══════════════════════════════════════════════════════════
+# DOCUMENTS & ACHIEVEMENTS: ENGLISH
+# ═══════════════════════════════════════════════════════════
 [[documents.en]]
 category = "Thesis"
 date = "2024"
@@ -480,6 +533,10 @@ title = "Summer School of Mathematics"
 description = "Advanced Geometry Course Certificate."
 url = "/assets/pdfs/example.pdf"
 
+
+# ═══════════════════════════════════════════════════════════
+# DOCUMENTS & ACHIEVEMENTS: FRENCH
+# ═══════════════════════════════════════════════════════════
 [[documents.fr]]
 category = "Mémoire"
 date = "2024"
@@ -501,6 +558,10 @@ title = "École d'été de Mathématiques"
 description = "Certificat de cours de géométrie avancée."
 url = "/assets/pdfs/example.pdf"
 
+
+# ═══════════════════════════════════════════════════════════
+# DOCUMENTS & ACHIEVEMENTS: RUSSIAN
+# ═══════════════════════════════════════════════════════════
 [[documents.ru]]
 category = "ВКР"
 date = "2024"

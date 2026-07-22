@@ -43,7 +43,65 @@ export function initNavigation(renderCallback) {
     });
   }
 
-  const sections = document.querySelectorAll('.content-section, #contact');
+  // === Клавиатурная навигация ===
+  const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
+  let isScrolling = false;
+
+  function getActiveSectionIndex() {
+    const scrollPos = window.scrollY + window.innerHeight / 3;
+    let activeIndex = 0;
+    sections.forEach((sec, i) => {
+      if (sec.offsetTop <= scrollPos) {
+        activeIndex = i;
+      }
+    });
+    return activeIndex;
+  }
+
+  function scrollToSection(index) {
+    if (index < 0 || index >= sections.length) return;
+
+    isScrolling = true;
+    const target = sections[index];
+    const top = target.getBoundingClientRect().top + window.scrollY;
+    const barH = topbar.offsetHeight;
+
+    window.scrollTo({
+      top: top - barH + 15,
+      behavior: 'smooth'
+    });
+
+    // Блокируем навигацию на время анимации прокрутки
+    setTimeout(() => {
+      isScrolling = false;
+    }, 700);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    // Игнорируем, если фокус в поле ввода
+    const activeTag = document.activeElement.tagName;
+    if (['INPUT', 'TEXTAREA'].includes(activeTag)) return;
+
+    const navKeys = ['PageDown', 'ArrowRight', 'ArrowDown', 'PageUp', 'ArrowLeft', 'ArrowUp'];
+    if (!navKeys.includes(e.key)) return;
+
+    e.preventDefault();
+
+    if (isScrolling) return;
+
+    const currentIndex = getActiveSectionIndex();
+    let nextIndex = currentIndex;
+
+    if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
+      nextIndex = currentIndex + 1;
+    } else if (['PageUp', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      nextIndex = currentIndex - 1;
+    }
+
+    scrollToSection(nextIndex);
+  });
+
+  // === Подсветка активного раздела при обычной прокрутке мышью ===
   const navLinks = document.querySelectorAll('.nav-link');
 
   const observer = new IntersectionObserver((entries) => {
