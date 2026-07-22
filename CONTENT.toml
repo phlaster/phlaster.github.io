@@ -472,6 +472,19 @@ description = "Terrain de jeu interactif pour le pavage hexagonal avec générat
 description = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
 
 [[projects]]
+name = "CertForge"
+url = "https://github.com/phlaster/CertForge"
+cover = "/assets/projects/certforge_social.jpg"
+languages = ["JS", "CSS"]
+
+[projects.en]
+description = "..."
+[projects.fr]
+description = "..."
+[projects.ru]
+description = "..."
+
+[[projects]]
 name = "RGBZones"
 url = "https://github.com/phlaster/RGBZones"
 cover = "/assets/projects/rgbzones_social.jpg"
@@ -489,6 +502,19 @@ name = "SMILES-DASS"
 url = "https://github.com/phlaster/SMILES-DASS"
 cover = "/assets/projects/smiles_dass_social.jpg"
 languages = ["Python", "Torch"]
+
+[projects.en]
+description = "..."
+[projects.fr]
+description = "..."
+[projects.ru]
+description = "..."
+
+[[projects]]
+name = "geovue"
+url = "https://github.com/phlaster/geovue"
+cover = "/assets/projects/geovue_social.jpg"
+languages = ["JS", "CSS"]
 
 [projects.en]
 description = "..."
