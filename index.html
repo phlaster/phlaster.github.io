@@ -200,30 +200,15 @@
   <!-- PDF MODAL -->
   <div id="pdfModal" class="pdf-modal no-print">
     <div class="pdf-modal-content">
-      <div class="pdf-modal-header">
-        <div class="pdf-controls">
-          <button id="pdfZoomOut" class="pdf-btn" title="Zoom Out">−</button>
-          <span id="pdfZoomLevel" class="pdf-zoom-level">100%</span>
-          <button id="pdfZoomIn" class="pdf-btn" title="Zoom In">+</button>
-          <a id="pdfDownload" class="pdf-btn pdf-download-btn" download>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Download
-          </a>
-        </div>
-        
-        <div class="pdf-page-selector">
-          <button id="pdfPrev" class="pdf-btn" title="Previous page">‹</button>
-          <input type="text" id="pdfCurrentPage" value="1" readonly>
-          <span>/</span>
-          <span id="pdfTotalPages">1</span>
-          <button id="pdfNext" class="pdf-btn" title="Next page">›</button>
-        </div>
-
-        <button id="closePdfModal" class="pdf-modal-close">×</button>
-      </div>
+      <button id="closePdfModal" class="pdf-modal-close" aria-label="Close PDF viewer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
       <div class="pdf-viewer-wrapper" id="pdf-viewer-wrapper">
-        <div id="pdf-loader" class="pdf-loader">Loading PDF...</div>
-        <div id="pdf-viewer-container"></div>
+        <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
       </div>
     </div>
   </div>
