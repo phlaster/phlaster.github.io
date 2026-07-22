@@ -1,9 +1,9 @@
-import { config, detectInitialLang, resolveTranslations } from './scripts/i18n.js';
-import { initNavigation } from './scripts/navigation.js';
-import { renderContent } from './scripts/render.js';
-import { initContact } from './scripts/contact.js';
-import { initPdfModal } from './scripts/pdf-modal.js';
-import { initPdfExport } from './scripts/pdf-export.js';
+import { config, detectInitialLang, resolveTranslations } from './i18n.js';
+import { initNavigation } from './navigation.js';
+import { renderContent } from './render.js';
+import { initContact } from './contact.js';
+import { initPdfModal } from './pdf-modal.js';
+import { initPdfExport } from './pdf-export.js';
 
 let currentLang = detectInitialLang();
 let i18nConfig = resolveTranslations(config, currentLang);
