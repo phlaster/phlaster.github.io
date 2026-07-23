@@ -15,14 +15,10 @@ export function initNavigation(renderCallback) {
     li.addEventListener('click', () => {
       const newLang = li.dataset.lang;
       langDropdown.querySelectorAll('li').forEach(x => x.classList.toggle('active', x === li));
-
-      const langAbbr = {
-        en: 'ENG',
-        ru: 'RUS',
-        fr: 'FRA'
-      };
+      
+      const langAbbr = { en: 'ENG', ru: 'RUS', fr: 'FRA' };
       $('langCurrent').textContent = langAbbr[newLang] || 'ENG';
-
+      
       langSwitch.classList.remove('open');
       renderCallback(newLang);
     });
@@ -40,81 +36,52 @@ export function initNavigation(renderCallback) {
   const footer = document.getElementById('contact');
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
+  const scrollCue = $('scrollCue');
+  const heroSection = $('hero');
 
-  const heroIframe = $('heroIframe');
-  let lastTwistMode = '';
-
-  function updateHeroTwistMode() {
-    if (!heroIframe || !heroIframe.contentWindow) return;
-
-    const scrolledHalfway = window.scrollY > window.innerHeight * 0.5;
-
-    const isMobile = window.matchMedia("(max-width: 768px)").matches || ('ontouchstart' in window && window.innerWidth <= 768);
-
-    let newMode = 'normal';
-    if (scrolledHalfway) {
-      newMode = isMobile ? 'disabled' : 'reduced';
-    }
-
-    if (newMode !== lastTwistMode) {
-      lastTwistMode = newMode;
-      heroIframe.contentWindow.postMessage({
-        type: 'HEX_LIVE_TWIST',
-        mode: newMode
-      }, '*');
-    }
-  }
-
+  // === Клик по логотипу A.M — проматывает в самый верх ===
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
     brandEl.style.cursor = 'pointer';
     brandEl.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
+  // === Функция точного расчета позиции скролла ===
   function getTargetScrollTop(targetId) {
     const targetEl = document.getElementById(targetId);
     if (!targetEl) return 0;
 
     if (targetId === 'contact') {
-      return targetEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 50;
+      return targetEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 30;
     }
 
     const panelHead = targetEl.querySelector('.panel-head');
     const anchorEl = panelHead || targetEl;
-
-    return anchorEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight - 10;
+    return anchorEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight - 20;
   }
 
+  // === Обработка кликов по навигации ===
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').substring(1);
-      window.scrollTo({
-        top: getTargetScrollTop(targetId),
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: getTargetScrollTop(targetId), behavior: 'smooth' });
     });
   });
 
-  const scrollCue = $('scrollCue');
+  // === Кнопка скролла из Hero ===
   if (scrollCue) {
     scrollCue.addEventListener('click', () => {
-      window.scrollTo({
-        top: getTargetScrollTop('about'),
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: getTargetScrollTop('about'), behavior: 'smooth' });
     });
   }
 
+  // === Клавиатурная навигация ===
   function getActiveSectionIndex() {
     const scrollPos = window.scrollY + topbar.offsetHeight + 50;
     let activeIndex = -1;
-
     for (let i = 0; i < sections.length; i++) {
       const secTop = sections[i].getBoundingClientRect().top + window.scrollY;
       if (secTop <= scrollPos) {
@@ -134,11 +101,10 @@ export function initNavigation(renderCallback) {
     if (!navKeys.includes(e.key)) return;
 
     e.preventDefault();
-
-    if (e.repeat) return;
+    if (e.repeat) return; 
 
     let currentIndex = getActiveSectionIndex();
-
+    
     if (currentIndex === -1 && ['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       currentIndex = 0;
     } else if (currentIndex === -1) {
@@ -148,27 +114,19 @@ export function initNavigation(renderCallback) {
     if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       const nextIndex = Math.min(currentIndex + 1, sections.length - 1);
       if (sections[nextIndex]) {
-        window.scrollTo({
-          top: getTargetScrollTop(sections[nextIndex].id),
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: getTargetScrollTop(sections[nextIndex].id), behavior: 'smooth' });
       }
     } else if (['PageUp', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
       if (currentIndex <= 0) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         const prevIndex = currentIndex - 1;
-        window.scrollTo({
-          top: getTargetScrollTop(sections[prevIndex].id),
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: getTargetScrollTop(sections[prevIndex].id), behavior: 'smooth' });
       }
     }
   });
 
+  // === Подсветка активного раздела ===
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -178,13 +136,15 @@ export function initNavigation(renderCallback) {
         });
       }
     });
-  }, {
-    rootMargin: '-30% 0px -60% 0px'
-  });
+  }, { rootMargin: '-30% 0px -60% 0px' });
 
   sections.forEach(sec => observer.observe(sec));
 
-  const updateTopbar = () => {
+  // === Логика цвета топ-бара и анимации кнопки ===
+  let scrollTimer = null;
+
+  const handleScroll = () => {
+    // 1. Обновляем цвет топ-бара
     const contentTop = contentArea.getBoundingClientRect().top;
     const footerTop = footer.getBoundingClientRect().top;
     const barHeight = topbar.offsetHeight;
@@ -194,14 +154,33 @@ export function initNavigation(renderCallback) {
     } else {
       topbar.classList.remove('solid');
     }
+
+    // 2. Обновляем анимацию кнопки
+    if (scrollCue && heroSection) {
+      const heroHeight = heroSection.offsetHeight;
+      const isPastMidpoint = window.scrollY > heroHeight / 2;
+
+      if (isPastMidpoint) {
+        // Если проскроллили дальше середины — глухо ставим на паузу
+        scrollCue.classList.add('paused');
+      } else {
+        // Если мы в верхней половине Hero — временно ставим на паузу (идет скролл)
+        scrollCue.classList.add('paused');
+        
+        // Сбрасываем старый таймер
+        clearTimeout(scrollTimer);
+        
+        // Откладываем снятие паузы на 200мс после того, как скролл прекратился
+        scrollTimer = setTimeout(() => {
+          // Проверяем, что мы всё еще не проскроллили половину Hero
+          if (window.scrollY <= heroSection.offsetHeight / 2) {
+            scrollCue.classList.remove('paused');
+          }
+        }, 200);
+      }
+    }
   };
 
-  window.addEventListener('scroll', () => {
-    updateTopbar();
-    updateHeroTwistMode();
-  }, {
-    passive: true
-  });
-  updateTopbar();
-  updateHeroTwistMode();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Инициализация при загрузке
 }

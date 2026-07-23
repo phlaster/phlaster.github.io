@@ -385,8 +385,9 @@
   text-transform: uppercase;
   cursor: pointer;
   pointer-events: auto;
-  transition: backdrop-filter .2s, transform .2s;
+  transition: backdrop-filter .2s;
   position: relative;
+  animation: bob-cue 2s ease-in-out infinite;
 }
 
 .scroll-cue::before {
@@ -409,22 +410,18 @@
 .scroll-cue:hover {
   backdrop-filter: brightness(0.9) blur(12px);
   -webkit-backdrop-filter: brightness(0.4) blur(12px);
-  transform: translateY(1px);
 }
 
-.scroll-cue .arrow {
-  animation: bob 1.8s ease-in-out infinite;
+.scroll-cue.paused {
+  animation-play-state: paused;
 }
 
-@keyframes bob {
-
-  0%,
-  100% {
+@keyframes bob-cue {
+  0%, 100% {
     transform: translateY(0);
   }
-
   50% {
-    transform: translateY(3px);
+    transform: translateY(10px);
   }
 }
 
