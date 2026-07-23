@@ -23,9 +23,10 @@ export function initContact(i18nConfigGetter) {
     const submitErrorIcon = document.querySelector('.submit-error-icon');
 
     submitBtn.classList.remove('is-loading', 'is-error', 'is-timed-out');
-    submitLoader.style.display = 'none';
-    submitErrorIcon.style.display = 'none';
-    submitBtnLabel.style.display = 'inline';
+
+    if (submitLoader) submitLoader.style.display = 'none';
+    if (submitErrorIcon) submitErrorIcon.style.display = 'none';
+    if (submitBtnLabel) submitBtnLabel.style.display = 'inline';
     submitBtn.removeAttribute('data-tooltip');
 
     const existingSpinner = submitBtn.querySelector('.btn-spinner');
@@ -39,16 +40,20 @@ export function initContact(i18nConfigGetter) {
     if (state === 'loading') {
       submitBtn.classList.add('is-loading');
       submitBtn.disabled = true;
-      submitBtnLabel.style.display = 'none';
-      submitLoader.style.display = 'block';
-      const ringFg = submitLoader.querySelector('.ring-fg');
-      ringFg.style.animation = 'none';
-      void ringFg.offsetWidth;
-      ringFg.style.animation = 'fillRing 10s linear forwards';
+      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
+      if (submitLoader) {
+        submitLoader.style.display = 'block';
+        const ringFg = submitLoader.querySelector('.ring-fg');
+        if (ringFg) {
+          ringFg.style.animation = 'none';
+          void ringFg.offsetWidth;
+          ringFg.style.animation = 'fillRing 10s linear forwards';
+        }
+      }
     } else if (state === 'syncing') {
       submitBtn.classList.add('is-loading');
       submitBtn.disabled = true;
-      submitBtnLabel.style.display = 'none';
+      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
       const spinner = document.createElement('span');
       spinner.className = 'btn-spinner';
       submitBtn.appendChild(spinner);
@@ -57,20 +62,22 @@ export function initContact(i18nConfigGetter) {
     } else if (state === 'error') {
       submitBtn.classList.add('is-error');
       submitBtn.disabled = false;
-      submitBtnLabel.style.display = 'none';
-      submitErrorIcon.style.display = 'block';
+      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
+      if (submitErrorIcon) submitErrorIcon.style.display = 'block';
       if (message) submitBtn.setAttribute('data-tooltip', message);
     } else if (state === 'timed-out') {
       submitBtn.classList.add('is-timed-out');
       submitBtn.disabled = true;
-      submitBtnLabel.style.display = 'none';
-      submitLoader.style.display = 'block';
-
-      const ringFg = submitLoader.querySelector('.ring-fg');
-      ringFg.style.animation = 'none';
-      void ringFg.offsetWidth;
-      ringFg.style.animation = `fillRing ${duration}s linear forwards`;
-
+      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
+      if (submitLoader) {
+        submitLoader.style.display = 'block';
+        const ringFg = submitLoader.querySelector('.ring-fg');
+        if (ringFg) {
+          ringFg.style.animation = 'none';
+          void ringFg.offsetWidth;
+          ringFg.style.animation = `fillRing ${duration}s linear forwards`;
+        }
+      }
       if (message) submitBtn.setAttribute('data-tooltip', message);
 
       timeoutTimer = setTimeout(() => {
