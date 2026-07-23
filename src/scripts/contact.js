@@ -278,6 +278,16 @@ export function initContact(i18nConfigGetter) {
 
   prepareRevealPoW();
 
+  const leaveContactsBtn = $('leaveContactsBtn');
+  const contactExtraFields = $('contactExtraFields');
+  if (leaveContactsBtn && contactExtraFields) {
+    leaveContactsBtn.addEventListener('click', () => {
+      leaveContactsBtn.style.display = 'none';
+      contactExtraFields.style.display = 'block';
+      $('f-name')?.focus();
+    });
+  }
+
   ['f-name', 'f-email', 'f-subject', 'f-message'].forEach(id => {
     $(id)?.addEventListener('input', prepareFormPoW);
   });

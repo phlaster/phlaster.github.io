@@ -247,6 +247,7 @@ export function renderContent(i18nConfig, lang) {
   $('contactTitle').innerHTML = c.title;
   $('contactIntro').textContent = c.intro;
   $('printContactText').textContent = c.print_contact_text || c.intro;
+  $('leaveContactsBtn').textContent = c.leave_contacts || 'Leave contacts';
   $('submitBtn').textContent = c.send;
   $('lbl-name').textContent = c.name;
   $('lbl-email').textContent = c.email;

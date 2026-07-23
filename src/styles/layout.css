@@ -120,6 +120,14 @@
   overflow: hidden;
 }
 
+  .btn-action:hover,
+  .lang-trigger:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-dark-fg);
+    opacity: 1;
+  }
+
 .btn-action svg,
 .lang-trigger svg {
   flex: 1 1 0;
@@ -344,7 +352,7 @@
 }
 
 .hero-social-link:hover {
-  transform: translateY(-3px);
+  transform: scale(1.5);
 }
 
 .hero-social-link:hover img {
@@ -355,11 +363,10 @@
   grid-column: 2;
   width: 100%;
   padding: 0 var(--gutter);
-  max-height: 80vh;
+  max-height: 65vh;
   aspect-ratio: auto;
   object-fit: contain;
   border-radius: var(--radius-lg);
-  filter: grayscale(.15) contrast(1.05);
   pointer-events: none;
 }
 
@@ -410,6 +417,7 @@
 .scroll-cue:hover {
   -webkit-backdrop-filter: brightness(0.4) blur(12px);
   backdrop-filter: brightness(0.4) blur(12px);
+  animation-play-state: paused;
 }
 
 .scroll-cue.paused {
@@ -417,9 +425,12 @@
 }
 
 @keyframes bob-cue {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
