@@ -19,13 +19,22 @@ async function verifyPoW(challenge, nonce, env) {
   if (!startTimeStr) return null;
 
   await env.CHALLENGES.delete(challenge);
+  const startTime = parseInt(startTimeStr, 10);
+  const elapsed = Date.now() - startTime;
+
+  if (nonce === 'TIMEOUT') {
+    if (elapsed >= 10000) {
+      return startTime;
+    }
+    return null;
+  }
 
   const data = new TextEncoder().encode(challenge + nonce);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashHex = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
 
   if (hashHex.endsWith('0000') && '012345'.includes(hashHex[hashHex.length - 5])) {
-    return parseInt(startTimeStr, 10);
+    return startTime;
   }
   return null;
 }

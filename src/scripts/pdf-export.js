@@ -1,16 +1,32 @@
 const $ = id => document.getElementById(id);
 
 export function initPdfExport() {
-  $('exportPdfBtn').addEventListener('click', async () => {
+  const btn = $('exportPdfBtn');
+  if (!btn) return;
+
+  const originalHTML = btn.innerHTML;
+  let isExporting = false;
+
+  btn.addEventListener('click', async () => {
+    if (btn.classList.contains('btn-pdf-error')) {
+      btn.innerHTML = originalHTML;
+      btn.classList.remove('btn-pdf-error');
+      btn.removeAttribute('data-tooltip');
+      return;
+    }
+
+    if (isExporting) return;
+    isExporting = true;
+
     const iframe = $('heroIframe');
     const printBg = $('printBackground');
-    const btn = $('exportPdfBtn');
 
-    if (!iframe.contentWindow) return;
+    if (!iframe.contentWindow) {
+      isExporting = false;
+      return;
+    }
 
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<span class="btn-spinner"></span>';
-    btn.disabled = true;
+    btn.innerHTML = `<svg class="reveal-ring" width="14" height="14" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
 
     try {
       const framePromise = new Promise((resolve) => {
@@ -23,9 +39,7 @@ export function initPdfExport() {
         window.addEventListener('message', handler);
       });
 
-      iframe.contentWindow.postMessage({
-        type: 'REQUEST_FRAME'
-      }, '*');
+      iframe.contentWindow.postMessage({ type: 'REQUEST_FRAME' }, '*');
       const frameData = await Promise.race([
         framePromise,
         new Promise(r => setTimeout(() => r(null), 5000))
@@ -36,51 +50,45 @@ export function initPdfExport() {
           const parser = new DOMParser();
           const doc = parser.parseFromString(frameData, "image/svg+xml");
           const svgElement = doc.documentElement;
-
           printBg.innerHTML = '';
           printBg.appendChild(svgElement);
-
           await new Promise(r => setTimeout(r, 100));
         } else {
           printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:cover;">`;
         }
         await new Promise(r => setTimeout(r, 100));
-      } else {
-        console.warn("PDF Export: Failed to get background frame.");
       }
-
-      btn.innerHTML = '<span class="btn-spinner"></span> Fetching contacts...';
 
       const emailHasLink = () => document.querySelector('#channelEmailWrap a[href^="mailto:"]');
       const tgHasLink = () => document.querySelector('#channelTelegramWrap a[href*="telegram.me"]');
-
-      let waitCount = 0;
 
       if ((!emailHasLink() || !tgHasLink()) && window.retryRevealContacts) {
         window.retryRevealContacts();
       }
 
-      while ((!emailHasLink() || !tgHasLink()) && waitCount < 200) {
+      let waitCount = 0;
+      while ((!emailHasLink() || !tgHasLink()) && waitCount < 100) {
         await new Promise(r => setTimeout(r, 100));
         waitCount++;
       }
 
       if (!emailHasLink() || !tgHasLink()) {
-        console.warn("PDF Export: Contacts could not be fetched in time.");
+        throw new Error('Failed to load contacts in time');
       }
-
-      btn.innerHTML = originalHTML;
-      btn.disabled = false;
 
       await new Promise(r => setTimeout(r, 50));
       window.print();
-
       printBg.innerHTML = '';
+
+      btn.innerHTML = originalHTML;
 
     } catch (e) {
       console.error("Export failed:", e);
-      btn.innerHTML = originalHTML;
-      btn.disabled = false;
+      btn.classList.add('btn-pdf-error');
+      btn.setAttribute('data-tooltip', e.message || 'Export failed');
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`;
+    } finally {
+      isExporting = false;
     }
   });
 }

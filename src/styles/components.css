@@ -414,3 +414,72 @@
     transform: rotate(360deg);
   }
 }
+
+/* === Contact Reveal: Progress Ring & Error === */
+.reveal-ring {
+  display: block;
+}
+.reveal-ring .ring-fg {
+  animation: fillRing 10s linear forwards;
+}
+@keyframes fillRing {
+  to { stroke-dashoffset: 0; }
+}
+
+.reveal-error,
+.btn-pdf-error {
+  position: relative;
+  cursor: help;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal-error {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #FFD700;
+}
+
+.btn-pdf-error {
+  border-color: #FFD700 !important;
+  color: #FFD700 !important;
+  opacity: 1;
+}
+
+.reveal-error::after,
+.btn-pdf-error::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: normal;
+  width: 200px;
+  max-width: 80vw;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.reveal-error:hover::after,
+.reveal-error:focus::after,
+.reveal-error:active::after,
+.btn-pdf-error:hover::after,
+.btn-pdf-error:focus::after,
+.btn-pdf-error:active::after {
+  opacity: 1;
+  visibility: visible;
+}
