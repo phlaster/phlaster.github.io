@@ -15,10 +15,14 @@ export function initNavigation(renderCallback) {
     li.addEventListener('click', () => {
       const newLang = li.dataset.lang;
       langDropdown.querySelectorAll('li').forEach(x => x.classList.toggle('active', x === li));
-      
-      const langAbbr = { en: 'ENG', ru: 'RUS', fr: 'FRA' };
+
+      const langAbbr = {
+        en: 'ENG',
+        ru: 'RUS',
+        fr: 'FRA'
+      };
       $('langCurrent').textContent = langAbbr[newLang] || 'ENG';
-      
+
       langSwitch.classList.remove('open');
       renderCallback(newLang);
     });
@@ -44,7 +48,10 @@ export function initNavigation(renderCallback) {
   if (brandEl) {
     brandEl.style.cursor = 'pointer';
     brandEl.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   }
 
@@ -67,14 +74,20 @@ export function initNavigation(renderCallback) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').substring(1);
-      window.scrollTo({ top: getTargetScrollTop(targetId), behavior: 'smooth' });
+      window.scrollTo({
+        top: getTargetScrollTop(targetId),
+        behavior: 'smooth'
+      });
     });
   });
 
   // === Кнопка скролла из Hero ===
   if (scrollCue) {
     scrollCue.addEventListener('click', () => {
-      window.scrollTo({ top: getTargetScrollTop('about'), behavior: 'smooth' });
+      window.scrollTo({
+        top: getTargetScrollTop('about'),
+        behavior: 'smooth'
+      });
     });
   }
 
@@ -101,10 +114,10 @@ export function initNavigation(renderCallback) {
     if (!navKeys.includes(e.key)) return;
 
     e.preventDefault();
-    if (e.repeat) return; 
+    if (e.repeat) return;
 
     let currentIndex = getActiveSectionIndex();
-    
+
     if (currentIndex === -1 && ['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       currentIndex = 0;
     } else if (currentIndex === -1) {
@@ -114,19 +127,27 @@ export function initNavigation(renderCallback) {
     if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       const nextIndex = Math.min(currentIndex + 1, sections.length - 1);
       if (sections[nextIndex]) {
-        window.scrollTo({ top: getTargetScrollTop(sections[nextIndex].id), behavior: 'smooth' });
+        window.scrollTo({
+          top: getTargetScrollTop(sections[nextIndex].id),
+          behavior: 'smooth'
+        });
       }
     } else if (['PageUp', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
       if (currentIndex <= 0) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       } else {
         const prevIndex = currentIndex - 1;
-        window.scrollTo({ top: getTargetScrollTop(sections[prevIndex].id), behavior: 'smooth' });
+        window.scrollTo({
+          top: getTargetScrollTop(sections[prevIndex].id),
+          behavior: 'smooth'
+        });
       }
     }
   });
 
-  // === Подсветка активного раздела ===
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -136,15 +157,47 @@ export function initNavigation(renderCallback) {
         });
       }
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  }, {
+    rootMargin: '-30% 0px -60% 0px'
+  });
 
   sections.forEach(sec => observer.observe(sec));
 
-  // === Логика цвета топ-бара и анимации кнопки ===
+  if (heroSection) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const iframe = document.getElementById('heroIframe');
+
+        if (entry.isIntersecting && entry.intersectionRatio <= 0.5) {
+          navLinks.forEach(link => link.classList.remove('active'));
+
+          if (iframe && iframe.contentWindow) {
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+            const mode = isMobile ? 'disabled' : 'reduced';
+            iframe.contentWindow.postMessage({
+              type: 'HEX_LIVE_TWIST',
+              mode: mode
+            }, '*');
+          }
+        } else {
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({
+              type: 'HEX_LIVE_TWIST',
+              mode: 'normal'
+            }, '*');
+          }
+        }
+      });
+    }, {
+      threshold: [0, 0.5, 1]
+    });
+
+    heroObserver.observe(heroSection);
+  }
+
   let scrollTimer = null;
 
   const handleScroll = () => {
-    // 1. Обновляем цвет топ-бара
     const contentTop = contentArea.getBoundingClientRect().top;
     const footerTop = footer.getBoundingClientRect().top;
     const barHeight = topbar.offsetHeight;
@@ -155,22 +208,15 @@ export function initNavigation(renderCallback) {
       topbar.classList.remove('solid');
     }
 
-    // 2. Обновляем анимацию кнопки
     if (scrollCue && heroSection) {
       const heroHeight = heroSection.offsetHeight;
       const isPastMidpoint = window.scrollY > heroHeight / 2;
 
       if (isPastMidpoint) {
-        // Если проскроллили дальше середины — глухо ставим на паузу
         scrollCue.classList.add('paused');
       } else {
-        // Если мы в верхней половине Hero — временно ставим на паузу (идет скролл)
         scrollCue.classList.add('paused');
-        
-        // Сбрасываем старый таймер
         clearTimeout(scrollTimer);
-        
-        // Откладываем снятие паузы на 200мс после того, как скролл прекратился
         scrollTimer = setTimeout(() => {
           // Проверяем, что мы всё еще не проскроллили половину Hero
           if (window.scrollY <= heroSection.offsetHeight / 2) {
@@ -181,6 +227,8 @@ export function initNavigation(renderCallback) {
     }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // Инициализация при загрузке
+  window.addEventListener('scroll', handleScroll, {
+    passive: true
+  });
+  handleScroll();
 }

@@ -29,6 +29,14 @@ export function initPdfExport() {
     btn.innerHTML = `<svg class="reveal-ring" width="14" height="14" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
 
     try {
+      const originalWidth = iframe.style.width;
+      const originalHeight = iframe.style.height;
+
+      iframe.style.width = '1920px';
+      iframe.style.height = '1080px';
+
+      await new Promise(r => setTimeout(r, 300));
+
       const framePromise = new Promise((resolve) => {
         const handler = (e) => {
           if (e.data && e.data.type === 'SEND_FRAME') {
@@ -39,22 +47,34 @@ export function initPdfExport() {
         window.addEventListener('message', handler);
       });
 
-      iframe.contentWindow.postMessage({ type: 'REQUEST_FRAME' }, '*');
+      iframe.contentWindow.postMessage({
+        type: 'REQUEST_FRAME'
+      }, '*');
       const frameData = await Promise.race([
         framePromise,
         new Promise(r => setTimeout(() => r(null), 5000))
       ]);
+      iframe.style.width = originalWidth;
+      iframe.style.height = originalHeight;
 
       if (frameData) {
         if (frameData.startsWith('<svg') || frameData.startsWith('<?xml')) {
           const parser = new DOMParser();
           const doc = parser.parseFromString(frameData, "image/svg+xml");
           const svgElement = doc.documentElement;
+
+          svgElement.removeAttribute('width');
+          svgElement.removeAttribute('height');
+
+          svgElement.setAttribute('width', '100%');
+          svgElement.setAttribute('height', '100%');
+          svgElement.setAttribute('preserveAspectRatio', 'none');
+
           printBg.innerHTML = '';
           printBg.appendChild(svgElement);
           await new Promise(r => setTimeout(r, 100));
         } else {
-          printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:cover;">`;
+          printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:fill;">`;
         }
         await new Promise(r => setTimeout(r, 100));
       }

@@ -72,22 +72,29 @@
 
   .hero-content {
     display: grid !important;
-    grid-template-columns: 1fr 2fr !important;
+    grid-template-columns: 1fr 1fr !important;
     align-items: center !important;
     justify-items: center !important;
     width: 100% !important;
     flex: 1;
-    gap: 2rem !important;
+    gap: 4rem !important;
+  }
+
+  .hero-text-block::before,
+  .hero-socials::before {
+    display: none !important;
   }
 
   .hero-text-block {
     display: inline-flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 0 !important;
+    padding: 3rem 4rem !important;
     text-align: center !important;
-    justify-self: center;
+    justify-self: end !important;
     max-width: 100%;
+    background: rgba(var(--color-dark-bg-rgb), 0.85) !important;
+    border-radius: var(--radius-lg) !important;
   }
 
   .hero-name {
@@ -113,6 +120,7 @@
     border-radius: 12px !important;
     filter: none !important;
     image-rendering: high-quality;
+    justify-self: start !important;
   }
 
   /* --- MAIN CONTENT AREA --- */
