@@ -10,6 +10,12 @@ export function initContact(i18nConfigGetter) {
   const CACHE_KEY = 'portfolio_contacts_cache';
   const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
+  const GIT_HASH = import.meta.env.VITE_GIT_HASH || 'unknown';
+  const IS_DIRTY = import.meta.env.VITE_IS_GIT_DIRTY === true;
+  const IS_DEV = import.meta.env.DEV;
+
+  const shouldUseCache = !(IS_DEV && IS_DIRTY);
+
   function setButtonState(state, message = '', duration = 0) {
     const submitBtn = $('submitBtn');
     const submitBtnLabel = $('submitBtnLabel');
@@ -177,19 +183,25 @@ export function initContact(i18nConfigGetter) {
   async function prepareRevealPoW() {
     if (contactsRevealed) return;
 
-    try {
-      const cachedRaw = localStorage.getItem(CACHE_KEY);
-      if (cachedRaw) {
-        const cached = JSON.parse(cachedRaw);
-        if (cached && cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL)) {
-          applyContacts(cached.email, cached.telegram);
-          contactsRevealed = true;
-          window.contactsRevealed = true;
-          return;
+    if (shouldUseCache) {
+      try {
+        const cachedRaw = localStorage.getItem(CACHE_KEY);
+        if (cachedRaw) {
+          const cached = JSON.parse(cachedRaw);
+          const isValid = IS_DEV ?
+            (cached && cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL)) :
+            (cached && cached.timestamp && (Date.now() - cached.timestamp < CACHE_TTL) && cached.hash === GIT_HASH);
+
+          if (isValid) {
+            applyContacts(cached.email, cached.telegram);
+            contactsRevealed = true;
+            window.contactsRevealed = true;
+            return;
+          }
         }
+      } catch (e) {
+        console.warn('Cache read failed:', e);
       }
-    } catch (e) {
-      console.warn('Cache read failed:', e);
     }
 
     let workerUrl;
@@ -237,16 +249,18 @@ export function initContact(i18nConfigGetter) {
       contactsRevealed = true;
       window.contactsRevealed = true;
 
-      try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify({
-          email,
-          telegram,
-          timestamp: Date.now()
-        }));
-      } catch (e) {
-        console.warn('Cache save failed:', e);
+      if (shouldUseCache) {
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            email,
+            telegram,
+            timestamp: Date.now(),
+            hash: GIT_HASH
+          }));
+        } catch (e) {
+          console.warn('Cache save failed:', e);
+        }
       }
-
     } catch (err) {
       console.error('Reveal PoW prep failed:', err);
       setRevealState('error', err.message || 'Failed to load contacts');

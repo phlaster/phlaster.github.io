@@ -29,6 +29,9 @@ function rerender(newLang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   renderContent(i18nConfig, currentLang);
 
   initNavigation(rerender);
