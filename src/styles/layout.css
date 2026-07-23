@@ -11,9 +11,9 @@
   display: flex;
   align-items: center;
   padding: 0 var(--gutter);
-  background: rgba(var(--color-dark-bg-rgb), 0.5);
-  backdrop-filter: saturate(180%) blur(12px);
+  background-color: rgba(var(--color-dark-bg-rgb), 0.5);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
   color: var(--color-dark-fg);
   transition: background .3s, color .3s, border-color .3s;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -373,10 +373,10 @@
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  background: transparent;
+  background-color: transparent;
   border: 1px transparent;
-  backdrop-filter: brightness(0.9) blur(10px);
   -webkit-backdrop-filter: brightness(0.9) blur(10px);
+  backdrop-filter: brightness(0.9) blur(10px);
   isolation: isolate;
   padding: .8rem 1rem;
   border-radius: var(--radius-lg);
@@ -408,8 +408,8 @@
 }
 
 .scroll-cue:hover {
-  backdrop-filter: brightness(0.9) blur(12px);
   -webkit-backdrop-filter: brightness(0.4) blur(12px);
+  backdrop-filter: brightness(0.4) blur(12px);
 }
 
 .scroll-cue.paused {
