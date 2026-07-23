@@ -483,3 +483,107 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* === Submit Button States === */
+.submit-btn {
+  position: relative;
+  min-width: 150px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, opacity .2s, color .2s, border-color .2s;
+}
+
+.submit-btn .btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.submit-btn.is-loading {
+  background: rgba(var(--color-dark-fg-rgb), 0.15);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
+  color: transparent;
+  cursor: progress;
+  opacity: 1;
+}
+
+.submit-btn.is-error {
+  background: transparent;
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.submit-btn.is-error::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: normal;
+  width: 200px;
+  max-width: 80vw;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn.is-error:hover::after,
+.submit-btn.is-error:active::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.submit-btn.is-timed-out {
+  background: rgba(var(--color-dark-fg-rgb), 0.15);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
+  color: transparent;
+  cursor: progress;
+  opacity: 1;
+}
+
+.submit-btn.is-timed-out::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: normal;
+  width: 200px;
+  max-width: 80vw;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn.is-timed-out:hover::after,
+.submit-btn.is-timed-out:active::after {
+  opacity: 1;
+  visibility: visible;
+}

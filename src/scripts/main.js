@@ -36,7 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initPdfModal(() => i18nConfig);
   initPdfExport();
 
-  document.getElementById('langCurrent').textContent = currentLang.toUpperCase();
+  const langAbbr = {
+    en: 'ENG',
+    ru: 'RUS',
+    fr: 'FRA'
+  };
+  document.getElementById('langCurrent').textContent = langAbbr[currentLang] || 'ENG';
   document.querySelectorAll('#langDropdown li').forEach(li => {
     li.classList.toggle('active', li.dataset.lang === currentLang);
   });

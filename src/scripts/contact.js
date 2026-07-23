@@ -5,9 +5,79 @@ export function initContact(i18nConfigGetter) {
   let formNonce = null;
   let isComputingFormPoW = false;
   let contactsRevealed = false;
+  let timeoutTimer = null;
 
   const CACHE_KEY = 'portfolio_contacts_cache';
   const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+  function setButtonState(state, message = '', duration = 0) {
+    const submitBtn = $('submitBtn');
+    const submitBtnLabel = $('submitBtnLabel');
+    const submitLoader = document.querySelector('.submit-loader');
+    const submitErrorIcon = document.querySelector('.submit-error-icon');
+
+    submitBtn.classList.remove('is-loading', 'is-error', 'is-timed-out');
+    submitLoader.style.display = 'none';
+    submitErrorIcon.style.display = 'none';
+    submitBtnLabel.style.display = 'inline';
+    submitBtn.removeAttribute('data-tooltip');
+
+    const existingSpinner = submitBtn.querySelector('.btn-spinner');
+    if (existingSpinner) existingSpinner.remove();
+
+    if (timeoutTimer) {
+      clearTimeout(timeoutTimer);
+      timeoutTimer = null;
+    }
+
+    if (state === 'loading') {
+      submitBtn.classList.add('is-loading');
+      submitBtn.disabled = true;
+      submitBtnLabel.style.display = 'none';
+      submitLoader.style.display = 'block';
+      const ringFg = submitLoader.querySelector('.ring-fg');
+      ringFg.style.animation = 'none';
+      void ringFg.offsetWidth;
+      ringFg.style.animation = 'fillRing 10s linear forwards';
+    } else if (state === 'syncing') {
+      submitBtn.classList.add('is-loading');
+      submitBtn.disabled = true;
+      submitBtnLabel.style.display = 'none';
+      const spinner = document.createElement('span');
+      spinner.className = 'btn-spinner';
+      submitBtn.appendChild(spinner);
+    } else if (state === 'ready') {
+      submitBtn.disabled = false;
+    } else if (state === 'error') {
+      submitBtn.classList.add('is-error');
+      submitBtn.disabled = false;
+      submitBtnLabel.style.display = 'none';
+      submitErrorIcon.style.display = 'block';
+      if (message) submitBtn.setAttribute('data-tooltip', message);
+    } else if (state === 'timed-out') {
+      submitBtn.classList.add('is-timed-out');
+      submitBtn.disabled = true;
+      submitBtnLabel.style.display = 'none';
+      submitLoader.style.display = 'block';
+
+      const ringFg = submitLoader.querySelector('.ring-fg');
+      ringFg.style.animation = 'none';
+      void ringFg.offsetWidth;
+      ringFg.style.animation = `fillRing ${duration}s linear forwards`;
+
+      if (message) submitBtn.setAttribute('data-tooltip', message);
+
+      timeoutTimer = setTimeout(() => {
+        if (messageInput.value.trim() && formChallenge && formNonce) {
+          setButtonState('ready');
+        } else {
+          setButtonState('default');
+        }
+      }, duration * 1000);
+    } else if (state === 'default') {
+      submitBtn.disabled = true;
+    }
+  }
 
   function getWorkerUrl() {
     const config = i18nConfigGetter();
@@ -56,26 +126,31 @@ export function initContact(i18nConfigGetter) {
 
   async function prepareFormPoW() {
     if (isComputingFormPoW || (formChallenge && formNonce)) return;
-    
+
     let workerUrl;
     try {
       workerUrl = getWorkerUrl();
     } catch (e) {
-      console.error('Form PoW prep failed:', e.message);
+      setButtonState('error', e.message);
       return;
     }
 
+    setButtonState('loading');
     isComputingFormPoW = true;
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
       if (!resCh.ok) throw new Error('Failed to get challenge');
-      const { challenge } = await resCh.json();
+      const {
+        challenge
+      } = await resCh.json();
       formChallenge = challenge;
-      
+
       const timeoutPromise = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), 10000));
       formNonce = await Promise.race([solvePoW(challenge), timeoutPromise]);
+
+      setButtonState('ready');
     } catch (err) {
-      console.error('Form PoW prep failed:', err);
+      setButtonState('error', err.message || 'PoW preparation failed');
       formChallenge = null;
     } finally {
       isComputingFormPoW = false;
@@ -86,7 +161,7 @@ export function initContact(i18nConfigGetter) {
     const tgWrap = $('channelTelegramWrap');
     const emailWrap = $('channelEmailWrap');
     if (!tgWrap || !emailWrap) return;
-    
+
     if (state === 'loading') {
       const ringHtml = `<div class="value" style="width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;"><svg class="reveal-ring" width="20" height="20" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(244, 241, 234, 0.1)" stroke-width="3"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--color-accent-soft)" stroke-width="3" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></div>`;
       const html = (label) => `<span class="label">${label}</span>${ringHtml}`;
@@ -130,23 +205,33 @@ export function initContact(i18nConfigGetter) {
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
       if (!resCh.ok) throw new Error('Failed to get challenge from server');
-      const { challenge } = await resCh.json();
-      
+      const {
+        challenge
+      } = await resCh.json();
+
       const timeoutPromise = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), 10000));
       const nonce = await Promise.race([solvePoW(challenge), timeoutPromise]);
 
       const resData = await fetch(`${workerUrl}/api/get-email`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ challenge, nonce })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          challenge,
+          nonce
+        })
       });
 
       if (!resData.ok) {
         const errData = await resData.json().catch(() => ({}));
         throw new Error(errData.error || 'Verification failed');
       }
-      
-      const { email, telegram } = await resData.json();
+
+      const {
+        email,
+        telegram
+      } = await resData.json();
 
       applyContacts(email, telegram);
       contactsRevealed = true;
@@ -154,7 +239,9 @@ export function initContact(i18nConfigGetter) {
 
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({
-          email, telegram, timestamp: Date.now()
+          email,
+          telegram,
+          timestamp: Date.now()
         }));
       } catch (e) {
         console.warn('Cache save failed:', e);
@@ -184,7 +271,9 @@ export function initContact(i18nConfigGetter) {
   function invalidateAndRemine() {
     formChallenge = null;
     formNonce = null;
-    prepareFormPoW();
+    if (!$('submitBtn').classList.contains('is-loading') && !$('submitBtn').classList.contains('is-syncing')) {
+      prepareFormPoW();
+    }
   }
 
   $('contactForm').addEventListener('submit', async (e) => {
@@ -194,6 +283,11 @@ export function initContact(i18nConfigGetter) {
     const config = i18nConfigGetter();
     const u = config.ui.contact || {};
 
+    if (btn.classList.contains('is-error')) {
+      invalidateAndRemine();
+      return;
+    }
+
     const name = $('f-name').value.trim();
     const email = $('f-email').value.trim();
     const subject = $('f-subject').value.trim();
@@ -202,6 +296,7 @@ export function initContact(i18nConfigGetter) {
     if (!message || message.length > 2000 || name.length > 30 || subject.length > 60) {
       status.textContent = u.form_invalid;
       status.className = 'form-status error';
+      setButtonState('error', u.form_invalid);
       invalidateAndRemine();
       return;
     }
@@ -210,17 +305,23 @@ export function initContact(i18nConfigGetter) {
     if (email && (email.length > 30 || !emailRegex.test(email))) {
       status.textContent = u.form_invalid_email;
       status.className = 'form-status error';
+      setButtonState('error', u.form_invalid_email);
       invalidateAndRemine();
       return;
     }
 
-    btn.disabled = true;
+    setButtonState('syncing');
     status.textContent = u.sending;
     status.className = 'form-status';
 
     try {
       if (!formChallenge && !isComputingFormPoW) await prepareFormPoW();
       while (isComputingFormPoW) await new Promise(r => setTimeout(r, 100));
+
+      if (formNonce === 'TIMEOUT') {
+        setButtonState('syncing');
+        formNonce = await solvePoW(formChallenge);
+      }
 
       const res = await fetch(`${config.contact.worker_url}/api/submit`, {
         method: 'POST',
@@ -238,10 +339,7 @@ export function initContact(i18nConfigGetter) {
       });
 
       const errData = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        throw new Error(errData.error || 'Server error');
-      }
+      if (!res.ok) throw new Error(errData.error || 'Server error');
 
       status.textContent = u.success;
       status.className = 'form-status success';
@@ -250,13 +348,37 @@ export function initContact(i18nConfigGetter) {
 
       formChallenge = null;
       formNonce = null;
+      setButtonState('default');
 
     } catch (err) {
-      status.textContent = err.message || u.error;
-      status.className = 'form-status error';
-      invalidateAndRemine();
-    } finally {
-      btn.disabled = false;
+      const errMsg = err.message || u.error;
+
+      const isRateLimit30 = errMsg.includes('30 seconds');
+      const isRateLimit60 = errMsg.includes('1 minute') || errMsg.includes('60 seconds');
+
+      if (isRateLimit30) {
+        if (sessionStorage.getItem('rate_limit_30s')) {
+          status.textContent = errMsg;
+          status.className = 'form-status error';
+          setButtonState('error', errMsg);
+          invalidateAndRemine();
+        } else {
+          sessionStorage.setItem('rate_limit_30s', '1');
+          setButtonState('timed-out', errMsg, 30);
+          status.textContent = ''; // Прячем текстовый статус
+          status.className = 'form-status';
+          setTimeout(() => sessionStorage.removeItem('rate_limit_30s'), 30000);
+        }
+      } else if (isRateLimit60) {
+        setButtonState('timed-out', errMsg, 60);
+        status.textContent = '';
+        status.className = 'form-status';
+      } else {
+        status.textContent = errMsg;
+        status.className = 'form-status error';
+        setButtonState('error', errMsg);
+        invalidateAndRemine();
+      }
     }
   });
 }

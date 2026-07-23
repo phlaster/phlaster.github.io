@@ -15,7 +15,14 @@ export function initNavigation(renderCallback) {
     li.addEventListener('click', () => {
       const newLang = li.dataset.lang;
       langDropdown.querySelectorAll('li').forEach(x => x.classList.toggle('active', x === li));
-      $('langCurrent').textContent = newLang.toUpperCase();
+
+      const langAbbr = {
+        en: 'ENG',
+        ru: 'RUS',
+        fr: 'FRA'
+      };
+      $('langCurrent').textContent = langAbbr[newLang] || 'ENG';
+
       langSwitch.classList.remove('open');
       renderCallback(newLang);
     });
@@ -34,7 +41,30 @@ export function initNavigation(renderCallback) {
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = Array.from(document.querySelectorAll('.content-section, #contact'));
 
-  // === Клик по логотипу A.M — проматывает в самый верх ===
+  const heroIframe = $('heroIframe');
+  let lastTwistMode = '';
+
+  function updateHeroTwistMode() {
+    if (!heroIframe || !heroIframe.contentWindow) return;
+
+    const scrolledHalfway = window.scrollY > window.innerHeight * 0.5;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches || ('ontouchstart' in window && window.innerWidth <= 768);
+
+    let newMode = 'normal';
+    if (scrolledHalfway) {
+      newMode = isMobile ? 'disabled' : 'reduced';
+    }
+
+    if (newMode !== lastTwistMode) {
+      lastTwistMode = newMode;
+      heroIframe.contentWindow.postMessage({
+        type: 'HEX_LIVE_TWIST',
+        mode: newMode
+      }, '*');
+    }
+  }
+
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
     brandEl.style.cursor = 'pointer';
@@ -46,23 +76,17 @@ export function initNavigation(renderCallback) {
     });
   }
 
-  // === Функция точного расчета позиции скролла ===
   function getTargetScrollTop(targetId) {
     const targetEl = document.getElementById(targetId);
     if (!targetEl) return 0;
 
-    // Для футера (контактов) выравниваем верхнюю границу вплотную к топ-бару,
-    // и опускаем еще на 30px ниже, как было запрошено.
     if (targetId === 'contact') {
       return targetEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 50;
     }
 
-    // Для остальных секций таргетимся на заголовок (.panel-head), 
-    // чтобы скрыть горизонтальный разделитель и убрать лишние отступы.
     const panelHead = targetEl.querySelector('.panel-head');
     const anchorEl = panelHead || targetEl;
 
-    // Оставляем 20px воздуха между топ-баром и заголовком
     return anchorEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight - 10;
   }
 
@@ -88,7 +112,7 @@ export function initNavigation(renderCallback) {
   }
 
   function getActiveSectionIndex() {
-    const scrollPos = window.scrollY + topbar.offsetHeight + 50; // 50px запас для корректного определения
+    const scrollPos = window.scrollY + topbar.offsetHeight + 50;
     let activeIndex = -1;
 
     for (let i = 0; i < sections.length; i++) {
@@ -172,8 +196,12 @@ export function initNavigation(renderCallback) {
     }
   };
 
-  window.addEventListener('scroll', updateTopbar, {
+  window.addEventListener('scroll', () => {
+    updateTopbar();
+    updateHeroTwistMode();
+  }, {
     passive: true
   });
   updateTopbar();
+  updateHeroTwistMode();
 }

@@ -4,12 +4,20 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 export function renderContent(i18nConfig, lang) {
   document.documentElement.lang = lang;
   
+  const a = i18nConfig.about || {};
+  const fullName = a.name || '—';
+  const nameParts = fullName.split(/\s+/).filter(p => p.length > 0);
+  
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
-    if (lang === 'ru') {
-      brandEl.innerHTML = 'А<span class="dot">·</span>М';
+    if (nameParts.length >= 2) {
+      const firstInitial = nameParts[0].charAt(0).toUpperCase();
+      const lastInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+      brandEl.innerHTML = `${firstInitial}<span class="dot">·</span>${lastInitial}`;
+    } else if (nameParts.length === 1) {
+      brandEl.innerHTML = `${nameParts[0].charAt(0).toUpperCase()}<span class="dot">·</span>`;
     } else {
-      brandEl.innerHTML = 'A<span class="dot">·</span>M';
+      brandEl.innerHTML = `?<span class="dot">·</span>?`;
     }
   }
 
@@ -17,8 +25,6 @@ export function renderContent(i18nConfig, lang) {
   const sections = ui.sections || {};
 
   // HERO
-  const a = i18nConfig.about || {};
-  const nameParts = (a.name || '—').split(' ');
   $('heroName').innerHTML = nameParts.length > 1 ? `<span>${esc(nameParts[0])}</span><em>${esc(nameParts.slice(1).join(' '))}</em>` : `<span>${esc(a.name)}</span>`;
   $('heroTagline').textContent = a.tagline || '';
   $('heroPhoto').src = i18nConfig.site.photo_top;
