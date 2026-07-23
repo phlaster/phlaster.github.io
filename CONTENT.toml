@@ -422,7 +422,7 @@ tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
 [[projects]]
 name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
-cover = "/assets/projects/deppa_social.jpg"
+cover = "/assets/projects/deppa_social.webp"
 languages = ["Julia"]
 
 [projects.en]
@@ -435,7 +435,7 @@ description = "Высопроизводительный пакет на Julia д
 [[projects]]
 name = "Pannagram"
 url = "https://github.com/iganna/pannagram"
-cover = "/assets/projects/pannagram_social.jpg"
+cover = "/assets/projects/pannagram_social.webp"
 languages = ["R", "Bash"]
 
 [projects.en]
@@ -448,7 +448,7 @@ description = "Инструментарий для построения лине
 [[projects]]
 name = "SeqFold.jl"
 url = "https://github.com/phlaster/SeqFold.jl"
-cover = "/assets/projects/seqfold_social.jpg"
+cover = "/assets/projects/seqfold_social.webp"
 languages = ["Julia"]
 
 [projects.en]
@@ -461,7 +461,7 @@ description = "..."
 [[projects]]
 name = "hextiles"
 url = "https://github.com/phlaster/hextiles"
-cover = "/assets/projects/hextiles_social.jpg"
+cover = "/assets/projects/hextiles_social.webp"
 languages = ["Vanilla JS", "WebGL", "CSS"]
 
 [projects.en]
@@ -474,7 +474,7 @@ description = "Интерактивная песочница с гексагон
 [[projects]]
 name = "CertForge"
 url = "https://github.com/phlaster/CertForge"
-cover = "/assets/projects/certforge_social.jpg"
+cover = "/assets/projects/certforge_social.webp"
 languages = ["JS", "CSS"]
 
 [projects.en]
@@ -487,7 +487,7 @@ description = "..."
 [[projects]]
 name = "RGBZones"
 url = "https://github.com/phlaster/RGBZones"
-cover = "/assets/projects/rgbzones_social.jpg"
+cover = "/assets/projects/rgbzones_social.webp"
 languages = ["Python", "JS", "CSS"]
 
 [projects.en]
@@ -500,7 +500,7 @@ description = "..."
 [[projects]]
 name = "SMILES-DASS"
 url = "https://github.com/phlaster/SMILES-DASS"
-cover = "/assets/projects/smiles_dass_social.jpg"
+cover = "/assets/projects/smiles_dass_social.webp"
 languages = ["Python", "Torch"]
 
 [projects.en]
@@ -513,7 +513,7 @@ description = "..."
 [[projects]]
 name = "geovue"
 url = "https://github.com/phlaster/geovue"
-cover = "/assets/projects/geovue_social.jpg"
+cover = "/assets/projects/geovue_social.webp"
 languages = ["JS", "CSS"]
 
 [projects.en]
