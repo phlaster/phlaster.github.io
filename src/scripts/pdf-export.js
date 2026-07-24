@@ -7,7 +7,8 @@ export function initPdfExport() {
   const originalHTML = btn.innerHTML;
   let isExporting = false;
 
-  const createBlurredBg = (dataUrlOrSvg) => {
+  // Универсальная функция для растеризации кадра
+  const createRasterBg = (dataUrlOrSvg, applyBlur = false) => {
     return new Promise((resolve) => {
       let imgSrc = dataUrlOrSvg;
       if (dataUrlOrSvg.startsWith('<svg') || dataUrlOrSvg.startsWith('<?xml')) {
@@ -17,23 +18,27 @@ export function initPdfExport() {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        canvas.width = 1920;
-        canvas.height = 1080;
+
+        canvas.width = applyBlur ? 900 : 1600;
+        canvas.height = applyBlur ? 720 : 1280;
+        
         const ctx = canvas.getContext('2d');
         
         ctx.fillStyle = '#070D15';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.filter = 'grayscale(40%) blur(3px)';
-        ctx.globalAlpha = 0.7;
+        if (applyBlur) {
+          ctx.filter = 'grayscale(40%) blur(2px)';
+          ctx.globalAlpha = 0.7;
+        } else {
+          ctx.filter = 'blur(1px)';
+        }
+        
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         
         try {
-          if (canvas.toDataURL('image/webp').startsWith('data:image/webp')) {
-            resolve(canvas.toDataURL('image/webp', 0.8));
-          } else {
-            resolve(canvas.toDataURL('image/jpeg', 0.8));
-          }
+          // ВОЗВРАЩАЕМ JPEG! Chrome отлично встраивает его в PDF без раздувания
+          resolve(canvas.toDataURL('image/jpeg', applyBlur ? 0.5 : 0.7));
         } catch (e) {
           resolve(imgSrc);
         }
@@ -72,7 +77,6 @@ export function initPdfExport() {
       iframe.style.width = '1920px';
       iframe.style.height = '1080px';
 
-      // Возвращаем iframe в нормальное состояние и ждем чуть дольше (600мс)
       iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: 'normal' }, '*');
       await new Promise(r => setTimeout(r, 600));
 
@@ -96,24 +100,14 @@ export function initPdfExport() {
       iframe.style.height = originalHeight;
 
       if (frameData) {
-        let clearBgHtml = '';
-        if (frameData.startsWith('<svg') || frameData.startsWith('<?xml')) {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(frameData, "image/svg+xml");
-          const svgElement = doc.documentElement;
-          svgElement.removeAttribute('width');
-          svgElement.removeAttribute('height');
-          svgElement.setAttribute('width', '100%');
-          svgElement.setAttribute('height', '100%');
-          svgElement.setAttribute('preserveAspectRatio', 'none');
-          clearBgHtml = svgElement.outerHTML;
-        } else {
-          clearBgHtml = `<img src="${frameData}" style="width:100%;height:100%;object-fit:fill;">`;
+        // 1. Создаем четкий WebP (1280x720)
+        const clearBg = await createRasterBg(frameData, false);
+        if (heroPrintBg) {
+          heroPrintBg.innerHTML = `<img src="${clearBg}" style="width:100%;height:100%;object-fit:fill;">`;
         }
 
-        if (heroPrintBg) heroPrintBg.innerHTML = clearBgHtml;
-
-        const blurredBg = await createBlurredBg(frameData);
+        // 2. Создаем размытый WebP (960x540)
+        const blurredBg = await createRasterBg(frameData, true);
         if (printBg) {
           printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:fill;">`;
         }
