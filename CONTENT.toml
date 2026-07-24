@@ -168,8 +168,8 @@ description = { en = "40.03.01.02, Law", fr = "40.03.01.02, Droit", ru = "40.03.
 [[skill_groups]]
 title = { en = "Languages", fr = "Langues", ru = "Языки" }
 items = [
-  { name = { en = "Russian (Native)", fr = "Russe (Natif)", ru = "Русский (Родной)" } },
-  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" } },
+  { name = { en = "Russian (Native)", fr = "Russe (Natif)", ru = "Русский (Родной)" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"]},
   { name = { en = "French (B1)", fr = "Français (B1)", ru = "Французский (B1)" } }
 ]
 
