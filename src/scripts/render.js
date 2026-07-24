@@ -24,13 +24,25 @@ export function renderContent(i18nConfig, lang) {
   const ui = i18nConfig.ui || {};
   const sections = ui.sections || {};
 
+  // === Translate Navigation Links ===
+  const navTitles = {
+    about: sections.about_title,
+    career: sections.career_title,
+    projects: sections.proj_title,
+    research: sections.research_title,
+    documents: sections.docs_title,
+    contact: ui.write_me
+  };
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const key = link.dataset.nav;
+    if (navTitles[key]) link.textContent = navTitles[key];
+  });
+
   // HERO
   $('heroName').innerHTML = nameParts.length > 1 ? `<span>${esc(nameParts[0])}</span><em>${esc(nameParts.slice(1).join(' '))}</em>` : `<span>${esc(a.name)}</span>`;
   $('heroTagline').textContent = a.tagline || '';
   $('heroPhoto').src = i18nConfig.site.photo_top;
   $('scrollCueText').textContent = ui.scroll_cue;
-  const writeMeLink = document.querySelector('.nav-link[href="#contact"]');
-  if (writeMeLink) writeMeLink.textContent = ui.write_me;
 
   const iframe = $('heroIframe');
   const heroUrl = i18nConfig.hero?.iframe_url;
@@ -54,10 +66,8 @@ export function renderContent(i18nConfig, lang) {
   $('about-sub').textContent = sections.about_sub;
   
   const interests = a.interests || { items: [] };
-  const interestsHtml = interests.items.map(i => `<li>${esc(i)}</li>`).join('');
-
-  const edu = a.education || [];
-  const eduHtml = edu.map(e => `<li><strong>${esc(e.degree)}</strong> — ${esc(e.institution)} (${esc(e.period)})</li>`).join('');
+  const hobbies = a.hobbies || { items: [] };
+  const social = a.social || { items: [] };
 
   $('about-content').innerHTML = `
     <div class="about-grid">
@@ -71,64 +81,59 @@ export function renderContent(i18nConfig, lang) {
           <div class="meta-value"><a href="https://www.openstreetmap.org/?query=${esc(a.location)}" target="_blank">${esc(a.location)}</a></div>
         </div>
         <div class="meta-block">
-          <div class="meta-label">${esc(ui.spoken_languages)}</div>
-          <ul class="meta-list">
-            ${Object.entries(a.spoken_languages || {}).map(([n, l]) => `<li><span>${esc(n)}</span><span class="lang-level">${esc(l)}</span></li>`).join('')}
-          </ul>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">${esc(ui.education)}</div>
-          <ul class="meta-list">${eduHtml}</ul>
-        </div>
-      </div>
-      <div class="about-meta" style="grid-column: 1 / -1;">
-        <div class="meta-block">
           <div class="meta-label">${esc(interests.title)}</div>
-          <ul class="meta-list interests-list">${interestsHtml}</ul>
+          <div class="skill-tags">${interests.items.map(i => `<span class="skill-tag">${esc(i)}</span>`).join('')}</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">${esc(hobbies.title)}</div>
+          <div class="skill-tags">${hobbies.items.map(i => `<span class="skill-tag">${esc(i)}</span>`).join('')}</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">${esc(social.title)}</div>
+          <div class="about-socials">
+            ${social.items.map(icon => `
+              <a href="${esc(icon.url)}" class="about-social-link" target="_blank" rel="noopener noreferrer" title="${esc(icon.key)}">
+                <img src="${esc(icon.icon)}" alt="${esc(icon.key)}">
+              </a>
+            `).join('')}
+          </div>
         </div>
       </div>
     </div>
   `;
 
-  // CAREER & SKILLS
+  // CAREER & SKILLS (Education and career)
   $('career-title').textContent = sections.career_title;
   $('career-sub').textContent = sections.career_sub;
-  const exps = i18nConfig.experience || [];
-  const skills = i18nConfig.skills || [];
+  const timeline = i18nConfig.timeline || [];
+  const skillGroups = i18nConfig.skill_groups || [];
 
-  const expHtml = exps.map(e => `
-    <div class="exp-item">
-      <div class="exp-period">${esc(e.period)}</div>
-      <div class="exp-content">
-        <div class="exp-role">${esc(e.role)}</div>
-        <div class="exp-company">${esc(e.company)}</div>
-        <div class="exp-desc">${esc(e.description)}</div>
-        ${e.skills_gained ? `
-          <div class="exp-skills">
-            <span class="meta-label">Skills gained:</span>
-            <div class="skill-tags">${e.skills_gained.map(t => `<span class="skill-tag">${esc(t)}</span>`).join('')}</div>
-          </div>
-        ` : ''}
+  const timelineHtml = timeline.map(e => `
+    <a class="timeline-item" href="${esc(e.url || '#')}" target="_blank" rel="noopener" data-place="${esc(e.place_id || '')}">
+      <div class="timeline-period">${esc(e.period)}</div>
+      <div class="timeline-content">
+        <div class="timeline-role">${esc(e.role)}</div>
+        <div class="timeline-org">${esc(e.organization)}</div>
+        <div class="timeline-desc">${esc(e.description)}</div>
       </div>
-    </div>
+    </a>
   `).join('');
 
-  const skillsHtml = skills.map(s => `
-    <div class="skill-item">
-      <h3>${esc(s.title)}</h3>
-      <p class="skill-desc">${esc(s.description)}</p>
-      <div class="skill-tags">${(s.tags||[]).map(t => `<span class="skill-tag">${esc(t)}</span>`).join('')}</div>
+  const skillsHtml = skillGroups.map(g => `
+    <div class="skill-group">
+      <div class="meta-label">${esc(g.title)}</div>
+      <div class="skill-tags">${(g.items||[]).map(i => `<span class="skill-tag" data-places="${esc((i.places || []).join(' '))}">${esc(i.name)}</span>`).join('')}</div>
     </div>
   `).join('');
 
   $('career-content').innerHTML = `
     <div class="career-grid">
       <div class="career-col">
-        <h3 class="research-col-title">Experience</h3>
-        ${expHtml}
+        <h3 class="research-col-title">${esc(ui.timeline_title || 'Timeline')}</h3>
+        <div class="timeline-list">${timelineHtml}</div>
       </div>
       <div class="career-col">
-        <h3 class="research-col-title">Expertise</h3>
+        <h3 class="research-col-title">${esc(ui.expertise_title || 'Expertise')}</h3>
         <div class="skills-groups">${skillsHtml}</div>
       </div>
     </div>
@@ -158,59 +163,36 @@ export function renderContent(i18nConfig, lang) {
   const confs = i18nConfig.conferences || [];
   const grants = i18nConfig.grants || [];
   
-  const confHtml = confs.map(c => `
-    <a class="conf-item ${c.pdf_url ? 'has-pdf' : ''}" ${c.url ? `href="${esc(c.url)}" target="_blank" rel="noopener"` : ''}>
-      <img src="${esc(c.cover)}" class="conf-cover" alt="${esc(c.title)}" onerror="this.style.display='none'">
-      <div class="conf-details">
-        <div class="conf-date">${esc(c.date)}</div>
-        <div class="conf-title">${esc(c.title)}</div>
-        <div class="conf-meta">
-          <span class="conf-location">📍 ${esc(c.location)}</span>
-          <span class="conf-role">${esc(c.role)}</span>
+  const renderItem = (item, showImage = false) => {
+    const date = item.date || item.year;
+    const meta = [item.authors, item.role, item.venue, item.location ? `${item.location}` : ''].filter(Boolean).join(' · ');
+    return `
+      <a class="research-item" href="${esc(item.url || '#')}" target="_blank" rel="noopener">
+        ${showImage && item.cover ? `<img src="${esc(item.cover)}" class="research-cover" alt="${esc(item.title)}" onerror="this.style.display='none'">` : ''}
+        <div class="research-details">
+          ${date ? `<div class="research-date">${esc(date)}</div>` : ''}
+          <div class="research-title">${esc(item.title)}</div>
+          ${meta ? `<div class="research-meta">${esc(meta)}</div>` : ''}
+          ${item.description ? `<div class="research-meta">${esc(item.description)}</div>` : ''}
+          ${item.pdf ? `<button class="view-pdf-btn" data-pdf="${esc(item.pdf)}" type="button">${esc(ui.view_pdf || 'Open PDF')}</button>` : ''}
         </div>
-      </div>
-    </a>
-  `).join('');
-
-  const pubHtml = pubs.map(p => `
-    <div class="pub-item">
-      <div class="pub-year">${esc(p.year)}</div>
-      <div class="pub-content">
-        <a href="${esc(p.url)}" target="_blank" rel="noopener" class="pub-title-link">
-          <div class="pub-title">${esc(p.title)}</div>
-        </a>
-        <div class="pub-authors">${esc(p.authors)}</div>
-        <div class="pub-venue">${esc(p.venue)}</div>
-      </div>
-    </div>
-  `).join('');
-
-  const grantsHtml = grants.map(g => `
-    <div class="pub-item">
-      <div class="pub-year">${esc(g.year)}</div>
-      <div class="pub-content">
-        <a href="${esc(g.url)}" target="_blank" rel="noopener" class="pub-title-link">
-          <div class="pub-title">${esc(g.title)}</div>
-        </a>
-        <div class="pub-authors">${esc(g.role)}</div>
-        <div class="pub-venue">${esc(g.description)}</div>
-      </div>
-    </div>
-  `).join('');
+      </a>
+    `;
+  };
 
   $('research-content').innerHTML = `
     <div class="research-grid">
       <div class="research-col">
         <h3 class="research-col-title">${esc(sections.research_conf)}</h3>
-        <div class="conf-list">${confHtml}</div>
+        <div class="research-list">${confs.map(c => renderItem(c, true)).join('')}</div>
       </div>
       <div class="research-col">
         <h3 class="research-col-title">${esc(sections.research_pubs)}</h3>
-        <div class="pub-list">${pubHtml}</div>
+        <div class="research-list">${pubs.map(p => renderItem(p, false)).join('')}</div>
       </div>
       <div class="research-col">
         <h3 class="research-col-title">${esc(sections.research_grants)}</h3>
-        <div class="pub-list">${grantsHtml}</div>
+        <div class="research-list">${grants.map(g => renderItem(g, false)).join('')}</div>
       </div>
     </div>
   `;
@@ -218,27 +200,27 @@ export function renderContent(i18nConfig, lang) {
   // DOCUMENTS
   $('docs-title').textContent = sections.docs_title;
   $('docs-sub').textContent = sections.docs_sub;
-  const docs = i18nConfig.documents || [];
+  const docs = (i18nConfig.documents || []).filter(d => !d.languages || d.languages.includes(lang));
   
   $('documents-content').innerHTML = `
     <div class="documents-grid">
-      ${docs.map(d => `
-        <div class="doc-item">
-          <div class="doc-meta">
-            <span class="doc-category">${esc(d.category)}</span>
-            <span class="doc-date">${esc(d.date)}</span>
-          </div>
-          <div class="doc-content">
-            <div class="doc-title">${esc(d.title)}</div>
-            <div class="doc-desc">${esc(d.description)}</div>
-          </div>
-          ${d.url ? `
-            <button class="view-pdf-btn" data-pdf="${esc(d.url)}">
-              ${esc(ui.view_pdf || 'Open PDF')}
-            </button>
-          ` : ''}
-        </div>
-      `).join('')}
+      ${docs.map(d => {
+        const Tag = d.url ? 'a' : 'div';
+        const attrs = d.url ? `href="${esc(d.url)}" target="_blank" rel="noopener" data-pdf="${esc(d.url)}"` : '';
+        return `
+          <${Tag} class="doc-item" ${attrs}>
+            <div class="doc-meta">
+              <span class="doc-category">${esc(d.category)}</span>
+              <span class="doc-date">${esc(d.date)}</span>
+            </div>
+            <div class="doc-content">
+              <div class="doc-title">${esc(d.title)}</div>
+              <div class="doc-desc">${esc(d.description)}</div>
+            </div>
+            ${d.url ? `<span class="view-pdf-btn">${esc(ui.view_pdf || 'Open PDF')}</span>` : ''}
+          </${Tag}>
+        `;
+      }).join('')}
     </div>
   `;
 

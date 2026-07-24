@@ -227,8 +227,58 @@ export function initNavigation(renderCallback) {
     }
   };
 
+  // === Sync highlighting between timeline and skills ===
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const skillTags = document.querySelectorAll('.skill-tag[data-places]');
+
+  timelineItems.forEach(item => {
+    const placeId = item.dataset.place;
+    if (!placeId) return;
+
+    const relatedTags = Array.from(skillTags).filter(tag =>
+      tag.dataset.places.split(' ').includes(placeId)
+    );
+
+    item.addEventListener('mouseenter', () => {
+      relatedTags.forEach(tag => tag.classList.add('highlight'));
+      item.classList.add('is-highlighted');
+    });
+
+    item.addEventListener('mouseleave', () => {
+      relatedTags.forEach(tag => tag.classList.remove('highlight'));
+      item.classList.remove('is-highlighted');
+    });
+  });
+
   window.addEventListener('scroll', handleScroll, {
     passive: true
   });
   handleScroll();
+}
+
+export function initCareerHighlighting() {
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const skillTags = document.querySelectorAll('.skill-tag[data-places]');
+  const skillsContainer = document.querySelector('.skills-groups');
+
+  if (!timelineItems.length || !skillTags.length) return;
+
+  timelineItems.forEach(item => {
+    const placeId = item.dataset.place;
+    if (!placeId) return;
+
+    const relatedTags = Array.from(skillTags).filter(tag => 
+      tag.dataset.places.split(' ').includes(placeId)
+    );
+
+    item.addEventListener('mouseenter', () => {
+      relatedTags.forEach(tag => tag.classList.add('highlight'));
+      if (skillsContainer) skillsContainer.classList.add('is-hovering');
+    });
+
+    item.addEventListener('mouseleave', () => {
+      relatedTags.forEach(tag => tag.classList.remove('highlight'));
+      if (skillsContainer) skillsContainer.classList.remove('is-hovering');
+    });
+  });
 }

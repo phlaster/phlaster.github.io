@@ -3,8 +3,9 @@ import {
   detectInitialLang,
   resolveTranslations
 } from './i18n.js';
-import {
-  initNavigation
+import { 
+  initNavigation, 
+  initCareerHighlighting 
 } from './navigation.js';
 import {
   renderContent
@@ -26,6 +27,8 @@ function rerender(newLang) {
   currentLang = newLang;
   i18nConfig = resolveTranslations(config, currentLang);
   renderContent(i18nConfig, currentLang);
+  
+  initCareerHighlighting();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
 
   renderContent(i18nConfig, currentLang);
+  initCareerHighlighting();
 
   initNavigation(rerender);
   initContact(() => i18nConfig);

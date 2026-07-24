@@ -13,31 +13,6 @@ iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA1WbXW8dyXG
 # ═══════════════════════════════════════════════════════════
 # HERO SOCIAL ICONS
 # ═══════════════════════════════════════════════════════════
-# [[hero_icons]]
-# key = "github"
-# icon = "/assets/icons/github-logo.svg"
-# url = "https://github.com/phlaster"
-
-# [[hero_icons]]
-# key = "gitlab"
-# icon = "/assets/icons/gitlab-logo.svg"
-# url = "https://gitlab.com/phlaster"
-
-# [[hero_icons]]
-# key = "stepik"
-# icon = "/assets/icons/stepik-logo.svg"
-# url = "https://stepik.org/users/346140343/profile"
-
-# [[hero_icons]]
-# key = "codewars"
-# icon = "/assets/icons/codewars-logo.svg"
-# url = "https://www.codewars.com/users/phlaster"
-
-# [[hero_icons]]
-# key = "rosalind"
-# icon = "/assets/icons/rosalind-logo.png"
-# url = "https://rosalind.info/users/alex_feb2021/"
-
 [[hero_icons]]
 key = "telegram"
 icon = "/assets/icons/telegram-logo.svg"
@@ -48,7 +23,6 @@ key = "email"
 icon = "/assets/icons/email-logo.svg"
 url = "#contact"
 
-
 # ═══════════════════════════════════════════════════════════
 # CONTACT (WORKER & FORM)
 # ═══════════════════════════════════════════════════════════
@@ -58,367 +32,175 @@ webhook_url = ""
 fallback_telegram = true
 worker_url = "https://cv.alex-phlaster.workers.dev" 
 
+# ═══════════════════════════════════════════════════════════
+# UI ELEMENTS
+# ═══════════════════════════════════════════════════════════
+[ui]
+scroll_cue = { en = "Scroll to explore", fr = "Défiler pour explorer", ru = "Прокрутите вниз" }
+based_in = { en = "Based in", fr = "Basé à", ru = "Местонахождение" }
+export_pdf = { en = "PDF", fr = "PDF", ru = "PDF" }
+write_me = { en = "Write me", fr = "M'écrire", ru = "Написать мне" }
+view_pdf = { en = "Open PDF", fr = "Ouvrir PDF", ru = "Открыть PDF" }
+timeline_title = { en = "Timeline", fr = "Chronologie", ru = "Хронология" }
+expertise_title = { en = "Expertise", fr = "Expertise", ru = "Экспертиза" }
+
+[ui.sections]
+about_title = { en = "About", fr = "À propos", ru = "Обо мне" }
+about_sub = { en = "A short introduction.", fr = "Une brève introduction.", ru = "Краткое введение." }
+career_title = { en = "Education and career", fr = "Éducation et carrière", ru = "Образование и карьера" }
+career_sub = { en = "Professional track and cross-disciplinary expertise.", fr = "Parcours professionnel et expertise interdisciplinaire.", ru = "Профессиональный путь и междисциплинарная экспертиза." }
+proj_title = { en = "Featured projects", fr = "Projets en vedette", ru = "Избранные проекты" }
+proj_sub = { en = "Open-source work and design experiments.", fr = "Travail open-source et expériences de design.", ru = "Open-source проекты и дизайнерские эксперименты." }
+research_title = { en = "Research & Publications", fr = "Recherche & Publications", ru = "Научная работа" }
+research_sub = { en = "Academic work, conferences, and grants.", fr = "Travail académique, conférences et subventions.", ru = "Исследования, конференции и гранты." }
+research_conf = { en = "Conferences", fr = "Conférences", ru = "Конференции" }
+research_pubs = { en = "Publications", fr = "Publications", ru = "Публикации" }
+research_grants = { en = "Grants", fr = "Subventions", ru = "Гранты" }
+docs_title = { en = "Documents & Achievements", fr = "Documents & Réalisations", ru = "Документы и достижения" }
+docs_sub = { en = "Degrees, thesis, coursework, and certificates.", fr = "Diplômes, mémoires, projets et certificats.", ru = "Дипломы, ВКР, курсовые и сертификаты." }
+
+[ui.contact]
+title = { en = "Let's <em>talk</em>.", fr = "<em>Parlons</em>.", ru = "<em>Поговорим</em>." }
+intro = { en = "For collaborations, questions, or just to say hello — drop a message below. It lands in my Telegram via a private bot.", fr = "Pour des collaborations, des questions, ou juste pour dire bonjour — laissez un message ci-dessous. Il arrive sur mon Telegram via un bot privé.", ru = "Для сотрудничества, вопросов или просто чтобы поздороваться — оставьте сообщение ниже. Оно попадет в мой Telegram через приватного бота." }
+print_contact_text = { en = "For collaborations, questions, or just to say hello — reach out via Email or Telegram. This document was exported directly from my interactive portfolio.", fr = "Pour des collaborations, des questions, ou juste pour dire bonjour — contactez-moi par Email ou sur Telegram. Ce document a été exporté directement de mon portfolio interactif.", ru = "Для сотрудничества, вопросов или просто чтобы поздороваться — свяжитесь со мной через Email или Telegram. Этот документ был экспортирован напрямую из моего интерактивного портфолио." }
+send = { en = "Send message", fr = "Envoyer le message", ru = "Отправить сообщение" }
+sending = { en = "Sending…", fr = "Envoi…", ru = "Отправка…" }
+success = { en = "Message sent. I will get back to you shortly.", fr = "Message envoyé. Je reviens vers vous rapidement.", ru = "Сообщение отправлено. Я отвечу в ближайшее время." }
+error = { en = "Could not send. Please use Telegram directly.", fr = "Échec de l'envoi. Veuillez utiliser Telegram directement.", ru = "Не удалось отправить. Пожалуйста, используйте Telegram напрямую." }
+leave_contacts = { en = "Leave contacts (optional)", fr = "Laisser des contacts (optionnel)", ru = "Оставить контакты (опционально)" }
+name = { en = "Name", fr = "Nom", ru = "Имя" }
+email = { en = "Email", fr = "Email", ru = "Email" }
+subject = { en = "Subject", fr = "Sujet", ru = "Тема" }
+message = { en = "Message", fr = "Message", ru = "Сообщение" }
+form_invalid = { en = "Please write a message. Check field length limits.", fr = "Veuillez écrire un message. Vérifiez les limites de longueur.", ru = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей." }
+form_invalid_email = { en = "Invalid email. Please use Latin letters and a valid domain", fr = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide", ru = "Некорректный email. Используйте латиницу и реальный домен" }
+
+[ui.pdf]
+footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}", fr = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date} · Dernière mise à jour : {deploy_date}", ru = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date} · Последнее обновление: {deploy_date}" }
 
 # ═══════════════════════════════════════════════════════════
-# UI ELEMENTS: ENGLISH
+# ABOUT
 # ═══════════════════════════════════════════════════════════
-[ui.en]
-scroll_cue = "Scroll to explore"
-based_in = "Based in"
-education = "Education"
-spoken_languages = "Spoken languages"
-export_pdf = "PDF"
-write_me = "Write me"
-view_pdf = "Open PDF"
+[about]
+name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
+tagline = { en = "", fr = "", ru = "" }
+bio_lead = { en = "", fr = "", ru = "" }
+bio = { en = "", fr = "", ru = "" }
+location = { en = "Saint Petersburg, Russia", fr = "Saint-Pétersbourg, Russie", ru = "Санкт-Петербург, Россия" }
 
-[ui.nav.en]
-about = "About"
-career = "Career & Skills"
-projects = "Projects"
-research = "Research"
-documents = "Documents"
-
-[ui.sections.en]
-about_title = "About"
-about_sub = "A short introduction."
-career_title = "Career & Skills"
-career_sub = "Professional track and cross-disciplinary expertise."
-proj_title = "Featured projects"
-proj_sub = "Open-source work and design experiments."
-research_title = "Research & Publications"
-research_sub = "Academic work, conferences, and grants."
-research_conf = "Conferences"
-research_pubs = "Publications"
-research_grants = "Grants"
-docs_title = "Documents & Achievements"
-docs_sub = "Degrees, thesis, coursework, and certificates."
-
-[ui.contact.en]
-title = "Let's <em>talk</em>."
-intro = "For collaborations, questions, or just to say hello — drop a message below. It lands in my Telegram via a private bot."
-print_contact_text = "For collaborations, questions, or just to say hello — reach out via Email or Telegram. This document was exported directly from my interactive portfolio."
-send = "Send message"
-sending = "Sending…"
-success = "Message sent. I will get back to you shortly."
-error = "Could not send. Please use Telegram directly."
-leave_contacts = "Leave contacts (optional)"
-name = "Name"
-email = "Email"
-subject = "Subject"
-message = "Message"
-form_invalid = "Please write a message. Check field length limits."
-form_invalid_email = "Invalid email. Please use Latin letters and a valid domain"
-
-
-# ═══════════════════════════════════════════════════════════
-# UI ELEMENTS: FRENCH
-# ═══════════════════════════════════════════════════════════
-[ui.fr]
-scroll_cue = "Défiler pour explorer"
-based_in = "Basé à"
-education = "Formation"
-spoken_languages = "Langues parlées"
-export_pdf = "PDF"
-write_me = "M'écrire"
-view_pdf = "Ouvrir PDF"
-
-[ui.nav.fr]
-about = "À propos"
-career = "Carrière & Comp."
-projects = "Projets"
-research = "Recherche"
-documents = "Documents"
-
-[ui.sections.fr]
-about_title = "À propos"
-about_sub = "Une brève introduction."
-career_title = "Carrière & Compétences"
-career_sub = "Parcours professionnel et expertise interdisciplinaire."
-proj_title = "Projets en vedette"
-proj_sub = "Travail open-source et expériences de design."
-research_title = "Recherche & Publications"
-research_sub = "Travail académique, conférences et subventions."
-research_conf = "Conférences"
-research_pubs = "Publications"
-research_grants = "Subventions"
-docs_title = "Documents & Réalisations"
-docs_sub = "Diplômes, mémoires, projets et certificats."
-
-[ui.contact.fr]
-title = "<em>Parlons</em>."
-intro = "Pour des collaborations, des questions, ou juste pour dire bonjour — laissez un message ci-dessous. Il arrive sur mon Telegram via un bot privé."
-print_contact_text = "Pour des collaborations, des questions, ou juste pour dire bonjour — contactez-moi par Email ou sur Telegram. Ce document a été exporté directement de mon portfolio interactif."
-send = "Envoyer le message"
-sending = "Envoi…"
-success = "Message envoyé. Je reviens vers vous rapidement."
-error = "Échec de l'envoi. Veuillez utiliser Telegram directement."
-leave_contacts = "Laisser des contacts (optionnel)"
-name = "Nom"
-email = "Email"
-subject = "Sujet"
-message = "Message"
-form_invalid = "Veuillez écrire un message. Vérifiez les limites de longueur."
-form_invalid_email = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide"
-
-
-# ═══════════════════════════════════════════════════════════
-# UI ELEMENTS: RUSSIAN
-# ═══════════════════════════════════════════════════════════
-[ui.ru]
-scroll_cue = "Прокрутите вниз"
-based_in = "Местонахождение"
-education = "Образование"
-spoken_languages = "Разговорные языки"
-export_pdf = "PDF"
-write_me = "Написать мне"
-view_pdf = "Открыть PDF"
-
-[ui.nav.ru]
-about = "Обо мне"
-career = "Карьера и навыки"
-projects = "Проекты"
-research = "Научная работа"
-documents = "Документы"
-
-[ui.sections.ru]
-about_title = "Обо мне"
-about_sub = "Краткое введение."
-career_title = "Карьера и навыки"
-career_sub = "Профессиональный путь и междисциплинарная экспертиза."
-proj_title = "Избранные проекты"
-proj_sub = "Open-source проекты и дизайнерские эксперименты."
-research_title = "Научная работа"
-research_sub = "Исследования, конференции и гранты."
-research_conf = "Конференции"
-research_pubs = "Публикации"
-research_grants = "Гранты"
-docs_title = "Документы и достижения"
-docs_sub = "Дипломы, ВКР, курсовые и сертификаты."
-
-[ui.contact.ru]
-title = "<em>Поговорим</em>."
-intro = "Для сотрудничества, вопросов или просто чтобы поздороваться — оставьте сообщение ниже. Оно попадет в мой Telegram через приватного бота."
-print_contact_text = "Для сотрудничества, вопросов или просто чтобы поздороваться — свяжитесь со мной через Email или Telegram. Этот документ был экспортирован напрямую из моего интерактивного портфолио."
-send = "Отправить сообщение"
-sending = "Отправка…"
-success = "Сообщение отправлено. Я отвечу в ближайшее время."
-error = "Не удалось отправить. Пожалуйста, используйте Telegram напрямую."
-leave_contacts = "Оставить контакты (опционально)"
-name = "Имя"
-email = "Email"
-subject = "Тема"
-message = "Сообщение"
-form_invalid = "Пожалуйста, напишите сообщение. Проверьте лимиты длины полей."
-form_invalid_email = "Некорректный email. Используйте латиницу и реальный домен"
-
-# ═══════════════════════════════════════════════════════════
-# PDF FOOTER TRANSLATIONS
-# ═══════════════════════════════════════════════════════════
-[ui.pdf.en]
-footer_text = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}"
-
-[ui.pdf.fr]
-footer_text = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date} · Dernière mise à jour : {deploy_date}"
-
-[ui.pdf.ru]
-footer_text = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date} · Последнее обновление: {deploy_date}"
-
-
-# ═══════════════════════════════════════════════════════════
-# ABOUT: ENGLISH
-# ═══════════════════════════════════════════════════════════
-[about.en]
-name = "Alexander Morozov"
-tagline = "Bioinformatician, wet-lab researcher, and software developer working at the intersection of computational biology and interactive systems."
-bio_lead = "Turning biological data into structured, actionable insights."
-bio = "Based in Cityname, splitting time between wet lab work, team management, and building visual/data tools. Freshly graduated Bachelor."
-location = "Cityname, Germany"
-
-[about.spoken_languages.en]
-"Russian" = "Native"
-"English" = "Upper-Intermediate (B2)"
-"French" = "Intermediate (B1)"
-
-[[about.education.en]]
-institution = "University Name"
-degree = "B.Sc. Bioinformatics"
-period = "2020 — 2024"
-
-[about.interests.en]
-title = "Scientific Interests"
+[about.interests]
+title = { en = "Scientific Interests", fr = "Intérêts Scientifiques", ru = "Научные интересы" }
 items = [
-  "Comparative Genomics",
-  "Pangenomics",
-  "Wet-Lab / Dry-Lab Integration",
-  "Scientific Data Visualization"
+  { en = "Comparative Genomics", fr = "Génomique Comparée", ru = "Сравнительная геномика" },
+  { en = "Pangenomics", fr = "Pangénomique", ru = "Пангеномика" },
+  { en = "Wet-Lab / Dry-Lab Integration", fr = "Intégration Labo Humide / Labo Sec", ru = "Интеграция мокрой лаборатории и биоинформатики" },
+  { en = "Scientific Data Visualization", fr = "Visualisation de Données Scientifiques", ru = "Научная визуализация данных" }
 ]
 
-
-# ═══════════════════════════════════════════════════════════
-# ABOUT: FRENCH
-# ═══════════════════════════════════════════════════════════
-[about.fr]
-name = "Alexander Morozov"
-tagline = "Bioinformaticien, chercheur en laboratoire et développeur de logiciels travaillant à l'intersection de la biologie computationnelle et des systèmes interactifs."
-bio_lead = "Transformer les données biologiques en informations structurées et exploitables."
-bio = "Basé à Cityname, partageant mon temps entre le travail en laboratoire, la gestion d'équipe et la création d'outils visuels et de données. Nouvellement diplômé."
-location = "Cityname, Allemagne"
-
-[about.spoken_languages.fr]
-"Russe" = "Niveau natif"
-"Anglais" = "Niveau avancé (B2)"
-"Français" = "Niveau seuil (B1)"
-
-[[about.education.fr]]
-institution = "Nom de l'Université"
-degree = "Licence en Bioinformatique"
-period = "2020 — 2024"
-
-[about.interests.fr]
-title = "Intérêts Scientifiques"
+[about.hobbies]
+title = { en = "Hobbies", fr = "Loisirs", ru = "Хобби" }
 items = [
-  "Génomique Comparée",
-  "Pangénomique",
-  "Intégration Labo Humide / Labo Sec",
-  "Visualisation de Données Scientifiques"
+  { en = "Photography", fr = "Photographie", ru = "Фотография" },
+  { en = "Hiking", fr = "Randonnée", ru = "Походы" },
+  { en = "Open Source", fr = "Open Source", ru = "Open Source" }
 ]
 
-
-# ═══════════════════════════════════════════════════════════
-# ABOUT: RUSSIAN
-# ═══════════════════════════════════════════════════════════
-[about.ru]
-name = "Александр Морозов"
-tagline = "Биоинформатик, лаборант-исследователь и разработчик на стыке вычислительной биологии и интерактивных систем."
-bio_lead = "Превращаю биологические данные в структурированные и применимые на практике инсайты."
-bio = "Живу в Берлине, разделяя время между мокрой лабораторией, управлением командой и созданием визуальных/данных инструментов. Недавно закончил бакалавриат."
-location = "Берлин, Германия"
-
-[about.spoken_languages.ru]
-"Русский" = "Родной"
-"Английский" = "Выше среднего (B2)"
-"Французский" = "Средний уровень (B1)"
-
-[[about.education.ru]]
-institution = "Название ВУЗа"
-degree = "Бакалавр биоинформатики"
-period = "2020 — 2024"
-
-[about.interests.ru]
-title = "Научные интересы"
+[about.social]
+title = { en = "Social", fr = "Réseaux sociaux", ru = "Социальные сети" }
 items = [
-  "Сравнительная геномика",
-  "Пангеномика",
-  "Интеграция мокрой лаборатории и биоинформатики",
-  "Научная визуализация данных"
+  { key = "github", icon = "/assets/icons/github-logo.svg", url = "https://github.com/phlaster" },
+  { key = "gitlab", icon = "/assets/icons/gitlab-logo.svg", url = "https://gitlab.com/phlaster" },
+  { key = "hf", icon = "/assets/icons/hf-logo.svg", url = "https://huggingface.co/phlaster" },
+  { key = "stepik", icon = "/assets/icons/stepik-logo.svg", url = "https://stepik.org/users/346140343/profile" },
+  { key = "codewars", icon = "/assets/icons/codewars-logo.svg", url = "https://www.codewars.com/users/phlaster" },
+  { key = "rosalind", icon = "/assets/icons/rosalind-logo.png", url = "https://rosalind.info/users/alex_feb2021/" },
+  { key = "orcid", icon = "/assets/icons/orcid-logo.svg", url = "https://orcid.org/0009-0005-2877-6008" },
+  { key = "scholar", icon = "/assets/icons/scholar-logo.png", url = "https://scholar.google.com/citations?user=eKgjgNwAAAAJ&hl" }
 ]
 
+# ═══════════════════════════════════════════════════════════
+# TIMELINE (Education and career)
+# ═══════════════════════════════════════════════════════════
+[[timeline]]
+place_id = "univ_y"
+period = { en = "2020 — 2024", fr = "2020 — 2024", ru = "2020 — 2024" }
+role = { en = "B.Sc. Bioinformatics", fr = "Licence en Bioinformatique", ru = "Бакалавр биоинформатики" }
+organization = { en = "University Name", fr = "Nom de l'Université", ru = "Название ВУЗа" }
+description = { en = "Bachelor degree in Bioinformatics.", fr = "Diplôme de Licence en Bioinformatique.", ru = "Степень бакалавра в области биоинформатики." }
+url = "https://example.com/univ"
+
+[[timeline]]
+place_id = "lab_x"
+period = { en = "2022 — Present", fr = "2022 — Présent", ru = "2022 — Наст. время" }
+role = { en = "Laboratory Researcher", fr = "Chercheur en Laboratoire", ru = "Лаборант-исследователь" }
+organization = { en = "Institute / Lab Name", fr = "Institut / Nom du Labo", ru = "Название института / лаборатории" }
+description = { en = "DNA/RNA extraction, PCR, sample collection, library prep, and data analysis integration.", fr = "Extraction ADN/ARN, PCR, collecte d'échantillons, préparation de banques et intégration d'analyse de données.", ru = "Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных." }
+url = "https://example.com/lab"
 
 # ═══════════════════════════════════════════════════════════
-# EXPERIENCE
+# SKILL GROUPS (Expertise)
 # ═══════════════════════════════════════════════════════════
-[[experience]]
-category = "lab" 
-period = "2022 — Present"
+[[skill_groups]]
+title = { en = "Wet Lab", fr = "Laboratoire Humide", ru = "Мокрая лаборатория" }
+items = [
+  { name = { en = "PCR", fr = "PCR", ru = "ПЦР" }, places = ["lab_x"] },
+  { name = { en = "Library Prep", fr = "Préparation de banques", ru = "Подготовка библиотек" }, places = ["lab_x"] },
+  { name = { en = "DNA/RNA Extraction", fr = "Extraction ADN/ARN", ru = "Выделение ДНК/РНК" }, places = ["lab_x"] }
+]
 
-[experience.en]
-role = "Laboratory Researcher"
-company = "Institute / Lab Name"
-description = "DNA/RNA extraction, PCR, sample collection, library prep, and data analysis integration."
-skills_gained = ["PCR", "Library Prep", "Data Analysis"]
+[[skill_groups]]
+title = { en = "Programming", fr = "Programmation", ru = "Программирование" }
+items = [
+  { name = { en = "Julia", fr = "Julia", ru = "Julia" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "Python", fr = "Python", ru = "Python" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "R", fr = "R", ru = "R" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "Bash", fr = "Bash", ru = "Bash" }, places = ["univ_y", "lab_x"] }
+]
 
-[experience.fr]
-role = "Chercheur en Laboratoire"
-company = "Institut / Nom du Labo"
-description = "Extraction ADN/ARN, PCR, collecte d'échantillons, préparation de banques et intégration d'analyse de données."
-skills_gained = ["PCR", "Préparation de banques", "Analyse de données"]
+[[skill_groups]]
+title = { en = "Mathematics", fr = "Mathématiques", ru = "Математика" }
+items = [
+  { name = { en = "Statistics", fr = "Statistiques", ru = "Статистика" }, places = ["univ_y"] },
+  { name = { en = "Linear Algebra", fr = "Algèbre Linéaire", ru = "Линейная алгебра" }, places = ["univ_y"] },
+  { name = { en = "Geometry", fr = "Géométrie", ru = "Геометрия" }, places = ["univ_y"] }
+]
 
-[experience.ru]
-role = "Лаборант-исследователь"
-company = "Название института / лаборатории"
-description = "Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных."
-skills_gained = ["ПЦР", "Подготовка библиотек", "Анализ данных"]
+[[skill_groups]]
+title = { en = "DevOps & Infra", fr = "DevOps & Infra", ru = "DevOps и Инфраструктура" }
+items = [
+  { name = { en = "Git", fr = "Git", ru = "Git" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "Docker", fr = "Docker", ru = "Docker" }, places = ["lab_x"] },
+  { name = { en = "Linux", fr = "Linux", ru = "Linux" }, places = ["lab_x"] },
+  { name = { en = "CI/CD", fr = "CI/CD", ru = "CI/CD" }, places = ["lab_x"] }
+]
 
+[[skill_groups]]
+title = { en = "Frontend & Design", fr = "Frontend & Design", ru = "Фронтенд и Дизайн" }
+items = [
+  { name = { en = "TypeScript", fr = "TypeScript", ru = "TypeScript" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "WebGL", fr = "WebGL", ru = "WebGL" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "Canvas API", fr = "Canvas API", ru = "Canvas API" }, places = ["univ_y", "lab_x"] },
+  { name = { en = "CSS", fr = "CSS", ru = "CSS" }, places = ["univ_y", "lab_x"] }
+]
+
+[[skill_groups]]
+title = { en = "Soft Skills", fr = "Compétences douces", ru = "Софт-скиллы" }
+items = [
+  { name = { en = "Team Management", fr = "Gestion d'équipe", ru = "Управление командой" }, places = ["lab_x"] },
+  { name = { en = "Data Analysis", fr = "Analyse de données", ru = "Анализ данных" }, places = ["lab_x"] }
+]
+
+[[skill_groups]]
+title = { en = "Languages", fr = "Langues", ru = "Языки" }
+items = [
+  { name = { en = "Russian (Native)", fr = "Russe (Natif)", ru = "Русский (Родной)" } },
+  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" } },
+  { name = { en = "French (B1)", fr = "Français (B1)", ru = "Французский (B1)" } }
+]
 
 # ═══════════════════════════════════════════════════════════
-# SKILLS
+# PROJECTS
 # ═══════════════════════════════════════════════════════════
-[[skills.en]]
-title = "Mathematics"
-description = "Applied statistics, linear algebra, and computational geometry."
-tags = ["Statistics", "Linear Algebra", "Geometry"]
-
-[[skills.en]]
-title = "Programming"
-description = "Data analysis scripts and high-performance packages."
-tags = ["Julia", "Python", "R", "Bash"]
-
-[[skills.en]]
-title = "Wet Lab"
-description = "Molecular biology workflows and sample processing."
-tags = ["PCR", "DNA/RNA Extraction", "Library Prep"]
-
-[[skills.en]]
-title = "DevOps & Infra"
-description = "Infrastructure management and continuous integration."
-tags = ["Git", "Docker", "Linux", "CI/CD"]
-
-[[skills.en]]
-title = "Frontend & Design"
-description = "Interactive data visualization and web tools."
-tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
-
-[[skills.fr]]
-title = "Mathématiques"
-description = "Statistiques appliquées, algèbre linéaire et géométrie computationnelle."
-tags = ["Statistiques", "Algèbre Linéaire", "Géométrie"]
-
-[[skills.fr]]
-title = "Programmation"
-description = "Scripts d'analyse de données et packages haute performance."
-tags = ["Julia", "Python", "R", "Bash"]
-
-[[skills.fr]]
-title = "Laboratoire Humide"
-description = "Flux de travail en biologie moléculaire et traitement des échantillons."
-tags = ["PCR", "Extraction ADN/ARN", "Préparation de banques"]
-
-[[skills.fr]]
-title = "DevOps & Infra"
-description = "Gestion de l'infrastructure et intégration continue."
-tags = ["Git", "Docker", "Linux", "CI/CD"]
-
-[[skills.fr]]
-title = "Frontend & Design"
-description = "Visualisation interactive des données et outils web."
-tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
-
-[[skills.ru]]
-title = "Математика"
-description = "Прикладная статистика, линейная алгебра и вычислительная геометрия."
-tags = ["Статистика", "Линейная алгебра", "Геометрия"]
-
-[[skills.ru]]
-title = "Программирование"
-description = "Скрипты для анализа данных и высокопроизводительные пакеты."
-tags = ["Julia", "Python", "R", "Bash"]
-
-[[skills.ru]]
-title = "Мокрая лаборатория"
-description = "Молекулярная биология и подготовка образцов."
-tags = ["ПЦР", "Выделение ДНК/РНК", "Подготовка библиотек"]
-
-[[skills.ru]]
-title = "DevOps и Инфраструктура"
-description = "Управление серверами и непрерывная интеграция."
-tags = ["Git", "Docker", "Linux", "CI/CD"]
-
-[[skills.ru]]
-title = "Фронтенд и Дизайн"
-description = "Интерактивная визуализация данных и веб-инструменты."
-tags = ["TypeScript", "WebGL", "Canvas API", "CSS"]
-
-
 # ═══════════════════════════════════════════════════════════
 # PROJECTS
 # ═══════════════════════════════════════════════════════════
@@ -427,237 +209,216 @@ name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
 cover = "/assets/projects/deppa_social.webp"
 languages = ["Julia"]
+description = { en = "A high-performance pure Julia package for MSA and degenerate PCR primer design.", fr = "Un package Julia pur et haute performance pour l'alignement MSA et la conception d'amorces PCR dégénérées.", ru = "Высокопроизводительный пакет на Julia для анализа множественного выравнивания и дизайна праймеров." }
 
-[projects.en]
-description = "A high-performance pure Julia package for MSA and degenerate PCR primer design."
-[projects.fr]
-description = "Un package Julia pur et haute performance pour l'alignement MSA et la conception d'amorces PCR dégénérées."
-[projects.ru]
-description = "Высопроизводительный пакет на Julia для анализа множественного выравнивания и дизайна праймеров."
 
 [[projects]]
 name = "Pannagram"
 url = "https://github.com/iganna/pannagram"
 cover = "/assets/projects/pannagram_social.webp"
 languages = ["R", "Bash"]
-
-[projects.en]
-description = "A toolkit for reference-free linear pangenome alignments."
-[projects.fr]
-description = "Une boîte à outils pour les alignements pangénomiques linéaires sans référence."
-[projects.ru]
-description = "Инструментарий для построения линейных пангеномных выравниваний без референса."
+description = { en = "A toolkit for constructing linear pangenome alignments, analyzing structural variants, and translating annotations.", fr = "Une boîte à outils pour construire des alignements pangénomiques linéaires, analyser les variants structurels et traduire les annotations.", ru = "Инструментарий для построения линейных пангеномных выравниваний, анализа структурных вариаций и переноса аннотаций." }
 
 [[projects]]
 name = "SeqFold.jl"
 url = "https://github.com/phlaster/SeqFold.jl"
 cover = "/assets/projects/seqfold_social.webp"
 languages = ["Julia"]
-
-[projects.en]
-description = "..."
-[projects.fr]
-description = "..."
-[projects.ru]
-description = "..."
+description = { en = "A high-performance pure Julia package for predicting nucleic acid secondary structures and calculating melting temperatures.", fr = "Un package Julia pur et haute performance pour prédire les structures secondaires des acides nucléiques et calculer les températures de fusion.", ru = "Высокопроизводительный пакет на чистом Julia для предсказания вторичных структур нуклеиновых кислот и расчета температуры плавления." }
 
 [[projects]]
 name = "hextiles"
 url = "https://github.com/phlaster/hextiles"
 cover = "/assets/projects/hextiles_social.webp"
 languages = ["Vanilla JS", "WebGL", "CSS"]
-
-[projects.en]
-description = "Interactive hexagonal tiling playground with procedural generation. Used as the background for this portfolio."
-[projects.fr]
-description = "Terrain de jeu interactif pour le pavage hexagonal avec génération procédurale. Utilisé comme fond pour ce portfolio."
-[projects.ru]
-description = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио."
+description = { en = "Interactive hexagonal tiling playground with procedural generation. Used as the background for this portfolio.", fr = "Terrain de jeu interactif pour le pavage hexagonal avec génération procédurale. Utilisé comme fond pour ce portfolio.", ru = "Интерактивная песочница с гексагональной плиткой и процедурной генерацией. Используется как фон этого портфолио." }
 
 [[projects]]
 name = "CertForge"
 url = "https://github.com/phlaster/CertForge"
 cover = "/assets/projects/certforge_social.webp"
 languages = ["JS", "CSS"]
-
-[projects.en]
-description = "..."
-[projects.fr]
-description = "..."
-[projects.ru]
-description = "..."
+description = { en = "An elegant browser-based tool for creating beautifully styled authenticity certificates for graphical art.", fr = "Un élégant outil basé sur navigateur pour créer de beaux certificats d'authenticité pour l'art graphique.", ru = "Элегантный браузерный инструмент для создания красиво оформленных сертификатов подлинности графических произведений." }
 
 [[projects]]
 name = "RGBZones"
 url = "https://github.com/phlaster/RGBZones"
 cover = "/assets/projects/rgbzones_social.webp"
 languages = ["Python", "JS", "CSS"]
+description = { en = "A real-time RGB lighting controller built on OpenRGB, dynamically adjusting PC lighting based on CPU temperature with custom gradients and visual notifications.", fr = "Un contrôleur d'éclairage RGB en temps réel basé sur OpenRGB, ajustant dynamiquement l'éclairage du PC en fonction de la température du CPU avec des dégradés personnalisés et des notifications visuelles.", ru = "Контроллер RGB-подсветки в реальном времени на базе OpenRGB, динамически регулирующий освещение ПК в зависимости от температуры процессора с настраиваемыми градиентами и визуальными уведомлениями." }
 
-[projects.en]
-description = "..."
-[projects.fr]
-description = "..."
-[projects.ru]
-description = "..."
 
 [[projects]]
 name = "SMILES-DASS"
 url = "https://github.com/phlaster/SMILES-DASS"
 cover = "/assets/projects/smiles_dass_social.webp"
 languages = ["Python", "Torch"]
-
-[projects.en]
-description = "..."
-[projects.fr]
-description = "..."
-[projects.ru]
-description = "..."
+description = { en = "Domain adaptation for satellite image segmentation using CNNs and spectral indices.", fr = "Adaptation de domaine pour la segmentation d'images satellites utilisant des CNN et des indices spectraux.", ru = "Доменная адаптация CNN для сегментации спутниковых снимков с использованием спектральных индексов." }
 
 [[projects]]
 name = "geovue"
 url = "https://github.com/phlaster/geovue"
 cover = "/assets/projects/geovue_social.webp"
 languages = ["JS", "CSS"]
-
-[projects.en]
-description = "..."
-[projects.fr]
-description = "..."
-[projects.ru]
-description = "..."
+description = { en = "A single-page web app for visualizing geospatial CSV data on an interactive map with dynamic groupings.", fr = "Une application web monopage pour visualiser des données CSV géospatiales sur une carte interactive avec des regroupements dynamiques.", ru = "Одностраничное веб-приложение для визуализации геопространственных CSV-данных на интерактивной карте с динамическими группировками." }
 
 # ═══════════════════════════════════════════════════════════
 # RESEARCH: CONFERENCES
 # ═══════════════════════════════════════════════════════════
 [[conferences]]
-cover = "https://picsum.photos/seed/conference5/200/300"
-date = "June 2023"
-url = "https://example.com/conf1"
-title = "Symposium on Computational Geometry"
-location = "Cityname, Germany"
-role = "Speaker"
-pdf_url = "/assets/pdfs/example.pdf"
+date = { en = "June 2026", fr = "Juin 2026", ru = "Июнь 2026" }
+title = { en = "V International Scientific Conference \"Plants and Microorganisms: Biotechnology of the Future\" (PLAMIC2026)", fr = "V Conférence scientifique internationale \"Plantes et micro-organismes : biotechnologie de l'avenir\" (PLAMIC2026)", ru = "V Международная научная конференция «Растения и микроорганизмы: биотехнология будущего» (PLAMIC2026)" }
+location = { en = "Kazan, Russia", fr = "Kazan, Russie", ru = "Казань, Россия" }
+role = { en = "Speaker", fr = "Conférencier", ru = "Доклад" }
+url = "https://plamic.ru/"
+pdf = "/assets/pdfs/conference_plamic2026.pdf"
+cover = "/assets/pics/plamic.webp"
 
 [[conferences]]
-cover = "https://picsum.photos/seed/conference1/200/300"
-date = "October 2022"
-url = "https://example.com/conf2"
-title = "International Conference on Bioinformatics"
-location = "Paris, France"
-role = "Participant"
-
+date = { en = "June 2026", fr = "Juin 2026", ru = "Июнь 2026" }
+title = { en = "V International Conference \"Conservation and Enhancement of Microbial Genetic Resources\" (BRCmicro 2026)", fr = "V Conférence internationale \"Conservation et augmentation des ressources génétiques des micro-organismes\" (BRCmicro 2026)", ru = "V Международная конференция «Сохранение и преумножение генетических ресурсов микроорганизмов» (BRCmicro 2026)" }
+location = { en = "Saint Petersburg, Russia", fr = "Saint-Pétersbourg, Russie", ru = "Санкт-Петербург, Россия" }
+role = { en = "Speaker", fr = "Conférencier", ru = "Доклад" }
+url = "https://brc.arriam.ru"
+pdf = "/assets/pdfs/conference_BRC_micro_2026.pdf"
+cover = "/assets/pics/brc_micro.webp"
 
 # ═══════════════════════════════════════════════════════════
 # RESEARCH: PUBLICATIONS
 # ═══════════════════════════════════════════════════════════
 [[publications]]
+date = "2025"
 title = "A comparison of 27 Arabidopsis thaliana genomes and the path toward an unbiased characterization of genetic polymorphism"
-year = 2025
 authors = "Igolkina et al."
-venue = "Nature Genetics, 57(9), 2289–2301 (2025)"
+venue = "Nature Genetics, 57(9), 2289–2301"
 url = "https://www.nature.com/articles/s41588-025-02293-0"
-pdf_url = "/assets/pdfs/example.pdf"
+pdf = "/assets/pdfs/nature2025.pdf"
 
 [[publications]]
+date = "2025"
 title = "Pannagram: unbiased pangenome alignment and the Mobilome calling"
-year = 2024
-authors = "Anna A. Igolkina, Alexander D. Morozov, Magnus Nordborg"
-venue = "bioRxiv 2025.02.07.637071 (2025)"
+authors = "Anna A. Igolkina, Alexander D. Bezlepsky, Magnus Nordborg"
+venue = "bioRxiv 2025.02.07.637071"
 url = "https://www.biorxiv.org/content/10.1101/2025.02.07.637071v1"
-pdf_url = "/assets/pdfs/example.pdf"
+pdf = "/assets/pdfs/biorxiv2025.pdf"
 
+[[publications]]
+date = "2024"
+title = "Dynamics of cellulose degradation by soil microorganisms from two contrasting soil types"
+authors = "Grigory V Gladkov, Anastasiia K Kimeklis, Olga V Orlova, Tatiana O Lisina, Arina A Kichko, Alexander D Bezlepsky, Evgeny E Andronov"
+venue = "Microorganisms 12(8), 1728 (2024)"
+url = "https://www.mdpi.com/2076-2607/12/8/1728"
+pdf = "/assets/pdfs/microorganisms2024.pdf"
 
 # ═══════════════════════════════════════════════════════════
 # RESEARCH: GRANTS
 # ═══════════════════════════════════════════════════════════
 [[grants]]
-year = "2024"
-title = "RSF Grant No. 24-24-00123"
-url = "https://example.com/grant1"
+date = "2025-2027"
+title = { en = "RSF 25-16-00068", fr = "RSF 25-16-00068", ru = "РНФ 25-16-00068" }
+description = { en = "\"Soil and nodule populations of rhizobia: evolution of multicomponent genomes in natural ecosystems and agrocenoses\" ARRIAM, led by N.A. Provorov", fr = "\"Populations de rhizobiums du sol et des nodosités : évolution des génomes multicomposants dans les écosystèmes naturels et les agrocénoses\" ARRIAM, dirigé par N.A. Provorov", ru = "«Почвенные и клубеньковые популяции ризобий: эволюция многокомпонентных геномов в природных экосистемах и агроценозах» ФГБНУ ВНИИСХМ, рук. д.б.н. Проворов Н.А." }
+url = "https://rscf.ru/project/cVcKH1GbhGomwDbIPOmx3VUxCSDCp5w5ltNqu0Sv2Rm3iV9Dj5rI3YIj_Hc63gkXGZYbZ6UOGSE~/"
 
-[grants.en]
-description = "Pangenome dynamics and structural variations."
-role = "Key Researcher"
+[[grants]]
+date = "2023-2025"
+title = { en = "RSF No. 23-16-00147", fr = "RSF No 23-16-00147", ru = "РНФ № 23-16-00147" }
+description = { en = "\"Metagenomic technologies in the development and use of associative microbial preparations for plant residue decomposition\" ARRIAM, led by E.E. Andronov", fr = "\"Technologies métagénomiques dans le développement et l'utilisation de préparations microbiennes associatives pour la décomposition des résidus végétaux\" ARRIAM, dirigé par E.E. Andronov", ru = "«Метагеномные технологии в разработке и использовании ассоциативных микробных препаратов для разложения растительных остатков» ФГБНУ ВНИИСХМ, рук. д.б.н. Андронов Е.Е." }
+url = "https://rscf.ru/project/Fs96sIFz3GH1wBwR9XSxmTbEEb7vvoty-yjHaJpGLz3uvcKVMXTLMeILoru-p7fAYAnD2-vG/"
 
-[grants.fr]
-description = "Dynamique du pangénome et variations structurelles."
-role = "Chercheur Principal"
-
-[grants.ru]
-description = "Динамика пангеномы и структурные вариации."
-role = "Ведущий научный сотрудник"
+[[grants]]
+date = "2022-2023"
+title = { en = "RSF No. 19-16-00081", fr = "RSF No 19-16-00081", ru = "РНФ № 19-16-00081" }
+description = { en = "\"Population genomics of nodule bacteria – a key to deciphering the mechanisms of prokaryote and eukaryote co-evolution\" ARRIAM, led by N.A. Provorov", fr = "\"Génomique populationnelle des bactéries nodulaires - une clé pour déchiffrer les mécanismes de co-évolution des procaryotes et des eucaryotes\" ARRIAM, dirigé par N.A. Provorov", ru = "«Популяционная геномика клубеньковых бактерий – ключ к расшифровке механизмов ко-эволюции прокариот и эукариот» ФГБНУ ВНИИСХМ, рук. д.б.н. Проворов Н.А." }
+url = "https://rscf.ru/project/TLqba7bD8O9L0l3QnP6vWU91ZAflwEAqQnqhu6i3QoGjperF_k1_L9xtfdJLrn6lDY3pUZqf/"
 
 
 # ═══════════════════════════════════════════════════════════
-# DOCUMENTS & ACHIEVEMENTS: ENGLISH
+# DOCUMENTS & ACHIEVEMENTS
 # ═══════════════════════════════════════════════════════════
-[[documents.en]]
-category = "Thesis"
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = { en = "2024", fr = "2024", ru = "2024" }
+title = { en = "Skoltech Certificate", fr = "Certificat Skoltech", ru = "Сертификат Сколтех" }
+description = { en = "Certificate of completion.", fr = "Certificat de fin.", ru = "Сертификат об успешном окончании." }
+url = "/assets/pdfs/certificate_skoltech2024.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+category = { en = "Academic Paper", fr = "Travail académique", ru = "Академическая работа" }
+date = { en = "2024", fr = "2024", ru = "2024" }
+title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
+description = { en = "Term paper for English language course.", fr = "Travail de semestre pour le cours d'anglais.", ru = "Семестровая работа по курсу английского языка." }
+url = "/assets/pdfs/paper_fp.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+category = "Дипломная работа"
 date = "2024"
-title = "Bachelor Thesis: Title of the Thesis"
-description = "Final qualification work submitted for B.Sc. degree."
-url = "/assets/pdfs/example.pdf"
+title = "Выпускная квалификационная работа"
+description = "Полный текст дипломной работы."
+url = "/assets/pdfs/thesis_full.pdf"
+languages = ["ru"]
 
-[[documents.en]]
-category = "Coursework"
-date = "2023"
-title = "Advanced Algorithms Coursework"
-description = "Implementation of pangenome alignment algorithms."
-url = "/assets/pdfs/example.pdf"
-
-[[documents.en]]
-category = "Certificate"
-date = "2022"
-title = "Summer School of Mathematics"
-description = "Advanced Geometry Course Certificate."
-url = "/assets/pdfs/example.pdf"
-
-
-# ═══════════════════════════════════════════════════════════
-# DOCUMENTS & ACHIEVEMENTS: FRENCH
-# ═══════════════════════════════════════════════════════════
-[[documents.fr]]
-category = "Mémoire"
+[[documents]]
+category = "Дипломная работа"
 date = "2024"
-title = "Mémoire de Licence : Titre du mémoire"
-description = "Travail de fin d'études soumis pour le grade de Licence."
-url = "/assets/pdfs/example.pdf"
+title = "Презентация к защите"
+description = "Презентация для защиты ВКР."
+url = "/assets/pdfs/thesis_presentation.pdf"
+languages = ["ru"]
 
-[[documents.fr]]
-category = "Projet"
-date = "2023"
-title = "Projet Algorithmes Avancés"
-description = "Implémentation d'algorithmes d'alignement pangénomique."
-url = "/assets/pdfs/example.pdf"
-
-[[documents.fr]]
-category = "Certificat"
-date = "2022"
-title = "École d'été de Mathématiques"
-description = "Certificat de cours de géométrie avancée."
-url = "/assets/pdfs/example.pdf"
-
-
-# ═══════════════════════════════════════════════════════════
-# DOCUMENTS & ACHIEVEMENTS: RUSSIAN
-# ═══════════════════════════════════════════════════════════
-[[documents.ru]]
-category = "ВКР"
+[[documents]]
+category = "Дипломная работа"
 date = "2024"
-title = "Бакалаврская ВКР: Тема работы"
-description = "Выпускная квалификационная работа на соискание степени бакалавра."
-url = "/assets/pdfs/example.pdf"
+title = "Отзыв научного руководителя"
+description = "Отзыв на дипломную работу."
+url = "/assets/pdfs/thesis_review.pdf"
+languages = ["ru"]
 
-[[documents.ru]]
-category = "Курсовая"
+[[documents]]
+category = "Курсовая работа"
 date = "2023"
-title = "Курсовая по продвинутым алгоритмам"
-description = "Реализация алгоритмов пангеномного выравнивания."
-url = "/assets/pdfs/example.pdf"
+title = "Численные методы"
+description = "Курсовая работа по методам вычислительной математики."
+url = "/assets/pdfs/coursework_nummethods.pdf"
+languages = ["ru"]
 
-[[documents.ru]]
-category = "Сертификат"
+[[documents]]
+category = "Курсовая работа"
+date = "2023"
+title = "Методы оптимизации"
+description = "Курсовая работа по методам оптимизации."
+url = "/assets/pdfs/coursework_optmethods.pdf"
+languages = ["ru"]
+
+[[documents]]
+category = "Курсовая работа"
 date = "2022"
-title = "Летняя школа математики"
-description = "Сертификат прохождения курса по продвинутой геометрии."
-url = "/assets/pdfs/example.pdf"
+title = "Случайные функции"
+description = "Курсовая работа по теории случайных функций."
+url = "/assets/pdfs/coursework_randfunctions.pdf"
+languages = ["ru"]
+
+[[documents]]
+category = "Лабораторная работа"
+date = "2023"
+title = "Биоинформатика"
+description = "Лабораторная работа по биоинформатике."
+url = "/assets/pdfs/labtask_bioinf.pdf"
+languages = ["ru"]
+
+[[documents]]
+category = "Лабораторная работа"
+date = "2023"
+title = "Множественное выравнивание"
+description = "Лабораторная работа по MSA."
+url = "/assets/pdfs/labtask_msa.pdf"
+languages = ["ru"]
+
+[[documents]]
+category = "Лабораторная работа"
+date = "2023"
+title = "Численные методы"
+description = "Лабораторная работа по численным методам."
+url = "/assets/pdfs/labtask_nummethods.pdf"
+languages = ["ru"]
