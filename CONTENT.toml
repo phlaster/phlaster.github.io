@@ -42,6 +42,7 @@ worker_url = "https://cv.alex-phlaster.workers.dev"
 # ═══════════════════════════════════════════════════════════
 [ui]
 scroll_cue = { en = "Scroll to explore", fr = "Défiler pour explorer", ru = "Прокрутите вниз" }
+draw_hint = { en = "Try drawing on the background", fr = "Essayez de dessiner sur le fond", ru = "Попробуйте рисовать на фоне" }
 based_in = { en = "Based in", fr = "Basé à", ru = "Местонахождение" }
 export_pdf = { en = "PDF", fr = "PDF", ru = "PDF" }
 write_me = { en = "Write me", fr = "M'écrire", ru = "Написать мне" }

@@ -53,6 +53,12 @@ export function renderContent(i18nConfig, lang) {
     iframe.style.display = 'none';
   }
 
+  // === Draw Hint Text ===
+  const drawHint = $('heroDrawHint');
+  if (drawHint) {
+    drawHint.textContent = ui.draw_hint || 'Try drawing on the background';
+  }
+
   // HERO SOCIALS
   const heroIcons = i18nConfig.hero_icons || [];
   $('heroSocials').innerHTML = heroIcons.map(icon => `

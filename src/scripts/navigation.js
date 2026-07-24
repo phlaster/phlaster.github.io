@@ -212,22 +212,26 @@ export function initNavigation(renderCallback) {
       topbar.classList.remove('solid');
     }
 
-    // === Плавное снижение контрастности фона ===
     if (heroSection) {
       const heroHeight = heroSection.offsetHeight;
       const scrollProgress = Math.min(window.scrollY / (heroHeight * 0.75), 1);
       const wrap = document.getElementById('canvasWrap');
-      
+
       if (wrap) {
-        // Читаем настройки из TOML, если их нет — используем значения по умолчанию
         const effects = config.config?.background_effects || {};
         const minOpacity = effects.scroll_min_opacity ?? 0.7;
         const maxGrayscale = effects.scroll_grayscale ?? 40;
         const maxBlur = effects.scroll_blur ?? 2;
 
-        // Применяем интерполяцию от 0 до заданного максимума
         wrap.style.opacity = String(1 - (1 - minOpacity) * scrollProgress);
         wrap.style.filter = `grayscale(${maxGrayscale * scrollProgress}%) blur(${maxBlur * scrollProgress}px)`;
+      }
+
+      const drawHint = $('heroDrawHint');
+      if (drawHint) {
+        const fadeProgress = Math.min(window.scrollY / (heroHeight * 0.5), 1);
+        drawHint.style.opacity = String(0.5 * (1 - fadeProgress));
+        drawHint.style.transform = `translateY(${10 * fadeProgress}px)`;
       }
     }
 

@@ -432,6 +432,23 @@
   }
 }
 
+/* ============ Hero Draw Hint ============ */
+.hero-draw-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.5rem 1rem;
+  color: var(--color-dark-fg);
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4), 0 0 8px rgba(0,0,0,0.2);
+  transition: color 0.3s ease;
+}
+
 /* ============ Main Content Area ============ */
 .content-area {
   position: relative;
@@ -820,6 +837,10 @@
     justify-content: center;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .hero-draw-hint {
+    display: none;
   }
 
   /* --- Content Grids --- */
