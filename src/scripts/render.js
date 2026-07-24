@@ -1,13 +1,19 @@
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+} [c]));
 
 export function renderContent(i18nConfig, lang) {
   document.documentElement.lang = lang;
-  
+
   const a = i18nConfig.about || {};
   const fullName = a.name || '—';
   const nameParts = fullName.split(/\s+/).filter(p => p.length > 0);
-  
+
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
     if (nameParts.length >= 2) {
@@ -70,10 +76,16 @@ export function renderContent(i18nConfig, lang) {
   // ABOUT
   $('about-title').textContent = sections.about_title;
   $('about-sub').textContent = sections.about_sub;
-  
-  const interests = a.interests || { items: [] };
-  const hobbies = a.hobbies || { items: [] };
-  const social = a.social || { items: [] };
+
+  const interests = a.interests || {
+    items: []
+  };
+  const hobbies = a.hobbies || {
+    items: []
+  };
+  const social = a.social || {
+    items: []
+  };
 
   $('about-content').innerHTML = `
     <div class="about-grid">
@@ -118,8 +130,8 @@ export function renderContent(i18nConfig, lang) {
     <a class="timeline-item" href="${esc(e.url || '#')}" target="_blank" rel="noopener" data-place="${esc(e.place_id || '')}">
       <div class="timeline-period">${esc(e.period)}</div>
       <div class="timeline-content">
-        <div class="timeline-role">${esc(e.role)}</div>
-        <div class="timeline-org">${esc(e.organization)}</div>
+      <div class="timeline-org">${esc(e.organization)}</div>
+      <div class="timeline-role">${esc(e.role)}</div>
         <div class="timeline-desc">${esc(e.description)}</div>
       </div>
     </a>
@@ -127,7 +139,7 @@ export function renderContent(i18nConfig, lang) {
 
   const skillsHtml = skillGroups.map(g => `
     <div class="skill-group">
-      <div class="meta-label">${esc(g.title)}</div>
+      <div class="timeline-period">${esc(g.title)}</div>
       <div class="skill-tags">${(g.items||[]).map(i => `<span class="skill-tag" data-places="${esc((i.places || []).join(' '))}">${esc(i.name)}</span>`).join('')}</div>
     </div>
   `).join('');
@@ -168,7 +180,7 @@ export function renderContent(i18nConfig, lang) {
   const pubs = i18nConfig.publications || [];
   const confs = i18nConfig.conferences || [];
   const grants = i18nConfig.grants || [];
-  
+
   const renderItem = (item, showImage = false) => {
     const date = item.date || item.year;
     const meta = [item.authors, item.role, item.venue, item.location ? `${item.location}` : ''].filter(Boolean).join(' · ');
@@ -207,7 +219,7 @@ export function renderContent(i18nConfig, lang) {
   $('docs-title').textContent = sections.docs_title;
   $('docs-sub').textContent = sections.docs_sub;
   const docs = (i18nConfig.documents || []).filter(d => !d.languages || d.languages.includes(lang));
-  
+
   $('documents-content').innerHTML = `
     <div class="documents-grid">
       ${docs.map(d => {
@@ -253,31 +265,31 @@ export function renderContent(i18nConfig, lang) {
   // === DEPLOY INFO ===
   const deployDate = import.meta.env.VITE_DEPLOY_DATE || 'Local Dev';
   const repoUrl = import.meta.env.VITE_REPO_URL || '#';
-  
+
   const ghPagesLink = $('ghPagesLink');
   if (ghPagesLink) ghPagesLink.href = repoUrl;
-  
+
   const deployDateText = $('deployDateText');
   if (deployDateText) deployDateText.textContent = ` · ${deployDate}`;
-  
+
   // === PDF FOOTER ===
-  const genDate = new Date().toLocaleString('sv-SE', { 
-    year: 'numeric', 
-    month: '2-digit', 
-    day: '2-digit', 
-    hour: '2-digit', 
-    minute: '2-digit', 
-    timeZoneName: 'short' 
+  const genDate = new Date().toLocaleString('sv-SE', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short'
   });
-  
+
   const siteUrl = window.location.origin;
-  
+
   const pdfFooterTemplate = ui.pdf?.footer_text || "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}";
   const pdfFooterText = pdfFooterTemplate
     .replace('{url}', siteUrl)
     .replace('{gen_date}', genDate)
     .replace('{deploy_date}', deployDate);
-      
+
   const pdfFooterInfo = $('pdfFooterInfo');
   if (pdfFooterInfo) pdfFooterInfo.innerHTML = pdfFooterText;
 }

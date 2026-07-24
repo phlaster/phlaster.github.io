@@ -1,6 +1,4 @@
-# ═══════════════════════════════════════════════════════════
-# SITE & HERO
-# ═══════════════════════════════════════════════════════════
+#========== SITE & HERO ==========#
 [site]
 author = "Alexander Bezlepsky"
 default_lang = "en"
@@ -15,9 +13,7 @@ scroll_blur = 3            # Максимальное размытие (0 - 10px
 [hero]
 iframe_url = "https://phlaster.github.io/hextiles/#embed=H4sIAAAAAAAAA12aW28lRxWF_8vJa8Xa1-puP4IQLyAQICBEeXDiM4zFZIzsIZFA_Hf0rerjCRnN2OU-ddmXtdfa1Z7_XH683Iebjcv7y71H17j8-_n5-8u93c1tm-Pyz4ePf73ce291V_rpq8v93O1ujsvzy9Pf_3ZO7s4alw9PP1z_9OPT66fXX318-PbD9fFy_-7hw-t1XF7fP__465enzw--f3j5x_Xl9c9Pr0_ffrj-37xf_P2Pnx5eXj8_-_Tw8vuHj3_ty_2x19vPX_Xlfua82z7PiMv9UXa3f54Tl_sZ-118npOX-8N_-uSrZE7h0WnU5f7rr8P24y7Gl75tzP3CNnv0vnwzvo6NuYfdHf__eJ93-3C3-Pl8t-1uDq-cP_vEI-wuRrZi-8X18fp4va4PPO72sU__-Qfdd8eYJh9_ekbsx12NWQfhePvgm3H57l8vP1x_-fzhWW5dvnCLmY-XcfnCj4r5wCht-vEto2l7f1eM9v14993B6OHdt8d3mvf4-Pju6oz63fGuj8s34_Ly_Ol3P1xfXp4erxzwZfX4MmsAHbPK9jCzsnIrrzZPb2-v7Mqq9IrmT6ZnmHmFd3RkZ2dWdhc_u-ZWV1VHumd7dqRVJB93tWVVt3dHZaVFOFunuVuXZUfzs1cZ-3pYVFVolNGdHaz1Zk_T8ZFdZjzxNtkQ6RzeWd3WbIpjXmEdkd1eFXhly145n5Zp5d7dYeVZ3pnJ_mbhGVUpW_AhrUwnhrO8sS7KcSHwPy0K__AVU_Em3T0q2U6usdeKeKdHdwQRJ9DmxBXXzLKMnaMIOZGz6HC2KSwyd8_iMJa6jCyAzaOOwiu8saomJB3RltluVlX42o5dlqHYOmcRWCJKrEilW7ull-KXGEVW3CMzIsAIiXWQQ1aZI485vpykEuJoItUMOMT5pNdTznA-XL51ZkcFIa51fCcoWpAsbyNCGCTIhocrHE24nLxjjgvKraAluPUMoOSRvZDk7U54LIq9gZliAICZ5amcEa5qZSSwhnkG4h0YmwlU5Le8MtxIDktWxEC2EBOJacQTKDo2BEnvdDOLzrD2hE7YlqKz7Co3W2sb9IGuoASwATxRGAplYKrsBEoESQF2YgWGKIHGJZVs6bxSmlkPnvggCtzhq8IUEUn2KVgcZgs-JLmd0Z6RSQyxJ1yF5liSDagARziIwWHXTABtZoaPQge2kIJUirzSjATjW4RIBhcoH0vgT5bSuiJMFUuUGicdccQs6h6TgcG5js2pDPPQrgoRvhtgBFPwgAoBF4wvReRFJ0qkMo018sC9VeeiJrzt6CJPQRGKBEVVmQAgiz-GnW5BSaiQMiILxIAMc0uDNUApFWRCABYbdKrqycA3yEPgNLegtMocOgz4bzEiAcb4KlKDybhEubiLrpVKYoJRJoiLOYCMbHDhNiDTovhUkgqvKMipJ2qMzDofgtZoC0hXBE_1Yw9mCg9N-ERKGMBBigQOBFUMzQJWVIepJCahUZUJQKcu2Z7aIuPkWmHGqaBSFIluSP_kFFnVi0jBo4sPwokRB0AGChu4hTfD0DjYHjaHd7PwVoGE08AAkY0gXJAnFUwd4Y24VRJJejkNtoHNDPJDVJGoIGw4rIKTVjIbJJMS6RbUQG0hijoYsgBBRvBVIwZQxLyEwq1UcISKMBFcdpChBosIBsowAaICG7ShDqZ17OoFNbo0nlyTCcoiEDCBnwNWCWGqVI1ikBbSPqgAqSYyUtiByqGSnGhBotURADmKANolmKSBeCi9LBdfFr4k5S0hAW2Ijy1hYxo4QcpYHoSRMlBwWZGp1gKaQY5XdS8A0UWQXFgDKWXbRPfIjpFC9TNpqL6ArXXEmqLgMWGn20ASoKEFm8JJBFq0K7nQzgny0D9gzVpJhQGrIuWgW6JzdjCUpVQKtYGH4XGKcrEi0JKaFZOZSz5pDaiBJVxos2ljahACRmbQ8TTIjb_UlZgGJUNGDB8VFbIvgVDBBWVD7UhtIV1PMYKkBA7Ed7oaySOKQRIXo6l3ovhUW2ogBU6aFJJRbailZBfqhJdg4zR1dHRtPBeFgwnStPDAWRxJngvlow7ghkWK9JnqR9Wz4meyiCUcLqVQo8Zm6iXRIqJB2SwugCOYZ0BG1Qw-hNczimCMWfyl91QNwV6QYCfNkWRW4oKNOldtBRupSaVIzzCtFuDEPvQjvaWGKGd0iSMApY4AowQKihaqV9-OKC6qXeVB8WL5CU3BXPRMC4yY0aRTPPSoajvJlISMnJsYjPYQBFIvYN4JYSDFCgKdo5p7lYT0VXZLRIXcpHjpxSFP3FR3RcBXICipRa9q4OAlNEpdoBoWwsm35T4gNBRV4FthpP9ehCYFFPMgbRITxInQsgTAICA0wyCfCIE2-i5UHvCp51YeadDooUR7RAkBUJtNoKEkKETXIRajFOpdoAH1-_S94lJoS3uBOVUWzQn9MvTKTkuJSg0r1ie8zwFA4daQ63qlIpHqUCacgceqCZpqddOCMWuooIUfNTNcatgPPFKFsouWTLyKueq8IG7WISpqLSUAhOdUGEhFzLd4Qo2vypEWhx6Bdw-gCwkBgNAHxQmyjFsd7EnCiTMJkO00aZwK-kiRGjNH22QhRS9XiagYDBVUu6ymCwoHTYB5xZiGTz0jH0r5ObyMQ0U_7MQ8VMh9kSTFIsvJGT2TTiOU1KpaYmbwFfzr9kdVUMXaDtoAErqk0oVDt2q6cFUyhp2UHliUIZI3IgWk0Q1adrp9dhSnU7j81V1MXR68pv4KVGMcfSqFIUrQbYpw0aPguq7RuorpRkQSWK82CWDrDstPiARgVOWV6x65FFB4VU9NNG_SQ1uLatB3CXx5C-KCNAugSgQxdCFWM0LYgHOCd5AHDet6ivAQITBChNQRik2JKwxDY4RNiDd6xL5cZei96NYk7yoF-AmTsFfUB1ZWmUs1TuixVvc6QqI-i2YFfMNKQEo9MQ9W1alChAK9LgBnyLFqU68JBHIM0DVIKqX-CPEXRtFnDKUqoRddHsg8naUuz7QzHKbr6XrBwbsUVSqh46UHBbl0UZwo6NJGrmJaRnEObSC2sF4t7pIZWitdjIEvr4BwcL22QJt1YeD1ia4-NC-oqfoM9RR6G0GdSiKM2MlRpBbsiRDopM4cSmPU_ELyQiA1DSmoDaEKz1sOJ-sjLdT7DsGU3BDGJWWS50Uyam6JiQhyXUckCNSwrmtQkxhJwgokBFjURG0NZaZWTXxOZ6RLAJ0UpUA6dD1aUIe2qFF1GWJE9tMlgpzq3Q7eSgqdBWp7k9ToCgQXqtbpf_RyDcVSleOgXuzoPYDe9nCXJgvrmqvbhJoFSZEkjEjzzkPyJ8al5AU5HAXqFB73JL3zWmKp3kEXTb2qk5BDMCqP850gPSntkRpa0E-ji8ItkkSf9XpJZAe90D0vwV1vkTBImRZj0AHAYLwDO4PFH1INYNQFnhdsQoFMKJo0Zbx40IuGRRpq2ejKgDlyrLLjAb0Z6BTu1ZLrjoAfSivyrK5fl1VdPW_KTQEA4UXS9IeYKOFcxa3oiYsJkAQT4VBLpG6aSsAa-EbpR1pEKbq-i50XI3N7Awmr4RSX6lUrgOFGqnZYqq63WQSNJkAv5VZOIDNKQ-6BJ1Wtbs64qrCcr4V_-_x4vdxf3j-8vr_owR-v_ELAc1xeHj4-Pn-_frbzHTVvj_2IGj2m5fBBcEcNDXPbGMTwAfeMGgzL92PUmAwt99HnU69Rw9uYveVkijOOPZmjHfe0oWkjjp1z_GDcsY8avbMnU1xbMrLh2_ABCAdLz6GPjb2dvUOT6Yv4tvOF49cegYW2Zuw7W83bUz-dLE7pZlyHc-KUBUfh77K16lzpe-G8jto2OabDNz-Hm8tzRYR5Wj9z5FoTjDjXo99Gc8SQ3bGNGHNNZDu5HsfIdXbiiM6Lne_L45B7ZNCdRVMj9gyNiFCeozxHPNGnwaxNI0VSHx9soQ0POcLkjUS5ghDHuWMYBsiLJNyhj4st56HsJuNkM09WKc-Tk1kV-8EhxpcCavs8N8Bh_fJm5Ng0wgiFofAsbcwRgXUHD4W6OCeyeWkiBzMigq6z6mZ7ZpNIPzAm5sYUDatZDax9RrwFIthJIdvxITF6O8AHu5UrhlhVWqRIZZ1Bq5FTC3iYB1muA1zqh5VZG7n3SrANFE2htQF5CfrGr6yASTM8Qohtduk6Jri127hH8qDb-MYu9C6fh2yoTRs0af_ZbLwg0joXXw4SzKhtFUyOSu0_erSKV5DaCZLm7QSC5C06IZY9W8UxxyzqS6kNpawpln0qTEzYYm05x76vAMyxu_I1euzORkKBT2VPyDLfVxLGfhACJcwEBMX-2LCJf-HLFFeNWC8L2c76bbj4TosFTeGbAgdJfAEWhb0CuFhpgf2QH0KC759NPRYkcXojd5tWT-KtY1IkKpNSCVk430StfIBw3CZvDhJcRQHNxdhMSIqiGpRkO_Bm4StuOIpZ4ieG8Bz1YiMgcxjuBpcG2jY6bGXCRm0Nio5zio4_0UVJbbehwR422oTJYF4dxscuVq1tGaiCXAijxvItCb0tZM3h83Mcpth4TdiBkcp8k6isfGwhASJNU1Zq8nawsah4OxZ4GSoDMmK37a26U7uJXPdtJR1u0NEYFXZincnyD-CGJdXL3DBFAGhHbTqZNHNROg3iXqOS47FL6rSzzzWjmXGcJisty1Ve3QhdGjvkop1TlC9WSnGBzCjVkozLN68jd9IAZmIzUaXKoPoWragp44Q4aaGsaAVgPZ1x24J6PjdGuFdY4vDFKKK4Tax2EOtYRS9Dp_VtSHoCZPSIrXFEG-71dvixg7JQkPbJN0X3iBse0jaJoTJjtr09PiuYyVL_fT1dWkZRCL-lBVUka8P2RDKIRw5ezp2zu0Ru0ymZwgP6Hr6knSK6OFpE6oOb28LoqLkvW33QC0p5zuFqFrhBUxp6jESspkUz1jo6TRkS1PLaLUaGKlyWrtyqvaLTvfVASbEINgiw2EhaXLkCbCNrslILW4yoYGWHanYpJYqzcJhTpa_pU8Qoo6avgrJRsApVBEga6eiRAnnbrQi6VKAkRNOLjmCO3MWmpD3p0tDfObgsCVscfiwRnCO3JmaL17YJBemkPRfjoqOFTdr42BYPSTJFRppxyGr5c8w1ZPLO0J3ZhYAs7Je9KXDZWV-T9m71Mai_0oHdBcUv8NHFn2XJbxBPgeQCftZ7ZWOQjqAbafUylZMnBLFSsFcbWUq-ek-6UbhPu0ClS6O6pH70UV3qrGRdiSnPIXmQWELGIEJDAQhDp6kPwSTkRG1EjUI5mMywJW-yeW43ta253TSOuznFrD4UDTvFqmHFsz0tze7VVxys02OOXDSgyeeQDmmtk-MS_Tlq329iUeSYhg5TTHzhuk742fLQqahsfXmmpoid2s9kqZe5SWzXDrrnitgKCMNcmlU8XfEQnpd1BcoXvOr2_39-8_Tx-penx0_v-a9ae4_Lw4dP15c_PX24vv7h4dPTM4_jv_8D7Uvdtg0mAAA"
 
-# ═══════════════════════════════════════════════════════════
-# HERO SOCIAL ICONS
-# ═══════════════════════════════════════════════════════════
+#========== HERO SOCIAL ICONS ==========#
 [[hero_icons]]
 key = "telegram"
 icon = "/assets/icons/telegram-logo.svg"
@@ -28,18 +24,14 @@ key = "email"
 icon = "/assets/icons/email-logo.svg"
 url = "#contact"
 
-# ═══════════════════════════════════════════════════════════
-# CONTACT (WORKER & FORM)
-# ═══════════════════════════════════════════════════════════
+#========== CONTACT (WORKER & FORM) ==========#
 [contact]
 telegram_bot = "my_portfolio_bot"
 webhook_url = ""
 fallback_telegram = true
 worker_url = "https://cv.alex-phlaster.workers.dev" 
 
-# ═══════════════════════════════════════════════════════════
-# UI ELEMENTS
-# ═══════════════════════════════════════════════════════════
+#========== UI ELEMENTS ==========#
 [ui]
 scroll_cue = { en = "Scroll to explore", fr = "Défiler pour explorer", ru = "Прокрутите вниз" }
 draw_hint = { en = "Try drawing on the background", fr = "Essayez de dessiner sur le fond", ru = "Попробуйте рисовать на фоне" }
@@ -84,9 +76,7 @@ form_invalid_email = { en = "Invalid email. Please use Latin letters and a valid
 [ui.pdf]
 footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}", fr = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date} · Dernière mise à jour : {deploy_date}", ru = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date} · Последнее обновление: {deploy_date}" }
 
-# ═══════════════════════════════════════════════════════════
-# ABOUT
-# ═══════════════════════════════════════════════════════════
+#========== ABOUT ==========#
 [about]
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
 tagline = { en = "", fr = "", ru = "" }
@@ -124,78 +114,57 @@ items = [
   { key = "scholar", icon = "/assets/icons/scholar-logo.png", url = "https://scholar.google.com/citations?user=eKgjgNwAAAAJ&hl" }
 ]
 
-# ═══════════════════════════════════════════════════════════
-# TIMELINE (Education and career)
-# ═══════════════════════════════════════════════════════════
+#========== TIMELINE (Education and career) ==========#
 [[timeline]]
-place_id = "univ_y"
-period = { en = "2020 — 2024", fr = "2020 — 2024", ru = "2020 — 2024" }
-role = { en = "B.Sc. Bioinformatics", fr = "Licence en Bioinformatique", ru = "Бакалавр биоинформатики" }
-organization = { en = "University Name", fr = "Nom de l'Université", ru = "Название ВУЗа" }
-description = { en = "Bachelor degree in Bioinformatics.", fr = "Diplôme de Licence en Bioinformatique.", ru = "Степень бакалавра в области биоинформатики." }
-url = "https://example.com/univ"
-
-[[timeline]]
-place_id = "lab_x"
+place_id = "arriam"
+url = "https://arriam.ru/"
 period = { en = "2022 — Present", fr = "2022 — Présent", ru = "2022 — Наст. время" }
-role = { en = "Laboratory Researcher", fr = "Chercheur en Laboratoire", ru = "Лаборант-исследователь" }
-organization = { en = "Institute / Lab Name", fr = "Institut / Nom du Labo", ru = "Название института / лаборатории" }
-description = { en = "DNA/RNA extraction, PCR, sample collection, library prep, and data analysis integration.", fr = "Extraction ADN/ARN, PCR, collecte d'échantillons, préparation de banques et intégration d'analyse de données.", ru = "Выделение ДНК/РНК, ПЦР, сбор образцов, подготовка библиотек и интеграция с анализом данных." }
-url = "https://example.com/lab"
+role = { en = "Lab Technician (1st cat.)", fr = "Technicien de labo (1ère cat.)", ru = "Техник 1 кат." }
+organization = { en = "All-Russia Research Institute for Agricultural Microbiology", fr = "Institut de recherche panrusse de microbiologie agricole", ru = "Всероссийский научно-исследовательский институт сельскохозяйственной микробиологии" }
+description = { en = "Laboratory of Microbiological Monitoring and Soil Bioremediation", fr = "Laboratoire de surveillance microbiologique et bioremédiation des sols", ru = "Лаборатория микробиологического мониторинга и биоремедиации почв" }
 
-# ═══════════════════════════════════════════════════════════
-# SKILL GROUPS (Expertise)
-# ═══════════════════════════════════════════════════════════
-[[skill_groups]]
-title = { en = "Wet Lab", fr = "Laboratoire Humide", ru = "Мокрая лаборатория" }
-items = [
-  { name = { en = "PCR", fr = "PCR", ru = "ПЦР" }, places = ["lab_x"] },
-  { name = { en = "Library Prep", fr = "Préparation de banques", ru = "Подготовка библиотек" }, places = ["lab_x"] },
-  { name = { en = "DNA/RNA Extraction", fr = "Extraction ADN/ARN", ru = "Выделение ДНК/РНК" }, places = ["lab_x"] }
-]
+[[timeline]]
+place_id = "polytech_bioinf"
+url = "https://physmech.spbstu.ru/"
+period = "2023 — 2026"
+role = { en = "B.Sc.", fr = "Licence", ru = "Бакалавр" }
+organization = { en = "Peter the Great St. Petersburg Polytechnic University", fr = "Université polytechnique de Saint-Pétersbourg", ru = "Санкт-Петербургский политехнический университет Петра Великого" }
+description = { en = "01.03.02_04, Applied Mathematics and Informatics (bioinformatics)", fr = "01.03.02_04, Mathématiques appliquées et Informatique (bioinformatique)", ru = "01.03.02_04, Прикладная математика и информатика (биоинформатика)" }
 
-[[skill_groups]]
-title = { en = "Programming", fr = "Programmation", ru = "Программирование" }
-items = [
-  { name = { en = "Julia", fr = "Julia", ru = "Julia" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "Python", fr = "Python", ru = "Python" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "R", fr = "R", ru = "R" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "Bash", fr = "Bash", ru = "Bash" }, places = ["univ_y", "lab_x"] }
-]
+[[timeline]]
+place_id = "skoltech_school"
+url = "https://smiles.skoltech.ru/"
+period = { en = "Summer 2024", fr = "Été 2024", ru = "Лето 2024" }
+role = { en = "Remote participant", fr = "Participant", ru = "Дистанционное участие" }
+organization = { en = "Skoltech", fr = "Skoltech", ru = "Сколтех" }
+description = { en = "SMILES, Summer school on Machine Learning", fr = "SMILES, École d'été sur l'apprentissage automatique (Machine Learning)", ru = "SMILES, Летняя школа машинного обучения" }
 
-[[skill_groups]]
-title = { en = "Mathematics", fr = "Mathématiques", ru = "Математика" }
-items = [
-  { name = { en = "Statistics", fr = "Statistiques", ru = "Статистика" }, places = ["univ_y"] },
-  { name = { en = "Linear Algebra", fr = "Algèbre Linéaire", ru = "Линейная алгебра" }, places = ["univ_y"] },
-  { name = { en = "Geometry", fr = "Géométrie", ru = "Геометрия" }, places = ["univ_y"] }
-]
+[[timeline]]
+place_id = "polytech_phys"
+url = "https://et.spbstu.ru/"
+period = "2021 — 2023"
+role = { en = "Student", fr = "Étudiant", ru = "Студент" }
+organization = { en = "Peter the Great St. Petersburg Polytechnic University", fr = "Université polytechnique de Saint-Pétersbourg", ru = "Санкт-Петербургский политехнический университет Петра Великого" }
+description = { en = "16.03.01, Technical Physics", fr = "16.03.01, Physique technique", ru = "16.03.01, Техническая физика" }
 
-[[skill_groups]]
-title = { en = "DevOps & Infra", fr = "DevOps & Infra", ru = "DevOps и Инфраструктура" }
-items = [
-  { name = { en = "Git", fr = "Git", ru = "Git" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "Docker", fr = "Docker", ru = "Docker" }, places = ["lab_x"] },
-  { name = { en = "Linux", fr = "Linux", ru = "Linux" }, places = ["lab_x"] },
-  { name = { en = "CI/CD", fr = "CI/CD", ru = "CI/CD" }, places = ["lab_x"] }
-]
+[[timeline]]
+place_id = "herzen_uni"
+url = "https://www.herzen.spb.ru/"
+period = "2018 — 2021"
+role = { en = "Student", fr = "Étudiant", ru = "Студент" }
+organization = { en = "Herzen University", fr = "Université Herzen", ru = "РГПУ имени Герцена" }
+description = { en = "03.03.02, Physics", fr = "03.03.02, Physique", ru = "03.03.02, Физика" }
 
-[[skill_groups]]
-title = { en = "Frontend & Design", fr = "Frontend & Design", ru = "Фронтенд и Дизайн" }
-items = [
-  { name = { en = "TypeScript", fr = "TypeScript", ru = "TypeScript" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "WebGL", fr = "WebGL", ru = "WebGL" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "Canvas API", fr = "Canvas API", ru = "Canvas API" }, places = ["univ_y", "lab_x"] },
-  { name = { en = "CSS", fr = "CSS", ru = "CSS" }, places = ["univ_y", "lab_x"] }
-]
+[[timeline]]
+place_id = "smtu"
+url = "https://www.smtu.ru/"
+period = "2015 — 2016"
+role = { en = "Student", fr = "Étudiant", ru = "Студент" }
+organization = { en = "SMTU (Saint Petersburg State Maritime Technical University)", fr = "Université technique maritime d'État de Saint-Pétersbourg (SMTU)", ru = "Санкт-Петербургский государственный морской технический университет (СПбГМТУ)" }
+description = { en = "40.03.01.02, Law", fr = "40.03.01.02, Droit", ru = "40.03.01.02, Юриспруденция" }
 
-[[skill_groups]]
-title = { en = "Soft Skills", fr = "Compétences douces", ru = "Софт-скиллы" }
-items = [
-  { name = { en = "Team Management", fr = "Gestion d'équipe", ru = "Управление командой" }, places = ["lab_x"] },
-  { name = { en = "Data Analysis", fr = "Analyse de données", ru = "Анализ данных" }, places = ["lab_x"] }
-]
 
+#========== SKILL GROUPS (Expertise) ==========#
 [[skill_groups]]
 title = { en = "Languages", fr = "Langues", ru = "Языки" }
 items = [
@@ -204,12 +173,91 @@ items = [
   { name = { en = "French (B1)", fr = "Français (B1)", ru = "Французский (B1)" } }
 ]
 
-# ═══════════════════════════════════════════════════════════
-# PROJECTS
-# ═══════════════════════════════════════════════════════════
-# ═══════════════════════════════════════════════════════════
-# PROJECTS
-# ═══════════════════════════════════════════════════════════
+[[skill_groups]]
+title = { en = "Computer science", fr = "L'informatique", ru = "Информационные технологии" }
+items = [
+  { name = "Python", places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "Julia", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "Bash", places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "R", places = ["polytech_bioinf", "arriam"] },
+  { name = "C++", places = ["polytech_bioinf", "arriam"] },
+  { name = "LaTeX", places = ["polytech_bioinf", "arriam"] },
+  { name = "JS", places = ["polytech_bioinf"] },
+  { name = "SQL", places = ["polytech_bioinf", "arriam"] },
+  { name = "MATLAB", places = ["polytech_bioinf"] },
+  { name = "Debuggers", places = ["polytech_bioinf", "arriam"] },
+  { name = "Git", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "Docker", places = ["polytech_bioinf", "arriam"] },
+  { name = "Arch Linux", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "GitHub", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "GitLab", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "HuggingFace", places = ["arriam"] },
+  { name = { en = "Webhooks & Automation", fr = "Webhooks et intégration", ru = "Настройка веб-хуков" }, places = ["arriam"] }
+]
+
+[[skill_groups]]
+title = { en = "Mathematics", fr = "Mathématiques", ru = "Математика" }
+items = [
+  { name = { en = "Linear algebra", fr = "Algèbre linéaire", ru = "Линейная алгебра" }, places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf"] },
+  { name = { en = "Probability Theory", fr = "Théorie des Probabilités", ru = "Теория вероятностей" }, places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Mathematical statistics", fr = "Statistiques mathématiques", ru = "Матстатистика" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Discrete Mathematics", fr = "Mathématiques Discrètes", ru = "Дискретная математика" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Numerical Methods", fr = "Méthodes Numériques", ru = "Численные методы" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Mathematical Physics", fr = "Physique Mathématique", ru = "Математическая физика" }, places = ["polytech_bioinf"] }
+]
+
+[[skill_groups]]
+title = { en = "Soft Skills & Management", fr = "Compétences douces et Gestion", ru = "Софт-скиллы и управление" }
+items = [
+  { name = { en = "Public speaking", fr = "Art oratoire", ru = "Публичные выступления" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Self-organization", fr = "Auto-organisation", ru = "Самоорганизация" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Critical thinking", fr = "Pensée critique", ru = "Критическое мышление" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Team Management", fr = "Gestion d'équipe", ru = "Управление командой" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Agile", fr = "Méthodologies Agile", ru = "Гибкие методологии" }, places = ["skoltech_school", "polytech_bioinf"] },
+  { name = "AnyType", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "TiddlyWiki", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+]
+
+[[skill_groups]]
+title = { en = "ML & AI", fr = "ML et IA", ru = "Машинное обучение и ИИ" }
+items = [
+  { name = { en = "LLM self hosting", fr = "Auto-hébergement du LLM"}, places = ["arriam"] },
+  { name = { en = "Model training", fr = "Entraînement du modèle"}, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Model fine tuning", fr = "Optimisation du modèle"}, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Data augmentation", fr = "Augmentation des données"}, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Custom Harnesses", fr = "Harnais sur mesure"}, places = ["arriam"] },
+  { name = { en = "AI Agents & Automation", fr = "Agents d'IA et automatisation", ru = "Создание и настройка AI-агентов" }, places = ["arriam"] },
+]
+
+[[skill_groups]]
+title = { en = "Wet lab skills", fr = "Compétences en laboratoire humide", ru = "Методы мокрой лаборатории" }
+items = [
+  { name = { en = "Sample Collection (Soil & Plants)", fr = "Collecte d'échantillons (Sol et Plantes)", ru = "Сбор образцов почвы и растений" }, places = ["arriam"] },
+  { name = { en = "DNA Extraction", fr = "Extraction ADN", ru = "Выделение ДНК" }, places = ["arriam"] },
+  { name = { en = "Buffer Preparation", fr = "Préparation du tampons", ru = "Приготовление буферов" }, places = ["arriam"] },
+  { name = { en = "PCR Reactions", fr = "Réactions PCR", ru = "ПЦР-реакции" }, places = ["arriam"] },
+  { name = { en = "Electrophoresis", fr = "Électrophorèse", ru = "Электрофорезы" }, places = ["arriam"] },
+  { name = { en = "Library Prep for Sequencing", fr = "Préparation de banques pour séquençage", ru = "Подготовка библиотек к секвенированию" }, places = ["arriam"] },
+  { name = { en = "Lab Notebook Management", fr = "Gestion du cahier de labo", ru = "Ведение лабжурнала" }, places = ["arriam"] }
+]
+
+[[skill_groups]]
+title = { en = "Data Analysis & Visualization", fr = "Analyse de Données et Visualisation", ru = "Анализ данных и визуализация" }
+items = [
+  { name = { en = "Multivariate Statistics", fr = "Statistiques Multivariées", ru = "Многомерная статистика" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Compositional Data Analysis", fr = "Analyse de données compositionnelles", ru = "Анализ композиционных данных" }, places = ["polytech_bioinf", "arriam"] },
+  { name = { en = "Publication-Ready Graphs", fr = "Graphiques prêts à la publication", ru = "Высококачественные графики для публикаций" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Interactive Dashboards", fr = "Tableaux de bord interactifs", ru = "Интерактивные дашборды" }, places = ["polytech_bioinf", "arriam"] },
+]
+
+[[skill_groups]]
+title = { en = "Scientific Communication", fr = "Communication Scientifique", ru = "Научная коммуникация" }
+items = [
+  { name = { en = "Article Editing & Writing", fr = "Édition et rédaction d'articles", ru = "Редактирование и написание текстов" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "Literature Review", fr = "Revue de littérature", ru = "Литературный обзор" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] }
+]
+
+#========== PROJECTS ==========#
 [[projects]]
 name = "DePPA.jl"
 url = "https://github.com/phlaster/DePPA.jl"
@@ -268,9 +316,8 @@ cover = "/assets/projects/geovue_social.webp"
 languages = ["JS", "CSS"]
 description = { en = "A single-page web app for visualizing geospatial CSV data on an interactive map with dynamic groupings.", fr = "Une application web monopage pour visualiser des données CSV géospatiales sur une carte interactive avec des regroupements dynamiques.", ru = "Одностраничное веб-приложение для визуализации геопространственных CSV-данных на интерактивной карте с динамическими группировками." }
 
-# ═══════════════════════════════════════════════════════════
-# RESEARCH: CONFERENCES
-# ═══════════════════════════════════════════════════════════
+#========== RESEARCH: CONFERENCES ==========#
+
 [[conferences]]
 date = { en = "June 2026", fr = "Juin 2026", ru = "Июнь 2026" }
 title = { en = "V International Scientific Conference \"Plants and Microorganisms: Biotechnology of the Future\" (PLAMIC2026)", fr = "V Conférence scientifique internationale \"Plantes et micro-organismes : biotechnologie de l'avenir\" (PLAMIC2026)", ru = "V Международная научная конференция «Растения и микроорганизмы: биотехнология будущего» (PLAMIC2026)" }
@@ -289,9 +336,7 @@ url = "https://brc.arriam.ru"
 pdf = "/assets/pdfs/conference_BRC_micro_2026.pdf"
 cover = "/assets/pics/brc_micro.webp"
 
-# ═══════════════════════════════════════════════════════════
-# RESEARCH: PUBLICATIONS
-# ═══════════════════════════════════════════════════════════
+#========== RESEARCH: PUBLICATIONS ==========#
 [[publications]]
 date = "2025"
 title = "A comparison of 27 Arabidopsis thaliana genomes and the path toward an unbiased characterization of genetic polymorphism"
@@ -316,9 +361,7 @@ venue = "Microorganisms 12(8), 1728 (2024)"
 url = "https://www.mdpi.com/2076-2607/12/8/1728"
 pdf = "/assets/pdfs/microorganisms2024.pdf"
 
-# ═══════════════════════════════════════════════════════════
-# RESEARCH: GRANTS
-# ═══════════════════════════════════════════════════════════
+#========== RESEARCH: GRANTS ==========#
 [[grants]]
 date = "2025-2027"
 title = { en = "RSF 25-16-00068", fr = "RSF 25-16-00068", ru = "РНФ 25-16-00068" }
@@ -338,9 +381,7 @@ description = { en = "\"Population genomics of nodule bacteria – a key to deci
 url = "https://rscf.ru/project/TLqba7bD8O9L0l3QnP6vWU91ZAflwEAqQnqhu6i3QoGjperF_k1_L9xtfdJLrn6lDY3pUZqf/"
 
 
-# ═══════════════════════════════════════════════════════════
-# DOCUMENTS & ACHIEVEMENTS
-# ═══════════════════════════════════════════════════════════
+#========== DOCUMENTS & ACHIEVEMENTS ==========#
 [[documents]]
 category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
 date = { en = "2024", fr = "2024", ru = "2024" }

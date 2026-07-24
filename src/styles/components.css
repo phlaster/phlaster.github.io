@@ -48,8 +48,8 @@
 /* === Career & Skills === */
 .career-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 3fr 4fr;
+  gap: 2rem;
 }
 
 .timeline-list {
@@ -60,8 +60,8 @@
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -82,20 +82,20 @@
   color: var(--color-text-faded);
 }
 
-.timeline-role {
+.timeline-org {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   margin-bottom: 0.25rem;
 }
 
-.timeline-org {
+.timeline-role {
   font-size: 0.9rem;
   color: var(--color-text-muted);
-  margin-bottom: 0.5rem;
 }
 
 .timeline-desc {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
+  font-style: italic;
   color: var(--color-text-muted);
 }
 
@@ -106,9 +106,9 @@
 }
 
 .skill-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
 }
 
 .skill-tags {
@@ -374,11 +374,15 @@
 .reveal-ring {
   display: block;
 }
+
 .reveal-ring .ring-fg {
   animation: fillRing 10s linear forwards;
 }
+
 @keyframes fillRing {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .reveal-error,

@@ -853,6 +853,12 @@
     gap: 2rem !important;
   }
 
+  .timeline-item,
+  .skill-group {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
   .about-meta[style] {
     grid-template-columns: 1fr !important;
   }
