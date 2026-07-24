@@ -2,7 +2,7 @@
 # SITE & HERO
 # ═══════════════════════════════════════════════════════════
 [site]
-author = "Alexander Morozov"
+author = "Alexander Bezlepsky"
 default_lang = "en"
 photo_top = "/assets/me/me_top.webp"
 photo_bottom = "/assets/me/me_bottom.webp"

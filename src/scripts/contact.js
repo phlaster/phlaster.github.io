@@ -6,6 +6,8 @@ export function initContact(i18nConfigGetter) {
   let isComputingFormPoW = false;
   let contactsRevealed = false;
   let timeoutTimer = null;
+  let revealedEmail = null;
+  let revealedTelegram = null;
 
   const CACHE_KEY = 'portfolio_contacts_cache';
   const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
@@ -100,11 +102,14 @@ export function initContact(i18nConfigGetter) {
   }
 
   function applyContacts(email, telegram) {
+    if (email) revealedEmail = email;
+    if (telegram) revealedTelegram = telegram;
+
     const tgWrap = $('channelTelegramWrap');
     const emailWrap = $('channelEmailWrap');
 
-    if (telegram && tgWrap) {
-      const tgUsername = telegram.replace(/@/g, '');
+    if (revealedTelegram && tgWrap) {
+      const tgUsername = revealedTelegram.replace(/@/g, '');
       const tgUrl = `https://telegram.me/${tgUsername}`;
       tgWrap.innerHTML = `<span class="label">Telegram</span><a class="value" href="${tgUrl}">@${tgUsername}</a>`;
       document.querySelectorAll('.hero-social-link[data-key="telegram"]').forEach(el => {
@@ -112,14 +117,21 @@ export function initContact(i18nConfigGetter) {
         el.target = "_blank";
       });
     }
-    if (email && emailWrap) {
-      emailWrap.innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${email}">${email}</a>`;
+    if (revealedEmail && emailWrap) {
+      emailWrap.innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${revealedEmail}">${revealedEmail}</a>`;
       document.querySelectorAll('.hero-social-link[data-key="email"]').forEach(el => {
-        el.href = `mailto:${email}`;
+        el.href = `mailto:${revealedEmail}`;
         el.target = "_blank";
       });
     }
   }
+
+  function reapplyContacts() {
+    if (revealedEmail || revealedTelegram) {
+      applyContacts();
+    }
+  }
+  window.reapplyContacts = reapplyContacts;
 
   async function solvePoW(challenge) {
     if (!window.crypto || !window.crypto.subtle) {

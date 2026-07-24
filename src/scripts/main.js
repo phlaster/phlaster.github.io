@@ -27,8 +27,8 @@ function rerender(newLang) {
   currentLang = newLang;
   i18nConfig = resolveTranslations(config, currentLang);
   renderContent(i18nConfig, currentLang);
-  
   initCareerHighlighting();
+  if (window.reapplyContacts) window.reapplyContacts();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
