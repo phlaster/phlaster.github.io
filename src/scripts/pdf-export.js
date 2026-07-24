@@ -7,6 +7,42 @@ export function initPdfExport() {
   const originalHTML = btn.innerHTML;
   let isExporting = false;
 
+  const createBlurredBg = (dataUrlOrSvg) => {
+    return new Promise((resolve) => {
+      let imgSrc = dataUrlOrSvg;
+      if (dataUrlOrSvg.startsWith('<svg') || dataUrlOrSvg.startsWith('<?xml')) {
+        imgSrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(dataUrlOrSvg)));
+      }
+
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1920;
+        canvas.height = 1080;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.fillStyle = '#070D15';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.filter = 'grayscale(40%) blur(3px)';
+        ctx.globalAlpha = 0.7;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        try {
+          if (canvas.toDataURL('image/webp').startsWith('data:image/webp')) {
+            resolve(canvas.toDataURL('image/webp', 0.8));
+          } else {
+            resolve(canvas.toDataURL('image/jpeg', 0.8));
+          }
+        } catch (e) {
+          resolve(imgSrc);
+        }
+      };
+      img.onerror = () => resolve(imgSrc);
+      img.src = imgSrc;
+    });
+  };
+
   btn.addEventListener('click', async () => {
     if (btn.classList.contains('btn-pdf-error')) {
       btn.innerHTML = originalHTML;
@@ -20,6 +56,7 @@ export function initPdfExport() {
 
     const iframe = $('heroIframe');
     const printBg = $('printBackground');
+    const heroPrintBg = $('heroPrintBg');
 
     if (!iframe.contentWindow) {
       isExporting = false;
@@ -35,7 +72,9 @@ export function initPdfExport() {
       iframe.style.width = '1920px';
       iframe.style.height = '1080px';
 
-      await new Promise(r => setTimeout(r, 300));
+      // Возвращаем iframe в нормальное состояние и ждем чуть дольше (600мс)
+      iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: 'normal' }, '*');
+      await new Promise(r => setTimeout(r, 600));
 
       const framePromise = new Promise((resolve) => {
         const handler = (e) => {
@@ -47,34 +86,36 @@ export function initPdfExport() {
         window.addEventListener('message', handler);
       });
 
-      iframe.contentWindow.postMessage({
-        type: 'REQUEST_FRAME'
-      }, '*');
+      iframe.contentWindow.postMessage({ type: 'REQUEST_FRAME' }, '*');
       const frameData = await Promise.race([
         framePromise,
         new Promise(r => setTimeout(() => r(null), 5000))
       ]);
+      
       iframe.style.width = originalWidth;
       iframe.style.height = originalHeight;
 
       if (frameData) {
+        let clearBgHtml = '';
         if (frameData.startsWith('<svg') || frameData.startsWith('<?xml')) {
           const parser = new DOMParser();
           const doc = parser.parseFromString(frameData, "image/svg+xml");
           const svgElement = doc.documentElement;
-
           svgElement.removeAttribute('width');
           svgElement.removeAttribute('height');
-
           svgElement.setAttribute('width', '100%');
           svgElement.setAttribute('height', '100%');
           svgElement.setAttribute('preserveAspectRatio', 'none');
-
-          printBg.innerHTML = '';
-          printBg.appendChild(svgElement);
-          await new Promise(r => setTimeout(r, 100));
+          clearBgHtml = svgElement.outerHTML;
         } else {
-          printBg.innerHTML = `<img src="${frameData}" style="width:100%;height:100%;object-fit:fill;">`;
+          clearBgHtml = `<img src="${frameData}" style="width:100%;height:100%;object-fit:fill;">`;
+        }
+
+        if (heroPrintBg) heroPrintBg.innerHTML = clearBgHtml;
+
+        const blurredBg = await createBlurredBg(frameData);
+        if (printBg) {
+          printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:fill;">`;
         }
         await new Promise(r => setTimeout(r, 100));
       }
@@ -98,7 +139,9 @@ export function initPdfExport() {
 
       await new Promise(r => setTimeout(r, 50));
       window.print();
+      
       printBg.innerHTML = '';
+      if (heroPrintBg) heroPrintBg.innerHTML = '';
 
       btn.innerHTML = originalHTML;
 
