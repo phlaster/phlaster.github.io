@@ -332,7 +332,8 @@
   .contact-channel .value {
     font-size: 1.8rem !important;
     color: var(--color-accent) !important;
-    font-family: var(--font-serif) !important;
+    font-family: var(--font-sans) !important;
+    font-weight: 700 !important;
   }
 
   .footer-bottom {
