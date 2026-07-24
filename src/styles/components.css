@@ -159,8 +159,8 @@
 }
 
 .skill-tag:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-text);
+  color: var(--color-text);
 }
 
 /* Projects */
@@ -269,7 +269,7 @@
 }
 
 .pub-title-link:hover .pub-title {
-  color: var(--color-accent);
+  color: var(--color-text-muted);
 }
 
 .pub-authors {
@@ -384,8 +384,8 @@
   gap: .5rem;
   font-family: var(--font-mono);
   font-size: .8125rem;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   padding: .3rem .8rem;
   border-radius: var(--radius);
   cursor: pointer;
@@ -395,7 +395,8 @@
 
 .view-pdf-btn:hover {
   background: var(--color-accent);
-  color: var(--color-dark-fg);
+  color: var(--color-text);
+  border-color: var(--color-accent);
 }
 
 /* Buttons & Loaders */
@@ -498,8 +499,8 @@
 .submit-btn .btn-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(var(--color-dark-fg-rgb), 0.3);
-  border-top-color: var(--color-dark-fg);
+  border: 2px solid rgba(var(--color-text-rgb), 0.3);
+  border-top-color: var(--color-text);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

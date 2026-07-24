@@ -120,13 +120,13 @@
   overflow: hidden;
 }
 
-  .btn-action:hover,
-  .lang-trigger:hover {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-    color: var(--color-dark-fg);
-    opacity: 1;
-  }
+.btn-action:hover,
+.lang-trigger:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  opacity: 1;
+}
 
 .btn-action svg,
 .lang-trigger svg {
@@ -633,7 +633,7 @@
 
 .submit-btn {
   background: var(--color-accent);
-  color: var(--color-dark-fg);
+  color: var(--color-text);
   border: 0;
   padding: .85rem 1.75rem;
   font-family: var(--font-mono);

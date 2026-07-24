@@ -61,7 +61,7 @@
 
 .pdf-modal-close:hover {
   background: var(--color-accent);
-  color: var(--color-dark-fg);
+  color: var(--color-text);
   border-color: var(--color-accent);
   transform: rotate(90deg);
 }
