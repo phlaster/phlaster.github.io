@@ -16,7 +16,7 @@
   backdrop-filter: saturate(180%) blur(12px);
   color: var(--color-dark-fg);
   transition: background .3s, color .3s, border-color .3s;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.05);
   border-top: none;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   touch-action: none;
@@ -401,14 +401,14 @@
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-dark-fg);
   border-radius: inherit;
   mix-blend-mode: difference;
   pointer-events: none;
 }
 
 .scroll-cue span {
-  color: #ffffff;
+  color: var(--color-dark-fg);
   mix-blend-mode: difference;
   position: relative;
   z-index: 1;

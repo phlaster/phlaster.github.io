@@ -440,12 +440,12 @@
   background: transparent;
   border: none;
   padding: 0;
-  color: #FFD700;
+  color: var(--error-red);
 }
 
 .btn-pdf-error {
-  border-color: #FFD700 !important;
-  color: #FFD700 !important;
+  border-color: var(--error-red) !important;
+  color: var(--error-red) !important;
   opacity: 1;
 }
 
@@ -498,8 +498,8 @@
 .submit-btn .btn-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
+  border: 2px solid rgba(var(--color-dark-fg-rgb), 0.3);
+  border-top-color: var(--color-dark-fg);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -514,8 +514,8 @@
 
 .submit-btn.is-error {
   background: transparent;
-  border: 1px solid #FFD700;
-  color: #FFD700;
+  border: 1px solid var(--error-red);
+  color: var(--error-red);
   cursor: pointer;
   opacity: 1;
 }

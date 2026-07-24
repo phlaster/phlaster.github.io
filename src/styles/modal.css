@@ -61,14 +61,14 @@
 
 .pdf-modal-close:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-dark-fg);
   border-color: var(--color-accent);
   transform: rotate(90deg);
 }
 
 .pdf-viewer-wrapper {
   flex: 1;
-  background: var(--color-modal-bg);
+  background: var(--color-dark-bg);
   display: block;
   overflow: hidden;
   border-radius: var(--radius-lg);

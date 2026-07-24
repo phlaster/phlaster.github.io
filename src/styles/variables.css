@@ -25,9 +25,8 @@
   --color-dark-fg-rgb: 244, 241, 234;
   
   /* === Специфичные элементы === */
-  --color-modal-bg: #525659;      /* Фон просмотрщика PDF */
-  --color-shadow: rgba(0, 0, 0, 0.12);
-  --color-shadow-lg: rgba(0, 0, 0, 0.15);
+  --color-shadow: rgba(0, 0, 0, 0.232);
+  --error-red: #d83d16;
   
   /* === Размеры и шрифты === */
   --radius: 8px;
