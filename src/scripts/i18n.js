@@ -11,6 +11,22 @@ const fallbackMap = {
   fr: 'ru'
 };
 
+const LANG_STORAGE_KEY = 'portfolio_lang';
+
+export function loadLang() {
+  try {
+    const saved = localStorage.getItem(LANG_STORAGE_KEY);
+    if (saved && langKeys.includes(saved)) return saved;
+  } catch (e) { /* localStorage заблокирован — идём дальше */ }
+  return detectInitialLang();
+}
+
+export function saveLang(lang) {
+  try {
+    localStorage.setItem(LANG_STORAGE_KEY, lang);
+  } catch (e) { /* localStorage заблокирован — идём дальше */ }
+}
+
 export function detectInitialLang() {
   const browserLangs = navigator.languages || [navigator.language];
   for (const bl of browserLangs) {

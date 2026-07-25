@@ -1,6 +1,7 @@
 import {
   config,
-  detectInitialLang,
+  loadLang,
+  saveLang,
   resolveTranslations
 } from './i18n.js';
 import { 
@@ -20,11 +21,12 @@ import {
   initPdfExport
 } from './pdf-export.js';
 
-let currentLang = detectInitialLang();
+let currentLang = loadLang();
 let i18nConfig = resolveTranslations(config, currentLang);
 
 function rerender(newLang) {
   currentLang = newLang;
+  saveLang(newLang);
   i18nConfig = resolveTranslations(config, currentLang);
   renderContent(i18nConfig, currentLang);
   initCareerHighlighting();
