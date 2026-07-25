@@ -693,6 +693,35 @@
   border-top: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }
 
+/* Кнопка копирования контакта */
+.copy-contact-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--color-dark-fg);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .copy-contact-btn:hover {
+    opacity: 1;
+    color: var(--color-accent-soft);
+  }
+}
+
+.copy-contact-btn.copied {
+  color: var(--color-accent-soft);
+  opacity: 1;
+}
+
 .contact-channel:last-child {
   border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), .1);
 }

@@ -177,17 +177,22 @@ export function initContact(i18nConfigGetter) {
     const tgWrap = $('channelTelegramWrap');
     const emailWrap = $('channelEmailWrap');
 
+    const copyIconSvg = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+    const checkIconSvg = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
     if (revealedTelegram && tgWrap) {
       const tgUsername = revealedTelegram.replace(/@/g, '');
       const tgUrl = `https://telegram.me/${tgUsername}`;
-      tgWrap.innerHTML = `<span class="label">Telegram</span><a class="value" href="${tgUrl}">@${tgUsername}</a>`;
+      const copyVal = `@${tgUsername}`;
+      tgWrap.innerHTML = `<span class="label">Telegram</span><button class="copy-contact-btn no-print" data-copy="${copyVal}" aria-label="Copy Telegram username">${copyIconSvg}</button><a class="value" href="${tgUrl}" target="_blank">${copyVal}</a>`;
       document.querySelectorAll('.hero-social-link[data-key="telegram"]').forEach(el => {
         el.href = tgUrl;
         el.target = "_blank";
       });
     }
     if (revealedEmail && emailWrap) {
-      emailWrap.innerHTML = `<span class="label">Email</span><a class="value" href="mailto:${revealedEmail}">${revealedEmail}</a>`;
+      const copyVal = revealedEmail;
+      emailWrap.innerHTML = `<span class="label">Email</span><button class="copy-contact-btn no-print" data-copy="${copyVal}" aria-label="Copy Email address">${copyIconSvg}</button><a class="value" href="mailto:${revealedEmail}">${revealedEmail}</a>`;
       document.querySelectorAll('.hero-social-link[data-key="email"]').forEach(el => {
         el.href = `mailto:${revealedEmail}`;
         el.target = "_blank";
@@ -280,7 +285,7 @@ export function initContact(i18nConfigGetter) {
 
       setPdfButtonState('loading');
     } else if (state === 'error') {
-      const html = (label) => `<span class="label">${label}</span><button class="value reveal-error" type="button" data-tooltip="${safeMsg}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>`;
+      const html = (label) => `<span class="label">${label}</span><button class="value reveal-error" type="button" data-tooltip="${safeMsg}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>`;
       tgWrap.innerHTML = html('Telegram');
       emailWrap.innerHTML = html('Email');
 
@@ -288,6 +293,27 @@ export function initContact(i18nConfigGetter) {
       setButtonState('error', message);
     }
   }
+
+  document.body.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.copy-contact-btn');
+    if (btn) {
+      const text = btn.dataset.copy;
+      const checkIconSvg = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      const copyIconSvg = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.innerHTML = checkIconSvg;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = copyIconSvg;
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
+    }
+  });
 
   async function prepareRevealPoW() {
     if (contactsRevealed) return;
@@ -349,7 +375,7 @@ export function initContact(i18nConfigGetter) {
         return await resData.json();
       };
 
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Network timeout: Server took too long to respond. This may be due to connection issues or regional blocking. Try using a VPN.')), 10000)
       );
 
