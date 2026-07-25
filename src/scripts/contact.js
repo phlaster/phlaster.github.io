@@ -71,6 +71,8 @@ export function initContact(i18nConfigGetter) {
 
     if (state === 'loading') {
       exportPdfBtn.classList.add('btn-pdf-loading');
+      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
+      exportPdfBtn.setAttribute('data-tooltip', loadingMsg);
       exportPdfBtn.innerHTML = `<svg class="reveal-ring" width="24" height="24" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
     } else if (state === 'error') {
       exportPdfBtn.classList.add('btn-pdf-error');
@@ -115,6 +117,8 @@ export function initContact(i18nConfigGetter) {
           ringFg.style.animation = 'fillRing 10s linear forwards';
         }
       }
+      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
+      submitBtn.setAttribute('data-tooltip', loadingMsg);
     } else if (state === 'syncing') {
       submitBtn.classList.add('is-loading');
       submitBtn.disabled = true;
@@ -276,9 +280,10 @@ export function initContact(i18nConfigGetter) {
     if (!tgWrap || !emailWrap) return;
 
     const safeMsg = message.replace(/"/g, '&quot;');
+    const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
 
     if (state === 'loading') {
-      const ringHtml = `<div class="value" style="width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;"><svg class="reveal-ring" width="20" height="20" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(var(--color-dark-fg-rgb), 0.1)" stroke-width="3"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--color-accent-soft)" stroke-width="3" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></div>`;
+      const ringHtml = `<button class="value reveal-loader" type="button" data-tooltip="${loadingMsg}" aria-label="Loading"><svg class="reveal-ring" width="20" height="20" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(var(--color-dark-fg-rgb), 0.1)" stroke-width="3"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--color-accent-soft)" stroke-width="3" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></button>`;
       const html = (label) => `<span class="label">${label}</span>${ringHtml}`;
       tgWrap.innerHTML = html('Telegram');
       emailWrap.innerHTML = html('Email');

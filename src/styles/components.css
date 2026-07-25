@@ -428,7 +428,9 @@
 
 .reveal-error,
 .btn-pdf-error,
-.btn-pdf-loading {
+.btn-pdf-loading,
+.reveal-loader,
+.submit-btn.is-loading {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -442,6 +444,14 @@
   padding: 0;
   color: var(--error-red);
   cursor: help;
+}
+
+.reveal-loader {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--color-accent-soft);
+  cursor: progress;
 }
 
 .btn-pdf-error {
@@ -476,8 +486,11 @@
 
 .reveal-error::after,
 .btn-pdf-error::after,
+.btn-pdf-loading::after,
 .submit-btn.is-error::after,
-.submit-btn.is-timed-out::after {
+.submit-btn.is-timed-out::after,
+.submit-btn.is-loading::after,
+.reveal-loader::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
@@ -502,16 +515,20 @@
 
 .reveal-error::after,
 .submit-btn.is-error::after,
-.submit-btn.is-timed-out::after {
+.submit-btn.is-timed-out::after,
+.submit-btn.is-loading::after,
+.reveal-loader::after {
   bottom: 140%;
 }
 
-.btn-pdf-error::after {
+.btn-pdf-error::after,
+.btn-pdf-loading::after {
   top: 140%;
 }
 
 @media screen and (max-width: 768px) {
-  .btn-pdf-error::after {
+  .btn-pdf-error::after,
+  .btn-pdf-loading::after {
     top: auto;
     bottom: 140%;
   }
@@ -523,10 +540,16 @@
 .btn-pdf-error:hover::after,
 .btn-pdf-error:focus::after,
 .btn-pdf-error:active::after,
+.btn-pdf-loading:hover::after,
+.btn-pdf-loading:focus::after,
+.btn-pdf-loading:active::after,
 .submit-btn.is-error:hover::after,
 .submit-btn.is-error:active::after,
 .submit-btn.is-timed-out:hover::after,
-.submit-btn.is-timed-out:active::after {
+.submit-btn.is-timed-out:active::after,
+.submit-btn.is-loading:hover::after,
+.reveal-loader:hover::after,
+.reveal-loader:focus::after {
   opacity: 1;
   visibility: visible;
 }
