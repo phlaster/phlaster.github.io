@@ -49,11 +49,20 @@ export function initNavigation(renderCallback) {
       if (topbar.classList.contains('mobile-menu-open')) {
         topbar.classList.remove('mobile-menu-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+
+        // Триггерим закрытие меню выбора языка при закрытии мобильного меню
+        langSwitch.classList.remove('open');
+        langTrigger.setAttribute('aria-expanded', 'false');
       }
     };
 
     mobileMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
+
+      // Любое нажатие на гамбургер (открытие или закрытие) закрывает меню языка
+      langSwitch.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+
       const isOpen = topbar.classList.toggle('mobile-menu-open');
       mobileMenuToggle.setAttribute('aria-expanded', isOpen);
 
@@ -184,6 +193,11 @@ export function initNavigation(renderCallback) {
 
   // === Клавиатурная навигация ===
   function getActiveSectionIndex() {
+    // Если мы в самом низу страницы, активным считается последний раздел (контакты)
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+      return sections.length - 1;
+    }
+
     const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
     const scrollPos = window.scrollY + barHeight + 50;
     let activeIndex = -1;
@@ -210,14 +224,11 @@ export function initNavigation(renderCallback) {
 
     let currentIndex = getActiveSectionIndex();
 
-    if (currentIndex === -1 && ['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
-      currentIndex = 0;
-    } else if (currentIndex === -1) {
-      return;
-    }
-
     if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
-      const nextIndex = Math.min(currentIndex + 1, sections.length - 1);
+      // Если мы в самом верху (Hero), currentIndex равен -1. 
+      // В таком случае нам нужен самый первый раздел (0 — About), а не +1 к нему.
+      const nextIndex = currentIndex === -1 ? 0 : Math.min(currentIndex + 1, sections.length - 1);
+
       if (sections[nextIndex]) {
         window.scrollTo({
           top: getTargetScrollTop(sections[nextIndex].id),
@@ -232,10 +243,12 @@ export function initNavigation(renderCallback) {
         });
       } else {
         const prevIndex = currentIndex - 1;
-        window.scrollTo({
-          top: getTargetScrollTop(sections[prevIndex].id),
-          behavior: 'smooth'
-        });
+        if (sections[prevIndex]) {
+          window.scrollTo({
+            top: getTargetScrollTop(sections[prevIndex].id),
+            behavior: 'smooth'
+          });
+        }
       }
     }
   });
