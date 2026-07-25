@@ -7,6 +7,15 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   "'": '&#39;'
 } [c]));
 
+const formatText = (s) => {
+  if (!s) return '';
+  let str = esc(s);
+  str = str.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  str = str.replace(/__([^_]+)__/g, '<em>$1</em>');
+  const paragraphs = str.split(/\n+/).filter(p => p.trim() !== '');
+  return paragraphs.join('</p><p>');
+};
+
 function updateFavicon(fullName) {
   const css = getComputedStyle(document.documentElement);
   const darkBg = css.getPropertyValue('--color-dark-bg').trim() || '#070D15';
@@ -121,8 +130,8 @@ export function renderContent(i18nConfig, lang) {
   $('about-content').innerHTML = `
     <div class="about-grid">
       <div class="about-bio">
-        <p class="lead">${esc(a.bio_lead)}</p>
-        <p>${esc(a.bio)}</p>
+        <p class="lead">${formatText(a.bio_lead)}</p>
+        <p>${formatText(a.bio)}</p>
       </div>
       <div class="about-meta">
         <div class="meta-block">
@@ -261,10 +270,9 @@ export function renderContent(i18nConfig, lang) {
   $('documents-content').innerHTML = `
     <div class="documents-grid">
       ${docs.map(d => {
-        const Tag = d.url ? 'a' : 'div';
-        const attrs = d.url ? `href="${esc(d.url)}" target="_blank" rel="noopener" data-pdf="${esc(d.url)}"` : '';
+        const pdfBtn = d.url ? `<button class="view-pdf-btn" data-pdf="${esc(d.url)}" type="button">${esc(ui.view_pdf || 'Open PDF')}</button>` : '';
         return `
-          <${Tag} class="doc-item" ${attrs}>
+          <div class="doc-item">
             <div class="doc-meta">
               <span class="doc-category">${esc(d.category)}</span>
               <span class="doc-date">${esc(d.date)}</span>
@@ -273,8 +281,8 @@ export function renderContent(i18nConfig, lang) {
               <div class="doc-title">${esc(d.title)}</div>
               <div class="doc-desc">${esc(d.description)}</div>
             </div>
-            ${d.url ? `<span class="view-pdf-btn">${esc(ui.view_pdf || 'Open PDF')}</span>` : ''}
-          </${Tag}>
+            ${pdfBtn}
+          </div>
         `;
       }).join('')}
     </div>

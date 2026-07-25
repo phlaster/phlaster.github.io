@@ -186,7 +186,7 @@
 
   .content-section .panel-head {
     margin-top: 0;
-    margin-bottom: 3rem;
+    /* margin-bottom: 1rem; */
   }
 
   .content-section:last-of-type {

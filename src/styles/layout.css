@@ -159,43 +159,33 @@
 
 /* === Базовые стили для кнопок (Десктоп) === */
 .btn-action {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .3rem;
   background: transparent;
-  border: 1px solid currentColor;
+  border: none;
   color: inherit;
-  padding: .4rem .5rem;
+  /* Синхронизация цвета с топбаром */
+  padding: 0.4rem;
   border-radius: var(--radius);
-  font-family: var(--font-sans);
-  font-size: .8rem;
   cursor: pointer;
-  opacity: .8;
-  transition: all .2s;
-  width: 70px;
-  text-align: center;
-  overflow: hidden;
+  opacity: 0.8;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
 }
 
-.btn-action:hover {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  opacity: 1;
+@media (hover: hover) {
+  .btn-action:hover {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+    opacity: 1;
+  }
 }
 
-.btn-action svg {
-  flex: 1 1 0;
-  max-width: 18px;
-  height: auto;
-}
-
-.btn-action span {
-  flex: 2 1 0;
-  text-align: center;
-  white-space: nowrap;
+.btn-action svg,
+.lang-trigger svg,
+.mobile-menu-toggle svg {
+  width: 24px;
+  height: 24px;
 }
 
 /* ============ Language Switcher ============ */
@@ -588,7 +578,7 @@
   z-index: 3;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 4rem var(--gutter) 5rem;
+  padding: 2rem var(--gutter) 5rem;
   min-height: 60vh;
   background: var(--color-bg);
   border-left: 1px solid var(--color-border);
@@ -598,7 +588,7 @@
 }
 
 .content-section {
-  padding: 3rem 0;
+  padding: 2rem 0;
   scroll-margin-top: calc(var(--bar-h) + 20px);
 }
 
@@ -611,7 +601,7 @@
 }
 
 .panel-head {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -620,7 +610,7 @@
 
 .panel-title {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
@@ -709,14 +699,19 @@
 
 .contact-channel .label {
   font-family: var(--font-sans);
-  font-size: .7rem;
+  font-size: 1rem;
   color: rgba(var(--color-dark-fg-rgb), .5);
   width: 80px;
+  font-size: .9375rem;
   flex-shrink: 0;
 }
 
 .contact-channel .value {
   color: var(--color-accent-soft);
+}
+
+.contact-channel .reveal-error {
+  color: var(--error-red) !important;
 }
 
 .contact-form {
@@ -941,6 +936,7 @@
     opacity: 1;
     pointer-events: auto;
     padding: 1rem;
+    overflow: visible;
   }
 
   .nav-links {
@@ -981,11 +977,11 @@
   }
 
   .btn-action {
-    width: 90px;
-    min-height: 36px;
+    width: var(--bar-h);
+    height: var(--bar-h);
+    padding: 0;
+    border: none;
     justify-content: center;
-    padding: 0.4rem 0.8rem;
-    border-color: currentColor;
     opacity: 0.8;
   }
 
@@ -995,9 +991,8 @@
     }
 
     .btn-action:hover {
-      background-color: var(--color-accent);
-      border-color: var(--color-accent);
-      color: var(--color-text);
+      background: rgba(var(--color-accent-rgb), 0.1);
+      color: var(--color-accent);
       opacity: 1;
     }
   }
@@ -1104,6 +1099,7 @@
   .career-col:first-child {
     order: 2;
   }
+
   .career-col:last-child {
     order: 1;
   }

@@ -429,33 +429,36 @@ export function initCareerHighlighting() {
     }
   };
 
+  // Проверка ширины экрана
+  const isWideScreen = () => window.matchMedia('(min-width: 769px)').matches;
+
   timelineItems.forEach(item => {
-    // Поведение мыши (только десктоп)
+    // Ховер мыши только на широких экранах
     item.addEventListener('mouseenter', () => {
-      if (window.matchMedia('(hover: hover)').matches) {
+      if (isWideScreen()) {
         setActive(item);
       }
     });
 
     item.addEventListener('mouseleave', () => {
-      if (window.matchMedia('(hover: hover)').matches) {
+      if (isWideScreen()) {
         clearActive();
       }
     });
 
     // Клик / Тап
     item.addEventListener('click', (e) => {
-      // Если кликнули по кнопке ссылки — не переключаем подсветку
+      // Если кликнули по кнопке ссылки — ничего не переключаем
       if (e.target.closest('.timeline-link-btn')) return;
 
-      // На десктопе клик по телу открывает ссылку
-      if (window.matchMedia('(hover: hover)').matches) {
+      if (isWideScreen()) {
+        // На широком экране клик по телу открывает ссылку
         const url = item.dataset.url;
         if (url && url !== '#') {
           window.open(url, '_blank', 'noopener');
         }
       } else {
-        // На мобильных — тогглим подсветку
+        // На узком экране — тогглим подсветку
         if (item.classList.contains('is-active')) {
           clearActive();
         } else {
@@ -473,9 +476,7 @@ export function initCareerHighlighting() {
         clearActive();
       }
     });
-  }, {
-    threshold: 0.3
-  });
+  }, { threshold: 0.3 });
   sections.forEach(sec => sectionObserver.observe(sec));
 
   // Сброс при переходе на широкий экран
