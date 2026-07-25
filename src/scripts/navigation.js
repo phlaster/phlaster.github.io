@@ -10,16 +10,12 @@ export function initNavigation(renderCallback) {
   const langDropdown = $('langDropdown');
   const topbar = $('topbar');
   const mobileMenuToggle = $('mobileMenuToggle');
-  const topbarMenuContent = document.querySelector('.topbar-menu-content');
 
+  // === Language Switcher ===
   langTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = langSwitch.classList.toggle('open');
     langTrigger.setAttribute('aria-expanded', isOpen);
-
-    if (topbarMenuContent) {
-      topbarMenuContent.style.overflow = isOpen ? 'visible' : '';
-    }
   });
 
   langDropdown.querySelectorAll('li').forEach(li => {
@@ -36,11 +32,6 @@ export function initNavigation(renderCallback) {
 
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
-
-      if (topbarMenuContent) topbarMenuContent.style.overflow = '';
-
-      topbar.classList.remove('mobile-menu-open');
-      mobileMenuToggle.setAttribute('aria-expanded', 'false');
       renderCallback(newLang);
     });
   });
@@ -49,34 +40,48 @@ export function initNavigation(renderCallback) {
     if (!langSwitch.contains(e.target)) {
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
-      if (topbarMenuContent) topbarMenuContent.style.overflow = '';
     }
   });
 
+  // === Логика мобильного меню (гамбургер) ===
   if (mobileMenuToggle) {
+    const closeMobileMenu = () => {
+      if (topbar.classList.contains('mobile-menu-open')) {
+        topbar.classList.remove('mobile-menu-open');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
     mobileMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = topbar.classList.toggle('mobile-menu-open');
       mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+
+      // Снимаем фокус с iframe, чтобы следующее касание по нему снова вызвало blur
+      if (isOpen) {
+        mobileMenuToggle.focus();
+      }
     });
 
-    const closeMenuOutside = (e) => {
-      if (topbar.classList.contains('mobile-menu-open') && !topbar.contains(e.target)) {
-        topbar.classList.remove('mobile-menu-open');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-
-        // Заодно закрываем дропдаун языков, если он был открыт
-        if (langSwitch.classList.contains('open')) {
-          langSwitch.classList.remove('open');
-          langTrigger.setAttribute('aria-expanded', 'false');
-          if (topbarMenuContent) topbarMenuContent.style.overflow = '';
-        }
+    // Закрываем меню при клике или касании вне области топбара (по документу)
+    const handleOutsideInteraction = (e) => {
+      if (!topbar.contains(e.target)) {
+        closeMobileMenu();
       }
     };
 
-    document.addEventListener('click', closeMenuOutside);
-    document.addEventListener('touchstart', closeMenuOutside, {
+    document.addEventListener('click', handleOutsideInteraction);
+    document.addEventListener('touchstart', handleOutsideInteraction, {
       passive: true
+    });
+
+    // Особый случай: касание внутри iframe (например, для рисования).
+    // Если iframe получает фокус, родительское окно теряет фокус (событие blur).
+    // Это позволяет закрыть меню, не блокируя само касание внутри iframe.
+    window.addEventListener('blur', () => {
+      if (topbar.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      }
     });
   }
 
@@ -92,6 +97,12 @@ export function initNavigation(renderCallback) {
   if (brandEl) {
     brandEl.style.cursor = 'pointer';
     brandEl.addEventListener('click', () => {
+      // Закрываем мобильное меню при клике на бренд
+      if (topbar.classList.contains('mobile-menu-open')) {
+        topbar.classList.remove('mobile-menu-open');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -104,13 +115,16 @@ export function initNavigation(renderCallback) {
     const targetEl = document.getElementById(targetId);
     if (!targetEl) return 0;
 
+    // Берем высоту из CSS-переменной, чтобы раскрытое мобильное меню не ломало расчет отступа
+    const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
+
     if (targetId === 'contact') {
-      return targetEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 30;
+      return targetEl.getBoundingClientRect().top + window.scrollY - barHeight + 30;
     }
 
     const panelHead = targetEl.querySelector('.panel-head');
     const anchorEl = panelHead || targetEl;
-    return anchorEl.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight - 20;
+    return anchorEl.getBoundingClientRect().top + window.scrollY - barHeight - 20;
   }
 
   // === Обработка кликов по навигации ===
@@ -118,6 +132,13 @@ export function initNavigation(renderCallback) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').substring(1);
+
+      // Закрываем мобильное меню при клике на пункт навигации
+      if (topbar.classList.contains('mobile-menu-open')) {
+        topbar.classList.remove('mobile-menu-open');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+
       window.scrollTo({
         top: getTargetScrollTop(targetId),
         behavior: 'smooth'
@@ -137,7 +158,8 @@ export function initNavigation(renderCallback) {
 
   // === Клавиатурная навигация ===
   function getActiveSectionIndex() {
-    const scrollPos = window.scrollY + topbar.offsetHeight + 50;
+    const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
+    const scrollPos = window.scrollY + barHeight + 50;
     let activeIndex = -1;
     for (let i = 0; i < sections.length; i++) {
       const secTop = sections[i].getBoundingClientRect().top + window.scrollY;
@@ -244,7 +266,7 @@ export function initNavigation(renderCallback) {
   const handleScroll = () => {
     const contentTop = contentArea.getBoundingClientRect().top;
     const footerTop = footer.getBoundingClientRect().top;
-    const barHeight = topbar.offsetHeight;
+    const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
 
     if (contentTop <= barHeight && footerTop > barHeight) {
       topbar.classList.add('solid');
@@ -285,7 +307,6 @@ export function initNavigation(renderCallback) {
         scrollCue.classList.add('paused');
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(() => {
-          // Проверяем, что мы всё еще не проскроллили половину Hero
           if (window.scrollY <= heroSection.offsetHeight / 2) {
             scrollCue.classList.remove('paused');
           }
@@ -293,29 +314,6 @@ export function initNavigation(renderCallback) {
       }
     }
   };
-
-  // === Sync highlighting between timeline and skills ===
-  const timelineItems = document.querySelectorAll('.timeline-item');
-  const skillTags = document.querySelectorAll('.skill-tag[data-places]');
-
-  timelineItems.forEach(item => {
-    const placeId = item.dataset.place;
-    if (!placeId) return;
-
-    const relatedTags = Array.from(skillTags).filter(tag =>
-      tag.dataset.places.split(' ').includes(placeId)
-    );
-
-    item.addEventListener('mouseenter', () => {
-      relatedTags.forEach(tag => tag.classList.add('highlight'));
-      item.classList.add('is-highlighted');
-    });
-
-    item.addEventListener('mouseleave', () => {
-      relatedTags.forEach(tag => tag.classList.remove('highlight'));
-      item.classList.remove('is-highlighted');
-    });
-  });
 
   document.addEventListener('visibilitychange', () => {
     const iframe = document.getElementById('heroIframe');

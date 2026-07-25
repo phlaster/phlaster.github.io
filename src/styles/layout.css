@@ -55,15 +55,12 @@
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
-}
-
-.mobile-menu-toggle {
-  display: none;
+  min-width: 0;
 }
 
 .nav-links {
+  flex: 1;
   display: flex;
   gap: .25rem;
   justify-content: center;
@@ -105,14 +102,26 @@
   background: rgba(var(--color-accent-soft-rgb), .12);
 }
 
+/* Группа кнопок (только PDF на десктопе) */
 .topbar-actions {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  flex-shrink: 0;
 }
 
-.btn-action,
-.lang-trigger {
+.mobile-menu-toggle {
+  display: none;
+}
+
+/* Переключатель языка (справа) */
+.lang-switch {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* === Базовые стили для кнопок (Десктоп) === */
+.btn-action {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -133,23 +142,20 @@
   overflow: hidden;
 }
 
-.btn-action:hover,
-.lang-trigger:hover {
+.btn-action:hover {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
   color: var(--color-text);
   opacity: 1;
 }
 
-.btn-action svg,
-.lang-trigger svg {
+.btn-action svg {
   flex: 1 1 0;
   max-width: 18px;
   height: auto;
 }
 
-.btn-action span,
-.lang-trigger span {
+.btn-action span {
   flex: 2 1 0;
   text-align: center;
   white-space: nowrap;
@@ -158,12 +164,44 @@
 /* ============ Language Switcher ============ */
 .lang-switch {
   position: relative;
+  flex-shrink: 0;
+}
+
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  /* Синхронизация цвета с топбаром */
+  padding: 0.4rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
+}
+
+.lang-trigger:hover {
+  background: rgba(var(--color-accent-rgb), 0.1);
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+.lang-trigger svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Скрываем текст, оставляя только иконку для всех экранов */
+.lang-current {
+  display: none;
 }
 
 .lang-dropdown {
   position: absolute;
   top: calc(100% + .5rem);
-  right: 0;
+  left: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -176,6 +214,13 @@
   transform: translateY(-5px);
   transition: opacity .2s, transform .2s, visibility .2s;
   z-index: 101;
+}
+
+@media screen and (min-width: 769px) {
+  .lang-dropdown {
+    left: auto;
+    right: 0;
+  }
 }
 
 .lang-switch.open .lang-dropdown {
@@ -360,7 +405,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* opacity: 0.85; */
   transition: opacity .2s, transform .2s;
 }
 
@@ -678,7 +722,7 @@
 
 .submit-btn:disabled:hover {
   background: var(--color-accent);
-  cursor: auto
+  cursor: auto;
 }
 
 .form-status {
@@ -718,22 +762,22 @@
 
 /* ============ Responsive: Mobile & Narrow Monitors ============ */
 @media screen and (max-width: 768px) {
-
-  /* --- Topbar (Мобильная версия) --- */
   :root {
     --bar-h: 60px;
   }
 
+  /* --- Topbar --- */
   .topbar {
     display: block;
     padding: 0;
-    border-bottom: none;
     height: auto;
     min-height: var(--bar-h);
     overflow: visible;
     transition: background .3s, color .3s, border-color .3s, backdrop-filter .3s;
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), 0.05);
   }
 
   .topbar-inner {
@@ -741,7 +785,6 @@
     grid-template-rows: var(--bar-h) 0fr;
     grid-template-columns: 1fr;
     width: 100%;
-    height: 100%;
     align-items: center;
     gap: 0;
     transition: grid-template-rows 0.3s ease;
@@ -759,12 +802,12 @@
     justify-content: center;
     height: var(--bar-h);
     width: 100%;
-    font-size: 2.25rem;
+    font-size: 2.2rem;
     z-index: 2;
   }
 
   .mobile-menu-toggle {
-    display: flex;
+    display: flex; /* Включаем гамбургер на мобильных */
     align-items: center;
     justify-content: center;
     grid-row: 1;
@@ -776,13 +819,44 @@
     border: none;
     color: inherit;
     cursor: pointer;
-    z-index: 2;
+    z-index: 3;
   }
 
   .mobile-menu-toggle:hover {
     background: rgba(var(--color-accent-rgb), 0.1);
   }
 
+  /* === Lang switch === */
+  .lang-switch {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: start;
+    height: var(--bar-h);
+    width: var(--bar-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  .lang-switch .lang-trigger {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .lang-dropdown {
+    left: 0;
+    right: auto;
+    width: auto;
+    min-width: 120px;
+    background: rgba(var(--color-dark-bg-rgb), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* === Hamburger menu === */
   .topbar-menu-content {
     grid-row: 2;
     grid-column: 1;
@@ -815,7 +889,7 @@
   .nav-link {
     flex: none;
     width: 100%;
-    text-align: left;
+    text-align: center; /* Центрирование заголовков */
     padding: 0.75rem 1rem;
     font-size: 1rem;
     border-radius: var(--radius);
@@ -839,8 +913,7 @@
     width: 100%;
   }
 
-  .btn-action,
-  .lang-trigger {
+  .btn-action {
     width: 90px;
     min-height: 36px;
     justify-content: center;
@@ -849,58 +922,18 @@
     opacity: 0.8;
   }
 
+  .btn-action:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    opacity: 1;
+  }
+
   .btn-pdf-error::after {
     bottom: 140%;
     top: auto;
   }
 
-  .lang-switch {
-    width: auto;
-    position: relative;
-  }
-
-  .lang-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: auto;
-    width: auto;
-    min-width: 120px;
-  }
-
-  .topbar:not(.solid) .lang-dropdown {
-    background: rgba(var(--color-dark-bg-rgb), 0.95);
-    color: var(--color-dark-fg);
-  }
-
-  .topbar:not(.solid) .lang-dropdown li {
-    color: var(--color-dark-fg) !important;
-  }
-
-  .topbar:not(.solid) .lang-dropdown li:hover {
-    background: rgba(var(--color-dark-fg-rgb), 0.1);
-  }
-
-  .topbar:not(.solid) .lang-dropdown li.active {
-    color: var(--color-accent-soft) !important;
-  }
-
-  .topbar.solid .lang-dropdown {
-    background: rgba(var(--color-dark-fg-rgb), 0.95);
-    color: var(--color-text);
-  }
-
-  .topbar.solid .lang-dropdown li {
-    color: var(--color-text) !important;
-  }
-
-  .topbar.solid .lang-dropdown li:hover {
-    background: rgba(var(--color-text-rgb), 0.05);
-  }
-
-  .topbar.solid .lang-dropdown li.active {
-    color: var(--color-accent) !important;
-  }
 
   /* --- Hero --- */
   .hero {
