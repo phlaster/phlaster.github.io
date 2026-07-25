@@ -60,20 +60,63 @@
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 100px 1fr auto;
   align-items: start;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s, background 0.2s;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  margin: -0.5rem 0;
+}
+
+/* Ховер только для устройств с мышью */
+@media (hover: hover) {
+  .timeline-item:hover {
+    border-color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb), 0.08);
+    opacity: 1;
+  }
+}
+
+/* Активное состояние (тоггл на мобайл) */
+.timeline-item.is-active {
+  border-color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), 0.08);
+  opacity: 1;
+}
+
+/* Обесцвечивание остальных элементов, когда один активен */
+.career-grid.is-hovering .timeline-item:not(.is-active),
+.career-grid.is-hovering .skill-tag:not(.highlight) {
+  opacity: 0.5;
   transition: opacity 0.2s;
 }
 
-.timeline-item:hover {
-  opacity: 0.7;
+.career-grid.is-hovering .timeline-item.is-active,
+.career-grid.is-hovering .skill-tag.highlight {
+  opacity: 1 !important;
 }
 
-.timeline-item.is-highlighted {
-  opacity: 0.5;
+/* Кнопка-ссылка (только для мобайл) */
+.timeline-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-left: 0.5rem;
+  opacity: 0.6;
+}
+
+@media (min-width: 769px) {
+  .timeline-link-btn {
+    display: none;
+  }
 }
 
 .timeline-period {
@@ -137,15 +180,6 @@
   opacity: 1 !important;
 }
 
-.skills-groups.is-hovering .skill-tag {
-  opacity: 0.5;
-  transition: opacity 0.2s;
-}
-
-.skills-groups.is-hovering .skill-tag.highlight {
-  opacity: 1 !important;
-}
-
 /* Projects */
 .projects-grid {
   display: grid;
@@ -164,11 +198,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.project-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent);
 }
 
 .project-cover {
@@ -285,10 +314,17 @@
   transition: all 0.2s;
 }
 
-.view-pdf-btn:hover {
-  background: var(--color-accent);
-  color: var(--color-text);
-  border-color: var(--color-accent);
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+  }
+
+  .view-pdf-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
 }
 
 /* Documents */
@@ -546,11 +582,6 @@
   transition: all 0.2s;
 }
 
-.leave-contacts-btn:hover {
-  background: rgba(var(--color-dark-fg-rgb), 0.15);
-  border-color: var(--color-accent-soft);
-}
-
 /* === About Socials === */
 .about-socials {
   display: flex;
@@ -567,8 +598,25 @@
   transition: opacity 0.2s, transform 0.2s;
 }
 
-.about-social-link:hover {
-  transform: scale(1.5);
+@media (hover: hover) {
+  .leave-contacts-btn:hover {
+    background: rgba(var(--color-dark-fg-rgb), 0.15);
+    border-color: var(--color-accent-soft);
+  }
+
+  .about-social-link:hover {
+    transform: scale(1.5);
+  }
+
+  .submit-btn:hover {
+    background: var(--color-accent-hover);
+    cursor: pointer;
+  }
+
+  .submit-btn:disabled:hover {
+    background: var(--color-accent);
+    cursor: auto;
+  }
 }
 
 .about-social-link img {

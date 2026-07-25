@@ -405,26 +405,83 @@ export function initNavigation(renderCallback) {
 export function initCareerHighlighting() {
   const timelineItems = document.querySelectorAll('.timeline-item');
   const skillTags = document.querySelectorAll('.skill-tag[data-places]');
-  const skillsContainer = document.querySelector('.skills-groups');
+  const careerGrid = document.querySelector('.career-grid');
 
-  if (!timelineItems.length || !skillTags.length) return;
+  if (!timelineItems.length || !skillTags.length || !careerGrid) return;
+
+  const clearActive = () => {
+    timelineItems.forEach(i => i.classList.remove('is-active'));
+    skillTags.forEach(t => t.classList.remove('highlight'));
+    careerGrid.classList.remove('is-hovering');
+  };
+
+  const setActive = (item) => {
+    clearActive();
+    item.classList.add('is-active');
+    careerGrid.classList.add('is-hovering');
+    const placeId = item.dataset.place;
+    if (placeId) {
+      Array.from(skillTags).forEach(tag => {
+        if (tag.dataset.places.split(' ').includes(placeId)) {
+          tag.classList.add('highlight');
+        }
+      });
+    }
+  };
 
   timelineItems.forEach(item => {
-    const placeId = item.dataset.place;
-    if (!placeId) return;
-
-    const relatedTags = Array.from(skillTags).filter(tag =>
-      tag.dataset.places.split(' ').includes(placeId)
-    );
-
+    // Поведение мыши (только десктоп)
     item.addEventListener('mouseenter', () => {
-      relatedTags.forEach(tag => tag.classList.add('highlight'));
-      if (skillsContainer) skillsContainer.classList.add('is-hovering');
+      if (window.matchMedia('(hover: hover)').matches) {
+        setActive(item);
+      }
     });
 
     item.addEventListener('mouseleave', () => {
-      relatedTags.forEach(tag => tag.classList.remove('highlight'));
-      if (skillsContainer) skillsContainer.classList.remove('is-hovering');
+      if (window.matchMedia('(hover: hover)').matches) {
+        clearActive();
+      }
     });
+
+    // Клик / Тап
+    item.addEventListener('click', (e) => {
+      // Если кликнули по кнопке ссылки — не переключаем подсветку
+      if (e.target.closest('.timeline-link-btn')) return;
+
+      // На десктопе клик по телу открывает ссылку
+      if (window.matchMedia('(hover: hover)').matches) {
+        const url = item.dataset.url;
+        if (url && url !== '#') {
+          window.open(url, '_blank', 'noopener');
+        }
+      } else {
+        // На мобильных — тогглим подсветку
+        if (item.classList.contains('is-active')) {
+          clearActive();
+        } else {
+          setActive(item);
+        }
+      }
+    });
+  });
+
+  // Сброс при прокрутке до другого раздела
+  const sections = document.querySelectorAll('.content-section');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        clearActive();
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+  sections.forEach(sec => sectionObserver.observe(sec));
+
+  // Сброс при переходе на широкий экран
+  window.matchMedia('(min-width: 769px)').addEventListener('change', (e) => {
+    if (e.matches) {
+      clearActive();
+    }
   });
 }

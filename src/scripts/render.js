@@ -158,14 +158,21 @@ export function renderContent(i18nConfig, lang) {
   const skillGroups = i18nConfig.skill_groups || [];
 
   const timelineHtml = timeline.map(e => `
-    <a class="timeline-item" href="${esc(e.url || '#')}" target="_blank" rel="noopener" data-place="${esc(e.place_id || '')}">
+    <div class="timeline-item" data-place="${esc(e.place_id || '')}" data-url="${esc(e.url || '#')}">
       <div class="timeline-period">${esc(e.period)}</div>
       <div class="timeline-content">
-      <div class="timeline-org">${esc(e.organization)}</div>
-      <div class="timeline-role">${esc(e.role)}</div>
+        <div class="timeline-org">${esc(e.organization)}</div>
+        <div class="timeline-role">${esc(e.role)}</div>
         <div class="timeline-desc">${esc(e.description)}</div>
       </div>
-    </a>
+      <a class="timeline-link-btn" href="${esc(e.url || '#')}" target="_blank" rel="noopener" aria-label="Open link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
   `).join('');
 
   const skillsHtml = skillGroups.map(g => `
