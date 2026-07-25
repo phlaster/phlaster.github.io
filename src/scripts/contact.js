@@ -1,5 +1,44 @@
 const $ = id => document.getElementById(id);
 
+async function handleFetchErrors(res) {
+  if (!res.ok) {
+    let serverError = '';
+    try {
+      const errData = await res.json();
+      serverError = errData.error || '';
+    } catch (e) {}
+
+    if (serverError) throw new Error(`${serverError} (Error ${res.status})`);
+    if (res.status === 404) throw new Error('Resource not found (404).');
+    if (res.status === 400) throw new Error('Bad request (400).');
+    if (res.status >= 500) throw new Error('Server error (500).');
+
+    throw new Error(`Request failed (Error ${res.status}).`);
+  }
+  return res;
+}
+
+function getErrorMessage(err) {
+  if (!err) return 'Unknown error occurred.';
+  let msg = (typeof err === 'string') ? err : (err.message || 'Unknown error');
+
+  if (msg === 'Failed to fetch' || msg.includes('NetworkError')) {
+    return 'Network error: Server is unreachable or offline.';
+  }
+
+  const statusMatch = msg.match(/\(Error (\d+)\)/);
+  if (statusMatch) {
+    const code = parseInt(statusMatch[1], 10);
+    let cleanMsg = msg.replace(/\(Error \d+\)/, '').trim();
+    if (cleanMsg) return cleanMsg;
+    if (code === 404) return 'The requested resource was not found (404).';
+    if (code === 400) return 'Bad request to the server (400). Please refresh the page.';
+    if (code >= 500) return `Internal server error (${code}). Please try again later.`;
+  }
+
+  return msg;
+}
+
 export function initContact(i18nConfigGetter) {
   let formChallenge = null;
   let formNonce = null;
@@ -10,13 +49,37 @@ export function initContact(i18nConfigGetter) {
   let revealedTelegram = null;
 
   const CACHE_KEY = 'portfolio_contacts_cache';
-  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+  const CACHE_TTL = 24 * 60 * 60 * 1000;
 
   const GIT_HASH = import.meta.env.VITE_GIT_HASH || 'unknown';
   const IS_DIRTY = import.meta.env.VITE_IS_GIT_DIRTY === true;
   const IS_DEV = import.meta.env.DEV;
 
   const shouldUseCache = !(IS_DEV && IS_DIRTY);
+
+  const exportPdfBtn = $('exportPdfBtn');
+  if (exportPdfBtn) {
+    exportPdfBtn.dataset.originalHtml = exportPdfBtn.innerHTML;
+  }
+
+  function setPdfButtonState(state, message = '') {
+    if (!exportPdfBtn) return;
+    const safeMsg = message.replace(/"/g, '&quot;');
+
+    exportPdfBtn.classList.remove('btn-pdf-loading', 'btn-pdf-error');
+    exportPdfBtn.removeAttribute('data-tooltip');
+
+    if (state === 'loading') {
+      exportPdfBtn.classList.add('btn-pdf-loading');
+      exportPdfBtn.innerHTML = `<svg class="reveal-ring" width="14" height="14" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
+    } else if (state === 'error') {
+      exportPdfBtn.classList.add('btn-pdf-error');
+      exportPdfBtn.setAttribute('data-tooltip', safeMsg);
+      exportPdfBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--error-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`;
+    } else if (state === 'ready') {
+      exportPdfBtn.innerHTML = exportPdfBtn.dataset.originalHtml;
+    }
+  }
 
   function setButtonState(state, message = '', duration = 0) {
     const submitBtn = $('submitBtn');
@@ -66,10 +129,13 @@ export function initContact(i18nConfigGetter) {
       submitBtn.disabled = false;
       if (submitBtnLabel) submitBtnLabel.style.display = 'none';
       if (submitErrorIcon) submitErrorIcon.style.display = 'block';
-      if (message) submitBtn.setAttribute('data-tooltip', message);
+      if (message) {
+        const safeMsg = message.replace(/"/g, '&quot;');
+        submitBtn.setAttribute('data-tooltip', safeMsg);
+      }
     } else if (state === 'timed-out') {
       submitBtn.classList.add('is-timed-out');
-      submitBtn.disabled = true;
+      submitBtn.disabled = false;
       if (submitBtnLabel) submitBtnLabel.style.display = 'none';
       if (submitLoader) {
         submitLoader.style.display = 'block';
@@ -80,7 +146,10 @@ export function initContact(i18nConfigGetter) {
           ringFg.style.animation = `fillRing ${duration}s linear forwards`;
         }
       }
-      if (message) submitBtn.setAttribute('data-tooltip', message);
+      if (message) {
+        const safeMsg = message.replace(/"/g, '&quot;');
+        submitBtn.setAttribute('data-tooltip', safeMsg);
+      }
 
       timeoutTimer = setTimeout(() => {
         if (messageInput.value.trim() && formChallenge && formNonce) {
@@ -124,6 +193,13 @@ export function initContact(i18nConfigGetter) {
         el.target = "_blank";
       });
     }
+
+    setPdfButtonState('ready');
+
+    const submitBtn = $('submitBtn');
+    if (submitBtn && submitBtn.classList.contains('is-error') && !isComputingFormPoW) {
+      prepareFormPoW();
+    }
   }
 
   function reapplyContacts() {
@@ -150,13 +226,14 @@ export function initContact(i18nConfigGetter) {
   }
 
   async function prepareFormPoW() {
+    if (!contactsRevealed) return;
     if (isComputingFormPoW || (formChallenge && formNonce)) return;
 
     let workerUrl;
     try {
       workerUrl = getWorkerUrl();
     } catch (e) {
-      setButtonState('error', e.message);
+      setButtonState('error', getErrorMessage(e));
       return;
     }
 
@@ -164,7 +241,7 @@ export function initContact(i18nConfigGetter) {
     isComputingFormPoW = true;
     try {
       const resCh = await fetch(`${workerUrl}/api/challenge`);
-      if (!resCh.ok) throw new Error('Failed to get challenge');
+      await handleFetchErrors(resCh);
       const {
         challenge
       } = await resCh.json();
@@ -175,7 +252,8 @@ export function initContact(i18nConfigGetter) {
 
       setButtonState('ready');
     } catch (err) {
-      setButtonState('error', err.message || 'PoW preparation failed');
+      const errMsg = getErrorMessage(err);
+      setButtonState('error', errMsg);
       formChallenge = null;
     } finally {
       isComputingFormPoW = false;
@@ -187,15 +265,22 @@ export function initContact(i18nConfigGetter) {
     const emailWrap = $('channelEmailWrap');
     if (!tgWrap || !emailWrap) return;
 
+    const safeMsg = message.replace(/"/g, '&quot;');
+
     if (state === 'loading') {
       const ringHtml = `<div class="value" style="width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;"><svg class="reveal-ring" width="20" height="20" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(var(--color-dark-fg-rgb), 0.1)" stroke-width="3"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--color-accent-soft)" stroke-width="3" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></div>`;
       const html = (label) => `<span class="label">${label}</span>${ringHtml}`;
       tgWrap.innerHTML = html('Telegram');
       emailWrap.innerHTML = html('Email');
+
+      setPdfButtonState('loading');
     } else if (state === 'error') {
-      const html = (label) => `<span class="label">${label}</span><button class="value reveal-error" type="button" data-tooltip="${message}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--error-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>`;
+      const html = (label) => `<span class="label">${label}</span><button class="value reveal-error" type="button" data-tooltip="${safeMsg}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--error-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>`;
       tgWrap.innerHTML = html('Telegram');
       emailWrap.innerHTML = html('Email');
+
+      setPdfButtonState('error', message);
+      setButtonState('error', message);
     }
   }
 
@@ -227,42 +312,46 @@ export function initContact(i18nConfigGetter) {
     try {
       workerUrl = getWorkerUrl();
     } catch (err) {
-      setRevealState('error', err.message);
+      setRevealState('error', getErrorMessage(err));
       return;
     }
 
     setRevealState('loading');
 
     try {
-      const resCh = await fetch(`${workerUrl}/api/challenge`);
-      if (!resCh.ok) throw new Error('Failed to get challenge from server');
-      const {
-        challenge
-      } = await resCh.json();
+      const fetchPromise = async () => {
+        const resCh = await fetch(`${workerUrl}/api/challenge`);
+        await handleFetchErrors(resCh);
+        const {
+          challenge
+        } = await resCh.json();
 
-      const timeoutPromise = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), 10000));
-      const nonce = await Promise.race([solvePoW(challenge), timeoutPromise]);
+        const powTimeout = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), 9000));
+        const nonce = await Promise.race([solvePoW(challenge), powTimeout]);
 
-      const resData = await fetch(`${workerUrl}/api/get-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          challenge,
-          nonce
-        })
-      });
+        const resData = await fetch(`${workerUrl}/api/get-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            challenge,
+            nonce
+          })
+        });
 
-      if (!resData.ok) {
-        const errData = await resData.json().catch(() => ({}));
-        throw new Error(errData.error || 'Verification failed');
-      }
+        await handleFetchErrors(resData);
+        return await resData.json();
+      };
+
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout: Server took too long to respond.')), 10000)
+      );
 
       const {
         email,
         telegram
-      } = await resData.json();
+      } = await Promise.race([fetchPromise(), timeoutPromise]);
 
       applyContacts(email, telegram);
       contactsRevealed = true;
@@ -282,7 +371,8 @@ export function initContact(i18nConfigGetter) {
       }
     } catch (err) {
       console.error('Reveal PoW prep failed:', err);
-      setRevealState('error', err.message || 'Failed to load contacts');
+      const errMsg = getErrorMessage(err);
+      setRevealState('error', errMsg);
     }
   }
 
@@ -325,6 +415,10 @@ export function initContact(i18nConfigGetter) {
     const btn = $('submitBtn');
     const config = i18nConfigGetter();
     const u = config.ui.contact || {};
+
+    if (btn.classList.contains('is-loading') || btn.classList.contains('is-syncing') || btn.classList.contains('is-timed-out')) {
+      return;
+    }
 
     if (btn.classList.contains('is-error')) {
       invalidateAndRemine();
@@ -381,8 +475,7 @@ export function initContact(i18nConfigGetter) {
         })
       });
 
-      const errData = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(errData.error || 'Server error');
+      await handleFetchErrors(res);
 
       status.textContent = u.success;
       status.className = 'form-status success';
@@ -394,10 +487,10 @@ export function initContact(i18nConfigGetter) {
       setButtonState('default');
 
     } catch (err) {
-      const errMsg = err.message || u.error;
+      const errMsg = getErrorMessage(err);
 
       const isRateLimit30 = errMsg.includes('30 seconds');
-      const isRateLimit60 = errMsg.includes('1 minute') || errMsg.includes('60 seconds');
+      const isRateLimit60 = errMsg.includes('1 minute') || errMsg.includes('60 seconds') || errMsg.includes('try again in a minute');
 
       if (isRateLimit30) {
         if (sessionStorage.getItem('rate_limit_30s')) {
@@ -408,7 +501,7 @@ export function initContact(i18nConfigGetter) {
         } else {
           sessionStorage.setItem('rate_limit_30s', '1');
           setButtonState('timed-out', errMsg, 30);
-          status.textContent = ''; // Прячем текстовый статус
+          status.textContent = '';
           status.className = 'form-status';
           setTimeout(() => sessionStorage.removeItem('rate_limit_30s'), 30000);
         }

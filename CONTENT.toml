@@ -160,7 +160,7 @@ place_id = "smtu"
 url = "https://www.smtu.ru/"
 period = "2015 — 2016"
 role = { en = "Student", fr = "Étudiant", ru = "Студент" }
-organization = { en = "SMTU (Saint Petersburg State Maritime Technical University)", fr = "Université technique maritime d'État de Saint-Pétersbourg (SMTU)", ru = "Санкт-Петербургский государственный морской технический университет (СПбГМТУ)" }
+organization = { en = "SMTU (Saint Petersburg State Marine Technical University)", fr = "Université technique maritime d'État de Saint-Pétersbourg (SMTU)", ru = "Санкт-Петербургский государственный морской технический университет (СПбГМТУ)" }
 description = { en = "40.03.01.02, Law", fr = "40.03.01.02, Droit", ru = "40.03.01.02, Юриспруденция" }
 
 

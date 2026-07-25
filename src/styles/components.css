@@ -388,9 +388,9 @@
 }
 
 .reveal-error,
-.btn-pdf-error {
+.btn-pdf-error,
+.btn-pdf-loading {
   position: relative;
-  cursor: help;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -402,19 +402,38 @@
   border: none;
   padding: 0;
   color: var(--error-red);
+  cursor: help;
 }
 
 .btn-pdf-error {
   border-color: var(--error-red) !important;
   color: var(--error-red) !important;
-  opacity: 1;
+  opacity: 1 !important;
+  overflow: visible !important;
+  cursor: help;
 }
 
+.btn-pdf-error:hover {
+  background: transparent !important;
+  border-color: var(--error-red) !important;
+  color: var(--error-red) !important;
+  opacity: 1 !important;
+}
+
+.btn-pdf-loading {
+  background: rgba(var(--color-dark-fg-rgb), 0.15);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
+  color: var(--color-text);
+  overflow: visible !important;
+}
+
+/* === Унифицированные тултипы === */
 .reveal-error::after,
-.btn-pdf-error::after {
+.btn-pdf-error::after,
+.submit-btn.is-error::after,
+.submit-btn.is-timed-out::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 140%;
   left: 50%;
   transform: translateX(-50%);
   background: var(--color-text);
@@ -427,7 +446,7 @@
   width: 200px;
   max-width: 80vw;
   text-align: center;
-  z-index: 1000;
+  z-index: 1001;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s, visibility 0.2s;
@@ -435,12 +454,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Тултипы для элементов внизу страницы появляются СВЕРХУ */
+.reveal-error::after,
+.submit-btn.is-error::after,
+.submit-btn.is-timed-out::after {
+  bottom: 140%;
+}
+
+.btn-pdf-error::after {
+  top: 140%;
+}
+
 .reveal-error:hover::after,
 .reveal-error:focus::after,
 .reveal-error:active::after,
 .btn-pdf-error:hover::after,
 .btn-pdf-error:focus::after,
-.btn-pdf-error:active::after {
+.btn-pdf-error:active::after,
+.submit-btn.is-error:hover::after,
+.submit-btn.is-error:active::after,
+.submit-btn.is-timed-out:hover::after,
+.submit-btn.is-timed-out:active::after {
   opacity: 1;
   visibility: visible;
 }
@@ -477,76 +511,17 @@
   background: transparent;
   border: 1px solid var(--error-red);
   color: var(--error-red);
-  cursor: pointer;
   opacity: 1;
-}
-
-.submit-btn.is-error::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 140%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: 0.5rem 0.8rem;
-  border-radius: var(--radius);
-  font-size: 0.75rem;
-  font-family: var(--font-sans);
-  white-space: normal;
-  width: 200px;
-  max-width: 80vw;
-  text-align: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
-  pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.submit-btn.is-error:hover::after,
-.submit-btn.is-error:active::after {
-  opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
+  cursor: help;
 }
 
 .submit-btn.is-timed-out {
   background: rgba(var(--color-dark-fg-rgb), 0.15);
   border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
   color: transparent;
-  cursor: progress;
   opacity: 1;
-}
-
-.submit-btn.is-timed-out::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 140%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: 0.5rem 0.8rem;
-  border-radius: var(--radius);
-  font-size: 0.75rem;
-  font-family: var(--font-sans);
-  white-space: normal;
-  width: 200px;
-  max-width: 80vw;
-  text-align: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
-  pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.submit-btn.is-timed-out:hover::after,
-.submit-btn.is-timed-out:active::after {
-  opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Leave Contacts Button */

@@ -101,6 +101,7 @@
 
 .btn-action,
 .lang-trigger {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -411,8 +412,8 @@
 }
 
 .scroll-cue:hover {
-  -webkit-backdrop-filter: brightness(0.4) blur(12px);
-  backdrop-filter: brightness(0.4) blur(12px);
+  -webkit-backdrop-filter: brightness(1) blur(15px);
+  backdrop-filter: brightness(1) blur(15px);
   animation-play-state: paused;
 }
 
