@@ -578,3 +578,10 @@
   height: 100%;
   object-fit: contain;
 }
+
+body.tab-hidden .reveal-ring .ring-fg,
+body.tab-hidden .btn-spinner,
+body.tab-hidden .submit-loader .ring-fg,
+body.tab-hidden .scroll-cue {
+  animation-play-state: paused !important;
+}

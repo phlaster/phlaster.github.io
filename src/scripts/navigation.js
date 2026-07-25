@@ -277,6 +277,25 @@ export function initNavigation(renderCallback) {
     });
   });
 
+  document.addEventListener('visibilitychange', () => {
+    const iframe = document.getElementById('heroIframe');
+    
+    if (document.hidden) {
+      document.body.classList.add('tab-hidden');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: 'disabled' }, '*');
+      }
+    } else {
+      document.body.classList.remove('tab-hidden');
+      if (iframe && iframe.contentWindow) {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const mode = isMobile ? 'reduced' : 'normal';
+        iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: mode }, '*');
+      }
+      handleScroll();
+    }
+  });
+
   window.addEventListener('scroll', handleScroll, {
     passive: true
   });

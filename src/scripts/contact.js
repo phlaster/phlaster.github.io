@@ -221,7 +221,12 @@ export function initContact(i18nConfigGetter) {
       const hashHex = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
       if (hashHex.endsWith('0000') && '012345'.includes(hashHex[hashHex.length - 5])) return nonce.toString();
       nonce++;
-      if (nonce % 10000 === 0) await new Promise(r => setTimeout(r));
+      if (nonce % 10000 === 0) {
+        await new Promise(r => setTimeout(r));
+        while (document.hidden) {
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
     }
   }
 
