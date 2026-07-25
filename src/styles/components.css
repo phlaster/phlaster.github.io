@@ -434,7 +434,6 @@
   opacity: 1 !important;
 }
 
-/* === Унифицированные тултипы === */
 .reveal-error::after,
 .btn-pdf-error::after,
 .submit-btn.is-error::after,
@@ -445,12 +444,12 @@
   transform: translateX(-50%);
   background: var(--color-text);
   color: var(--color-bg);
-  padding: 0.5rem 0.8rem;
+  padding: 0.6rem 0.9rem;
   border-radius: var(--radius);
   font-size: 0.75rem;
   font-family: var(--font-sans);
   white-space: normal;
-  width: 200px;
+  width: 260px;
   max-width: 80vw;
   text-align: center;
   z-index: 1001;
@@ -461,7 +460,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Тултипы для элементов внизу страницы появляются СВЕРХУ */
 .reveal-error::after,
 .submit-btn.is-error::after,
 .submit-btn.is-timed-out::after {

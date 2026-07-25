@@ -23,7 +23,7 @@ function getErrorMessage(err) {
   let msg = (typeof err === 'string') ? err : (err.message || 'Unknown error');
 
   if (msg === 'Failed to fetch' || msg.includes('NetworkError')) {
-    return 'Network error: Server is unreachable or offline.';
+    return 'Network error: Server is unreachable. This may be due to a connection issue or regional blocking. Try using a VPN.';
   }
 
   const statusMatch = msg.match(/\(Error (\d+)\)/);
@@ -349,8 +349,8 @@ export function initContact(i18nConfigGetter) {
         return await resData.json();
       };
 
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout: Server took too long to respond.')), 10000)
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Network timeout: Server took too long to respond. This may be due to connection issues or regional blocking. Try using a VPN.')), 10000)
       );
 
       const {
