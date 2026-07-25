@@ -10,11 +10,16 @@ export function initNavigation(renderCallback) {
   const langDropdown = $('langDropdown');
   const topbar = $('topbar');
   const mobileMenuToggle = $('mobileMenuToggle');
+  const topbarMenuContent = document.querySelector('.topbar-menu-content');
 
   langTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = langSwitch.classList.toggle('open');
     langTrigger.setAttribute('aria-expanded', isOpen);
+
+    if (topbarMenuContent) {
+      topbarMenuContent.style.overflow = isOpen ? 'visible' : '';
+    }
   });
 
   langDropdown.querySelectorAll('li').forEach(li => {
@@ -30,7 +35,11 @@ export function initNavigation(renderCallback) {
       $('langCurrent').textContent = langAbbr[newLang] || 'ENG';
 
       langSwitch.classList.remove('open');
-      topbar.classList.remove('mobile-menu-open'); // Закрываем гамбургер при смене языка
+      langTrigger.setAttribute('aria-expanded', 'false');
+
+      if (topbarMenuContent) topbarMenuContent.style.overflow = '';
+
+      topbar.classList.remove('mobile-menu-open');
       mobileMenuToggle.setAttribute('aria-expanded', 'false');
       renderCallback(newLang);
     });
@@ -40,10 +49,10 @@ export function initNavigation(renderCallback) {
     if (!langSwitch.contains(e.target)) {
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
+      if (topbarMenuContent) topbarMenuContent.style.overflow = '';
     }
   });
 
-  // === Логика мобильного меню (гамбургер) ===
   if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -55,11 +64,20 @@ export function initNavigation(renderCallback) {
       if (topbar.classList.contains('mobile-menu-open') && !topbar.contains(e.target)) {
         topbar.classList.remove('mobile-menu-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+
+        // Заодно закрываем дропдаун языков, если он был открыт
+        if (langSwitch.classList.contains('open')) {
+          langSwitch.classList.remove('open');
+          langTrigger.setAttribute('aria-expanded', 'false');
+          if (topbarMenuContent) topbarMenuContent.style.overflow = '';
+        }
       }
     };
 
     document.addEventListener('click', closeMenuOutside);
-    document.addEventListener('touchstart', closeMenuOutside, { passive: true });
+    document.addEventListener('touchstart', closeMenuOutside, {
+      passive: true
+    });
   }
 
   const contentArea = $('contentArea');
@@ -301,18 +319,24 @@ export function initNavigation(renderCallback) {
 
   document.addEventListener('visibilitychange', () => {
     const iframe = document.getElementById('heroIframe');
-    
+
     if (document.hidden) {
       document.body.classList.add('tab-hidden');
       if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: 'disabled' }, '*');
+        iframe.contentWindow.postMessage({
+          type: 'HEX_LIVE_TWIST',
+          mode: 'disabled'
+        }, '*');
       }
     } else {
       document.body.classList.remove('tab-hidden');
       if (iframe && iframe.contentWindow) {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const mode = isMobile ? 'reduced' : 'normal';
-        iframe.contentWindow.postMessage({ type: 'HEX_LIVE_TWIST', mode: mode }, '*');
+        iframe.contentWindow.postMessage({
+          type: 'HEX_LIVE_TWIST',
+          mode: mode
+        }, '*');
       }
       handleScroll();
     }
