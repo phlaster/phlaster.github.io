@@ -20,6 +20,10 @@ export function detectInitialLang() {
   return config.site.default_lang || 'en';
 }
 
+function isEmptyValue(v) {
+  return v === undefined || v === null || (typeof v === 'string' && v.trim() === '');
+}
+
 export function resolveTranslations(obj, lang) {
   if (Array.isArray(obj)) return obj.map(item => resolveTranslations(item, lang));
   if (typeof obj === 'object' && obj !== null) {
@@ -35,7 +39,7 @@ export function resolveTranslations(obj, lang) {
       }
 
       for (const l of sequence) {
-        if (obj[l] !== undefined) {
+        if (!isEmptyValue(obj[l])) {          // было: obj[l] !== undefined
           if (Array.isArray(obj[l]) || typeof obj[l] !== 'object') {
             return resolveTranslations(obj[l], lang);
           }

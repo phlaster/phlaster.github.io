@@ -42,20 +42,34 @@ view_pdf = { en = "Open PDF", fr = "Ouvrir PDF", ru = "Открыть PDF" }
 timeline_title = { en = "Timeline", fr = "Chronologie", ru = "Хронология" }
 expertise_title = { en = "Expertise", fr = "Expertise", ru = "Экспертиза" }
 
-[ui.sections]
-about_title = { en = "About", fr = "À propos", ru = "Обо мне" }
-about_sub = { en = "A short introduction.", fr = "Une brève introduction.", ru = "Краткое введение." }
-career_title = { en = "Education and career", fr = "Éducation et carrière", ru = "Образование и карьера" }
-career_sub = { en = "Professional track and cross-disciplinary expertise.", fr = "Parcours professionnel et expertise interdisciplinaire.", ru = "Профессиональный путь и междисциплинарная экспертиза." }
-proj_title = { en = "Featured projects", fr = "Projets en vedette", ru = "Избранные проекты" }
-proj_sub = { en = "Open-source work and design experiments.", fr = "Travail open-source et expériences de design.", ru = "Open-source проекты и дизайнерские эксперименты." }
-research_title = { en = "Research & Publications", fr = "Recherche & Publications", ru = "Научная работа" }
-research_sub = { en = "Academic work, conferences, and grants.", fr = "Travail académique, conférences et subventions.", ru = "Исследования, конференции и гранты." }
-research_conf = { en = "Conferences", fr = "Conférences", ru = "Конференции" }
-research_pubs = { en = "Publications", fr = "Publications", ru = "Публикации" }
-research_grants = { en = "Grants", fr = "Subventions", ru = "Гранты" }
-docs_title = { en = "Documents & Achievements", fr = "Documents & Réalisations", ru = "Документы и достижения" }
-docs_sub = { en = "Degrees, thesis, coursework, and certificates.", fr = "Diplômes, mémoires, projets et certificats.", ru = "Дипломы, ВКР, курсовые и сертификаты." }
+# --- Sections: each has title (heading), sub (subtitle), nav (menu alias) ---
+[ui.sections.about]
+title = { en = "About Me", fr = "À propos", ru = "Обо мне" }
+sub = { en = "Who I am", fr = "Qui suis-je", ru = "Кто я" }
+nav = { en = "About", fr = "Profil", ru = "Обо мне" }
+
+[ui.sections.career]
+title = { en = "Education & Career", fr = "Formation & Carrière", ru = "Образование и карьера" }
+sub = { en = "My path", fr = "Mon parcours", ru = "Мой путь" }
+nav = { en = "Career", fr = "Carrière", ru = "Карьера" }
+
+[ui.sections.projects]
+title = { en = "Featured rojects", fr = "Projets en vedette", ru = "Избранные проекты" }
+sub = { en = "What I built", fr = "Ce que j'ai construit", ru = "Что я сделал" }
+nav = { en = "Projects", fr = "Projets", ru = "Проекты" }
+
+[ui.sections.research]
+title = { en = "Research & Publications", fr = "Recherche & Publications", ru = "Исследования и публикации" }
+sub = { en = "Academic work", fr = "Travaux académiques", ru = "Научная работа" }
+nav = { en = "Research", fr = "Recherche", ru = "Наука" }
+conf = { en = "Conferences", fr = "Conférences", ru = "Конференции" }
+pubs = { en = "Publications", fr = "Publications", ru = "Публикации" }
+grants = { en = "Grants", fr = "Financements", ru = "Гранты" }
+
+[ui.sections.documents]
+title = { en = "Documents & Achievements", fr = "Documents & Réalisations", ru = "Документы и достижения" }
+sub = { en = "Certificates, awards", fr = "Certificats, prix", ru = "Сертификаты, награды" }
+nav = { en = "Documents", fr = "Documents", ru = "Документы" }
 
 [ui.contact]
 title = { en = "Let's <em>talk</em>.", fr = "<em>Parlons</em>.", ru = "<em>Поговорим</em>." }

@@ -30,15 +30,15 @@ export function renderContent(i18nConfig, lang) {
   const ui = i18nConfig.ui || {};
   const sections = ui.sections || {};
 
-  // === Translate Navigation Links ===
   const navTitles = {
-    about: sections.about_title,
-    career: sections.career_title,
-    projects: sections.proj_title,
-    research: sections.research_title,
-    documents: sections.docs_title,
+    about: sections.about?.nav || sections.about?.title,
+    career: sections.career?.nav || sections.career?.title,
+    projects: sections.projects?.nav || sections.projects?.title,
+    research: sections.research?.nav || sections.research?.title,
+    documents: sections.documents?.nav || sections.documents?.title,
     contact: ui.write_me
   };
+
   document.querySelectorAll('.nav-link').forEach(link => {
     const key = link.dataset.nav;
     if (navTitles[key]) link.textContent = navTitles[key];
@@ -74,8 +74,8 @@ export function renderContent(i18nConfig, lang) {
   `).join('');
 
   // ABOUT
-  $('about-title').textContent = sections.about_title;
-  $('about-sub').textContent = sections.about_sub;
+  $('about-title').textContent = sections.about?.title || '';
+  $('about-sub').textContent = sections.about?.sub || '';
 
   const interests = a.interests || {
     items: []
@@ -121,8 +121,8 @@ export function renderContent(i18nConfig, lang) {
   `;
 
   // CAREER & SKILLS (Education and career)
-  $('career-title').textContent = sections.career_title;
-  $('career-sub').textContent = sections.career_sub;
+  $('career-title').textContent = sections.career?.title || '';
+  $('career-sub').textContent = sections.career?.sub || '';
   const timeline = i18nConfig.timeline || [];
   const skillGroups = i18nConfig.skill_groups || [];
 
@@ -158,8 +158,8 @@ export function renderContent(i18nConfig, lang) {
   `;
 
   // PROJECTS
-  $('proj-title').textContent = sections.proj_title;
-  $('proj-sub').textContent = sections.proj_sub;
+  $('proj-title').textContent = sections.projects?.title || '';
+  $('proj-sub').textContent = sections.projects?.sub || '';
   $('projects-content').innerHTML = `
     <div class="projects-grid">
       ${(i18nConfig.projects || []).map(p => `
@@ -175,8 +175,8 @@ export function renderContent(i18nConfig, lang) {
   `;
 
   // RESEARCH
-  $('research-title').textContent = sections.research_title;
-  $('research-sub').textContent = sections.research_sub;
+  $('research-title').textContent = sections.research?.title || '';
+  $('research-sub').textContent = sections.research?.sub || '';
   const pubs = i18nConfig.publications || [];
   const confs = i18nConfig.conferences || [];
   const grants = i18nConfig.grants || [];
@@ -199,25 +199,25 @@ export function renderContent(i18nConfig, lang) {
   };
 
   $('research-content').innerHTML = `
-    <div class="research-grid">
-      <div class="research-col">
-        <h3 class="research-col-title">${esc(sections.research_conf)}</h3>
-        <div class="research-list">${confs.map(c => renderItem(c, true)).join('')}</div>
-      </div>
-      <div class="research-col">
-        <h3 class="research-col-title">${esc(sections.research_pubs)}</h3>
-        <div class="research-list">${pubs.map(p => renderItem(p, false)).join('')}</div>
-      </div>
-      <div class="research-col">
-        <h3 class="research-col-title">${esc(sections.research_grants)}</h3>
-        <div class="research-list">${grants.map(g => renderItem(g, false)).join('')}</div>
-      </div>
+  <div class="research-grid">
+    <div class="research-col">
+      <h3 class="research-col-title">${esc(sections.research?.conf || '')}</h3>
+      <div class="research-list">${confs.map(c => renderItem(c, true)).join('')}</div>
     </div>
-  `;
+    <div class="research-col">
+      <h3 class="research-col-title">${esc(sections.research?.pubs || '')}</h3>
+      <div class="research-list">${pubs.map(p => renderItem(p, false)).join('')}</div>
+    </div>
+    <div class="research-col">
+      <h3 class="research-col-title">${esc(sections.research?.grants || '')}</h3>
+      <div class="research-list">${grants.map(g => renderItem(g, false)).join('')}</div>
+    </div>
+  </div>
+`;
 
   // DOCUMENTS
-  $('docs-title').textContent = sections.docs_title;
-  $('docs-sub').textContent = sections.docs_sub;
+  $('docs-title').textContent = sections.documents?.title || '';
+  $('docs-sub').textContent = sections.documents?.sub || '';
   const docs = (i18nConfig.documents || []).filter(d => !d.languages || d.languages.includes(lang));
 
   $('documents-content').innerHTML = `
