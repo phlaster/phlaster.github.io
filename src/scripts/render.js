@@ -7,12 +7,43 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   "'": '&#39;'
 } [c]));
 
+function updateFavicon(fullName) {
+  const css = getComputedStyle(document.documentElement);
+  const darkBg = css.getPropertyValue('--color-dark-bg').trim() || '#070D15';
+  const lightFg = css.getPropertyValue('--color-dark-fg').trim() || '#EDEDEE';
+  const accent = css.getPropertyValue('--color-accent').trim() || '#5F9F59';
+
+  const letter = esc((fullName || '').trim().charAt(0).toUpperCase() || '?');
+
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">` +
+    `<rect x="3" y="3" width="94" height="94" rx="21" fill="${darkBg}" stroke="${lightFg}" stroke-opacity="0.35" stroke-width="3"/>` +
+    `<text x="50" y="50" dy=".35em" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="75" font-weight="700" fill="${accent}">${letter}</text>` +
+    `</svg>`;
+
+  let link = document.querySelector('link[rel="icon"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.head.appendChild(link);
+  }
+  link.type = 'image/svg+xml';
+  link.href = 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
 export function renderContent(i18nConfig, lang) {
   document.documentElement.lang = lang;
 
   const a = i18nConfig.about || {};
   const fullName = a.name || '—';
+  updateFavicon(fullName);
   const nameParts = fullName.split(/\s+/).filter(p => p.length > 0);
+
+  const firstWord = nameParts[0] || '';
+  const lastWord = nameParts[nameParts.length - 1] || '';
+  document.title = firstWord ?
+    `${firstWord[0]}.${nameParts.length >= 2 ? ' ' + lastWord : ''}, CV` :
+    'CV';
 
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
