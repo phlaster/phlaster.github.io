@@ -527,11 +527,20 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .btn-pdf-error::after,
   .btn-pdf-loading::after {
     top: auto;
     bottom: 140%;
+  }
+
+  .submit-btn.is-loading::after,
+  .submit-btn.is-error::after,
+  .submit-btn.is-timed-out::after {
+    bottom: auto;
+    top: 50%;
+    left: calc(100% + 10px);
+    transform: translateY(-50%);
+    width: 200px;
   }
 }
 
@@ -558,46 +567,57 @@
 /* === Submit Button States === */
 .submit-btn {
   position: relative;
-  min-width: 150px;
-  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background .2s, opacity .2s, color .2s, border-color .2s;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  transition: color 0.2s;
+  flex-shrink: 0;
 }
 
-.submit-btn .btn-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(var(--color-text-rgb), 0.3);
-  border-top-color: var(--color-text);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+/* Неактивная (текст не набран) — серая, без ховера */
+.submit-btn:disabled {
+  color: rgba(var(--color-dark-fg-rgb), 0.3);
+  cursor: auto;
 }
 
-.submit-btn.is-loading {
-  background: rgba(var(--color-dark-fg-rgb), 0.15);
-  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
-  color: transparent;
+/* Активная (текст набран) — белая */
+.submit-btn:not(:disabled) {
+  color: var(--color-dark-fg);
+}
+
+/* Ховер на активную кнопку — зелёная, без фона и рамок */
+@media (hover: hover) {
+  .submit-btn:not(:disabled):hover {
+    background: transparent;
+    border: none;
+    color: var(--color-accent-soft);
+  }
+}
+
+/* Состояния загрузки и ошибки */
+.submit-btn.is-loading,
+.submit-btn.is-timed-out {
+  color: var(--color-dark-fg);
   cursor: progress;
-  opacity: 1;
+  background: transparent;
+  border: none;
 }
 
 .submit-btn.is-error {
   background: transparent;
-  border: 1px solid var(--error-red);
+  border: none;
   color: var(--error-red);
-  opacity: 1;
-  pointer-events: auto;
   cursor: help;
 }
 
-.submit-btn.is-timed-out {
-  background: rgba(var(--color-dark-fg-rgb), 0.15);
-  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.3);
-  color: transparent;
-  opacity: 1;
-  pointer-events: auto;
+.submit-loader .ring-fg {
+  animation: fillRing 10s linear forwards;
 }
 
 /* === Contact Extra Fields Blur Wrapper === */

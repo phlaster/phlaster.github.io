@@ -189,11 +189,14 @@
             <span id="charCounter" class="char-counter">0/2000</span>
           </div>
           <div class="submit-row">
-            <button class="submit-btn" type="submit" id="submitBtn" disabled>
-              <span class="btn-label" id="submitBtnLabel">Send message</span>
-              <svg class="submit-loader" width="20" height="20" viewBox="0 0 36 36" style="display:none;">
-                <circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(var(--color-text-rgb), 0.1)" stroke-width="3" />
-                <circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--color-text)" stroke-width="3" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)" />
+            <button class="submit-btn" type="submit" id="submitBtn" disabled aria-label="Send message">
+              <svg class="submit-icon" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <svg class="submit-loader" width="24" height="24" viewBox="0 0 36 36" style="display:none;">
+                <circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/>
+                <circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
               </svg>
               <svg class="submit-error-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>

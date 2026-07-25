@@ -800,31 +800,6 @@
   margin-top: 1rem;
 }
 
-.submit-btn {
-  background: var(--color-accent);
-  color: var(--color-text);
-  border: 0;
-  padding: .85rem 1.75rem;
-  font-family: var(--font-sans);
-  font-size: .8125rem;
-  border-radius: var(--radius);
-  transition: background .2s;
-}
-
-.submit-btn:hover {
-  background: var(--color-accent-hover);
-  cursor: pointer;
-}
-
-.submit-btn:disabled {
-  opacity: .5;
-}
-
-.submit-btn:disabled:hover {
-  background: var(--color-accent);
-  cursor: auto;
-}
-
 .form-status {
   font-size: .8125rem;
   color: rgba(var(--color-dark-fg-rgb), .6);

@@ -101,29 +101,25 @@ export function initContact(i18nConfigGetter) {
 
   function setButtonState(state, message = '', duration = 0) {
     const submitBtn = $('submitBtn');
-    const submitBtnLabel = $('submitBtnLabel');
-    const submitLoader = document.querySelector('.submit-loader');
-    const submitErrorIcon = document.querySelector('.submit-error-icon');
+    const submitIcon = submitBtn.querySelector('.submit-icon');
+    const submitLoader = submitBtn.querySelector('.submit-loader');
+    const submitErrorIcon = submitBtn.querySelector('.submit-error-icon');
 
     submitBtn.classList.remove('is-loading', 'is-error', 'is-timed-out');
-
-    if (submitLoader) submitLoader.style.display = 'none';
-    if (submitErrorIcon) submitErrorIcon.style.display = 'none';
-    if (submitBtnLabel) submitBtnLabel.style.display = 'inline';
     submitBtn.removeAttribute('data-tooltip');
 
-    const existingSpinner = submitBtn.querySelector('.btn-spinner');
-    if (existingSpinner) existingSpinner.remove();
+    if (submitIcon) submitIcon.style.display = 'none';
+    if (submitLoader) submitLoader.style.display = 'none';
+    if (submitErrorIcon) submitErrorIcon.style.display = 'none';
 
     if (timeoutTimer) {
       clearTimeout(timeoutTimer);
       timeoutTimer = null;
     }
 
-    if (state === 'loading') {
+    if (state === 'loading' || state === 'syncing') {
       submitBtn.classList.add('is-loading');
       submitBtn.disabled = true;
-      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
       if (submitLoader) {
         submitLoader.style.display = 'block';
         const ringFg = submitLoader.querySelector('.ring-fg');
@@ -135,28 +131,9 @@ export function initContact(i18nConfigGetter) {
       }
       const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
       submitBtn.setAttribute('data-tooltip', loadingMsg);
-    } else if (state === 'syncing') {
-      submitBtn.classList.add('is-loading');
-      submitBtn.disabled = true;
-      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
-      const spinner = document.createElement('span');
-      spinner.className = 'btn-spinner';
-      submitBtn.appendChild(spinner);
-    } else if (state === 'ready') {
-      submitBtn.disabled = false;
-    } else if (state === 'error') {
-      submitBtn.classList.add('is-error');
-      submitBtn.disabled = false;
-      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
-      if (submitErrorIcon) submitErrorIcon.style.display = 'block';
-      if (message) {
-        const safeMsg = message.replace(/"/g, '&quot;');
-        submitBtn.setAttribute('data-tooltip', safeMsg);
-      }
     } else if (state === 'timed-out') {
       submitBtn.classList.add('is-timed-out');
       submitBtn.disabled = false;
-      if (submitBtnLabel) submitBtnLabel.style.display = 'none';
       if (submitLoader) {
         submitLoader.style.display = 'block';
         const ringFg = submitLoader.querySelector('.ring-fg');
@@ -170,7 +147,6 @@ export function initContact(i18nConfigGetter) {
         const safeMsg = message.replace(/"/g, '&quot;');
         submitBtn.setAttribute('data-tooltip', safeMsg);
       }
-
       timeoutTimer = setTimeout(() => {
         if (messageInput.value.trim() && formChallenge && formNonce) {
           setButtonState('ready');
@@ -178,8 +154,20 @@ export function initContact(i18nConfigGetter) {
           setButtonState('default');
         }
       }, duration * 1000);
+    } else if (state === 'ready') {
+      submitBtn.disabled = false;
+      if (submitIcon) submitIcon.style.display = 'block';
+    } else if (state === 'error') {
+      submitBtn.classList.add('is-error');
+      submitBtn.disabled = false;
+      if (submitErrorIcon) submitErrorIcon.style.display = 'block';
+      if (message) {
+        const safeMsg = message.replace(/"/g, '&quot;');
+        submitBtn.setAttribute('data-tooltip', safeMsg);
+      }
     } else if (state === 'default') {
       submitBtn.disabled = true;
+      if (submitIcon) submitIcon.style.display = 'block';
     }
   }
 
