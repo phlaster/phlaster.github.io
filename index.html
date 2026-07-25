@@ -25,39 +25,50 @@
   <header class="topbar no-print" id="topbar">
     <div class="topbar-inner">
       <div class="brand">A<span class="dot">·</span>M</div>
-      <nav class="nav-links" id="navLinks" role="navigation">
-        <a href="#about" class="nav-link" data-nav="about">About</a>
-        <a href="#career" class="nav-link" data-nav="career">Career & Skills</a>
-        <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
-        <a href="#research" class="nav-link" data-nav="research">Research</a>
-        <a href="#documents" class="nav-link" data-nav="documents">Documents</a>
-        <a href="#contact" class="nav-link" data-nav="contact">Write me</a>
-      </nav>
-      <div class="topbar-actions">
-        <button class="btn-action btn-pdf" id="exportPdfBtn" aria-label="Export to PDF">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>PDF</span>
-        </button>
-        <div class="lang-switch" id="langSwitch">
-          <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      
+      <div class="topbar-menu-content">
+        <nav class="nav-links" id="navLinks" role="navigation">
+          <a href="#about" class="nav-link" data-nav="about">About</a>
+          <a href="#career" class="nav-link" data-nav="career">Career & Skills</a>
+          <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
+          <a href="#research" class="nav-link" data-nav="research">Research</a>
+          <a href="#documents" class="nav-link" data-nav="documents">Documents</a>
+          <a href="#contact" class="nav-link" data-nav="contact">Write me</a>
+        </nav>
+        <div class="topbar-actions">
+          <button class="btn-action btn-pdf" id="exportPdfBtn" aria-label="Export to PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span class="lang-current" id="langCurrent">ENG</span>
+            <span>PDF</span>
           </button>
-          <ul class="lang-dropdown" id="langDropdown" role="menu">
-            <li role="menuitem" data-lang="en" class="active">English</li>
-            <li role="menuitem" data-lang="ru">Русский</li>
-            <li role="menuitem" data-lang="fr">Français</li>
-          </ul>
+          <div class="lang-switch" id="langSwitch">
+            <button class="lang-trigger" id="langTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span class="lang-current" id="langCurrent">ENG</span>
+            </button>
+            <ul class="lang-dropdown" id="langDropdown" role="menu">
+              <li role="menuitem" data-lang="en" class="active">English</li>
+              <li role="menuitem" data-lang="ru">Русский</li>
+              <li role="menuitem" data-lang="fr">Français</li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </div>
   </header>
 

@@ -8,6 +8,8 @@ export function initNavigation(renderCallback) {
   const langSwitch = $('langSwitch');
   const langTrigger = $('langTrigger');
   const langDropdown = $('langDropdown');
+  const topbar = $('topbar');
+  const mobileMenuToggle = $('mobileMenuToggle');
 
   langTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -28,6 +30,8 @@ export function initNavigation(renderCallback) {
       $('langCurrent').textContent = langAbbr[newLang] || 'ENG';
 
       langSwitch.classList.remove('open');
+      topbar.classList.remove('mobile-menu-open'); // Закрываем гамбургер при смене языка
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
       renderCallback(newLang);
     });
   });
@@ -39,7 +43,25 @@ export function initNavigation(renderCallback) {
     }
   });
 
-  const topbar = $('topbar');
+  // === Логика мобильного меню (гамбургер) ===
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = topbar.classList.toggle('mobile-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    const closeMenuOutside = (e) => {
+      if (topbar.classList.contains('mobile-menu-open') && !topbar.contains(e.target)) {
+        topbar.classList.remove('mobile-menu-open');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    document.addEventListener('click', closeMenuOutside);
+    document.addEventListener('touchstart', closeMenuOutside, { passive: true });
+  }
+
   const contentArea = $('contentArea');
   const footer = document.getElementById('contact');
   const navLinks = document.querySelectorAll('.nav-link');
