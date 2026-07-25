@@ -818,10 +818,11 @@
   .hero-name {
     display: flex !important;
     flex-direction: row !important;
+    flex-wrap: wrap !important; 
     justify-content: center;
-    white-space: nowrap;
-    font-size: clamp(1.8rem, 10vw, 3.8rem) !important;
-    gap: 0.3em;
+    white-space: normal !important;
+    font-size: clamp(1.9rem, 9vw, 3rem) !important;
+    gap: 0.2em 0.3em;
   }
 
   .hero-tagline {
