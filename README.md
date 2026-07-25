@@ -35,10 +35,6 @@
     <div style="background-color: #AFB9CA; width: 100px; height: 100px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div>
     <div style="margin-top: 8px; font-family: monospace; font-size: 14px;">#AFB9CA</div>
   </div>
-  <div style="display: inline-block; text-align: center; margin: 0 16px 16px 0;">
-    <div style="background-color: #DDDFE1; width: 100px; height: 100px; border-radius: 12px; border: 1px solid #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div>
-    <div style="margin-top: 8px; font-family: monospace; font-size: 14px;">#DDDFE1</div>
-  </div>
 
   <h3 style="margin: 32px 0 16px 0;">Accents</h3>
   <div style="display: inline-block; text-align: center; margin: 0 16px 16px 0;">
