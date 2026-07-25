@@ -83,6 +83,32 @@ export function initNavigation(renderCallback) {
         closeMobileMenu();
       }
     });
+
+    // === Закрытие меню свайпом вверх ===
+    let touchStartY = 0;
+
+    topbar.addEventListener('touchstart', (e) => {
+      // Запоминаем начальную точку касания, только если меню открыто
+      if (topbar.classList.contains('mobile-menu-open')) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, {
+      passive: true
+    });
+
+    topbar.addEventListener('touchend', (e) => {
+      if (!topbar.classList.contains('mobile-menu-open')) return;
+
+      const touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchEndY - touchStartY;
+
+      // Если свайп вверх (отрицательное значение) больше 50px
+      if (deltaY < -50) {
+        closeMobileMenu();
+      }
+    }, {
+      passive: true
+    });
   }
 
   const contentArea = $('contentArea');
@@ -262,6 +288,7 @@ export function initNavigation(renderCallback) {
   }
 
   let scrollTimer = null;
+  let heroSnapTimer = null;
 
   const handleScroll = () => {
     const contentTop = contentArea.getBoundingClientRect().top;
@@ -294,6 +321,22 @@ export function initNavigation(renderCallback) {
         const fadeProgress = Math.min(window.scrollY / (heroHeight * 0.5), 1);
         drawHint.style.opacity = String(0.5 * (1 - fadeProgress));
         drawHint.style.transform = `translateY(${10 * fadeProgress}px)`;
+      }
+
+      // === Прилипание перемотки (Snap to top) ===
+      const snapThreshold = heroHeight * 0.25;
+      if (window.scrollY > 0 && window.scrollY <= snapThreshold) {
+        clearTimeout(heroSnapTimer);
+        heroSnapTimer = setTimeout(() => {
+          if (window.scrollY > 0 && window.scrollY <= snapThreshold) {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }
+        }, 500);
+      } else {
+        clearTimeout(heroSnapTimer);
       }
     }
 

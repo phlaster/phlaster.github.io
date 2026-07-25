@@ -2,8 +2,9 @@
 .topbar {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 100%;
   max-width: var(--maxw);
   z-index: 100;
@@ -11,15 +12,36 @@
   display: flex;
   align-items: center;
   padding: 0 var(--gutter);
-  background-color: rgba(var(--color-dark-bg-rgb), 0.5);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  backdrop-filter: saturate(180%) blur(12px);
   color: var(--color-dark-fg);
-  transition: background .3s, color .3s, border-color .3s;
+  transition: color .3s, border-color .3s;
   border: 1px solid rgba(var(--color-dark-fg-rgb), 0.05);
   border-top: none;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   touch-action: none;
+}
+
+.topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--color-dark-bg-rgb), 0.5);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-radius: inherit;
+  z-index: -1;
+  transition: background .3s;
+}
+
+.topbar.solid {
+  color: var(--color-text);
+  border-color: var(--color-border);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.topbar.solid::before {
+  background-color: rgba(var(--color-dark-fg-rgb), .92);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .topbar * {
@@ -202,8 +224,11 @@
   position: absolute;
   top: calc(100% + .5rem);
   left: 0;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  right: auto;
+  background: rgba(var(--color-dark-bg-rgb), 0.7);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.1);
   border-radius: var(--radius);
   list-style: none;
   padding: .35rem 0;
@@ -232,16 +257,49 @@
 .lang-dropdown li {
   padding: .5rem .85rem;
   cursor: pointer;
-  color: var(--color-text);
+  color: var(--color-dark-fg); 
+  transition: background .2s, color .2s;
 }
 
 .lang-dropdown li:hover {
-  background: var(--color-bg);
+  background: rgba(var(--color-dark-fg-rgb), 0.1);
 }
 
 .lang-dropdown li.active {
-  color: var(--color-accent);
+  color: var(--color-accent-soft);
   font-weight: 500;
+}
+
+/* На десктопе выравниваем по правому краю */
+@media screen and (min-width: 769px) {
+  .lang-dropdown {
+    left: auto;
+    right: 0;
+  }
+}
+
+.lang-switch.open .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Когда топбар становится solid (светлым при прокрутке) */
+.topbar.solid .lang-dropdown {
+  background: rgba(var(--color-dark-fg-rgb), 0.92);
+  border: 1px solid var(--color-border);
+}
+
+.topbar.solid .lang-dropdown li {
+  color: var(--color-text); 
+}
+
+.topbar.solid .lang-dropdown li:hover {
+  background: rgba(var(--color-text-rgb), 0.05);
+}
+
+.topbar.solid .lang-dropdown li.active {
+  color: var(--color-accent);
 }
 
 /* ============ Hero ============ */
@@ -773,11 +831,13 @@
     height: auto;
     min-height: var(--bar-h);
     overflow: visible;
-    transition: background .3s, color .3s, border-color .3s, backdrop-filter .3s;
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     border-bottom: 1px solid rgba(var(--color-dark-fg-rgb), 0.05);
+  }
+
+  .topbar::before {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
   }
 
   .topbar-inner {
@@ -844,16 +904,6 @@
     height: 100%;
     padding: 0;
     justify-content: center;
-  }
-
-  .lang-dropdown {
-    left: 0;
-    right: auto;
-    width: auto;
-    min-width: 120px;
-    background: rgba(var(--color-dark-bg-rgb), 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
 
   /* === Hamburger menu === */
