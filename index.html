@@ -161,22 +161,25 @@
           </div>
         </div>
         <form class="contact-form" id="contactForm" novalidate>
-          <button type="button" class="leave-contacts-btn" id="leaveContactsBtn">Leave Contacts</button>
-
-          <div class="contact-extra-fields" id="contactExtraFields" style="display: none;">
-            <div class="form-row">
-              <div class="field">
-                <label for="f-name" id="lbl-name">Name</label>
-                <input id="f-name" name="name" type="text" maxlength="30">
+          <div class="contact-extra-wrap" id="contactExtraWrap">
+            <div class="contact-extra-fields">
+              <div class="form-row">
+                <div class="field">
+                  <label for="f-name" id="lbl-name">Name</label>
+                  <input id="f-name" name="name" type="text" maxlength="30">
+                </div>
+                <div class="field">
+                  <label for="f-email" id="lbl-email">Email</label>
+                  <input id="f-email" name="email" type="text" maxlength="30">
+                </div>
               </div>
               <div class="field">
-                <label for="f-email" id="lbl-email">Email</label>
-                <input id="f-email" name="email" type="text" maxlength="30">
+                <label for="f-subject" id="lbl-subject">Subject</label>
+                <input id="f-subject" name="subject" type="text" maxlength="60">
               </div>
             </div>
-            <div class="field">
-              <label for="f-subject" id="lbl-subject">Subject</label>
-              <input id="f-subject" name="subject" type="text" maxlength="60">
+            <div class="contact-extra-blur" id="leaveContactsBtn" role="button" tabindex="0" aria-label="Reveal contact fields">
+              <span>Leave contacts (optional)</span>
             </div>
           </div>
 

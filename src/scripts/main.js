@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation(rerender);
   initContact(() => i18nConfig);
   initPdfModal(() => i18nConfig);
-  initPdfExport();
-
+  initPdfExport(() => i18nConfig);
+  
   const langAbbr = {
     en: 'ENG',
     ru: 'RUS',

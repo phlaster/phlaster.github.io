@@ -18,27 +18,6 @@ async function handleFetchErrors(res) {
   return res;
 }
 
-function getErrorMessage(err) {
-  if (!err) return 'Unknown error occurred.';
-  let msg = (typeof err === 'string') ? err : (err.message || 'Unknown error');
-
-  if (msg === 'Failed to fetch' || msg.includes('NetworkError')) {
-    return 'Network error: Server is unreachable. This may be due to a connection issue or regional blocking. Try using a VPN.';
-  }
-
-  const statusMatch = msg.match(/\(Error (\d+)\)/);
-  if (statusMatch) {
-    const code = parseInt(statusMatch[1], 10);
-    let cleanMsg = msg.replace(/\(Error \d+\)/, '').trim();
-    if (cleanMsg) return cleanMsg;
-    if (code === 404) return 'The requested resource was not found (404).';
-    if (code === 400) return 'Bad request to the server (400). Please refresh the page.';
-    if (code >= 500) return `Internal server error (${code}). Please try again later.`;
-  }
-
-  return msg;
-}
-
 export function initContact(i18nConfigGetter) {
   let formChallenge = null;
   let formNonce = null;
@@ -56,6 +35,43 @@ export function initContact(i18nConfigGetter) {
   const IS_DEV = import.meta.env.DEV;
 
   const shouldUseCache = !(IS_DEV && IS_DIRTY);
+
+  function getErrorMessage(err) {
+    const ui = i18nConfigGetter().ui.contact;
+    
+    if (!err) return ui.err_unknown || 'Unknown error occurred.';
+    const msg = (typeof err === 'string') ? err : (err.message || (ui.err_unknown || 'Unknown error'));
+
+    if (msg === 'Failed to fetch' || msg.includes('NetworkError') || msg === 'NETWORK_TIMEOUT') {
+      return ui.err_network || 'Network error: Server is unreachable. This may be due to a connection issue or regional blocking. Try using a VPN.';
+    }
+
+    if (msg === 'ERR_WORKER_URL') {
+      return ui.err_worker_url || 'Worker URL is not configured.';
+    }
+
+    if (msg === 'ERR_CRYPTO') {
+      return ui.err_crypto || 'Crypto API unavailable (requires HTTPS).';
+    }
+
+    const statusMatch = msg.match(/\(Error (\d+)\)/);
+    if (statusMatch) {
+      const code = parseInt(statusMatch[1], 10);
+      let cleanMsg = msg.replace(/\(Error \d+\)/, '').trim();
+      
+      if (cleanMsg) {
+        if (cleanMsg.includes('30 seconds')) return ui.err_rate_30 || 'Please wait at least 30 seconds between messages. A timer has started.';
+        if (cleanMsg.includes('1 minute') || cleanMsg.includes('60 seconds') || cleanMsg.includes('try again in a minute')) return ui.err_rate_60 || 'You are sending messages too fast. Timer reset. Please try again in a minute.';
+        return cleanMsg;
+      }
+      
+      if (code === 404) return ui.err_404 || 'The requested resource was not found (404).';
+      if (code === 400) return ui.err_400 || 'Bad request to the server (400). Please refresh the page.';
+      if (code >= 500) return ui.err_500 || 'Internal server error (500). Please try again later.';
+    }
+
+    return msg;
+  }
 
   const exportPdfBtn = $('exportPdfBtn');
   if (exportPdfBtn) {
@@ -170,7 +186,7 @@ export function initContact(i18nConfigGetter) {
   function getWorkerUrl() {
     const config = i18nConfigGetter();
     const url = config?.contact?.worker_url;
-    if (!url) throw new Error('Worker URL is not configured');
+    if (!url) throw new Error('ERR_WORKER_URL');
     return url;
   }
 
@@ -220,7 +236,7 @@ export function initContact(i18nConfigGetter) {
 
   async function solvePoW(challenge) {
     if (!window.crypto || !window.crypto.subtle) {
-      throw new Error('Crypto API unavailable (requires HTTPS)');
+      throw new Error('ERR_CRYPTO');
     }
     const enc = new TextEncoder();
     let nonce = 0;
@@ -380,8 +396,8 @@ export function initContact(i18nConfigGetter) {
         return await resData.json();
       };
 
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Network timeout: Server took too long to respond. This may be due to connection issues or regional blocking. Try using a VPN.')), 10000)
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('NETWORK_TIMEOUT')), 10000)
       );
 
       const {
@@ -417,12 +433,18 @@ export function initContact(i18nConfigGetter) {
   prepareRevealPoW();
 
   const leaveContactsBtn = $('leaveContactsBtn');
-  const contactExtraFields = $('contactExtraFields');
-  if (leaveContactsBtn && contactExtraFields) {
-    leaveContactsBtn.addEventListener('click', () => {
-      leaveContactsBtn.style.display = 'none';
-      contactExtraFields.style.display = 'block';
+  const contactExtraWrap = $('contactExtraWrap');
+  if (leaveContactsBtn && contactExtraWrap) {
+    const revealFields = () => {
+      contactExtraWrap.classList.add('is-revealed');
       $('f-name')?.focus();
+    };
+    leaveContactsBtn.addEventListener('click', revealFields);
+    leaveContactsBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        revealFields();
+      }
     });
   }
 
@@ -524,9 +546,12 @@ export function initContact(i18nConfigGetter) {
 
     } catch (err) {
       const errMsg = getErrorMessage(err);
+      const ui = i18nConfigGetter().ui.contact;
+      const rate30Msg = ui.err_rate_30 || 'Please wait at least 30 seconds between messages. A timer has started.';
+      const rate60Msg = ui.err_rate_60 || 'You are sending messages too fast. Timer reset. Please try again in a minute.';
 
-      const isRateLimit30 = errMsg.includes('30 seconds');
-      const isRateLimit60 = errMsg.includes('1 minute') || errMsg.includes('60 seconds') || errMsg.includes('try again in a minute');
+      const isRateLimit30 = errMsg === rate30Msg;
+      const isRateLimit60 = errMsg === rate60Msg;
 
       if (isRateLimit30) {
         if (sessionStorage.getItem('rate_limit_30s')) {
