@@ -427,6 +427,13 @@
   overflow: visible !important;
 }
 
+.btn-pdf-loading:hover {
+  background: rgba(var(--color-dark-fg-rgb), 0.15) !important;
+  border-color: rgba(var(--color-dark-fg-rgb), 0.3) !important;
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+
 /* === Унифицированные тултипы === */
 .reveal-error::after,
 .btn-pdf-error::after,

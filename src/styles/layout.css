@@ -652,17 +652,21 @@
   font-family: var(--font-sans);
   font-size: .8125rem;
   border-radius: var(--radius);
-  cursor: pointer;
   transition: background .2s;
 }
 
 .submit-btn:hover {
   background: var(--color-accent-hover);
+  cursor: pointer;
 }
 
 .submit-btn:disabled {
   opacity: .5;
-  cursor: not-allowed;
+}
+
+.submit-btn:disabled:hover {
+  background: var(--color-accent);
+  cursor:auto
 }
 
 .form-status {
