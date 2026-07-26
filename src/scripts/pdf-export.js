@@ -17,8 +17,8 @@ export function initPdfExport(i18nConfigGetter) {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        canvas.width = applyBlur ? 1280 : 1920;
-        canvas.height = applyBlur ? 720 : 1080;
+        canvas.width = applyBlur ? 1080 : 1920;
+        canvas.height = applyBlur ? 720 : 1280;
 
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#070D15';
@@ -45,7 +45,6 @@ export function initPdfExport(i18nConfigGetter) {
   };
 
   btn.addEventListener('click', async (e) => {
-    // Блокируем клик, если идет загрузка или произошла ошибка
     if (btn.classList.contains('btn-pdf-error') || btn.classList.contains('btn-pdf-loading')) {
       e.preventDefault();
       return;
@@ -53,6 +52,14 @@ export function initPdfExport(i18nConfigGetter) {
 
     if (isExporting) return;
     isExporting = true;
+
+    if (!import.meta.env.DEV) {
+      const lang = document.documentElement.lang || 'en';
+      const pdfUrl = `./pdf/cv-${lang}.pdf`;
+      window.openPdf(pdfUrl);
+      isExporting = false;
+      return;
+    }
 
     const iframe = $('heroIframe');
     const printBg = $('printBackground');
@@ -102,12 +109,12 @@ export function initPdfExport(i18nConfigGetter) {
       if (frameData) {
         const clearBg = await createRasterBg(frameData, false);
         if (heroPrintBg) {
-          heroPrintBg.innerHTML = `<img src="${clearBg}" style="width:100%;height:100%;object-fit:cover;">`;
+          heroPrintBg.innerHTML = `<img src="${clearBg}" style="width:100%;height:100%;object-fit:fill;">`;
         }
 
         const blurredBg = await createRasterBg(frameData, true);
         if (printBg) {
-          printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:cover;">`;
+          printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:fill;">`;
         }
         await new Promise(r => setTimeout(r, 100));
       }
@@ -120,8 +127,8 @@ export function initPdfExport(i18nConfigGetter) {
 
       btn.innerHTML = originalHTML;
 
-    } catch (e) {
-      console.error("Export failed:", e);
+    } catch (err) {
+      console.error("Export failed:", err);
       const exportErr = i18nConfigGetter().ui.contact.err_pdf_export || 'Export failed';
       btn.classList.add('btn-pdf-error');
       btn.setAttribute('data-tooltip', exportErr);
