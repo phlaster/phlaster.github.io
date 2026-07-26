@@ -297,7 +297,14 @@ export function initNavigation(renderCallback) {
       entries.forEach(entry => {
         const iframe = document.getElementById('heroIframe');
 
-        if (entry.isIntersecting && entry.intersectionRatio <= 0.5) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({
+              type: 'HEX_LIVE_TWIST',
+              mode: 'normal'
+            }, '*');
+          }
+        } else {
           navLinks.forEach(link => link.classList.remove('active'));
 
           if (iframe && iframe.contentWindow) {
@@ -306,13 +313,6 @@ export function initNavigation(renderCallback) {
             iframe.contentWindow.postMessage({
               type: 'HEX_LIVE_TWIST',
               mode: mode
-            }, '*');
-          }
-        } else {
-          if (iframe && iframe.contentWindow) {
-            iframe.contentWindow.postMessage({
-              type: 'HEX_LIVE_TWIST',
-              mode: 'normal'
             }, '*');
           }
         }
@@ -592,34 +592,37 @@ export function initCareerHighlighting() {
     });
   });
 
-  // Сброс при прокрутке до другого раздела
-  const sections = document.querySelectorAll('.content-section');
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        clearActive();
-      }
+  // === Сброс при прокрутке к другому разделу (уходим из секции Career) ===
+  const careerSection = document.getElementById('career');
+  if (careerSection) {
+    const careerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          clearActive();
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.3
-  });
-  sections.forEach(sec => sectionObserver.observe(sec));
 
-  // Сброс при переходе на широкий экран
+    careerObserver.observe(careerSection);
+  }
+
+  // === Сброс при переходе на широкий экран ===
   window.matchMedia('(min-width: 769px)').addEventListener('change', (e) => {
     if (e.matches) {
       clearActive();
     }
   });
 
-  // Сброс линий при ресайзе, чтобы они не "отрывались" от элементов
+  // === Сброс при изменении ширины экрана (чтобы линии и стили не ломались) ===
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       if (careerGrid.classList.contains('is-hovering')) {
-        clearLines();
+        clearActive();
       }
-    }, 100);
+    }, 150);
   });
 }
