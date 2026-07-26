@@ -10,11 +10,9 @@
   z-index: 100;
   height: var(--bar-h);
   display: flex;
-  align-items: center;
   padding: 0 var(--gutter);
   color: var(--color-dark-fg);
   transition: color .3s, border-color .3s;
-  border: 1px solid rgba(var(--color-dark-fg-rgb), 0.05);
   border-top: none;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   touch-action: none;
@@ -59,13 +57,13 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
 }
 
 .brand {
+  margin-top: -3px;
   font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 2.2rem;
+  font-weight: 600;
   flex-shrink: 0;
 }
 
@@ -165,7 +163,6 @@
   background: transparent;
   border: none;
   color: inherit;
-  /* Синхронизация цвета с топбаром */
   padding: 0.4rem;
   border-radius: var(--radius);
   cursor: pointer;

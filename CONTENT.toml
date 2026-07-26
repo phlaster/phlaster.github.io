@@ -409,14 +409,6 @@ url = "/assets/pdfs/certificate_skoltech2024.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
-category = { en = "Academic Paper", fr = "Travail académique", ru = "Академическая работа" }
-date = "2023"
-title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
-description = { en = "Term paper for English language course", fr = "Travail de semestre pour le cours d'anglais", ru = "Семестровая работа по курсу английского языка" }
-url = "/assets/pdfs/paper_fp.pdf"
-languages = ["en", "ru", "fr"]
-
-[[documents]]
 category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
 date = "2026"
 title = { en = "Full Thesis Text", fr = "Texte intégral du mémoire", ru = "Выпускная квалификационная работа" }
@@ -455,6 +447,14 @@ title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", f
 description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
 url = "/assets/pdfs/coursework_nummethods.pdf"
 languages = ["ru"]
+
+[[documents]]
+category = { en = "Academic Paper", fr = "Travail académique", ru = "Академическая работа" }
+date = "2023"
+title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
+description = { en = "Term paper for English language course", fr = "Travail de semestre pour le cours d'anglais", ru = "Семестровая работа по курсу английского языка" }
+url = "/assets/pdfs/paper_fp.pdf"
+languages = ["en", "ru", "fr"]
 
 [[documents]]
 category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
