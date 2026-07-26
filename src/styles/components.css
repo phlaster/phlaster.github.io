@@ -74,7 +74,7 @@
   padding: 0.5rem;
   margin: -0.5rem 0;
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
 }
 
 /* Активное состояние (тоггл на мобайл) */
@@ -164,7 +164,7 @@
   color: var(--color-text-muted);
   transition: all 0.2s;
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
 }
 
 .skill-tag.highlight {
@@ -417,18 +417,13 @@
   opacity: 1 !important;
 }
 
-.reveal-error::after,
-.btn-pdf-error::after,
-.btn-pdf-loading::after,
-.submit-btn.is-error::after,
-.submit-btn.is-timed-out::after,
-.submit-btn.is-loading::after,
-.reveal-loader::after {
+/* === Рефакторинг тултипов через :where() === */
+:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-text);
+  background: var(--color-text-muted);
   color: var(--color-bg);
   padding: 0.6rem 0.9rem;
   border-radius: var(--radius);
@@ -438,7 +433,7 @@
   width: 260px;
   max-width: 80vw;
   text-align: center;
-  z-index: 1001;
+  z-index: var(--z-tooltip);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s, visibility 0.2s;
@@ -446,35 +441,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.reveal-error::after,
-.submit-btn.is-error::after,
-.submit-btn.is-timed-out::after,
-.submit-btn.is-loading::after,
-.reveal-loader::after {
+:where(.reveal-error, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
   bottom: 140%;
 }
 
-.btn-pdf-error::after,
-.btn-pdf-loading::after {
+:where(.btn-pdf-error, .btn-pdf-loading)::after {
   top: 140%;
 }
 
-.reveal-error:hover::after,
-.reveal-error:focus::after,
-.reveal-error:active::after,
-.btn-pdf-error:hover::after,
-.btn-pdf-error:focus::after,
-.btn-pdf-error:active::after,
-.btn-pdf-loading:hover::after,
-.btn-pdf-loading:focus::after,
-.btn-pdf-loading:active::after,
-.submit-btn.is-error:hover::after,
-.submit-btn.is-error:active::after,
-.submit-btn.is-timed-out:hover::after,
-.submit-btn.is-timed-out:active::after,
-.submit-btn.is-loading:hover::after,
-.reveal-loader:hover::after,
-.reveal-loader:focus::after {
+/* ВАЖНО: Показываем тултип, как только JS добавил класс состояния, 
+   а не только по :hover (ведь кнопка может быть disabled) */
+:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
   opacity: 1;
   visibility: visible;
 }
@@ -497,8 +474,14 @@
 
 .submit-btn:disabled {
   color: var(--color-dark-fg);
-  opacity: 0.3;
   cursor: auto;
+}
+
+/* Применяем прозрачность только к иконкам внутри кнопки, а не к самой кнопке */
+.submit-btn:disabled .submit-icon,
+.submit-btn:disabled .submit-loader,
+.submit-btn:disabled .submit-error-icon {
+  opacity: 0.3;
 }
 
 /* Активная (текст набран) — белая */
@@ -543,7 +526,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: var(--z-overlay);
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 

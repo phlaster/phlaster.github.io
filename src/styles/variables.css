@@ -38,4 +38,13 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  /* === Z-index Scale === */
+  --z-base: 1;          /* Базовый слой (Hero) */
+  --z-content: 3;       /* Основной контент и Footer */
+  --z-overlay: 10;      /* Локальные оверлеи внутри компонентов (blur в форме) */
+  --z-topbar: 100;      /* Фиксированный топбар */
+  --z-dropdown: 101;    /* Выпадающие меню (языки) */
+  --z-modal: 1000;      /* Модальные окна (PDF) */
+  --z-tooltip: 1001;    /* Тултипы и ошибки */
 }

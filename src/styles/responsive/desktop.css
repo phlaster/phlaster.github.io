@@ -67,19 +67,15 @@
     transform: scale(1.5);
   }
 
+  /* === Submit Button Hovers === */
   .submit-btn:not(:disabled):hover {
     background: transparent;
     border: none;
     color: var(--color-accent-soft);
-  }
-
-  .submit-btn:hover {
-    background: var(--color-accent-hover);
     cursor: pointer;
   }
 
   .submit-btn:disabled:hover {
-    background: var(--color-accent);
     cursor: auto;
   }
 

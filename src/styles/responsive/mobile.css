@@ -360,20 +360,14 @@
     width: 100% !important;
   }
 
-  /* --- Mobile Tooltips --- */
-  .btn-pdf-error::after,
-  .btn-pdf-loading::after {
-    top: auto;
-    bottom: 140%;
-  }
-
+  /* --- Mobile Tooltips Repositioning --- */
   .submit-btn.is-loading::after,
   .submit-btn.is-error::after,
   .submit-btn.is-timed-out::after {
+    top: calc(100% + 10px);
     bottom: auto;
-    top: 50%;
-    left: calc(100% + 10px);
-    transform: translateY(-50%);
-    width: 200px;
+    left: 0; 
+    transform: translateX(0);
+    width: 220px;
   }
 }
