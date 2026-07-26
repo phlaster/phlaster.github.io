@@ -1,0 +1,97 @@
+/* === Desktop Hovers === */
+@media (hover: hover) {
+  .nav-link:hover {
+    opacity: 1;
+  }
+
+  .lang-trigger:hover {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+    opacity: 1;
+  }
+
+  .btn-action:hover {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+    opacity: 1;
+  }
+
+  .timeline-link-btn:hover {
+    color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb), 0.1);
+    opacity: 1;
+  }
+
+  .timeline-item:hover {
+    border-color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb), 0.08);
+    opacity: 1;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+  }
+
+  .view-pdf-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+
+  .hero-social-link:hover {
+    transform: scale(1.5);
+  }
+
+  .scroll-cue:hover {
+    -webkit-backdrop-filter: brightness(1) blur(15px);
+    backdrop-filter: brightness(1) blur(15px);
+    animation-play-state: paused;
+  }
+
+  .copy-contact-btn:hover {
+    opacity: 1;
+    color: var(--color-accent-soft);
+  }
+
+  .contact-extra-blur:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .contact-extra-blur:hover span {
+    color: #ffffff;
+  }
+
+  .about-social-link:hover {
+    transform: scale(1.5);
+  }
+
+  .submit-btn:not(:disabled):hover {
+    background: transparent;
+    border: none;
+    color: var(--color-accent-soft);
+  }
+
+  .submit-btn:hover {
+    background: var(--color-accent-hover);
+    cursor: pointer;
+  }
+
+  .submit-btn:disabled:hover {
+    background: var(--color-accent);
+    cursor: auto;
+  }
+
+  .btn-pdf-error:hover {
+    background: transparent !important;
+    color: var(--error-red) !important;
+    opacity: 1 !important;
+  }
+
+  .btn-pdf-loading:hover {
+    background: transparent !important;
+    color: inherit !important;
+    opacity: 1 !important;
+  }
+}

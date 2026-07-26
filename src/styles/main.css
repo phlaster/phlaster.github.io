@@ -11,10 +11,17 @@
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 
-/* === Local Styles === */
+/* === Core === */
 @import './variables.css';
 @import './base.css';
+@import './animations.css';
+
+/* === Base Layout & UI === */
 @import './layout.css';
 @import './components.css';
 @import './modal.css';
-@import './print.css';
+
+/* === Environments (Responsive & Print) === */
+@import './responsive/desktop.css';
+@import './responsive/mobile.css';
+@import './print/print.css';
