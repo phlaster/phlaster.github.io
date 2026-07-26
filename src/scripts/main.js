@@ -54,4 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#langDropdown li').forEach(li => {
     li.classList.toggle('active', li.dataset.lang === currentLang);
   });
+
+  document.body.classList.add('is-ready');
 });
