@@ -63,7 +63,7 @@ sub = { en = "A collection of my certificates, coursework, and other documents w
 nav = { en = "Documents", fr = "Documents", ru = "Документы" }
 
 [ui.contact]
-pow_loading = { en = "Solving anti-spam PoW... Please wait up to 10s.", fr = "Résolution du PoW anti-spam... Veuillez patienter jusqu'à 10s.", ru = "Вычисляем PoW против спама... Пожалуйста, подождите до 10 сек." }
+pow_loading = { en = "Anti-spam check... Please wait up to 10s.", fr = "Vérification anti-spam... Veuillez patienter jusqu'à 10s.", ru = "Проверка на спам... Пожалуйста, подождите до 10 сек." }
 err_network = { en = "Network error: Server is unreachable. This may be due to a connection issue or regional blocking. Try using a VPN.", fr = "Erreur réseau : Serveur inaccessible. Cela peut être dû à un problème de connexion ou à un blocage régional. Essayez d'utiliser un VPN.", ru = "Сетевая ошибка: Сервер недоступен. Это может быть связано с проблемой соединения или региональной блокировкой. Попробуйте использовать VPN." }
 err_404 = { en = "The requested resource was not found (404).", fr = "La ressource demandée est introuvable (404).", ru = "Запрошенный ресурс не найден (404)." }
 err_400 = { en = "Bad request to the server (400). Please refresh the page.", fr = "Requête incorrecte au serveur (400). Veuillez rafraîchir la page.", ru = "Ошибочный запрос к серверу (400). Пожалуйста, обновите страницу." }

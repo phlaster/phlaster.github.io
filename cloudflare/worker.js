@@ -57,7 +57,7 @@ export default {
         const challenge = crypto.randomUUID();
         const startTime = Date.now().toString();
         await env.CHALLENGES.put(challenge, startTime, {
-          expirationTtl: 600
+          expirationTtl: 60
         });
         return json({
           challenge
@@ -67,7 +67,6 @@ export default {
       if (pathname === '/api/submit' && request.method === 'POST') {
         const {
           challenge,
-          nonce,
           name,
           email,
           subject,
@@ -103,12 +102,24 @@ export default {
           }
         }
 
-        const startTime = await verifyPoW(challenge, nonce, env);
-        if (!startTime) return json({
-          error: 'Invalid or expired challenge'
-        }, 400);
+        // --- ПРОВЕРКА 10-СЕКУНДНОГО ТАЙМЕРА ---
+        const startTimeStr = await env.CHALLENGES.get(challenge);
+        if (!startTimeStr) {
+          return json({
+            error: 'Invalid or expired challenge'
+          }, 400);
+        }
 
-        const durationSec = Math.round((Date.now() - startTime) / 1000);
+        const startTime = parseInt(startTimeStr, 10);
+        const elapsed = Date.now() - startTime;
+
+        if (elapsed < 10000) {
+          return json({
+            error: 'Anti-spam timer not finished. Please wait.'
+          }, 400);
+        }
+
+        await env.CHALLENGES.delete(challenge);
 
         const cf = request.cf || {};
         const country = cf.country || 'Unknown';
@@ -124,7 +135,7 @@ export default {
         tgText += `<b>Message:</b>\n${escHtml(message)}`;
 
         tgText += `\n\n<b>Meta:</b>\n`;
-        tgText += `<b>Time Spent:</b> <code>${durationSec} sec</code>\n`;
+        tgText += `<b>Time Spent:</b> <code>${Math.round(elapsed / 1000)} sec</code>\n`;
         tgText += `<b>IP:</b> <code>${escHtml(ip)}</code>\n`;
         tgText += `<b>Location:</b> <code>${escHtml(city)}, ${escHtml(country)}</code>\n`;
         tgText += `<b>ISP:</b> <code>${escHtml(isp)}</code>\n`;

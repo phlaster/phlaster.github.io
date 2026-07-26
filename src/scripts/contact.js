@@ -19,9 +19,10 @@ async function handleFetchErrors(res) {
 }
 
 export function initContact(i18nConfigGetter) {
-  let formChallenge = null;
-  let formNonce = null;
-  let isComputingFormPoW = false;
+  let challengeId = null;
+  let isReady = false;
+  let isSending = false;
+  let timerInterval = null;
   let timeoutTimer = null;
 
   function getErrorMessage(err) {
@@ -38,8 +39,8 @@ export function initContact(i18nConfigGetter) {
       return ui.err_worker_url || 'Worker URL is not configured.';
     }
 
-    if (msg === 'ERR_CRYPTO') {
-      return ui.err_crypto || 'Crypto API unavailable (requires HTTPS).';
+    if (msg.includes('Anti-spam timer not finished')) {
+      return ui.err_rate_30 || 'Please wait for the timer to finish before sending.';
     }
 
     const statusMatch = msg.match(/\(Error (\d+)\)/);
@@ -75,7 +76,7 @@ export function initContact(i18nConfigGetter) {
 
     if (state === 'loading') {
       exportPdfBtn.classList.add('btn-pdf-loading');
-      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
+      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Anti-spam check... Please wait up to 10s.").replace(/"/g, '&quot;');
       exportPdfBtn.setAttribute('data-tooltip', loadingMsg);
       exportPdfBtn.innerHTML = `<svg class="reveal-ring" width="24" height="24" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
     } else if (state === 'error') {
@@ -105,7 +106,7 @@ export function initContact(i18nConfigGetter) {
       timeoutTimer = null;
     }
 
-    if (state === 'loading' || state === 'syncing') {
+    if (state === 'loading') {
       submitBtn.classList.add('is-loading');
       submitBtn.disabled = true;
       if (submitLoader) {
@@ -117,37 +118,26 @@ export function initContact(i18nConfigGetter) {
           ringFg.style.animation = 'fillRing 10s linear forwards';
         }
       }
-      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Solving anti-spam PoW...").replace(/"/g, '&quot;');
+      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Anti-spam check... Please wait up to 10s.").replace(/"/g, '&quot;');
       submitBtn.setAttribute('data-tooltip', loadingMsg);
-    } else if (state === 'timed-out') {
-      submitBtn.classList.add('is-timed-out');
-      submitBtn.disabled = false;
+    } else if (state === 'syncing') {
+      submitBtn.classList.add('is-loading');
+      submitBtn.disabled = true;
       if (submitLoader) {
         submitLoader.style.display = 'block';
         const ringFg = submitLoader.querySelector('.ring-fg');
         if (ringFg) {
           ringFg.style.animation = 'none';
           void ringFg.offsetWidth;
-          ringFg.style.animation = `fillRing ${duration}s linear forwards`;
+          ringFg.style.animation = 'spin 0.8s linear infinite'; // Быстрый спиннер при отправке
         }
       }
-      if (message) {
-        const safeMsg = message.replace(/"/g, '&quot;');
-        submitBtn.setAttribute('data-tooltip', safeMsg);
-      }
-      timeoutTimer = setTimeout(() => {
-        if (messageInput.value.trim() && formChallenge && formNonce) {
-          setButtonState('ready');
-        } else {
-          setButtonState('default');
-        }
-      }, duration * 1000);
     } else if (state === 'ready') {
       submitBtn.disabled = false;
       if (submitIcon) submitIcon.style.display = 'block';
     } else if (state === 'error') {
       submitBtn.classList.add('is-error');
-      submitBtn.disabled = false;
+      submitBtn.disabled = false; // Доступна для клика, чтобы запустить таймер заново
       if (submitErrorIcon) submitErrorIcon.style.display = 'block';
       if (message) {
         const safeMsg = message.replace(/"/g, '&quot;');
@@ -195,32 +185,14 @@ export function initContact(i18nConfigGetter) {
   }
   window.reapplyContacts = reapplyContacts;
 
-  // Сразу применяем контакты при инициализации
   applyContacts();
 
-  async function solvePoW(challenge) {
-    if (!window.crypto || !window.crypto.subtle) {
-      throw new Error('ERR_CRYPTO');
-    }
-    const enc = new TextEncoder();
-    let nonce = 0;
-    while (true) {
-      const data = enc.encode(challenge + nonce);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      const hashHex = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
-      if (hashHex.endsWith('0000') && '012345'.includes(hashHex[hashHex.length - 5])) return nonce.toString();
-      nonce++;
-      if (nonce % 10000 === 0) {
-        await new Promise(r => setTimeout(r));
-        while (document.hidden) {
-          await new Promise(r => setTimeout(r, 500));
-        }
-      }
-    }
-  }
+  async function initiateSendingProcess() {
+    if (isSending) return;
+    if (isReady) return;
 
-  async function prepareFormPoW() {
-    if (isComputingFormPoW || (formChallenge && formNonce)) return;
+    setButtonState('loading');
+    clearTimeout(timerInterval);
 
     let workerUrl;
     try {
@@ -230,26 +202,33 @@ export function initContact(i18nConfigGetter) {
       return;
     }
 
-    setButtonState('loading');
-    isComputingFormPoW = true;
     try {
-      const resCh = await fetch(`${workerUrl}/api/challenge`);
-      await handleFetchErrors(resCh);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('NETWORK_TIMEOUT')), 10000)
+      );
+
+      const res = await Promise.race([
+        fetch(`${workerUrl}/api/challenge`),
+        timeoutPromise
+      ]);
+
+      await handleFetchErrors(res);
       const {
         challenge
-      } = await resCh.json();
-      formChallenge = challenge;
+      } = await res.json();
+      challengeId = challenge;
 
-      const timeoutPromise = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), 10000));
-      formNonce = await Promise.race([solvePoW(challenge), timeoutPromise]);
+      // Запускаем 10-секундный таймер готовности
+      timerInterval = setTimeout(() => {
+        isReady = true;
+        setButtonState('ready');
+      }, 10000);
 
-      setButtonState('ready');
     } catch (err) {
+      console.error('Anti-spam prep failed:', err);
       const errMsg = getErrorMessage(err);
       setButtonState('error', errMsg);
-      formChallenge = null;
-    } finally {
-      isComputingFormPoW = false;
+      challengeId = null;
     }
   }
 
@@ -314,46 +293,43 @@ export function initContact(i18nConfigGetter) {
     ['f-name', 'f-email', 'f-subject'].forEach(id => {
       const el = $(id);
       if (!el) return;
-
       el.addEventListener('focus', () => clearTimeout(blurTimer));
       el.addEventListener('blur', () => startBlurTimer());
     });
   }
 
-  ['f-name', 'f-email', 'f-subject', 'f-message'].forEach(id => {
-    $(id)?.addEventListener('input', prepareFormPoW);
-  });
-
   const messageInput = $('f-message');
   const charCounter = $('charCounter');
 
+  messageInput.addEventListener('focus', initiateSendingProcess);
   messageInput.addEventListener('input', () => {
     charCounter.textContent = `${messageInput.value.length}/2000`;
   });
 
-  function invalidateAndRemine() {
-    formChallenge = null;
-    formNonce = null;
-    if (!$('submitBtn').classList.contains('is-loading') && !$('submitBtn').classList.contains('is-syncing')) {
-      prepareFormPoW();
-    }
-  }
+  const contactForm = $('contactForm');
 
-  $('contactForm').addEventListener('submit', async (e) => {
+  // Перехватываем Enter, чтобы не отправить форму раньше времени
+  contactForm.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !isReady && !isSending) {
+      e.preventDefault();
+      initiateSendingProcess();
+    }
+  });
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const status = $('formStatus');
     const btn = $('submitBtn');
     const config = i18nConfigGetter();
     const u = config.ui.contact || {};
 
-    if (btn.classList.contains('is-loading') || btn.classList.contains('is-syncing') || btn.classList.contains('is-timed-out')) {
+    // Если нажали на кнопку с ошибкой — перезапускаем таймер
+    if (btn.classList.contains('is-error')) {
+      initiateSendingProcess();
       return;
     }
 
-    if (btn.classList.contains('is-error')) {
-      invalidateAndRemine();
-      return;
-    }
+    if (!isReady || isSending) return;
 
     const name = $('f-name').value.trim();
     const email = $('f-email').value.trim();
@@ -364,7 +340,6 @@ export function initContact(i18nConfigGetter) {
       status.textContent = u.form_invalid;
       status.className = 'form-status error';
       setButtonState('error', u.form_invalid);
-      invalidateAndRemine();
       return;
     }
 
@@ -373,31 +348,22 @@ export function initContact(i18nConfigGetter) {
       status.textContent = u.form_invalid_email;
       status.className = 'form-status error';
       setButtonState('error', u.form_invalid_email);
-      invalidateAndRemine();
       return;
     }
 
+    isSending = true;
     setButtonState('syncing');
     status.textContent = u.sending;
     status.className = 'form-status';
 
     try {
-      if (!formChallenge && !isComputingFormPoW) await prepareFormPoW();
-      while (isComputingFormPoW) await new Promise(r => setTimeout(r, 100));
-
-      if (formNonce === 'TIMEOUT') {
-        setButtonState('syncing');
-        formNonce = await solvePoW(formChallenge);
-      }
-
       const res = await fetch(`${config.contact.worker_url}/api/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          challenge: formChallenge,
-          nonce: formNonce,
+          challenge: challengeId,
           name,
           email,
           subject,
@@ -409,11 +375,12 @@ export function initContact(i18nConfigGetter) {
 
       status.textContent = u.success;
       status.className = 'form-status success';
-      $('contactForm').reset();
+      contactForm.reset();
       charCounter.textContent = '0/2000';
 
-      formChallenge = null;
-      formNonce = null;
+      isReady = false;
+      isSending = false;
+      challengeId = null;
       setButtonState('default');
 
     } catch (err) {
@@ -430,24 +397,24 @@ export function initContact(i18nConfigGetter) {
           status.textContent = errMsg;
           status.className = 'form-status error';
           setButtonState('error', errMsg);
-          invalidateAndRemine();
         } else {
           sessionStorage.setItem('rate_limit_30s', '1');
-          setButtonState('timed-out', errMsg, 30);
+          setButtonState('error', errMsg); // Заменено на error, чтобы кнопка была кликабельна
           status.textContent = '';
           status.className = 'form-status';
           setTimeout(() => sessionStorage.removeItem('rate_limit_30s'), 30000);
         }
       } else if (isRateLimit60) {
-        setButtonState('timed-out', errMsg, 60);
+        setButtonState('error', errMsg);
         status.textContent = '';
         status.className = 'form-status';
       } else {
         status.textContent = errMsg;
         status.className = 'form-status error';
         setButtonState('error', errMsg);
-        invalidateAndRemine();
       }
+    } finally {
+      isSending = false;
     }
   });
 }
