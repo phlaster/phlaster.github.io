@@ -193,10 +193,10 @@ items = [
 ]
 
 [[skill_groups]]
-title = { en = "Computer science", fr = "L'informatique", ru = "Информационные технологии" }
+title = { en = "Computer science", fr = "L'informatique", ru = "Информ. технологии" }
 items = [
   { name = "Python", places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = "Julia", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "Julia", places = ["polytech_phys", "polytech_bioinf", "arriam"] },
   { name = "Bash", places = ["herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
   { name = "R", places = ["polytech_bioinf", "arriam"] },
   { name = "C++", places = ["polytech_bioinf", "arriam"] },
@@ -211,8 +211,8 @@ items = [
   { name = "GitHub", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
   { name = "GitLab", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "Parallel Computing", fr = "Calcul parallèle", ru = "Параллельные вычисления" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = "HuggingFace", places = ["arriam"] },
-  { name = { en = "Webhook configuration", fr = "Configuration de webhooks", ru = "Настройка веб-хуков" }, places = ["arriam"] }
+  { name = "HuggingFace", places = ["polytech_bioinf", "arriam"] },
+  { name = { en = "Webhook configuration", fr = "Configuration de webhooks", ru = "Настройка веб-хуков" }, places = ["polytech_bioinf", "arriam"] }
 ]
 
 [[skill_groups]]
