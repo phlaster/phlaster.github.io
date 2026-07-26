@@ -105,14 +105,6 @@ export function renderContent(i18nConfig, lang) {
     drawHint.textContent = ui.draw_hint || 'Try drawing on the background';
   }
 
-  // HERO SOCIALS
-  const heroIcons = i18nConfig.hero_icons || [];
-  $('heroSocials').innerHTML = heroIcons.map(icon => `
-    <a href="${esc(icon.url)}" class="hero-social-link" data-key="${esc(icon.key)}" target="${icon.url.startsWith('#') ? '_self' : '_blank'}" rel="noopener noreferrer">
-      <img src="${esc(icon.icon)}" alt="${esc(icon.key)}">
-    </a>
-  `).join('');
-
   // ABOUT
   $('about-title').textContent = sections.about?.title || '';
   $('about-sub').textContent = sections.about?.sub || '';

@@ -64,22 +64,6 @@ export default {
         });
       }
 
-      if (pathname === '/api/get-email' && request.method === 'POST') {
-        const {
-          challenge,
-          nonce
-        } = await request.json();
-        const startTime = await verifyPoW(challenge, nonce, env);
-        if (!startTime) return json({
-          error: 'Invalid or expired challenge'
-        }, 400);
-
-        return json({
-          email: env.MY_EMAIL,
-          telegram: env.MY_TELEGRAM
-        });
-      }
-
       if (pathname === '/api/submit' && request.method === 'POST') {
         const {
           challenge,
