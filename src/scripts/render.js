@@ -95,6 +95,14 @@ export function renderContent(i18nConfig, lang) {
   const iframe = $('heroIframe');
   const heroUrl = i18nConfig.hero?.iframe_url;
   if (heroUrl && !heroUrl.includes('...')) {
+    iframe.classList.remove('is-loaded');
+    
+    iframe.onload = () => {
+      requestAnimationFrame(() => {
+        iframe.classList.add('is-loaded');
+      });
+    };
+    
     iframe.src = heroUrl;
     iframe.style.display = 'block';
   } else {

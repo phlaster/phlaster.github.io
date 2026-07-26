@@ -345,6 +345,12 @@
   pointer-events: auto;
   touch-action: none;
   transform: translateZ(0);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.hero-canvas-wrap iframe.is-loaded {
+  opacity: 1;
 }
 
 .hero-overlay {
