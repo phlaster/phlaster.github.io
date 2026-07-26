@@ -17,8 +17,8 @@ export function initPdfExport(i18nConfigGetter) {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        canvas.width = applyBlur ? 900 : 1600;
-        canvas.height = applyBlur ? 720 : 1280;
+        canvas.width = applyBlur ? 1280 : 1920;
+        canvas.height = applyBlur ? 720 : 1080;
 
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#070D15';
@@ -102,12 +102,12 @@ export function initPdfExport(i18nConfigGetter) {
       if (frameData) {
         const clearBg = await createRasterBg(frameData, false);
         if (heroPrintBg) {
-          heroPrintBg.innerHTML = `<img src="${clearBg}" style="width:100%;height:100%;object-fit:fill;">`;
+          heroPrintBg.innerHTML = `<img src="${clearBg}" style="width:100%;height:100%;object-fit:cover;">`;
         }
 
         const blurredBg = await createRasterBg(frameData, true);
         if (printBg) {
-          printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:fill;">`;
+          printBg.innerHTML = `<img src="${blurredBg}" style="width:100%;height:100%;object-fit:cover;">`;
         }
         await new Promise(r => setTimeout(r, 100));
       }
