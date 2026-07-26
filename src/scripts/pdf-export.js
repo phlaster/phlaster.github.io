@@ -83,10 +83,13 @@ export function initPdfExport(i18nConfigGetter) {
 
         // Распаковываем gzip поток
         const decompressedStream = res.body.pipeThrough(new DecompressionStream('gzip'));
-        const blob = await new Response(decompressedStream).blob();
+        const rawBlob = await new Response(decompressedStream).blob();
+        
+        // Явно меняем MIME-тип на application/pdf, иначе Chrome покажет исходный код
+        const pdfBlob = new Blob([rawBlob], { type: 'application/pdf' });
         
         // Создаем временный URL, сохраняем в кэш и открываем
-        const blobUrl = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(pdfBlob);
         pdfCache[lang] = blobUrl;
         window.openPdf(blobUrl);
 
