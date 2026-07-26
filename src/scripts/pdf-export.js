@@ -18,7 +18,7 @@ export function initPdfExport(i18nConfigGetter) {
       img.onload = () => {
         const canvas = document.createElement('canvas');
         canvas.width = applyBlur ? 1080 : 1920;
-        canvas.height = applyBlur ? 720 : 1280;
+        canvas.height = applyBlur ? 720 : 1080;
 
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#070D15';

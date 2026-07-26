@@ -89,7 +89,7 @@ form_invalid = { en = "Please write a message. Check field length limits.", fr =
 form_invalid_email = { en = "Invalid email. Please use Latin letters and a valid domain", fr = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide", ru = "Некорректный email. Используй латиницу и реальный домен" }
 
 [ui.pdf]
-footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date} · Last update: {deploy_date}", fr = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date} · Dernière mise à jour : {deploy_date}", ru = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date} · Последнее обновление: {deploy_date}" }
+footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date}", fr = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date}", ru = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date}" }
 
 #========== ABOUT ==========#
 [about]
