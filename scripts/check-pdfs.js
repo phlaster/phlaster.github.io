@@ -26,11 +26,17 @@ pdfFiles.forEach(f => {
   if (stat.mtimeMs < minPdfTime) minPdfTime = stat.mtimeMs;
 });
 
-// Получаем список всех файлов в Git
+// Получаем список файлов из Git, но фильтруем только те, что влияют на рендер
 const trackedFiles = execSync('git ls-files', { encoding: 'utf-8' })
   .split('\n')
   .filter(Boolean)
-  .filter(f => !f.startsWith('public/pdf/'));
+  .filter(f => {
+    // Проверяем только контент, разметку, стили и скрипт рендера
+    return f === 'CONTENT.toml' ||
+           f === 'index.html' ||
+           f.startsWith('src/styles/') ||
+           f.startsWith('src/scripts/render.js');
+  });
 
 // Ищем файлы, которые изменялись позже самого старого PDF
 let offendingFiles = [];
