@@ -1,3 +1,1 @@
 node scripts/check-pdfs.js
-git add public/pdf/*.gz
-git commit --amend --no-edit
