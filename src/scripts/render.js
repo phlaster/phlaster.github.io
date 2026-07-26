@@ -12,8 +12,10 @@ const formatText = (s) => {
   let str = esc(s);
   str = str.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   str = str.replace(/__([^_]+)__/g, '<em>$1</em>');
-  const paragraphs = str.split(/\n+/).filter(p => p.trim() !== '');
-  return paragraphs.join('</p><p>');
+  str = str.replace(/\r\n/g, '\n');
+  const paragraphs = str.split(/\n{2,}/).map(p => p.trim()).filter(p => p !== '');
+  const formatted = paragraphs.map(p => p.replace(/\s*\n\s*/g, ' '));
+  return formatted.join('</p><p>');
 };
 
 function updateFavicon(fullName) {
@@ -122,7 +124,6 @@ export function renderContent(i18nConfig, lang) {
   $('about-content').innerHTML = `
     <div class="about-grid">
       <div class="about-bio">
-        <p class="lead">${formatText(a.bio_lead)}</p>
         <p>${formatText(a.bio)}</p>
       </div>
       <div class="about-meta">

@@ -613,7 +613,7 @@
 }
 
 .panel-subtitle {
-  color: var(--color-text-muted);
+  color: var(--color-text-faded);
   font-size: 0.95rem;
   font-family: var(--font-sans);
 }

@@ -36,30 +36,29 @@ expertise_title = { en = "Expertise", fr = "Expertise", ru = "Экспертиз
 # --- Sections: each has title (heading), sub (subtitle), nav (menu alias) ---
 [ui.sections.about]
 title = { en = "A few words about me", fr = "Quelques mots à propos de moi", ru = "Пару слов обо мне" }
-sub = { en = "Briefly: who I am and where to find me.", fr = "En bref : qui je suis et où m'atteindre.", ru = "Здесь кратко о том, кто я такой и где меня найти" }
+sub = { en = "Who I am, where I come from, and what I'm into — in a few paragraphs.", fr = "Qui je suis, d'où je viens et ce qui m'intéresse — en quelques paragraphes.", ru = "Кто я, откуда пришёл и что мне интересно — в нескольких абзацах." }
 nav = { en = "About", fr = "À propos", ru = "Обо мне" }
-
-[ui.sections.career]
-title = { en = "Education & Career", fr = "Formation & Carrière", ru = "Образование и карьера" }
-sub = { en = "I haven't taken the easy way out: I've switched universities, took academic leave, re-applied for admission, and once radically changed my interests from humanities to natural sciences.", fr = "Je n'ai pas cherché le chemin de facilité : j'ai changé d'université, pris des congés académiques, réintégré mes études, et un jour j'ai radicalement orienté mon intérêt des sciences humaines vers les sciences naturelles.", ru = "Я не искал лёгких путей: менял вузы, уходил в академ, перепоступал, а однажды радикально сменил сферу интересов с гуманитарной на естественно-научную" }
-nav = { en = "Career", fr = "Carrière", ru = "Карьера" }
-
-[ui.sections.projects]
-title = { en = "Featured projects", fr = "Projets en vedette", ru = "Избранные проекты" }
-sub = { en = "I advocate for open knowledge, so all my projects are publicly available. I'm not shy about using neural networks in my work, but I refine every detail and take responsibility for the final result.", fr = "Je suis partisan de l'ouverture des savoirs, donc tous mes projets sont accessibles publiquement. Je n'hésite pas à utiliser les réseaux neuronaux dans mon travail, mais je peaufine chaque détail et assume la responsabilité du résultat final.", ru = "Я сторонник открытости знаний, поэтому все мои проекты лежат в открытом доступе. Я не стесняюсь использовать нейросети в работе, но дорабатываю каждую деталь и несу ответственность за конечный результат." }
-nav = { en = "Projects", fr = "Projets", ru = "Проекты" }
 
 [ui.sections.research]
 title = { en = "Research & Publications", fr = "Recherche & Publications", ru = "Исследования и публикации" }
-sub = { en = "I don't have first-author papers yet, but I've put in the hard work to contribute to publications and present at conferences.", fr = "Je n'ai pas encore de publications où je serais premier auteur, mais j'y ai mis le temps et les efforts pour contribuer à des articles et présenter lors de conférences.", ru = "Пока что у меня нет статей, где я первый автор, но у меня есть некоторые публикации и участия в конференциях, ради которых пришлось усердно поработать" }
+sub = { en = "Co-authored publications, conference talks, and participation in RSF grants.", fr = "Publications co-signées, communications en conférence et participation à des subventions RSF.", ru = "Публикации в соавторстве, доклады на конференциях и участие в грантах РНФ." }
 nav = { en = "Research", fr = "Recherche", ru = "Исследования" }
 conf = { en = "Conferences", fr = "Conférences", ru = "Конференции" }
 pubs = { en = "Publications", fr = "Publications", ru = "Публикации" }
 grants = { en = "Grants", fr = "Subventions", ru = "Гранты" }
 
+[ui.sections.career]
+title = { en = "Education & Career", fr = "Formation & Carrière", ru = "Образование и карьера" }
+sub = { en = "From law school through physics to bioinformatics — and four years in a microbiology lab. A timeline of how I got here.", fr = "De la fac de droit à la bioinformatique en passant par la physique — et quatre ans dans un laboratoire de microbiologie. La chronologie de mon parcours jusqu'ici.", ru = "От юрфака через физику к биоинформатике — и четыре года в микробиологической лаборатории. Хронология того, как я оказался здесь." }
+nav = { en = "Career", fr = "Carrière", ru = "Карьера" }
+
+[ui.sections.projects]
+title = { en = "Featured projects", fr = "Projets en vedette", ru = "Избранные проекты" }
+sub = { en = "My projects in the open: registered Julia packages, web apps, ML experiments.", fr = "Mes projets en accès libre : packages Julia enregistrés, applications web, expérimentations ML.", ru = "Мои проекты в открытом доступе: зарегистрированные Julia-пакеты, веб-приложения, ML-эксперименты." }
+nav = { en = "Projects", fr = "Projets", ru = "Проекты" }
+
 [ui.sections.documents]
 title = { en = "Documents & Achievements", fr = "Documents & Réalisations", ru = "Документы и достижения" }
-sub = { en = "A collection of my certificates, coursework, and other documents worth sharing.", fr = "Une sélection de mes certificats, travaux universitaires et autres pièces qui méritent d'être partagées.", ru = "Здесь я собрал сертификаты, студенческие работы и просто документы, которые не стыдно показать" }
 nav = { en = "Documents", fr = "Documents", ru = "Документы" }
 
 [ui.contact]
@@ -96,8 +95,96 @@ footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_bla
 [about]
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
 tagline = { en = "Bioinformatics researcher combining a background in physics and applied mathematics with wet-lab biology skills to develop open-source tools for genomic analytics", fr = "Chercheur en bioinformatique alliant une formation en physique et en mathématiques appliquées à des compétences en biologie expérimentale pour développer des outils open-source d'analytique génomique", ru = "Биоинформатик-исследователь, объединяю опыт студента-физика и прикладного математика с навыками мокрой биологии для разработки open-source инструментов для геномной аналитики" }
-bio_lead = { en = "Hi, my name is Sasha! I love biology and computers, and I dream of doing medical research at the intersection of disciplines.", fr = "Salut, je m'appelle Sacha ! J'adore la biologie et l'informatique, et je rêve de faire de la recherche médicale à l'intersection des disciplines.", ru = "Привет, меня зовут Саша! Люблю биологию и компьютеры, мечтаю заниматься медицинскими исследованиями на стыке дисциплин." }
-bio = { en = "I recently graduated from Peter the Great St. Petersburg Polytechnic University with a degree in Applied Mathematics and Informatics (bioinformatics) and I am now looking for a master's programme as the next step in my scientific career.\nCurrently I work in a microbiology laboratory in Pushkin (Saint Petersburg), researching soil metagenomes. I am fascinated by biology and chemistry, gaining hands-on experience extracting DNA, running electrophoresis, and setting up PCR. But what I love most is processing the data from my own experiments and seeing results through the full pipeline — from field sampling to interactive dashboards at a conference talk.\nI enjoy diving headfirst into a problem, staying up all night until a solution is found, working with passionate people, sharing interests, and in my free time playing board games, cycling, photographing nature, and designing things for pet projects.\nI am committed to continuous growth: I fill gaps in my biological knowledge, study statistics, and learn French. I want my master's degree to give me an additional push toward fundamental science.", fr = "J'ai récemment obtenu mon diplôme de l'Université polytechnique de Saint-Pétersbourg en mathématiques appliquées et informatique (bioinformatique) et je cherche désormais un master comme prochaine étape de ma carrière scientifique.\nActuellement, je travaille dans un laboratoire de microbiologie à Pouchkine (Saint-Pétersbourg) où j'étudie les métagénomes du sol. La biologie et la chimie me fascinent ; j'acquiers de l'expérience pratique en extraction d'ADN, en électrophorèse et en PCR. Mais ce que j'aime par-dessus tout, c'est traiter les données issues de mes propres expériences et suivre le pipeline complet — du prélèvement sur le terrain aux tableaux de bord interactifs présentés en conférence.\nJ'aime me plonger corps et âme dans un problème, passer des nuits blanches jusqu'à trouver la solution, travailler avec des gens passionnés, partager mes centres d'intérêt, et pendant mon temps libre jouer à des jeux de société, faire du vélo, photographier la nature et concevoir des designs pour mes projets personnels.\nJe m'engage dans un développement continu : je comble mes lacunes en biologie, j'étudie les statistiques et j'apprends le français. Je souhaite que mon master me donne une impulsion supplémentaire vers la science fondamentale.", ru = "Я недавно закончил Политех по направлению Прикладная математика и информатика (биоинформатика) и теперь ищу место своей магистратуры на пути научной карьеры.\nСейчас я работаю в микробиологической лаборатории в г. Пушкин (Санкт-Петербург) и занимаюсь исследованиями почвенных метагеномов. Меня завораживает биология и химия и я набираюсь опыта выделяя ДНК, проводя электрофорезы, запуская ПЦР. Но особенно люблю обрабатывать данные полученные в ходе собственных экспериментов и получать результаты, проходя полный путь от отбора пробы \"в поле\" до интерактивных дашбордов на выступлении.\nМне нравится закапываться в проблему с головой, не спать ночами, пока решение не найдено, нравится работать с увлечёнными людьми, делиться интересами, а в свободное время играть в настольные игры, ездить на велосипеде, фотографировать природу, дизайнить что-нибудь для пет-проектов.\nЯ стремлюсь к развитию, устраняю собственные пробелы в биологическом знании, изучаю статистику и учу французский язык. Хочу, чтобы магистратура дала мне дополнительный импульс в сторону фундаментальной науки." }
+bio = { en = """
+Hi, my name is Alex. I like going through the whole research
+cycle: collecting a sample in the field, extracting DNA, running PCR,
+setting up electrophoresis, and then processing the data and assembling
+the statistics into a beautiful interactive dashboard. The intersection
+of the wet lab and high-performance computing is where I feel at home.
+
+I graduated from Peter the Great St. Petersburg Polytechnic University
+with a degree in Applied Mathematics and Informatics (bioinformatics),
+and I'm now looking for a master's programme — the next step toward
+a scientific career. Alongside that, I work in the Laboratory of
+Microbiological Monitoring at ARRIAM (Pushkin, Saint Petersburg):
+I study soil metagenomes and handle DNA extraction, electrophoresis,
+PCR, and sequencing library preparation.
+
+The computational side is my second pillar. I write in Julia, Python,
+and R; I develop open-source packages for genomic analytics and contribute to collaborative pangenomics
+projects. I have co-authorship experience in peer-reviewed
+journals and have given talks at field conferences.
+
+Right now I'm deliberately deepening my biological foundation,
+sharpening my statistics, and learning French. From a master's
+programme I expect a transition from applied tasks to fundamental
+questions in evolutionary genomics and metagenomics — from soil
+communities to the human microbiome.
+
+Outside of science I translate poetry, ride a bike, and build small
+web tools — sometimes useful, sometimes just pretty.
+""", fr = """
+Salut, je m'appelle Alex. J'aime parcourir le cycle de recherche
+en entier : prélever un échantillon sur le terrain, extraire l'ADN,
+lancer une PCR, monter une électrophorèse, puis traiter les données
+et assembler les statistiques en un beau tableau de bord interactif.
+C'est à l'intersection de la paillasse et du calcul haute performance
+que je me sens à ma place.
+
+J'ai obtenu mon diplôme de l'Université polytechnique de
+Saint-Pétersbourg en mathématiques appliquées et informatique
+(bioinformatique), et je cherche maintenant un master — la prochaine
+étape vers une carrière scientifique. En parallèle, je travaille au
+laboratoire de surveillance microbiologique de l'ARRIAM (Pouchkine,
+Saint-Pétersbourg) : j'étudie les métagénomes du sol et je m'occupe
+d'extraction d'ADN, d'électrophorèse, de PCR et de préparation de
+banques pour le séquençage.
+
+Le versant calcul est mon second pilier. J'écris en Julia, Python et R ;
+je développe des packages open-source pour l'analytique génomique et je participe à des projets collaboratifs de
+pangénomique. J'ai une expérience de co-auteur dans des
+revues à comité de lecture et j'ai présenté des communications lors
+de conférences du domaine.
+
+En ce moment, j'approfondis délibérément mes bases en biologie,
+je renforce mes statistiques et j'apprends le français. J'attends d'un
+master la transition des tâches appliquées vers des questions
+fondamentales en génomique évolutive et en métagénomique — des
+communautés du sol au microbiome humain.
+
+En dehors de la science, je traduis de la poésie, je fais du vélo et
+je construis de petits outils web — parfois utiles, parfois simplement
+jolis.
+""", ru = """
+Привет, меня зовут Саша. Мне нравится проходить исследовательский
+цикл целиком: отобрать пробу в поле, выделить ДНК, прогнать ПЦР,
+поставить форез, а потом обработать данные и собрать статистику
+в красивый интерактивный дашборд. На стыке мокрой лаборатории
+и высокопроизводительных вычислений я чувствую себя на своём месте.
+
+Я закончил Политех по направлению «Прикладная математика и
+информатика» (биоинформатика) и сейчас ищу магистратуру —
+следующий шаг к научной карьере. Параллельно работаю
+в лаборатории микробиологического мониторинга ВНИИСХМ (г. Пушкин,
+Санкт-Петербург): исследую почвенные метагеномы, занимаюсь
+выделением ДНК, электрофорезом, ПЦР и подготовкой библиотек
+к секвенированию.
+
+Вычислительная сторона — моя вторая опора. Пишу на Julia, Python
+и R; развиваю open-source пакеты для геномной аналитики, участвую в совместных проектах
+по пангеномике. Есть опыт соавторства
+в рецензируемых журналах и докладов на профильных конференциях.
+
+Сейчас целенаправленно углубляю биологическую базу, подтягиваю
+статистику и учу французский. От магистратуры жду перехода
+от прикладных задач к фундаментальным вопросам в эволюционной
+геномике и метагеномике — от почвенных сообществ до микробиома
+человека.
+
+Вне науки перевожу стихи, катаюсь на велосипеде и собираю
+небольшие веб-инструменты — иногда полезные, иногда просто
+красивые.
+""" }
 location = { en = "Saint Petersburg, Russia", fr = "Saint-Pétersbourg, Russie", ru = "Санкт-Петербург, Россия" }
 
 [about.interests]
