@@ -586,9 +586,9 @@
   flex-shrink: 0;
 }
 
-/* Неактивная (текст не набран) — серая, без ховера */
 .submit-btn:disabled {
-  color: rgba(var(--color-dark-fg-rgb), 0.3);
+  color: var(--color-dark-fg);
+  opacity: 0.3;
   cursor: auto;
 }
 
