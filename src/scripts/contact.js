@@ -276,17 +276,47 @@ export function initContact(i18nConfigGetter) {
 
   const leaveContactsBtn = $('leaveContactsBtn');
   const contactExtraWrap = $('contactExtraWrap');
+  let blurTimer = null;
+
   if (leaveContactsBtn && contactExtraWrap) {
+    const checkAndHideFields = () => {
+      const nameVal = $('f-name').value.trim();
+      const emailVal = $('f-email').value.trim();
+      const subjectVal = $('f-subject').value.trim();
+
+      const activeEl = document.activeElement;
+      const isFocusedInside = contactExtraWrap.contains(activeEl) && activeEl.tagName === 'INPUT';
+
+      if (!nameVal && !emailVal && !subjectVal && !isFocusedInside) {
+        contactExtraWrap.classList.remove('is-revealed');
+      }
+    };
+
+    const startBlurTimer = () => {
+      clearTimeout(blurTimer);
+      blurTimer = setTimeout(checkAndHideFields, 5000);
+    };
+
     const revealFields = () => {
       contactExtraWrap.classList.add('is-revealed');
       $('f-name')?.focus();
+      startBlurTimer();
     };
+
     leaveContactsBtn.addEventListener('click', revealFields);
     leaveContactsBtn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         revealFields();
       }
+    });
+
+    ['f-name', 'f-email', 'f-subject'].forEach(id => {
+      const el = $(id);
+      if (!el) return;
+
+      el.addEventListener('focus', () => clearTimeout(blurTimer));
+      el.addEventListener('blur', () => startBlurTimer());
     });
   }
 
