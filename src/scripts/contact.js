@@ -11,6 +11,7 @@ async function handleFetchErrors(res) {
     if (serverError) throw new Error(`${serverError} (Error ${res.status})`);
     if (res.status === 404) throw new Error('Resource not found (404).');
     if (res.status === 400) throw new Error('Bad request (400).');
+    if (res.status === 429) throw new Error('Too many requests (429).');
     if (res.status >= 500) throw new Error('Server error (500).');
 
     throw new Error(`Request failed (Error ${res.status}).`);
@@ -19,44 +20,32 @@ async function handleFetchErrors(res) {
 }
 
 export function initContact(i18nConfigGetter) {
-  let challengeId = null;
-  let isReady = false;
   let isSending = false;
-  let timerInterval = null;
-  let timeoutTimer = null;
+  let startTime = null;
 
   function getErrorMessage(err) {
     const ui = i18nConfigGetter().ui.contact;
-
     if (!err) return ui.err_unknown || 'Unknown error occurred.';
     const msg = (typeof err === 'string') ? err : (err.message || (ui.err_unknown || 'Unknown error'));
 
     if (msg === 'Failed to fetch' || msg.includes('NetworkError') || msg === 'NETWORK_TIMEOUT') {
-      return ui.err_network || 'Network error: Server is unreachable. This may be due to a connection issue or regional blocking. Try using a VPN.';
+      return ui.err_network || 'Network error or timeout.';
     }
 
     if (msg === 'ERR_WORKER_URL') {
       return ui.err_worker_url || 'Worker URL is not configured.';
     }
 
-    if (msg.includes('Anti-spam timer not finished')) {
-      return ui.err_rate_30 || 'Please wait for the timer to finish before sending.';
+    if (msg.includes('Too many requests') || msg.includes('429')) {
+      return ui.err_rate_limit || 'You are sending messages too fast. Please wait at least 10 seconds.';
     }
 
     const statusMatch = msg.match(/\(Error (\d+)\)/);
     if (statusMatch) {
       const code = parseInt(statusMatch[1], 10);
-      let cleanMsg = msg.replace(/\(Error \d+\)/, '').trim();
-
-      if (cleanMsg) {
-        if (cleanMsg.includes('30 seconds')) return ui.err_rate_30 || 'Please wait at least 30 seconds between messages. A timer has started.';
-        if (cleanMsg.includes('1 minute') || cleanMsg.includes('60 seconds') || cleanMsg.includes('try again in a minute')) return ui.err_rate_60 || 'You are sending messages too fast. Timer reset. Please try again in a minute.';
-        return cleanMsg;
-      }
-
       if (code === 404) return ui.err_404 || 'The requested resource was not found (404).';
-      if (code === 400) return ui.err_400 || 'Bad request to the server (400). Please refresh the page.';
-      if (code >= 500) return ui.err_500 || 'Internal server error (500). Please try again later.';
+      if (code === 400) return ui.err_400 || 'Bad request to the server (400).';
+      if (code >= 500) return ui.err_500 || 'Internal server error (500).';
     }
 
     return msg;
@@ -76,9 +65,9 @@ export function initContact(i18nConfigGetter) {
 
     if (state === 'loading') {
       exportPdfBtn.classList.add('btn-pdf-loading');
-      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Anti-spam check... Please wait up to 10s.").replace(/"/g, '&quot;');
+      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Loading...").replace(/"/g, '&quot;');
       exportPdfBtn.setAttribute('data-tooltip', loadingMsg);
-      exportPdfBtn.innerHTML = `<svg class="reveal-ring" width="24" height="24" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4"/><circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>`;
+      exportPdfBtn.innerHTML = `<span class="btn-spinner"></span>`;
     } else if (state === 'error') {
       exportPdfBtn.classList.add('btn-pdf-error');
       exportPdfBtn.setAttribute('data-tooltip', safeMsg);
@@ -88,65 +77,37 @@ export function initContact(i18nConfigGetter) {
     }
   }
 
-  function setButtonState(state, message = '', duration = 0) {
+  function setButtonState(state) {
     const submitBtn = $('submitBtn');
     const submitIcon = submitBtn.querySelector('.submit-icon');
     const submitLoader = submitBtn.querySelector('.submit-loader');
     const submitErrorIcon = submitBtn.querySelector('.submit-error-icon');
 
-    submitBtn.classList.remove('is-loading', 'is-error', 'is-timed-out');
-    submitBtn.removeAttribute('data-tooltip');
+    submitBtn.classList.remove('is-active', 'is-loading', 'is-error');
 
     if (submitIcon) submitIcon.style.display = 'none';
     if (submitLoader) submitLoader.style.display = 'none';
     if (submitErrorIcon) submitErrorIcon.style.display = 'none';
 
-    if (timeoutTimer) {
-      clearTimeout(timeoutTimer);
-      timeoutTimer = null;
-    }
-
     if (state === 'loading') {
       submitBtn.classList.add('is-loading');
-      submitBtn.disabled = true;
-      if (submitLoader) {
-        submitLoader.style.display = 'block';
-        const ringFg = submitLoader.querySelector('.ring-fg');
-        if (ringFg) {
-          ringFg.style.animation = 'none';
-          void ringFg.offsetWidth;
-          ringFg.style.animation = 'fillRing 10s linear forwards';
-        }
-      }
-      const loadingMsg = (i18nConfigGetter()?.ui.contact.pow_loading || "Anti-spam check... Please wait up to 10s.").replace(/"/g, '&quot;');
-      submitBtn.setAttribute('data-tooltip', loadingMsg);
-    } else if (state === 'syncing') {
-      submitBtn.classList.add('is-loading');
-      submitBtn.disabled = true;
-      if (submitLoader) {
-        submitLoader.style.display = 'block';
-        const ringFg = submitLoader.querySelector('.ring-fg');
-        if (ringFg) {
-          ringFg.style.animation = 'none';
-          void ringFg.offsetWidth;
-          ringFg.style.animation = 'spin 0.8s linear infinite'; // Быстрый спиннер при отправке
-        }
-      }
-    } else if (state === 'ready') {
-      submitBtn.disabled = false;
-      if (submitIcon) submitIcon.style.display = 'block';
+      if (submitLoader) submitLoader.style.display = 'inline-block';
     } else if (state === 'error') {
       submitBtn.classList.add('is-error');
-      submitBtn.disabled = false; // Доступна для клика, чтобы запустить таймер заново
       if (submitErrorIcon) submitErrorIcon.style.display = 'block';
-      if (message) {
-        const safeMsg = message.replace(/"/g, '&quot;');
-        submitBtn.setAttribute('data-tooltip', safeMsg);
-      }
-    } else if (state === 'default') {
-      submitBtn.disabled = true;
+    } else if (state === 'active') {
+      submitBtn.classList.add('is-active');
+      if (submitIcon) submitIcon.style.display = 'block';
+    } else { // default
       if (submitIcon) submitIcon.style.display = 'block';
     }
+  }
+
+  function setInputsDisabled(disabled) {
+    $('f-name').disabled = disabled;
+    $('f-email').disabled = disabled;
+    $('f-subject').disabled = disabled;
+    $('f-message').disabled = disabled;
   }
 
   function getWorkerUrl() {
@@ -186,51 +147,6 @@ export function initContact(i18nConfigGetter) {
   window.reapplyContacts = reapplyContacts;
 
   applyContacts();
-
-  async function initiateSendingProcess() {
-    if (isSending) return;
-    if (isReady) return;
-
-    setButtonState('loading');
-    clearTimeout(timerInterval);
-
-    let workerUrl;
-    try {
-      workerUrl = getWorkerUrl();
-    } catch (e) {
-      setButtonState('error', getErrorMessage(e));
-      return;
-    }
-
-    try {
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('NETWORK_TIMEOUT')), 10000)
-      );
-
-      const res = await Promise.race([
-        fetch(`${workerUrl}/api/challenge`),
-        timeoutPromise
-      ]);
-
-      await handleFetchErrors(res);
-      const {
-        challenge
-      } = await res.json();
-      challengeId = challenge;
-
-      // Запускаем 10-секундный таймер готовности
-      timerInterval = setTimeout(() => {
-        isReady = true;
-        setButtonState('ready');
-      }, 10000);
-
-    } catch (err) {
-      console.error('Anti-spam prep failed:', err);
-      const errMsg = getErrorMessage(err);
-      setButtonState('error', errMsg);
-      challengeId = null;
-    }
-  }
 
   document.body.addEventListener('click', async (e) => {
     const btn = e.target.closest('.copy-contact-btn');
@@ -301,20 +217,55 @@ export function initContact(i18nConfigGetter) {
   const messageInput = $('f-message');
   const charCounter = $('charCounter');
 
-  messageInput.addEventListener('focus', initiateSendingProcess);
-  messageInput.addEventListener('input', () => {
+  // === Инициализация состояния полей после перезагрузки ===
+  if (messageInput.value.length > 0) {
+    startTime = Date.now();
     charCounter.textContent = `${messageInput.value.length}/2000`;
+    setButtonState('active');
+  }
+
+  // Снимаем размытие, если во вспомогательных полях остался текст
+  const nameVal = $('f-name').value.trim();
+  const emailVal = $('f-email').value.trim();
+  const subjectVal = $('f-subject').value.trim();
+  if ((nameVal || emailVal || subjectVal) && contactExtraWrap) {
+    contactExtraWrap.classList.add('is-revealed');
+  }
+
+  messageInput.addEventListener('input', () => {
+    const len = messageInput.value.length;
+    charCounter.textContent = `${len}/2000`;
+
+    if (len > 0 && !startTime) {
+      startTime = Date.now();
+    } else if (len === 0) {
+      startTime = null;
+    }
+
+    if (len > 0) {
+      setButtonState('active');
+    } else {
+      setButtonState('default');
+    }
+  });
+
+  // === Логика крестиков для очистки полей ===
+  document.querySelectorAll('.field-clear').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const target = $(targetId);
+      if (target) {
+        target.value = '';
+        // Триггерим событие input, чтобы обновить счётчик и состояние кнопки отправки
+        target.dispatchEvent(new Event('input', {
+          bubbles: true
+        }));
+        target.focus();
+      }
+    });
   });
 
   const contactForm = $('contactForm');
-
-  // Перехватываем Enter, чтобы не отправить форму раньше времени
-  contactForm.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !isReady && !isSending) {
-      e.preventDefault();
-      initiateSendingProcess();
-    }
-  });
 
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -323,13 +274,19 @@ export function initContact(i18nConfigGetter) {
     const config = i18nConfigGetter();
     const u = config.ui.contact || {};
 
-    // Если нажали на кнопку с ошибкой — перезапускаем таймер
     if (btn.classList.contains('is-error')) {
-      initiateSendingProcess();
+      setButtonState('loading');
+      setTimeout(() => {
+        if (messageInput.value.length > 0) {
+          setButtonState('active');
+        } else {
+          setButtonState('default');
+        }
+      }, 500);
       return;
     }
 
-    if (!isReady || isSending) return;
+    if (isSending) return;
 
     const name = $('f-name').value.trim();
     const email = $('f-email').value.trim();
@@ -337,82 +294,73 @@ export function initContact(i18nConfigGetter) {
     const message = messageInput.value.trim();
 
     if (!message || message.length > 2000 || name.length > 30 || subject.length > 60) {
-      status.textContent = u.form_invalid;
+      status.textContent = u.form_invalid || 'Invalid form data.';
       status.className = 'form-status error';
-      setButtonState('error', u.form_invalid);
       return;
     }
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (email && (email.length > 30 || !emailRegex.test(email))) {
-      status.textContent = u.form_invalid_email;
+      status.textContent = u.form_invalid_email || 'Invalid email.';
       status.className = 'form-status error';
-      setButtonState('error', u.form_invalid_email);
       return;
     }
 
     isSending = true;
-    setButtonState('syncing');
-    status.textContent = u.sending;
+    setButtonState('loading');
+    setInputsDisabled(true);
+    status.textContent = u.sending || 'Sending...';
     status.className = 'form-status';
 
+    const duration = startTime ? Date.now() - startTime : 0;
+
+    let workerUrl;
     try {
-      const res = await fetch(`${config.contact.worker_url}/api/submit`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          challenge: challengeId,
-          name,
-          email,
-          subject,
-          message
-        })
-      });
+      workerUrl = getWorkerUrl();
+    } catch (err) {
+      isSending = false;
+      setButtonState('error');
+      setInputsDisabled(false);
+      status.textContent = getErrorMessage(err);
+      status.className = 'form-status error';
+      return;
+    }
+
+    try {
+      const res = await Promise.race([
+        fetch(`${workerUrl}/api/submit`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            subject,
+            message,
+            duration
+          })
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('NETWORK_TIMEOUT')), 5000))
+      ]);
 
       await handleFetchErrors(res);
 
-      status.textContent = u.success;
+      status.textContent = u.success || 'Message sent successfully!';
       status.className = 'form-status success';
       contactForm.reset();
       charCounter.textContent = '0/2000';
+      startTime = null;
 
-      isReady = false;
-      isSending = false;
-      challengeId = null;
       setButtonState('default');
+      setInputsDisabled(false);
 
     } catch (err) {
       const errMsg = getErrorMessage(err);
-      const ui = i18nConfigGetter().ui.contact;
-      const rate30Msg = ui.err_rate_30 || 'Please wait at least 30 seconds between messages. A timer has started.';
-      const rate60Msg = ui.err_rate_60 || 'You are sending messages too fast. Timer reset. Please try again in a minute.';
-
-      const isRateLimit30 = errMsg === rate30Msg;
-      const isRateLimit60 = errMsg === rate60Msg;
-
-      if (isRateLimit30) {
-        if (sessionStorage.getItem('rate_limit_30s')) {
-          status.textContent = errMsg;
-          status.className = 'form-status error';
-          setButtonState('error', errMsg);
-        } else {
-          sessionStorage.setItem('rate_limit_30s', '1');
-          setButtonState('error', errMsg); // Заменено на error, чтобы кнопка была кликабельна
-          status.textContent = '';
-          status.className = 'form-status';
-          setTimeout(() => sessionStorage.removeItem('rate_limit_30s'), 30000);
-        }
-      } else if (isRateLimit60) {
-        setButtonState('error', errMsg);
-        status.textContent = '';
-        status.className = 'form-status';
-      } else {
-        status.textContent = errMsg;
-        status.className = 'form-status error';
-        setButtonState('error', errMsg);
-      }
+      status.textContent = errMsg;
+      status.className = 'form-status error';
+      setButtonState('error');
+      setInputsDisabled(false);
     } finally {
       isSending = false;
     }

@@ -7,11 +7,20 @@
   <title>N. Surname, CV</title>
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='3' y='3' width='94' height='94' rx='21' fill='%23070D15' stroke='%23EDEDEE' stroke-opacity='0.35' stroke-width='3'/%3E%3Ctext x='50' y='50' dy='.35em' text-anchor='middle' font-family='Georgia, serif' font-size='75' font-weight='700' fill='%235F9F59'%3EN%3C/text%3E%3C/svg%3E">
-  
+
   <style>
-    html { background: #070D15; }
-    body { opacity: 0; transition: opacity 0.3s ease-in-out; }
-    body.is-ready { opacity: 1; }
+    html {
+      background: #070D15;
+    }
+
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    body.is-ready {
+      opacity: 1;
+    }
   </style>
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
@@ -167,16 +176,34 @@
               <div class="form-row">
                 <div class="field">
                   <label for="f-name" id="lbl-name">Name</label>
-                  <input id="f-name" name="name" type="text" maxlength="30">
+                  <input id="f-name" name="name" type="text" maxlength="30" placeholder=" ">
+                  <button type="button" class="field-clear" data-target="f-name" aria-label="Clear field">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
                 </div>
                 <div class="field">
                   <label for="f-email" id="lbl-email">Email</label>
-                  <input id="f-email" name="email" type="text" maxlength="30">
+                  <input id="f-email" name="email" type="text" maxlength="30" placeholder=" ">
+                  <button type="button" class="field-clear" data-target="f-email" aria-label="Clear field">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
                 </div>
               </div>
               <div class="field">
                 <label for="f-subject" id="lbl-subject">Subject</label>
-                <input id="f-subject" name="subject" type="text" maxlength="60">
+                <input id="f-subject" name="subject" type="text" maxlength="60" placeholder=" ">
+                <button type="button" class="field-clear" data-target="f-subject" aria-label="Clear field">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
             </div>
             <div class="contact-extra-blur" id="leaveContactsBtn" role="button" tabindex="0" aria-label="Reveal contact fields">
@@ -186,19 +213,22 @@
 
           <div class="field textarea-wrapper">
             <label for="f-message" id="lbl-message">Message</label>
-            <textarea id="f-message" name="message" rows="5" required maxlength="2000"></textarea>
+            <textarea id="f-message" name="message" rows="5" required maxlength="2000" placeholder=" "></textarea>
+            <button type="button" class="field-clear" data-target="f-message" aria-label="Clear field">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
             <span id="charCounter" class="char-counter">0/2000</span>
           </div>
           <div class="submit-row">
-            <button class="submit-btn" type="submit" id="submitBtn" disabled aria-label="Send message">
+            <button class="submit-btn" type="submit" id="submitBtn" aria-label="Send message">
               <svg class="submit-icon" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
-              <svg class="submit-loader" width="24" height="24" viewBox="0 0 36 36" style="display:none;">
-                <circle class="ring-bg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="4" />
-                <circle class="ring-fg" cx="18" cy="18" r="15.9155" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)" />
-              </svg>
+              <span class="submit-loader" style="display:none;"></span>
               <svg class="submit-error-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                 <line x1="12" y1="9" x2="12" y2="13"></line>

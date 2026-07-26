@@ -68,15 +68,18 @@
   }
 
   /* === Submit Button Hovers === */
-  .submit-btn:not(:disabled):hover {
+  .submit-btn.is-active:hover {
     background: transparent;
     border: none;
     color: var(--color-accent-soft);
     cursor: pointer;
   }
 
-  .submit-btn:disabled:hover {
-    cursor: auto;
+  .submit-btn.is-error:hover {
+    background: transparent;
+    border: none;
+    color: var(--error-red);
+    opacity: 0.8;
   }
 
   .btn-pdf-error:hover {

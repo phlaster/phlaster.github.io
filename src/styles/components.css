@@ -418,7 +418,7 @@
 }
 
 /* === Рефакторинг тултипов через :where() === */
-:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
+:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .reveal-loader)::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
@@ -441,7 +441,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-:where(.reveal-error, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
+:where(.reveal-error, .reveal-loader)::after {
   bottom: 140%;
 }
 
@@ -449,9 +449,7 @@
   top: 140%;
 }
 
-/* ВАЖНО: Показываем тултип, как только JS добавил класс состояния, 
-   а не только по :hover (ведь кнопка может быть disabled) */
-:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .submit-btn.is-error, .submit-btn.is-timed-out, .submit-btn.is-loading, .reveal-loader)::after {
+:where(.reveal-error, .btn-pdf-error, .btn-pdf-loading, .reveal-loader)::after {
   opacity: 1;
   visibility: visible;
 }
@@ -467,46 +465,55 @@
   padding: 0;
   background: transparent !important;
   border: none !important;
-  cursor: pointer;
-  transition: color 0.2s;
+  cursor: default;
+  transition: color 0.2s, opacity 0.2s;
   flex-shrink: 0;
-}
-
-.submit-btn:disabled {
   color: var(--color-dark-fg);
-  cursor: auto;
-}
-
-/* Применяем прозрачность только к иконкам внутри кнопки, а не к самой кнопке */
-.submit-btn:disabled .submit-icon,
-.submit-btn:disabled .submit-loader,
-.submit-btn:disabled .submit-error-icon {
   opacity: 0.3;
+  pointer-events: none;
+  /* Не реагирует на ховер и касания по умолчанию */
 }
 
-/* Активная (текст набран) — белая */
-.submit-btn:not(:disabled) {
+/* Активная (текст набран) */
+.submit-btn.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
   color: var(--color-dark-fg);
 }
 
-/* Состояния загрузки и ошибки */
-.submit-btn.is-loading,
-.submit-btn.is-timed-out {
-  color: var(--color-dark-fg);
+/* Состояние загрузки */
+.submit-btn.is-loading {
+  opacity: 1;
+  pointer-events: none;
   cursor: progress;
-  background: transparent;
-  border: none;
+  color: var(--color-dark-fg);
 }
 
+/* Состояние ошибки */
 .submit-btn.is-error {
-  background: transparent;
-  border: none;
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
   color: var(--error-red);
-  cursor: help;
 }
 
-.submit-loader .ring-fg {
-  animation: fillRing 10s linear forwards;
+.submit-loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(var(--color-dark-fg-rgb), 0.3);
+  border-top-color: var(--color-dark-fg);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* === Контактная форма: состояния полей === */
+.field input:disabled,
+.field textarea:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 /* === Contact Extra Fields Blur Wrapper === */
@@ -573,4 +580,46 @@ body.tab-hidden .btn-spinner,
 body.tab-hidden .submit-loader .ring-fg,
 body.tab-hidden .scroll-cue {
   animation-play-state: paused !important;
+}
+
+/* === Clear Input Button === */
+.field {
+  position: relative;
+}
+
+.field-clear {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--color-dark-fg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 0.2s, visibility 0.2s;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.field input:not(:placeholder-shown)~.field-clear,
+.field textarea:not(:placeholder-shown)~.field-clear {
+  opacity: 0.4;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.field-clear:hover {
+  opacity: 0.8;
+}
+
+.field input:disabled~.field-clear,
+.field textarea:disabled~.field-clear {
+  display: none;
 }

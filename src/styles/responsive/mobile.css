@@ -360,14 +360,4 @@
     width: 100% !important;
   }
 
-  /* --- Mobile Tooltips Repositioning --- */
-  .submit-btn.is-loading::after,
-  .submit-btn.is-error::after,
-  .submit-btn.is-timed-out::after {
-    top: calc(100% + 10px);
-    bottom: auto;
-    left: 0; 
-    transform: translateX(0);
-    width: 220px;
-  }
 }
