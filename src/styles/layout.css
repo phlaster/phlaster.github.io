@@ -976,9 +976,13 @@
     justify-content: center;
     gap: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(var(--color-text-rgb), 0.1);
+    border-top: 1px solid rgba(var(--color-dark-fg-rgb), 0.15);
     margin-top: 0.5rem;
     width: 100%;
+  }
+
+  .topbar.solid .topbar-actions {
+    border-top: 1px solid rgba(var(--color-text-rgb), 0.15);
   }
 
   .btn-action {
