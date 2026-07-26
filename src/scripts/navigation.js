@@ -426,7 +426,26 @@ export function initNavigation(renderCallback) {
   handleScroll();
 }
 
+// Переменные для хранения слушателей, чтобы очищать их при повторном вызове
+let _careerResizeHandler = null;
+let _careerObserver = null;
+let _careerMediaHandler = null;
+
 export function initCareerHighlighting() {
+  // === ОЧИСТКА СТАРЫХ СЛУШАТЕЛЕЙ (чтобы не было утечки памяти) ===
+  if (_careerResizeHandler) {
+    window.removeEventListener('resize', _careerResizeHandler);
+    _careerResizeHandler = null;
+  }
+  if (_careerObserver) {
+    _careerObserver.disconnect();
+    _careerObserver = null;
+  }
+  if (_careerMediaHandler) {
+    window.matchMedia('(min-width: 769px)').removeEventListener('change', _careerMediaHandler);
+    _careerMediaHandler = null;
+  }
+
   const timelineItems = document.querySelectorAll('.timeline-item');
   const skillTags = document.querySelectorAll('.skill-tag[data-places]');
   const careerGrid = document.querySelector('.career-grid');
@@ -447,7 +466,7 @@ export function initCareerHighlighting() {
     svg.style.width = '100%';
     svg.style.height = '100%';
     svg.style.pointerEvents = 'none';
-    svg.style.zIndex = '0'; // Под текстом, но над фоном
+    svg.style.zIndex = '0';
     careerGrid.appendChild(svg);
   }
 
@@ -457,7 +476,6 @@ export function initCareerHighlighting() {
 
   const drawLines = (item) => {
     clearLines();
-    // Линии рисуются только на узких экранах
     if (isWideScreen()) return;
 
     const gridRect = careerGrid.getBoundingClientRect();
@@ -465,30 +483,26 @@ export function initCareerHighlighting() {
     const placeId = item.dataset.place;
     if (!placeId) return;
 
-    // Находим только те скиллы, которые относятся к нажатому элементу
     const matchingTags = Array.from(skillTags).filter(tag =>
       tag.dataset.places.split(' ').includes(placeId)
     );
 
     if (matchingTags.length === 0) return;
 
-    // Перемешиваем скиллы и выбираем до 10 случайных
     const shuffled = [...matchingTags].sort(() => 0.5 - Math.random());
     const tagsToAnimate = shuffled.slice(0, 10);
 
-    const totalDuration = 800; // Общая длительность всей анимации (0.7 сек)
-    const lineDuration = 600; // Длительность полета одного отрезка
+    const totalDuration = 800;
+    const lineDuration = 600;
     const stagger = tagsToAnimate.length > 1 ? (totalDuration - lineDuration) / (tagsToAnimate.length - 1) : 0;
 
     tagsToAnimate.forEach((tag, index) => {
       setTimeout(() => {
         const tagRect = tag.getBoundingClientRect();
 
-        // Случайные координаты внутри нажатого блока (старт)
         const startX = itemRect.left + Math.random() * itemRect.width - gridRect.left;
         const startY = itemRect.top + Math.random() * itemRect.height - gridRect.top;
 
-        // Случайные координаты внутри скилла (финиш)
         const endX = tagRect.left + Math.random() * tagRect.width - gridRect.left;
         const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
 
@@ -502,38 +516,30 @@ export function initCareerHighlighting() {
         line.setAttribute('stroke-linecap', 'round');
 
         const length = Math.hypot(endX - startX, endY - startY);
-        // Длина летящего отрезка (20% от длины пути, но не менее 15px)
         const segLength = Math.max(10, length * 0.3);
 
-        // Видим только короткий отрезок в самом начале пути
         line.style.strokeDasharray = `${segLength} ${length + segLength}`;
         line.style.strokeDashoffset = '0';
         line.style.opacity = '0';
 
         svg.appendChild(line);
 
-        // Запускаем анимацию полета и появления
         requestAnimationFrame(() => {
-          // Появление (0.1с) и движение (0.3с)
           line.style.transition = 'opacity 0.2s ease-out, stroke-dashoffset 0.3s ease-in';
           line.style.opacity = '0.6';
-
-          // Сдвигаем отрезок к концу линии
           line.style.strokeDashoffset = `${-(length - segLength)}`;
         });
 
-        // После того как отрезок долетел, он исчезает
         setTimeout(() => {
           line.style.transition = 'opacity 0.1s ease-out';
           line.style.opacity = '0';
-        }, 300); // 0.1s появление + 0.3s движение = 0.4s (lineDuration)
+        }, 300);
 
-        // Удаляем линию из DOM после завершения всех анимаций
         setTimeout(() => {
           if (line.parentNode) line.remove();
         }, 450);
 
-      }, index * stagger); // Каждая линия стартует со своей задержкой
+      }, index * stagger);
     });
   };
 
@@ -559,21 +565,20 @@ export function initCareerHighlighting() {
     drawLines(item);
   };
 
+  // Удаляем старые слушатели на элементах перед добавлением новых (чтобы не дублировались)
   timelineItems.forEach(item => {
-    // Поведение мыши (только десктоп)
+    item.onmouseenter = null;
+    item.onmouseleave = null;
+    item.onclick = null;
+
     item.addEventListener('mouseenter', () => {
-      if (isWideScreen()) {
-        setActive(item);
-      }
+      if (isWideScreen()) setActive(item);
     });
 
     item.addEventListener('mouseleave', () => {
-      if (isWideScreen()) {
-        clearActive();
-      }
+      if (isWideScreen()) clearActive();
     });
 
-    // Клик / Тап
     item.addEventListener('click', (e) => {
       if (e.target.closest('.timeline-link-btn')) return;
 
@@ -592,37 +597,25 @@ export function initCareerHighlighting() {
     });
   });
 
-  // === Сброс при прокрутке к другому разделу (уходим из секции Career) ===
-  const careerSection = document.getElementById('career');
-  if (careerSection) {
-    const careerObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          clearActive();
-        }
-      });
-    }, {
-      threshold: 0.1
+  const sections = document.querySelectorAll('.content-section');
+  _careerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) clearActive();
     });
+  }, { threshold: 0.3 });
+  sections.forEach(sec => _careerObserver.observe(sec));
 
-    careerObserver.observe(careerSection);
-  }
+  _careerMediaHandler = (e) => {
+    if (e.matches) clearActive();
+  };
+  window.matchMedia('(min-width: 769px)').addEventListener('change', _careerMediaHandler);
 
-  // === Сброс при переходе на широкий экран ===
-  window.matchMedia('(min-width: 769px)').addEventListener('change', (e) => {
-    if (e.matches) {
-      clearActive();
-    }
-  });
-
-  // === Сброс при изменении ширины экрана (чтобы линии и стили не ломались) ===
   let resizeTimer;
-  window.addEventListener('resize', () => {
+  _careerResizeHandler = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (careerGrid.classList.contains('is-hovering')) {
-        clearActive();
-      }
-    }, 150);
-  });
+      if (careerGrid.classList.contains('is-hovering')) clearLines();
+    }, 100);
+  };
+  window.addEventListener('resize', _careerResizeHandler);
 }
