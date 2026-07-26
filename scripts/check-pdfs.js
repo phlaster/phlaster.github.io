@@ -53,7 +53,6 @@ if (offendingFiles.length > 0) {
   console.error('Пожалуйста, обновите PDF-файлы в public/pdf перед отправкой кода.\n');
   console.error('Файлы, измененные позже PDF:');
   
-  // Сортируем по свежести и показываем топ-10 нарушителей
   offendingFiles
     .sort((a, b) => b.time - a.time)
     .slice(0, 10)
@@ -66,8 +65,24 @@ if (offendingFiles.length > 0) {
     console.error(`...и еще ${offendingFiles.length - 10} файлов.`);
   }
 
-  process.exit(1); // Возвращаем ошибку, чтобы прервать git push
+  process.exit(1);
 }
 
-console.log('✅ Проверка PDF пройдена: рендеры актуальны.');
+// 6. СЖАТИЕ PDF В GZIP (Максимальный уровень 9)
+const zlib = require('zlib');
+
+console.log('\n⚙️ Сжатие PDF файлов (gzip level 9)...');
+let compressedCount = 0;
+
+pdfFiles.forEach(pdfPath => {
+  const gzPath = pdfPath + '.gz';
+  const pdfData = fs.readFileSync(pdfPath);
+  
+  const gzData = zlib.gzipSync(pdfData, { level: 9 });
+  
+  fs.writeFileSync(gzPath, gzData);
+  compressedCount++;
+});
+
+console.log(`✅ Успешно сжато файлов: ${compressedCount}`);
 process.exit(0);

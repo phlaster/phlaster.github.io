@@ -53,11 +53,37 @@ export function initPdfExport(i18nConfigGetter) {
     if (isExporting) return;
     isExporting = true;
 
+    // === РЕЖИМ PRODUCTION: Открываем готовый статичный PDF ===
     if (!import.meta.env.DEV) {
       const lang = document.documentElement.lang || 'en';
-      const pdfUrl = `./pdf/cv-${lang}.pdf`;
-      window.openPdf(pdfUrl);
-      isExporting = false;
+
+      try {
+        if (typeof DecompressionStream === 'undefined') {
+          const pdfUrl = `./pdf/cv-${lang}.pdf`;
+          window.openPdf(pdfUrl);
+          return;
+        }
+
+        btn.innerHTML = `<span class="btn-spinner"></span>`;
+
+        const res = await fetch(`./pdf/cv-${lang}.pdf.gz`);
+        if (!res.ok) throw new Error('PDF not found');
+
+        const decompressedStream = res.body.pipeThrough(new DecompressionStream('gzip'));
+        const blob = await new Response(decompressedStream).blob();
+
+        const blobUrl = URL.createObjectURL(blob);
+        window.openPdf(blobUrl);
+
+      } catch (err) {
+        console.error("PDF load/decompress failed:", err);
+        const exportErr = i18nConfigGetter().ui.contact.err_pdf_export || 'Export failed';
+        btn.classList.add('btn-pdf-error');
+        btn.setAttribute('data-tooltip', exportErr);
+        btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`;
+      } finally {
+        isExporting = false;
+      }
       return;
     }
 
