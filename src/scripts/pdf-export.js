@@ -6,6 +6,7 @@ export function initPdfExport(i18nConfigGetter) {
 
   const originalHTML = btn.dataset.originalHtml || btn.innerHTML;
   let isExporting = false;
+  const pdfCache = {};
 
   const createRasterBg = (dataUrlOrSvg, applyBlur = false) => {
     return new Promise((resolve) => {
@@ -58,23 +59,38 @@ export function initPdfExport(i18nConfigGetter) {
       const lang = document.documentElement.lang || 'en';
       
       try {
-        if (typeof DecompressionStream === 'undefined') {
-          const pdfUrl = `./pdf/cv-${lang}.pdf`;
-          window.openPdf(pdfUrl);
-          btn.innerHTML = originalHTML; // Возвращаем кнопку в норму
+        // Если PDF для этого языка уже загружен — просто открываем его
+        if (pdfCache[lang]) {
+          window.openPdf(pdfCache[lang]);
+          btn.innerHTML = originalHTML;
           return;
         }
 
         btn.innerHTML = `<span class="btn-spinner"></span>`;
-        
+
+        // Если браузер не поддерживает DecompressionStream, отдаем обычный PDF
+        if (typeof DecompressionStream === 'undefined') {
+          const pdfUrl = `./pdf/cv-${lang}.pdf`;
+          pdfCache[lang] = pdfUrl; // Кэшируем прямой URL
+          window.openPdf(pdfUrl);
+          btn.innerHTML = originalHTML;
+          return;
+        }
+
+        // Запрашиваем сжатый файл
         const res = await fetch(`./pdf/cv-${lang}.pdf.gz`);
         if (!res.ok) throw new Error('PDF not found');
+
+        // Распаковываем gzip поток
         const decompressedStream = res.body.pipeThrough(new DecompressionStream('gzip'));
         const blob = await new Response(decompressedStream).blob();
         
+        // Создаем временный URL, сохраняем в кэш и открываем
         const blobUrl = URL.createObjectURL(blob);
+        pdfCache[lang] = blobUrl;
         window.openPdf(blobUrl);
 
+        // Возвращаем кнопку в исходное состояние
         btn.innerHTML = originalHTML;
         
       } catch (err) {
