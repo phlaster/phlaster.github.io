@@ -60,6 +60,8 @@
   display: grid;
   grid-template-columns: 3fr 4fr;
   gap: 2rem;
+  position: relative;
+  /* Добавлено */
 }
 
 .timeline-list {
@@ -80,6 +82,10 @@
   border-radius: var(--radius);
   padding: 0.5rem;
   margin: -0.5rem 0;
+  position: relative;
+  /* Добавлено */
+  z-index: 1;
+  /* Добавлено */
 }
 
 /* Ховер только для широких экранов (десктоп) */
@@ -192,6 +198,10 @@
   font-size: 0.85rem;
   color: var(--color-text-muted);
   transition: all 0.2s;
+  position: relative;
+  /* Добавлено */
+  z-index: 1;
+  /* Добавлено */
 }
 
 .skill-tag.highlight {
@@ -527,6 +537,7 @@
 }
 
 @media screen and (max-width: 768px) {
+
   .btn-pdf-error::after,
   .btn-pdf-loading::after {
     top: auto;

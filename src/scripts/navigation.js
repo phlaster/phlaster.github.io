@@ -36,9 +36,9 @@ export function initNavigation(renderCallback) {
       // === Предотвращение сдвига страницы при смене языка ===
       const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
       const scrollPos = window.scrollY + barHeight + 50;
-      
+
       // Находим секцию, в которой сейчас находится пользователь
-      let activeSection = document.getElementById('hero'); 
+      let activeSection = document.getElementById('hero');
       const sectionsList = Array.from(document.querySelectorAll('.content-section, #contact'));
       for (let i = 0; i < sectionsList.length; i++) {
         if (sectionsList[i].offsetTop <= scrollPos) {
@@ -47,13 +47,13 @@ export function initNavigation(renderCallback) {
           break;
         }
       }
-      
+
       // Запоминаем отступ от начала этой секции до текущего скролла
       const offsetIn = window.scrollY - activeSection.offsetTop;
 
       // Перерисовываем контент (вызывает rerender в main.js)
       renderCallback(newLang);
-      
+
       // Восстанавливаем позицию скролла с учетом новых размеров секции
       const newScrollTop = activeSection.offsetTop + offsetIn;
       window.scrollTo(0, newScrollTop);
@@ -433,10 +433,115 @@ export function initCareerHighlighting() {
 
   if (!timelineItems.length || !skillTags.length || !careerGrid) return;
 
+  const isWideScreen = () => window.matchMedia('(min-width: 769px)').matches;
+
+  // === Создаем SVG слой для линий ===
+  careerGrid.style.position = 'relative';
+  let svg = careerGrid.querySelector('.career-lines-svg');
+  if (!svg) {
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.classList.add('career-lines-svg');
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none';
+    svg.style.zIndex = '0'; // Под текстом, но над фоном
+    careerGrid.appendChild(svg);
+  }
+
+  const clearLines = () => {
+    if (svg) svg.innerHTML = '';
+  };
+
+  const drawLines = (item) => {
+    clearLines();
+    // Линии рисуются только на узких экранах
+    if (isWideScreen()) return;
+
+    const gridRect = careerGrid.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const placeId = item.dataset.place;
+    if (!placeId) return;
+
+    // Находим только те скиллы, которые относятся к нажатому элементу
+    const matchingTags = Array.from(skillTags).filter(tag =>
+      tag.dataset.places.split(' ').includes(placeId)
+    );
+
+    if (matchingTags.length === 0) return;
+
+    // Перемешиваем скиллы и выбираем до 10 случайных
+    const shuffled = [...matchingTags].sort(() => 0.5 - Math.random());
+    const tagsToAnimate = shuffled.slice(0, 10);
+
+    const totalDuration = 800; // Общая длительность всей анимации (0.7 сек)
+    const lineDuration = 600; // Длительность полета одного отрезка
+    const stagger = tagsToAnimate.length > 1 ? (totalDuration - lineDuration) / (tagsToAnimate.length - 1) : 0;
+
+    tagsToAnimate.forEach((tag, index) => {
+      setTimeout(() => {
+        const tagRect = tag.getBoundingClientRect();
+
+        // Случайные координаты внутри нажатого блока (старт)
+        const startX = itemRect.left + Math.random() * itemRect.width - gridRect.left;
+        const startY = itemRect.top + Math.random() * itemRect.height - gridRect.top;
+
+        // Случайные координаты внутри скилла (финиш)
+        const endX = tagRect.left + Math.random() * tagRect.width - gridRect.left;
+        const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', startX);
+        line.setAttribute('y1', startY);
+        line.setAttribute('x2', endX);
+        line.setAttribute('y2', endY);
+        line.setAttribute('stroke', 'var(--color-accent)');
+        line.setAttribute('stroke-width', '3');
+        line.setAttribute('stroke-linecap', 'round');
+
+        const length = Math.hypot(endX - startX, endY - startY);
+        // Длина летящего отрезка (20% от длины пути, но не менее 15px)
+        const segLength = Math.max(10, length * 0.3);
+
+        // Видим только короткий отрезок в самом начале пути
+        line.style.strokeDasharray = `${segLength} ${length + segLength}`;
+        line.style.strokeDashoffset = '0';
+        line.style.opacity = '0';
+
+        svg.appendChild(line);
+
+        // Запускаем анимацию полета и появления
+        requestAnimationFrame(() => {
+          // Появление (0.1с) и движение (0.3с)
+          line.style.transition = 'opacity 0.2s ease-out, stroke-dashoffset 0.3s ease-in';
+          line.style.opacity = '0.6';
+
+          // Сдвигаем отрезок к концу линии
+          line.style.strokeDashoffset = `${-(length - segLength)}`;
+        });
+
+        // После того как отрезок долетел, он исчезает
+        setTimeout(() => {
+          line.style.transition = 'opacity 0.1s ease-out';
+          line.style.opacity = '0';
+        }, 300); // 0.1s появление + 0.3s движение = 0.4s (lineDuration)
+
+        // Удаляем линию из DOM после завершения всех анимаций
+        setTimeout(() => {
+          if (line.parentNode) line.remove();
+        }, 450);
+
+      }, index * stagger); // Каждая линия стартует со своей задержкой
+    });
+  };
+
   const clearActive = () => {
     timelineItems.forEach(i => i.classList.remove('is-active'));
     skillTags.forEach(t => t.classList.remove('highlight'));
     careerGrid.classList.remove('is-hovering');
+    clearLines();
   };
 
   const setActive = (item) => {
@@ -451,13 +556,11 @@ export function initCareerHighlighting() {
         }
       });
     }
+    drawLines(item);
   };
 
-  // Проверка ширины экрана
-  const isWideScreen = () => window.matchMedia('(min-width: 769px)').matches;
-
   timelineItems.forEach(item => {
-    // Ховер мыши только на широких экранах
+    // Поведение мыши (только десктоп)
     item.addEventListener('mouseenter', () => {
       if (isWideScreen()) {
         setActive(item);
@@ -472,17 +575,14 @@ export function initCareerHighlighting() {
 
     // Клик / Тап
     item.addEventListener('click', (e) => {
-      // Если кликнули по кнопке ссылки — ничего не переключаем
       if (e.target.closest('.timeline-link-btn')) return;
 
       if (isWideScreen()) {
-        // На широком экране клик по телу открывает ссылку
         const url = item.dataset.url;
         if (url && url !== '#') {
           window.open(url, '_blank', 'noopener');
         }
       } else {
-        // На узком экране — тогглим подсветку
         if (item.classList.contains('is-active')) {
           clearActive();
         } else {
@@ -500,7 +600,9 @@ export function initCareerHighlighting() {
         clearActive();
       }
     });
-  }, { threshold: 0.3 });
+  }, {
+    threshold: 0.3
+  });
   sections.forEach(sec => sectionObserver.observe(sec));
 
   // Сброс при переходе на широкий экран
@@ -508,5 +610,16 @@ export function initCareerHighlighting() {
     if (e.matches) {
       clearActive();
     }
+  });
+
+  // Сброс линий при ресайзе, чтобы они не "отрывались" от элементов
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (careerGrid.classList.contains('is-hovering')) {
+        clearLines();
+      }
+    }, 100);
   });
 }
