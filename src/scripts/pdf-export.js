@@ -56,25 +56,27 @@ export function initPdfExport(i18nConfigGetter) {
     // === РЕЖИМ PRODUCTION: Открываем готовый статичный PDF ===
     if (!import.meta.env.DEV) {
       const lang = document.documentElement.lang || 'en';
-
+      
       try {
         if (typeof DecompressionStream === 'undefined') {
           const pdfUrl = `./pdf/cv-${lang}.pdf`;
           window.openPdf(pdfUrl);
+          btn.innerHTML = originalHTML; // Возвращаем кнопку в норму
           return;
         }
 
         btn.innerHTML = `<span class="btn-spinner"></span>`;
-
+        
         const res = await fetch(`./pdf/cv-${lang}.pdf.gz`);
         if (!res.ok) throw new Error('PDF not found');
-
         const decompressedStream = res.body.pipeThrough(new DecompressionStream('gzip'));
         const blob = await new Response(decompressedStream).blob();
-
+        
         const blobUrl = URL.createObjectURL(blob);
         window.openPdf(blobUrl);
 
+        btn.innerHTML = originalHTML;
+        
       } catch (err) {
         console.error("PDF load/decompress failed:", err);
         const exportErr = i18nConfigGetter().ui.contact.err_pdf_export || 'Export failed';
