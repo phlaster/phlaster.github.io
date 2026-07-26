@@ -163,7 +163,7 @@
   background: transparent;
   border: none;
   color: inherit;
-  padding: 0.4rem;
+  padding: 0.8rem;
   border-radius: var(--radius);
   cursor: pointer;
   opacity: 0.8;
@@ -199,7 +199,7 @@
   border: none;
   color: inherit;
   /* Синхронизация цвета с топбаром */
-  padding: 0.4rem;
+  padding: 0.8rem;
   border-radius: var(--radius);
   cursor: pointer;
   opacity: 0.8;
