@@ -143,7 +143,7 @@ export function renderContent(i18nConfig, lang) {
           <div class="about-socials">
             ${social.items.map(icon => `
               <a href="${esc(icon.url)}" class="about-social-link" target="_blank" rel="noopener noreferrer" title="${esc(icon.key)}">
-                <img src="${esc(icon.icon)}" alt="${esc(icon.key)}">
+                <img src="${esc(icon.icon)}" alt="${esc(icon.key)}" loading="lazy">
               </a>
             `).join('')}
           </div>
@@ -203,7 +203,7 @@ export function renderContent(i18nConfig, lang) {
     <div class="projects-grid">
       ${(i18nConfig.projects || []).map(p => `
         <a class="project-card" href="${esc(p.url)}" target="_blank" rel="noopener">
-          <img src="${esc(p.cover)}" class="project-cover" alt="${esc(p.name)}">
+          <img src="${esc(p.cover)}" class="project-cover" alt="${esc(p.name)}" loading="lazy">
           <div class="project-info">
             <div class="project-name">${esc(p.name)}</div>
             <div class="project-desc">${esc(p.description)}</div>
@@ -225,7 +225,7 @@ export function renderContent(i18nConfig, lang) {
     const meta = [item.authors, item.role, item.venue, item.location ? `${item.location}` : ''].filter(Boolean).join(' · ');
     return `
       <a class="research-item" href="${esc(item.url || '#')}" target="_blank" rel="noopener">
-        ${showImage && item.cover ? `<img src="${esc(item.cover)}" class="research-cover" alt="${esc(item.title)}" onerror="this.style.display='none'">` : ''}
+        ${showImage && item.cover ? `<img src="${esc(item.cover)}" class="research-cover" alt="${esc(item.title)}" loading="lazy" onerror="this.style.display='none'">` : ''}
         <div class="research-details">
           ${date ? `<div class="research-date">${esc(date)}</div>` : ''}
           <div class="research-title">${esc(item.title)}</div>
