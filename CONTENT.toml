@@ -327,7 +327,7 @@ name = "RGBZones"
 url = "https://github.com/phlaster/RGBZones"
 cover = "/assets/projects/rgbzones_social.webp"
 languages = ["Python", "JS", "CSS"]
-description = { en = "A real-time RGB lighting controller built on OpenRGB, dynamically adjusting PC lighting based on CPU temperature with custom gradients and visual notifications", fr = "Un contrôleur d'éclairage RGB en temps réel basé sur OpenRGB, ajustant dynamiquement l'éclairage du PC en fonction de la température du CPU avec des dégradés personnalisés et des notifications visuelles", ru = "Контроллер RGB-подсветки в реальном времени на базе OpenRGB, динамически регулирующий освещение ПК в зависимости от температуры процессора с настраиваемыми градиентами и визуальными уведомлениями" }
+description = { en = "A real-time RGB lighting controller built on OpenRGB, dynamically adjusting PC lighting based on CPU temperature with custom gradients and visual notifications", fr = "Un contrôleur d'éclairage RGB en temps réel basé sur OpenRGB, ajustant dynamiquement l'éclairage du PC en fonction de la température du CPU avec des dégradés personnalisés et des notifications visuelles", ru = "Контроллер RGB-подсветки на базе OpenRGB, динамически регулирующий освещение ПК с настраиваемыми градиентами и визуальными уведомлениями" }
 
 [[projects]]
 name = "SMILES-DASS"

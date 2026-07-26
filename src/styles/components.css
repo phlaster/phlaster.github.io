@@ -2,13 +2,14 @@
 .about-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 4rem;
+  gap: 3rem; /* Уменьшили с 4rem */
   margin-bottom: 2rem;
 }
 
 .about-bio p {
-  font-size: 1rem;
-  margin-bottom: 1.25rem;
+  font-size: 1.0625rem; /* Увеличили с 1rem до 17px */
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
   color: var(--color-text-muted);
   text-align: justify;
   hyphens: auto;
@@ -16,10 +17,11 @@
 }
 
 .about-bio p.lead {
-  font-size: 1.25rem;
+  font-size: 1.375rem; /* Увеличили с 1.25rem до 22px */
+  line-height: 1.5;
   color: var(--color-text);
   font-family: var(--font-serif);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
@@ -216,6 +218,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+  padding-bottom: 1.5rem; /* Добавили воздух снизу */
 }
 
 .project-card {
