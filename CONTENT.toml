@@ -29,14 +29,14 @@ url = "#contact"
 telegram_bot = "my_portfolio_bot"
 webhook_url = ""
 fallback_telegram = true
-worker_url = "https://cv.alex-phlaster.workers.dev" 
+worker_url = "https://cv.alex-phlaster.workers.dev"
 
 #========== UI ELEMENTS ==========#
 [ui]
 scroll_cue = { en = "Scroll to explore", fr = "Défiler pour explorer", ru = "Прокрути вниз" }
 draw_hint = { en = "Try drawing on the background", fr = "Essayez de dessiner sur le fond", ru = "Попробуй рисовать на фоне" }
 based_in = { en = "Based in", fr = "Basé à", ru = "Найти меня можно в" }
-export_pdf =  "PDF"
+export_pdf = "PDF"
 write_me = { en = "Write me", fr = "M'écrire", ru = "Напиши мне" }
 view_pdf = { en = "Open PDF", fr = "Ouvrir PDF", ru = "Открыть PDF" }
 timeline_title = { en = "Timeline", fr = "Chronologie", ru = "Хронология" }
@@ -83,13 +83,13 @@ err_crypto = { en = "Crypto API unavailable (requires HTTPS).", fr = "Crypto API
 err_rate_30 = { en = "Please wait at least 30 seconds between messages. A timer has started.", fr = "Veuillez patienter au moins 30 secondes entre les messages. Un minuteur a démarré.", ru = "Пожалуйста, подождите хотя бы 30 секунд между сообщениями. Запущен таймер." }
 err_rate_60 = { en = "You are sending messages too fast. Timer reset. Please try again in a minute.", fr = "Vous envoyez des messages trop rapidement. Minuteur réinitialisé. Veuillez réessayer dans une minute.", ru = "Вы отправляете сообщения слишком быстро. Таймер сброшен. Пожалуйста, попробуйте через минуту." }
 err_pdf_export = { en = "Export failed", fr = "Échec de l'exportation", ru = "Ошибка экспорта" }
-title = { ru = "<em>Напиши</em> мне!" }
-intro = {  ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по контактам ниже или оставь сообщение прямо здесь в форме обратной связи!" }
-print_contact_text = { ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по этим контактам!" }
-send = { ru = "Отправить" }
+title = { en = "<em>Write</em> to me!", fr = "<em>Écrivez</em>-moi !", ru = "<em>Напиши</em> мне!" }
+intro = { en = "For collaboration, proposals, or just a chat, reach me via the contacts below or leave a message right here in the feedback form!", fr = "Pour une collaboration, une proposition ou simplement pour discuter, contactez-moi via les coordonnées ci-dessous ou laissez un message directement ici dans le formulaire de contact !", ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по контактам ниже или оставь сообщение прямо здесь в форме обратной связи!" }
+print_contact_text = { en = "For collaboration, proposals, or just a chat, reach me via these contacts!", fr = "Pour une collaboration, une proposition ou simplement pour discuter, contactez-moi via ces coordonnées !", ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по этим контактам!" }
+send = { en = "Send", fr = "Envoyer", ru = "Отправить" }
 sending = { en = "Sending…", fr = "Envoi…", ru = "Отправка…" }
-success = { ru = "Сообщение отправлено. Я отвечу в ближайшее время!" }
-error = { ru = "Не удалось отправить. Пожалуйста, используйте Telegram напрямую." }
+success = { en = "Message sent. I will get back to you soon!", fr = "Message envoyé. Je vous répondrai dans les plus brefs délais !", ru = "Сообщение отправлено. Я отвечу в ближайшее время!" }
+error = { en = "Failed to send. Please use Telegram directly.", fr = "Échec de l'envoi. Veuillez utiliser Telegram directement.", ru = "Не удалось отправить. Пожалуйста, используйте Telegram напрямую." }
 leave_contacts = { en = "Leave contacts (optional)", fr = "Laisser des contacts (optionnel)", ru = "Оставить контакты (опционально)" }
 name = { en = "Name", fr = "Nom", ru = "Имя" }
 email = { en = "Email", fr = "Email", ru = "Email" }
@@ -104,9 +104,9 @@ footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_bla
 #========== ABOUT ==========#
 [about]
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
-tagline = { ru = "Биоинформатик-исследователь, объединяю опыт студента-физика и прикладного математика с навыками мокрой биологии для разработки open-source инструментов для геномной аналитики" }
-bio_lead = { ru = "Привет, меня зовут Саша! Люблю биологию и компьютеры, мечтаю заниматься медицинскими исследованиями на стыке дисциплин."}
-bio = { ru = "Я недавно закончил Политех по направлению Прикладная математика и информатика (биоинформатика) и теперь ищу место своей магистратуры на пути научной карьеры.\nСейчас я работаю в микробиологической лаборатории в г. Пушкин (Санкт-Петербург) и занимаюсь исследованиями почвенных метагеномов. Меня завораживает биология и химия и я набираюсь опыта выделяя ДНК, проводя электрофорезы, запуская ПЦР. Но особенно люблю обрабатывать данные полученные в ходе собственных экспериментов и получать результаты, проходя полный путь от отбора пробы \"в поле\" до интерактивных дашбордов на выступлении.\nМне нравится закапываться в проблему с головой, не спать ночами, пока решение не найдено, нравится работать с увлечёнными людьми, делиться интересами, а в свободное время играть в настольные игры, ездить на велосипеде, фотографировать природу, дизайнить что-нибудь для пет-проектов.\nЯ стремлюсь к развитию, устраняю собственные пробелы в биологическом знании, изучаю статистику и учу французский язык. Хочу, чтобы магистратура дала мне дополнительный импульс в сторону фундаментальной науки." }
+tagline = { en = "Bioinformatics researcher combining a background in physics and applied mathematics with wet-lab biology skills to develop open-source tools for genomic analytics", fr = "Chercheur en bioinformatique alliant une formation en physique et en mathématiques appliquées à des compétences en biologie expérimentale pour développer des outils open-source d'analytique génomique", ru = "Биоинформатик-исследователь, объединяю опыт студента-физика и прикладного математика с навыками мокрой биологии для разработки open-source инструментов для геномной аналитики" }
+bio_lead = { en = "Hi, my name is Sasha! I love biology and computers, and I dream of doing medical research at the intersection of disciplines.", fr = "Salut, je m'appelle Sacha ! J'adore la biologie et l'informatique, et je rêve de faire de la recherche médicale à l'intersection des disciplines.", ru = "Привет, меня зовут Саша! Люблю биологию и компьютеры, мечтаю заниматься медицинскими исследованиями на стыке дисциплин." }
+bio = { en = "I recently graduated from Peter the Great St. Petersburg Polytechnic University with a degree in Applied Mathematics and Informatics (bioinformatics) and I am now looking for a master's programme as the next step in my scientific career.\nCurrently I work in a microbiology laboratory in Pushkin (Saint Petersburg), researching soil metagenomes. I am fascinated by biology and chemistry, gaining hands-on experience extracting DNA, running electrophoresis, and setting up PCR. But what I love most is processing the data from my own experiments and seeing results through the full pipeline — from field sampling to interactive dashboards at a conference talk.\nI enjoy diving headfirst into a problem, staying up all night until a solution is found, working with passionate people, sharing interests, and in my free time playing board games, cycling, photographing nature, and designing things for pet projects.\nI am committed to continuous growth: I fill gaps in my biological knowledge, study statistics, and learn French. I want my master's degree to give me an additional push toward fundamental science.", fr = "J'ai récemment obtenu mon diplôme de l'Université polytechnique de Saint-Pétersbourg en mathématiques appliquées et informatique (bioinformatique) et je cherche désormais un master comme prochaine étape de ma carrière scientifique.\nActuellement, je travaille dans un laboratoire de microbiologie à Pouchkine (Saint-Pétersbourg) où j'étudie les métagénomes du sol. La biologie et la chimie me fascinent ; j'acquiers de l'expérience pratique en extraction d'ADN, en électrophorèse et en PCR. Mais ce que j'aime par-dessus tout, c'est traiter les données issues de mes propres expériences et suivre le pipeline complet — du prélèvement sur le terrain aux tableaux de bord interactifs présentés en conférence.\nJ'aime me plonger corps et âme dans un problème, passer des nuits blanches jusqu'à trouver la solution, travailler avec des gens passionnés, partager mes centres d'intérêt, et pendant mon temps libre jouer à des jeux de société, faire du vélo, photographier la nature et concevoir des designs pour mes projets personnels.\nJe m'engage dans un développement continu : je comble mes lacunes en biologie, j'étudie les statistiques et j'apprends le français. Je souhaite que mon master me donne une impulsion supplémentaire vers la science fondamentale.", ru = "Я недавно закончил Политех по направлению Прикладная математика и информатика (биоинформатика) и теперь ищу место своей магистратуры на пути научной карьеры.\nСейчас я работаю в микробиологической лаборатории в г. Пушкин (Санкт-Петербург) и занимаюсь исследованиями почвенных метагеномов. Меня завораживает биология и химия и я набираюсь опыта выделяя ДНК, проводя электрофорезы, запуская ПЦР. Но особенно люблю обрабатывать данные полученные в ходе собственных экспериментов и получать результаты, проходя полный путь от отбора пробы \"в поле\" до интерактивных дашбордов на выступлении.\nМне нравится закапываться в проблему с головой, не спать ночами, пока решение не найдено, нравится работать с увлечёнными людьми, делиться интересами, а в свободное время играть в настольные игры, ездить на велосипеде, фотографировать природу, дизайнить что-нибудь для пет-проектов.\nЯ стремлюсь к развитию, устраняю собственные пробелы в биологическом знании, изучаю статистику и учу французский язык. Хочу, чтобы магистратура дала мне дополнительный импульс в сторону фундаментальной науки." }
 location = { en = "Saint Petersburg, Russia", fr = "Saint-Pétersbourg, Russie", ru = "Санкт-Петербург, Россия" }
 
 [about.interests]
@@ -197,7 +197,7 @@ description = { en = "40.03.01.02, Law", fr = "40.03.01.02, Droit", ru = "40.03.
 title = { en = "Languages", fr = "Langues", ru = "Языки" }
 items = [
   { name = { en = "Russian (Native)", fr = "Russe (Natif)", ru = "Русский (Родной)" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"]},
+  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "French (B1)", fr = "Français (B1)", ru = "Французский (B1)" } }
 ]
 
@@ -244,7 +244,7 @@ items = [
   { name = { en = "Team Management", fr = "Gestion d'équipe", ru = "Управление командой" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "Agile", fr = "Méthodologies Agile", ru = "Гибкие методологии" }, places = ["skoltech_school", "polytech_bioinf"] },
   { name = "AnyType", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = "TiddlyWiki", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = "TiddlyWiki", places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] }
 ]
 
 [[skill_groups]]
@@ -255,7 +255,7 @@ items = [
   { name = { en = "Model fine tuning", fr = "Optimisation du modèle", ru = "Оптимизация параметров" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "Data augmentation", fr = "Augmentation des données", ru = "Аугментация данных" }, places = ["skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "Custom Harnesses", fr = "Harnais sur mesure", ru = "Собственные обвязки для инференса" }, places = ["arriam"] },
-  { name = { en = "Building & configuring AI agents", fr = "Création et configuration d'agents IA", ru = "Создание и настройка AI-агентов" }, places = ["arriam"] },
+  { name = { en = "Building & configuring AI agents", fr = "Création et configuration d'agents IA", ru = "Создание и настройка AI-агентов" }, places = ["arriam"] }
 ]
 
 [[skill_groups]]
@@ -276,7 +276,7 @@ items = [
   { name = { en = "Multivariate Statistics", fr = "Statistiques Multivariées", ru = "Многомерная статистика" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
   { name = { en = "Compositional Data Analysis", fr = "Analyse de données compositionnelles", ru = "Анализ композиционных данных" }, places = ["polytech_bioinf", "arriam"] },
   { name = { en = "Publication-Ready Graphs", fr = "Graphiques prêts à la publication", ru = "Высококачественные графики для публикаций" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = { en = "Interactive Dashboards", fr = "Tableaux de bord interactifs", ru = "Интерактивные дашборды" }, places = ["polytech_bioinf", "arriam"] },
+  { name = { en = "Interactive Dashboards", fr = "Tableaux de bord interactifs", ru = "Интерактивные дашборды" }, places = ["polytech_bioinf", "arriam"] }
 ]
 
 [[skill_groups]]
@@ -293,7 +293,6 @@ url = "https://github.com/phlaster/DePPA.jl"
 cover = "/assets/projects/deppa_social.webp"
 languages = ["Julia"]
 description = { en = "A high-performance pure Julia package for MSA and degenerate PCR primer design", fr = "Un package Julia pur et haute performance pour l'alignement MSA et la conception d'amorces PCR dégénérées", ru = "Высокопроизводительный пакет на Julia для анализа множественного выравнивания и дизайна вырожденных праймеров" }
-
 
 [[projects]]
 name = "Pannagram"
@@ -329,7 +328,6 @@ url = "https://github.com/phlaster/RGBZones"
 cover = "/assets/projects/rgbzones_social.webp"
 languages = ["Python", "JS", "CSS"]
 description = { en = "A real-time RGB lighting controller built on OpenRGB, dynamically adjusting PC lighting based on CPU temperature with custom gradients and visual notifications", fr = "Un contrôleur d'éclairage RGB en temps réel basé sur OpenRGB, ajustant dynamiquement l'éclairage du PC en fonction de la température du CPU avec des dégradés personnalisés et des notifications visuelles", ru = "Контроллер RGB-подсветки в реальном времени на базе OpenRGB, динамически регулирующий освещение ПК в зависимости от температуры процессора с настраиваемыми градиентами и визуальными уведомлениями" }
-
 
 [[projects]]
 name = "SMILES-DASS"
@@ -428,73 +426,73 @@ url = "/assets/pdfs/paper_fp.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
-category = "Дипломная работа"
+category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
 date = "2026"
-title = "Выпускная квалификационная работа"
-description = "Полный текст дипломной работы"
+title = { en = "Full Thesis Text", fr = "Texte intégral du mémoire", ru = "Выпускная квалификационная работа" }
+description = { en = "Full text of the graduation thesis", fr = "Texte intégral du mémoire de fin d'études", ru = "Полный текст дипломной работы" }
 url = "/assets/pdfs/thesis_full.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Thesis"
+category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
 date = "2026"
-title = "Graduation Thesis Abstract"
-description = "Title page and abstract section"
+title = { en = "Graduation Thesis Abstract", fr = "Résumé du mémoire de fin d'études", ru = "Автореферат дипломной работы" }
+description = { en = "Title page and abstract section", fr = "Page de titre et résumé", ru = "Титульный лист и автореферат" }
 url = "/assets/pdfs/thesis_abstract_ru_en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
-category = "Дипломная работа"
+category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
 date = "2026"
-title = "Презентация к защите"
-description = "Презентация для защиты ВКР"
+title = { en = "Defense Presentation", fr = "Présentation de soutenance", ru = "Презентация к защите" }
+description = { en = "Presentation for the thesis defense", fr = "Présentation pour la soutenance du mémoire", ru = "Презентация для защиты ВКР" }
 url = "/assets/pdfs/thesis_presentation.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Дипломная работа"
+category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
 date = "2026"
-title = "Отзыв научного руководителя"
-description = "Отзыв на дипломную работу"
+title = { en = "Supervisor's Review", fr = "Avis du directeur de recherche", ru = "Отзыв научного руководителя" }
+description = { en = "Supervisor's review of the thesis", fr = "Avis du directeur sur le mémoire", ru = "Отзыв на дипломную работу" }
 url = "/assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Курсовая работа"
+category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
 date = "2023"
-title = "Предобусловленный метод сопряженных градиентов для разреженных матриц"
-description = "Численные методы"
+title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", fr = "Méthode du gradient conjugué préconditionné pour les matrices creuses", ru = "Предобусловленный метод сопряженных градиентов для разреженных матриц" }
+description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
 url = "/assets/pdfs/coursework_nummethods.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Курсовая работа"
+category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
 date = "2023"
-title = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ"
-description = "Методы оптимизации"
+title = { en = "Solving the Generalized Traveling Salesman Problem for CNC Machine Idle-Path Optimization", fr = "Résolution du problème généralisé du voyageur de commerce pour l'optimisation des trajets à vide des machines CNC", ru = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ" }
+description = { en = "Optimization Methods", fr = "Méthodes d'optimisation", ru = "Методы оптимизации" }
 url = "/assets/pdfs/coursework_optmethods.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Лабораторная работа"
+category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
 date = "2026"
-title = "BS-Seq"
-description = "Биоинформатика"
+title = { en = "BS-Seq", fr = "BS-Seq", ru = "BS-Seq" }
+description = { en = "Bioinformatics", fr = "Bioinformatique", ru = "Биоинформатика" }
 url = "/assets/pdfs/labtask_bioinf.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Лабораторная работа"
+category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
 date = "2025"
-title = "Классификация многомерных объектов при наличии обучающей выборки"
-description = "Многомерный статистический анализ"
+title = { en = "Classification of Multivariate Objects with a Training Set", fr = "Classification d'objets multivariés en présence d'un échantillon d'apprentissage", ru = "Классификация многомерных объектов при наличии обучающей выборки" }
+description = { en = "Multivariate Statistical Analysis", fr = "Analyse statistique multivariée", ru = "Многомерный статистический анализ" }
 url = "/assets/pdfs/labtask_msa.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = "Лабораторная работа"
+category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
 date = "2023"
-title = "Приближение табличных функций"
-description = "Численные методы"
+title = { en = "Approximation of Tabular Functions", fr = "Approximation de fonctions tabulaires", ru = "Приближение табличных функций" }
+description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
 url = "/assets/pdfs/labtask_nummethods.pdf"
 languages = ["ru"]

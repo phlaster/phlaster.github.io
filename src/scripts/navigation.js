@@ -32,7 +32,31 @@ export function initNavigation(renderCallback) {
 
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
+
+      // === Предотвращение сдвига страницы при смене языка ===
+      const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
+      const scrollPos = window.scrollY + barHeight + 50;
+      
+      // Находим секцию, в которой сейчас находится пользователь
+      let activeSection = document.getElementById('hero'); 
+      const sectionsList = Array.from(document.querySelectorAll('.content-section, #contact'));
+      for (let i = 0; i < sectionsList.length; i++) {
+        if (sectionsList[i].offsetTop <= scrollPos) {
+          activeSection = sectionsList[i];
+        } else {
+          break;
+        }
+      }
+      
+      // Запоминаем отступ от начала этой секции до текущего скролла
+      const offsetIn = window.scrollY - activeSection.offsetTop;
+
+      // Перерисовываем контент (вызывает rerender в main.js)
       renderCallback(newLang);
+      
+      // Восстанавливаем позицию скролла с учетом новых размеров секции
+      const newScrollTop = activeSection.offsetTop + offsetIn;
+      window.scrollTo(0, newScrollTop);
     });
   });
 
