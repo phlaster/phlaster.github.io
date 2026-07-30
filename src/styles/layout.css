@@ -313,7 +313,7 @@
   flex-direction: column;
   align-items: center;
   font-family: var(--font-serif);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(1.7rem, 4.8vw, 5.5rem);
   line-height: 1;
   width: 100%;
@@ -321,15 +321,17 @@
 
 .hero-name em {
   font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--color-accent-soft);
 }
 
 .hero-tagline {
   margin-top: 1rem;
   font-size: 1rem;
+  letter-spacing: 0.015rem;
+  word-spacing: 0.2rem;;
   text-align: justify;
-  text-align-last: center; /* Центрируем последнюю строку для красоты */
+  text-align-last: center;
   hyphens: auto;
   -webkit-hyphens: auto;
   overflow-wrap: break-word;
@@ -412,6 +414,8 @@
   padding: .8rem 1rem;
   border-radius: var(--radius-lg);
   font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.05rem;
   font-size: .8rem;
   text-transform: uppercase;
   cursor: pointer;
