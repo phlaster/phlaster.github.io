@@ -465,6 +465,14 @@ url = "/assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
+category = { ru = "Личное", en = "Personal", fr = "Personnel" }
+date = "2026"
+title = { ru = "Серия Duolingo — французский", en = "Duolingo streak — French", fr = "Série Duolingo — français" }
+description = { ru = "984 дня непрерывной практики, уровень 92", en = "984-day streak, level 92", fr = "984 jours de pratique continue, niveau 92" }
+url = "/assets/pdfs/duo_streak.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
 category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
 date = "2023"
 title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", fr = "Méthode du gradient conjugué préconditionné pour les matrices creuses", ru = "Предобусловленный метод сопряженных градиентов для разреженных матриц" }
