@@ -24,11 +24,11 @@ worker_url = "https://cv.alex-phlaster.workers.dev"
 
 #========== UI ELEMENTS ==========#
 [ui]
-scroll_cue = { en = "Scroll to explore", fr = "Défiler pour explorer", ru = "Прокрути вниз" }
-draw_hint = { en = "Try drawing on the background", fr = "Essayez de dessiner sur le fond", ru = "Попробуй рисовать на фоне" }
-based_in = { en = "Based in", fr = "Basé à", ru = "Найти меня можно в" }
+scroll_cue = { ru = "Исследовать", en = "Explore", fr = "Explorer" }
+draw_hint = { ru = "Рисуйте на интерактивном фоне", en = "Draw on the interactive background", fr = "Dessinez sur l'arrière-plan interactif" }
+based_in = { ru = "Местоположение", en = "Location", fr = "Localisation" }
 export_pdf = "PDF"
-write_me = { en = "Write me", fr = "M'écrire", ru = "Напиши мне" }
+write_me = { ru = "Связаться со мной", en = "Contact me", fr = "Contactez-moi" }
 view_pdf = { en = "Open PDF", fr = "Ouvrir PDF", ru = "Открыть PDF" }
 timeline_title = { en = "Timeline", fr = "Chronologie", ru = "Хронология" }
 expertise_title = { en = "Expertise", fr = "Expertise", ru = "Экспертиза" }
@@ -36,12 +36,12 @@ expertise_title = { en = "Expertise", fr = "Expertise", ru = "Экспертиз
 # --- Sections: each has title (heading), sub (subtitle), nav (menu alias) ---
 [ui.sections.about]
 title = { en = "A few words about me", fr = "Quelques mots à propos de moi", ru = "Пару слов обо мне" }
-sub = { en = "Who I am, where I come from, and what I'm into — in a few paragraphs.", fr = "Qui je suis, d'où je viens et ce qui m'intéresse — en quelques paragraphes.", ru = "Кто я, откуда пришёл и что мне интересно — в нескольких абзацах." }
+sub = { ru = "Образование, лабораторный опыт и научные интересы", en = "Education, lab experience, and research interests", fr = "Formation, expérience en laboratoire et intérêts de recherche" }
 nav = { en = "About", fr = "À propos", ru = "Обо мне" }
 
 [ui.sections.research]
 title = { en = "Research & Publications", fr = "Recherche & Publications", ru = "Исследования и публикации" }
-sub = { en = "Co-authored publications, conference talks, and participation in RSF grants.", fr = "Publications co-signées, communications en conférence et participation à des subventions RSF.", ru = "Публикации в соавторстве, доклады на конференциях и участие в грантах РНФ." }
+sub = { ru = "Соавторство, доклады на конференциях и участие в грантах", en = "Co-authorship, conference talks, and grant participation", fr = "Co-auteur, présentations en conférence et participation à des subventions" }
 nav = { en = "Research", fr = "Recherche", ru = "Исследования" }
 conf = { en = "Conferences", fr = "Conférences", ru = "Конференции" }
 pubs = { en = "Publications", fr = "Publications", ru = "Публикации" }
@@ -49,17 +49,18 @@ grants = { en = "Grants", fr = "Subventions", ru = "Гранты" }
 
 [ui.sections.career]
 title = { en = "Education & Career", fr = "Formation & Carrière", ru = "Образование и карьера" }
-sub = { en = "From law school through physics to bioinformatics — and four years in a microbiology lab. A timeline of how I got here.", fr = "De la fac de droit à la bioinformatique en passant par la physique — et quatre ans dans un laboratoire de microbiologie. La chronologie de mon parcours jusqu'ici.", ru = "От юрфака через физику к биоинформатике — и четыре года в микробиологической лаборатории. Хронология того, как я оказался здесь." }
+sub = { ru = "Хронология образования и профессионального пути", en = "Timeline of education and professional path", fr = "Chronologie de la formation et du parcours professionnel" }
 nav = { en = "Career", fr = "Carrière", ru = "Карьера" }
 
 [ui.sections.projects]
 title = { en = "Featured projects", fr = "Projets en vedette", ru = "Избранные проекты" }
-sub = { en = "My projects in the open: registered Julia packages, web apps, ML experiments.", fr = "Mes projets en accès libre : packages Julia enregistrés, applications web, expérimentations ML.", ru = "Мои проекты в открытом доступе: зарегистрированные Julia-пакеты, веб-приложения, ML-эксперименты." }
+sub = { ru = "Мои проекты в открытом доступе: вычислительные пакеты, веб-приложения, ML-эксперименты", en = "My open-source projects: computational packages, web apps, ML experiments", fr = "Mes projets open-source : packages computationnels, applications web, expériences ML" }
 nav = { en = "Projects", fr = "Projets", ru = "Проекты" }
 
 [ui.sections.documents]
 title = { en = "Documents & Achievements", fr = "Documents & Réalisations", ru = "Документы и достижения" }
 nav = { en = "Documents", fr = "Documents", ru = "Документы" }
+sub = { ru = "Cертификаты, студенческие работы и другие документы, которыми хочется поделиться", en = "Certificates, student works, and other documents I'd like to share", fr = "Certificats, travaux d'étudiants et autres documents que je souhaite partager" }
 
 [ui.contact]
 pow_loading = { en = "Anti-spam check... Please wait up to 10s.", fr = "Vérification anti-spam... Veuillez patienter jusqu'à 10s.", ru = "Проверка на спам... Пожалуйста, подождите до 10 сек." }
@@ -73,20 +74,20 @@ err_crypto = { en = "Crypto API unavailable (requires HTTPS).", fr = "Crypto API
 err_rate_30 = { en = "Please wait at least 30 seconds between messages. A timer has started.", fr = "Veuillez patienter au moins 30 secondes entre les messages. Un minuteur a démarré.", ru = "Пожалуйста, подождите хотя бы 30 секунд между сообщениями. Запущен таймер." }
 err_rate_60 = { en = "You are sending messages too fast. Timer reset. Please try again in a minute.", fr = "Vous envoyez des messages trop rapidement. Minuteur réinitialisé. Veuillez réessayer dans une minute.", ru = "Вы отправляете сообщения слишком быстро. Таймер сброшен. Пожалуйста, попробуйте через минуту." }
 err_pdf_export = { en = "Export failed", fr = "Échec de l'exportation", ru = "Ошибка экспорта" }
-title = { en = "<em>Write</em> to me!", fr = "<em>Écrivez</em>-moi !", ru = "<em>Напиши</em> мне!" }
-intro = { en = "For collaboration, proposals, or just a chat, reach me via the contacts below or leave a message right here in the feedback form!", fr = "Pour une collaboration, une proposition ou simplement pour discuter, contactez-moi via les coordonnées ci-dessous ou laissez un message directement ici dans le formulaire de contact !", ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по контактам ниже или оставь сообщение прямо здесь в форме обратной связи!" }
-print_contact_text = { en = "For collaboration, proposals, or just a chat, reach me via these contacts!", fr = "Pour une collaboration, une proposition ou simplement pour discuter, contactez-moi via ces coordonnées !", ru = "Для сотрудничества, предложений или просто чтобы поболтать пиши мне по этим контактам!" }
+title = { ru = "<em>Напишите</em> мне!", en = "<em>Write</em> to me!", fr = "<em>Écrivez</em>-moi !" }
+intro = { ru = "Для сотрудничества, предложений или просто чтобы поболтать пишите мне по контактам ниже или оставьте сообщение прямо здесь в форме обратной связи!", en = "For collaboration, proposals, or just to chat, write to me via the contacts below or leave a message right here in the feedback form!", fr = "Pour une collaboration, des propositions ou simplement discuter, écrivez-moi via les contacts ci-dessous ou laissez un message ici même dans le formulaire de contact!" }
+print_contact_text = { ru = "Для сотрудничества, предложений или просто чтобы поболтать пишите мне по этим контактам!", en = "For collaboration, proposals, or just to chat, write to me via these contacts!", fr = "Pour une collaboration, des propositions ou simplement discuter, écrivez-moi via ces contacts!" }
 send = { en = "Send", fr = "Envoyer", ru = "Отправить" }
 sending = { en = "Sending…", fr = "Envoi…", ru = "Отправка…" }
 success = { en = "Message sent. I will get back to you soon!", fr = "Message envoyé. Je vous répondrai dans les plus brefs délais !", ru = "Сообщение отправлено. Я отвечу в ближайшее время!" }
-error = { en = "Failed to send. Please use Telegram directly.", fr = "Échec de l'envoi. Veuillez utiliser Telegram directement.", ru = "Не удалось отправить. Пожалуйста, используйте Telegram напрямую." }
+error = { ru = "Не удалось отправить. Пожалуйста, воспользуйтесь предоставленными контактами.", en = "Failed to send. Please use the provided contacts.", fr = "Échec de l'envoi. Veuillez utiliser les contacts fournis." }
 leave_contacts = { en = "Leave contacts (optional)", fr = "Laisser des contacts (optionnel)", ru = "Оставить контакты (опционально)" }
 name = { en = "Name", fr = "Nom", ru = "Имя" }
 email = { en = "Email", fr = "Email", ru = "Email" }
 subject = { en = "Subject", fr = "Sujet", ru = "Тема" }
 message = { en = "Message", fr = "Message", ru = "Сообщение" }
-form_invalid = { en = "Please write a message. Check field length limits.", fr = "Veuillez écrire un message. Vérifiez les limites de longueur.", ru = "Пожалуйста, напиши сообщение. Проверь лимиты длины полей." }
-form_invalid_email = { en = "Invalid email. Please use Latin letters and a valid domain", fr = "Email invalide. Veuillez utiliser l'alphabet latin et un domaine valide", ru = "Некорректный email. Используй латиницу и реальный домен" }
+form_invalid = { ru = "Заполните поле сообщения. Проверьте ограничения по длине.", en = "Please write a message. Check field length limits.", fr = "Veuillez écrire un message. Vérifiez les limites de longueur des champs." }
+form_invalid_email = { ru = "Некорректный адрес. Допускаются латинские символы и валидный домен.", en = "Invalid email address. Only Latin characters and a valid domain are allowed.", fr = "Adresse e-mail invalide. Seuls les caractères latins et un domaine valide sont autorisés." }
 
 [ui.pdf]
 footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_blank\">portfolio</a> on {gen_date}", fr = "Généré à partir du <a href=\"{url}\" target=\"_blank\">portfolio interactif</a> le {gen_date}", ru = "Сгенерировано из интерактивного <a href=\"{url}\" target=\"_blank\">портфолио</a> {gen_date}" }
@@ -94,7 +95,7 @@ footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_bla
 #========== ABOUT ==========#
 [about]
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
-tagline = { en = "Bioinformatics researcher combining a background in physics and applied mathematics with wet-lab biology skills to develop open-source tools for genomic analytics", fr = "Chercheur en bioinformatique alliant une formation en physique et en mathématiques appliquées à des compétences en biologie expérimentale pour développer des outils open-source d'analytique génomique", ru = "Биоинформатик-исследователь, объединяю опыт студента-физика и прикладного математика с навыками мокрой биологии для разработки open-source инструментов для геномной аналитики" }
+tagline = { en = "Bioinformatics graduate with a background in applied mathematics and physics; I develop open-source tools for genomic analytics and combine this with wet-lab work.", fr = "Diplômé en bioinformatique avec une formation en mathématiques appliquées et en physique; je développe des outils open-source pour l'analytique génomique, en combinant cela avec un travail à la paillasse.", ru = "Бакалавр биоинформатики с подготовкой в прикладной математике и физике; разрабатываю open-source инструменты для геномной аналитики и совмещаю это с работой в мокрой лаборатории." }
 bio = { en = """
 Hi, my name is Alex. I like going through the whole research
 cycle: collecting a sample in the field, extracting DNA, running PCR,
