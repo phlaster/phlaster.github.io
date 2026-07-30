@@ -27,12 +27,11 @@ export function initPdfModal(i18nConfigGetter) {
 
   $('closePdfModal').addEventListener('click', closeModal);
 
-  modal.addEventListener('pointerdown', (e) => {
+  modal.addEventListener('click', (e) => {
     if (!e.target.closest('.pdf-modal-content')) {
       closeModal();
     }
   });
-
   document.body.addEventListener('click', (e) => {
     const target = e.target.closest('[data-pdf]');
     if (target) {

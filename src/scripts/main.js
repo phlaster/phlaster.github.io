@@ -20,6 +20,9 @@ import {
 import {
   initPdfExport
 } from './pdf-export.js';
+import {
+  initProjects
+} from './projects.js';
 
 let currentLang = loadLang();
 let i18nConfig = resolveTranslations(config, currentLang);
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact(() => i18nConfig);
   initPdfModal(() => i18nConfig);
   initPdfExport(() => i18nConfig);
+  initProjects();
   
   const langAbbr = {
     en: 'ENG',

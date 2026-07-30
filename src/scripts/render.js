@@ -207,21 +207,27 @@ export function renderContent(i18nConfig, lang) {
       </div>
     </div>
   `;
-
   // PROJECTS
   $('proj-title').textContent = sections.projects?.title || '';
   $('proj-sub').textContent = sections.projects?.sub || '';
   $('projects-content').innerHTML = `
     <div class="projects-grid">
       ${(i18nConfig.projects || []).map(p => `
-        <a class="project-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+        <article class="project-card" data-repo-url="${esc(p.url)}" tabindex="0" role="button" aria-label="View README for ${esc(p.name)}">
           <img src="${esc(p.cover)}" class="project-cover" alt="${esc(p.name)}" loading="lazy">
           <div class="project-info">
             <div class="project-name">${esc(p.name)}</div>
             <div class="project-desc">${esc(p.description)}</div>
             <div class="project-langs">${(p.languages || []).map(l => `<span class="lang-chip">${esc(l)}</span>`).join('')}</div>
           </div>
-        </a>`).join('')}
+          <a class="project-link-btn" href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="Open GitHub repository">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </article>`).join('')}
     </div>
   `;
 
