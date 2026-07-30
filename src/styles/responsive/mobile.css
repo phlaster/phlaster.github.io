@@ -82,6 +82,12 @@
     justify-content: center;
   }
 
+  /* === Фикс обрезания меню слева === */
+  .lang-dropdown {
+    left: 5px;
+    right: auto;
+  }
+
   /* === Hamburger menu === */
   .topbar-menu-content {
     grid-row: 2;
