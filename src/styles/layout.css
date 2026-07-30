@@ -328,8 +328,11 @@
 .hero-tagline {
   margin-top: 1rem;
   font-size: 1rem;
-  text-align: center;
-  text-align-last: center;
+  text-align: justify;
+  text-align-last: center; /* Центрируем последнюю строку для красоты */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
   width: 100%;
 }
 

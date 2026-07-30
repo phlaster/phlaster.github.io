@@ -228,10 +228,14 @@
   }
 
   .hero-tagline {
-    text-align: center;
+    text-align: justify;
+    text-align-last: center;
     max-width: 100%;
     margin-top: 0.5rem;
     font-size: 0.9rem;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   .hero-socials {
