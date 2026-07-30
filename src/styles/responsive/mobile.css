@@ -1,4 +1,13 @@
 /* === Responsive: Mobile & Narrow Monitors === */
+@media screen and (max-width: 960px) {
+  .pdf-modal-close {
+    width: 40px;
+    height: 40px;
+    top: -8px;
+    right: -20px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   :root {
     --bar-h: 60px;
@@ -365,47 +374,61 @@
     width: 100% !important;
   }
 
+  .pdf-modal-close {
+    top: 7px;
+    right: 7px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* === README Modal Mobile Adjustments === */
+  .md-modal-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .md-viewer-wrapper {
+    padding: 0.5rem 0.7em;
+  }
+
+  .md-content {
+    font-size: 0.85rem;
+  }
+
+  .md-content h3 {
+    font-size: 1rem;
+  }
+
+  .md-content pre {
+    padding: 0.5rem;
+  }
+
+  .md-content pre code {
+    font-size: 0.6rem;
+  }
+
+  .md-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
 }
-  
-  @media screen and (max-width: 960px) {
-    .pdf-modal-close {
-      width: 40px;
-      height: 40px;
-      top: -8px;
-      right: -20px;
-    }
+
+@media screen and (max-width: 420px) {
+  .pdf-modal-close {
+    top: 8px;
+    right: 8px;
+    background: rgba(var(--color-dark-bg-rgb), 0.6);
+    color: var(--color-dark-fg);
+    border-color: rgba(var(--color-dark-fg-rgb), 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: none;
   }
 
-  @media screen and (max-width: 768px) {
-    .pdf-modal-close {
-      /* width: 30px; */
-      /* height: 30px; */
-      top: -5px;
-      right: -15px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* .pdf-modal-close svg {
-      width: 22px;
-      height: 22px;
-    } */
+  .md-modal-content .pdf-modal-close {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
   }
-
-  @media screen and (max-width: 420px) {
-    .pdf-modal-close {
-      top: 8px;
-      right: 8px;
-      background: rgba(var(--color-dark-bg-rgb), 0.6);
-      color: var(--color-dark-fg);
-      border-color: rgba(var(--color-dark-fg-rgb), 0.2);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      box-shadow: none;
-    }
-
-    .md-modal-content .pdf-modal-close {
-      background: var(--color-surface);
-      color: var(--color-text);
-      border-color: var(--color-border);
-    }
-  }
+}
