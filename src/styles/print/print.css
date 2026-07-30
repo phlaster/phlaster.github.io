@@ -58,7 +58,9 @@
   #canvasWrap,
   #topbar,
   .pdf-modal,
-  .hero-foot {
+  .hero-foot,
+  .timeline-link-btn,
+  .project-link-btn {
     display: none !important;
   }
 
@@ -152,6 +154,10 @@
     margin: 0 !important;
     max-width: 100% !important;
     display: block !important;
+  }
+
+  .timeline-item {
+    grid-template-columns: 100px 1fr !important;
   }
 
   .content-section {

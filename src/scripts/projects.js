@@ -43,81 +43,99 @@ export function initProjects() {
         document.body.style.overflow = 'hidden';
         mdContent.innerHTML = '<div class="md-loading">Loading README...</div>';
 
+    try {
+      let mdText = null;
+
+      // 1. Пытаемся загрузить через raw.githubusercontent.com (без лимитов API)
+      const rawUrls = [
+        `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/README.md`,
+        `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`,
+        `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`,
+        `https://raw.githubusercontent.com/${owner}/${repo}/main/readme.md`,
+        `https://raw.githubusercontent.com/${owner}/${repo}/master/readme.md`
+      ];
+
+      for (const url of rawUrls) {
         try {
-            let mdText = null;
+          const res = await fetch(url);
+          if (res.ok) {
+            mdText = await res.text();
+            break;
+          }
+        } catch (err) { /* Игнорируем */ }
+      }
 
-            // 1. Пытаемся загрузить через raw.githubusercontent.com (без лимитов API)
-            const rawUrls = [
-                `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/README.md`,
-                `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`,
-                `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`,
-                `https://raw.githubusercontent.com/${owner}/${repo}/main/readme.md`,
-                `https://raw.githubusercontent.com/${owner}/${repo}/master/readme.md`
-            ];
+      // 2. Фолбэк на GitHub API
+      if (!mdText) {
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/readme`;
+        const apiRes = await fetch(apiUrl, {
+          headers: { 'Accept': 'application/vnd.github.v3.raw' }
+        });
+        if (!apiRes.ok) throw new Error('Failed to fetch README');
+        mdText = await apiRes.text();
+      }
 
-            for (const url of rawUrls) {
-                try {
-                    const res = await fetch(url);
-                    if (res.ok) {
-                        mdText = await res.text();
-                        break;
-                    }
-                } catch (err) {
-                    /* Игнорируем */
-                }
-            }
+      const html = marked.parse(mdText);
+      
+      // === ОБРАБОТКА HTML ПЕРЕД ВСТАВКОЙ В DOM ===
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
 
-            // 2. Фолбэк на GitHub API
-            if (!mdText) {
-                const apiUrl = `https://api.github.com/repos/${owner}/${repo}/readme`;
-                const apiRes = await fetch(apiUrl, {
-                    headers: {
-                        'Accept': 'application/vnd.github.v3.raw'
-                    }
-                });
-                if (!apiRes.ok) throw new Error('Failed to fetch README');
-                mdText = await apiRes.text();
-            }
+      // Фиксим ссылки
+      doc.querySelectorAll('a').forEach(a => {
+        const href = a.getAttribute('href');
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
 
-            const html = marked.parse(mdText);
-
-            // === ОБРАБОТКА HTML ДЛЯ КАРТИНОК И ССЫЛОК ===
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            // Фиксим картинки (бэйджи и локальные скриншоты)
-            doc.querySelectorAll('img').forEach(img => {
-                const src = img.getAttribute('src');
-                if (src) {
-                    // Скрываем Referer, чтобы бэйджи (Codecov и др.) не блокировали загрузку
-                    img.setAttribute('referrerpolicy', 'no-referrer');
-
-                    // Если путь относительный, делаем его абсолютным к raw GitHub
-                    if (!src.startsWith('http://') && !src.startsWith('https://') && !src.startsWith('data:')) {
-                        let cleanPath = src.replace(/^(\.\.?\/)+/, '').replace(/^\//, '');
-                        img.setAttribute('src', `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/${cleanPath}`);
-                    }
-                }
-            });
-
-            // Фиксим ссылки, чтобы они открывались на GitHub в новой вкладке
-            doc.querySelectorAll('a').forEach(a => {
-                const href = a.getAttribute('href');
-                a.setAttribute('target', '_blank');
-                a.setAttribute('rel', 'noopener noreferrer');
-
-                if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:')) {
-                    let cleanPath = href.replace(/^(\.\.?\/)+/, '').replace(/^\//, '');
-                    // Ведем ссылки на файлы прямо в интерфейс GitHub
-                    a.setAttribute('href', `https://github.com/${owner}/${repo}/blob/HEAD/${cleanPath}`);
-                }
-            });
-
-            const cleanHtml = doc.body.innerHTML;
-            mdContent.innerHTML = cleanHtml;
-
-        } catch (err) {
-            mdContent.innerHTML = `<div class="md-error">Failed to load README. <a href="${repoUrl}" target="_blank">Open repository directly</a>.</div>`;
+        if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+          let cleanPath = href.replace(/^(\.\.?\/)+/, '').replace(/^\//, '');
+          a.setAttribute('href', `https://github.com/${owner}/${repo}/blob/HEAD/${cleanPath}`);
         }
+      });
+
+      // Подготавливаем картинки (вычисляем правильный URL и кладем в data-атрибут)
+      doc.querySelectorAll('img').forEach(img => {
+        let src = img.getAttribute('src');
+        if (src) {
+          img.setAttribute('referrerpolicy', 'no-referrer');
+          
+          let finalSrc = src;
+          if (!src.startsWith('http://') && !src.startsWith('https://') && !src.startsWith('data:')) {
+            let cleanPath = src.replace(/^(\.\.?\/)+/, '').replace(/^\//, '');
+            finalSrc = `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/${cleanPath}`;
+          }
+          
+          img.setAttribute('data-final-src', finalSrc);
+          img.removeAttribute('src'); // Временно убираем src, чтобы не загрузился до установки onerror
+        }
+      });
+
+      // 3. Вставляем подготовленный HTML на страницу
+      mdContent.innerHTML = doc.body.innerHTML;
+
+      // 4. ВЕШАЕМ ОБРАБОТЧИКИ НА "ЖИВОЙ" DOM
+      mdContent.querySelectorAll('img').forEach(img => {
+        const finalSrc = img.getAttribute('data-final-src');
+        if (!finalSrc) return;
+
+        // Устанавливаем прямой путь
+        img.setAttribute('src', finalSrc);
+
+        // Если прямая загрузка падает — меняем на прокси wsrv.nl
+        img.addEventListener('error', function() {
+          if (!this.dataset.proxyTried) {
+            this.dataset.proxyTried = 'true';
+            const encodedUrl = encodeURIComponent(finalSrc);
+            this.setAttribute('src', `https://wsrv.nl/?url=${encodedUrl}`);
+          } else {
+            // Если и прокси упал, скрываем битую иконку
+            this.style.display = 'none';
+          }
+        });
+      });
+
+    } catch (err) {
+      mdContent.innerHTML = `<div class="md-error">Failed to load README. <a href="${repoUrl}" target="_blank">Open repository directly</a>.</div>`;
+    }
     });
 }
