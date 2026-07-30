@@ -64,6 +64,24 @@
     display: none !important;
   }
 
+  .timeline-item,
+  .project-card,
+  .doc-item {
+    position: relative;
+  }
+
+  .print-only-block-link {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: transparent !important;
+    text-decoration: none !important;
+  }
+
   .print-only {
     display: block !important;
   }

@@ -185,6 +185,7 @@ export function renderContent(i18nConfig, lang) {
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
       </a>
+      ${e.url && e.url !== '#' ? `<a href="${esc(e.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
     </div>
   `).join('');
 
@@ -227,6 +228,7 @@ export function renderContent(i18nConfig, lang) {
               <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
           </a>
+          <a href="${esc(p.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>
         </article>`).join('')}
     </div>
   `;
@@ -292,6 +294,7 @@ export function renderContent(i18nConfig, lang) {
               <div class="doc-desc">${esc(d.description)}</div>
             </div>
             ${pdfBtn}
+            ${d.url ? `<a href="${esc(d.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
           </div>
         `;
       }).join('')}

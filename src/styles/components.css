@@ -654,3 +654,7 @@ body.tab-hidden .scroll-cue {
   color: var(--color-accent);
   background: rgba(var(--color-accent-rgb), 0.1);
 }
+
+.print-only-block-link {
+  display: none;
+}
