@@ -97,92 +97,30 @@ footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_bla
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
 tagline = { en = "Bioinformatics graduate with a background in applied mathematics and physics; I develop open-source tools for genomic analytics and combine this with wet-lab work.", fr = "Diplômé en bioinformatique avec une formation en mathématiques appliquées et en physique; je développe des outils open-source pour l'analytique génomique, en combinant cela avec un travail à la paillasse.", ru = "Бакалавр биоинформатики с подготовкой в прикладной математике и физике; разрабатываю open-source инструменты для геномной аналитики и совмещаю это с работой в мокрой лаборатории." }
 bio = { en = """
-Hi, my name is Alex. I like going through the whole research
-cycle: collecting a sample in the field, extracting DNA, running PCR,
-setting up electrophoresis, and then processing the data and assembling
-the statistics into a beautiful interactive dashboard. The intersection
-of the wet lab and high-performance computing is where I feel at home.
+I will receive my B.Sc. in Bioinformatics from Peter the Great St. Petersburg Polytechnic University (SPbPU) in 2026. My academic background combines bioinformatics with training in physics and applied mathematics. Since 2022, I have been working at the Laboratory of Microbiological Monitoring and Soil Bioremediation (All-Russian Research Institute for Agricultural Microbiology, Pushkin, St. Petersburg), where I combine computational analysis of genomic data with experimental ("wet-lab") research, from sample collection and DNA extraction to amplicon sequencing library preparation.
 
-I graduated from Peter the Great St. Petersburg Polytechnic University
-with a degree in Applied Mathematics and Informatics (bioinformatics),
-and I'm now looking for a master's programme — the next step toward
-a scientific career. Alongside that, I work in the Laboratory of
-Microbiological Monitoring at ARRIAM (Pushkin, Saint Petersburg):
-I study soil metagenomes and handle DNA extraction, electrophoresis,
-PCR, and sequencing library preparation.
+Alongside experimental work, I contribute to the development of the **Pannagram** software package, including code refactoring, development workflow automation, and documentation. Within projects funded by the Russian Science Foundation (RSF), I analyze experimental data, prepare figures for scientific publications, and edit research manuscripts. Working in a collaborative research environment has given me valuable experience in discussing scientific problems and interpreting results as part of a team.
 
-I write in Julia, Python, and R; I develop open-source packages for
-genomic analytics and contribute to collaborative pangenomics projects.
-I have co-authorship experience in peer-reviewed journals and have
-given talks at field conferences.
+In parallel, I develop my own computational tools for molecular biology. My main projects, **DePPA.jl** and **SeqFold.jl**, are Julia packages for degenerate PCR primer design and nucleic acid secondary structure prediction. Both packages have reached stable releases, include comprehensive documentation, and are registered in the Julia General Registry. My daily workflow involves Julia, Python, R, and Bash. I also administer the laboratory's computing infrastructure and maintain the software environment for high-performance computing.
 
-Right now I'm deliberately deepening my biological foundation,
-sharpening my statistics, and learning French. From a master's
-programme I expect a transition from applied tasks to fundamental
-questions in evolutionary genomics and metagenomics — from soil
-communities to the human microbiome.
+The next step in my professional development is a transition toward biomedical research. My current experience is primarily focused on microbial genomics and soil microbiology, while I am seeking opportunities to work with eukaryotic systems, biomedical datasets, and research groups in these areas. This is why I am applying for a Master's program: to build on my background in computational biology, gain experience with biomedical data, and join a research group working on problems in biomedicine.
 
-Outside of science I translate poetry, ride a bike, and build small
-web tools — sometimes useful, sometimes just pretty.
 """, fr = """
-Salut, je m'appelle Alex. J'aime parcourir le cycle de recherche
-en entier : prélever un échantillon sur le terrain, extraire l'ADN,
-lancer une PCR, monter une électrophorèse, puis traiter les données
-et assembler les statistiques en un beau tableau de bord interactif.
-C'est à l'intersection de la paillasse et du calcul haute performance
-que je me sens à ma place.
+Je suis étudiant en bioinformatique à l'Université polytechnique Pierre-le-Grand de Saint-Pétersbourg (SPbPU), où j'obtiendrai ma licence en 2026. Ma formation repose sur un double parcours en bioinformatique, physique et mathématiques appliquées. Depuis 2022, je travaille au laboratoire de surveillance microbiologique et de bioremédiation des sols de l'Institut panrusse de recherche en microbiologie agricole (Pouchkine, Saint-Pétersbourg), où je combine l'analyse computationnelle de données génomiques avec le travail expérimental en laboratoire (« wet lab »), depuis le prélèvement des échantillons et l'extraction de l'ADN jusqu'à la préparation de bibliothèques pour le séquençage d'amplicons.
 
-J'ai obtenu mon diplôme de l'Université polytechnique de
-Saint-Pétersbourg en mathématiques appliquées et informatique
-(bioinformatique), et je cherche maintenant un master — la prochaine
-étape vers une carrière scientifique. En parallèle, je travaille au
-laboratoire de surveillance microbiologique de l'ARRIAM (Pouchkine,
-Saint-Pétersbourg) : j'étudie les métagénomes du sol et je m'occupe
-d'extraction d'ADN, d'électrophorèse, de PCR et de préparation de
-banques pour le séquençage.
+En parallèle des activités expérimentales, je contribue au développement du logiciel **Pannagram**, notamment au travers du refactoring du code, de l'automatisation du processus de développement et de la rédaction de la documentation. Dans le cadre de projets financés par la Fondation russe pour la science (RSF), j'analyse des données expérimentales, réalise les figures destinées aux publications scientifiques et participe à la révision de manuscrits. Cette expérience au sein d'une équipe de recherche m'a appris à discuter des problématiques scientifiques et à interpréter les résultats de manière collaborative.
 
-I write in Julia, Python, and R; I develop open-source packages for
-genomic analytics and contribute to collaborative pangenomics projects.
-I have co-authorship experience in peer-reviewed journals and have
-given talks at field conferences.
+Je développe également mes propres outils de calcul pour la biologie moléculaire. Mes principaux projets, **DePPA.jl** et **SeqFold.jl**, sont des bibliothèques écrites en Julia pour la conception d'amorces PCR dégénérées et la prédiction des structures secondaires des acides nucléiques. Ces deux projets ont atteint un niveau de maturité stable, disposent d'une documentation complète et sont enregistrés dans le Julia General Registry. J'utilise quotidiennement Julia, Python, R et Bash. J'assure également l'administration des serveurs du laboratoire ainsi que la maintenance de l'environnement logiciel dédié au calcul haute performance.
 
-En ce moment, j'approfondis délibérément mes bases en biologie,
-je renforce mes statistiques et j'apprends le français. J'attends d'un
-master la transition des tâches appliquées vers des questions
-fondamentales en génomique évolutive et en métagénomique — des
-communautés du sol au microbiome humain.
-
-En dehors de la science, je traduis de la poésie, je fais du vélo et
-je construis de petits outils web — parfois utiles, parfois simplement
-jolis.
+La prochaine étape de mon parcours est de m'orienter vers la recherche biomédicale. Mon expérience actuelle est principalement centrée sur la génomique microbienne et la microbiologie des sols ; je souhaite désormais acquérir une expérience des systèmes eucaryotes, des données biomédicales et des équipes de recherche spécialisées dans ces domaines. C'est dans cette perspective que je candidate à un master, afin de mettre à profit mon expérience en biologie computationnelle, d'apprendre à travailler avec des données biomédicales et de rejoindre une équipe de recherche en biomédecine.
 """, ru = """
-Привет, меня зовут Саша. Мне нравится проходить исследовательский
-цикл целиком: отобрать пробу в поле, выделить ДНК, прогнать ПЦР,
-поставить форез, а потом обработать данные и собрать статистику
-в красивый интерактивный дашборд. На стыке мокрой лаборатории
-и высокопроизводительных вычислений я чувствую себя на своём месте.
+Бакалавр биоинформатики (СПбПУ, 2026) с бэкграундом в физике и прикладной математике. С 2022 года работаю в лаборатории микробиологического мониторинга и биоремедиации почв ВНИИСХМ (г. Пушкин, Санкт-Петербург), где совмещаю вычислительный анализ геномных данных с экспериментальной («мокрой») лабораторной работой — от отбора проб и выделения ДНК до подготовки библиотек для ампликонного секвенирования.
 
-Я закончил Политех по направлению «Прикладная математика и
-информатика» (биоинформатика) и сейчас ищу магистратуру —
-следующий шаг к научной карьере. Параллельно работаю
-в лаборатории микробиологического мониторинга ВНИИСХМ (г. Пушкин,
-Санкт-Петербург): исследую почвенные метагеномы, занимаюсь
-выделением ДНК, электрофорезом, ПЦР и подготовкой библиотек
-к секвенированию.
+Помимо экспериментальной работы участвую в разработке пакета **Pannagram**, занимаюсь рефакторингом кода, автоматизацией процессов разработки и подготовкой документации. В рамках грантов РНФ обрабатываю экспериментальные данные, создаю публикационные иллюстрации, редактирую тексты научных статей. Работа в исследовательской группе дала мне опыт обсуждения научных задач и совместной интерпретации результатов.
 
-Пишу на Julia, Python и R; развиваю open-source пакеты для геномной
-аналитики, участвую в совместных проектах по пангеномике. Есть опыт
-соавторства в рецензируемых журналах и докладов на профильных конференциях.
+Параллельно разрабатываю собственные вычислительные инструменты для задач молекулярной биологии. Основные проекты — **DePPA.jl** и **SeqFold.jl**: пакеты на языке Julia для дизайна вырожденных ПЦР-праймеров и предсказания вторичных структур нуклеиновых кислот. Оба проекта доведены до стабильных релизов, снабжены документацией и зарегистрированы в Julia General Registry. В повседневной работе использую Julia, Python, R и Bash. Администрирую серверное оборудование лаборатории и поддерживаю вычислительное окружение для высокопроизводительных расчётов.
 
-Сейчас целенаправленно углубляю биологическую базу, подтягиваю
-статистику и учу французский. От магистратуры жду перехода
-от прикладных задач к фундаментальным вопросам в эволюционной
-геномике и метагеномике — от почвенных сообществ до микробиома
-человека.
-
-Вне науки перевожу стихи, катаюсь на велосипеде и собираю
-небольшие веб-инструменты — иногда полезные, иногда просто
-красивые.
+Следующим этапом для себя вижу переход в биомедицину. Мой текущий опыт сформирован преимущественно на задачах микробной геномики и почвенной микробиологии; я ищу опыт работы с эукариотическими системами, современными медицинскими данными и исследовательскими группами соответствующего профиля. Именно поэтому я поступаю в магистратуру, где рассчитываю применить свой опыт вычислительной биологии к задачам биомедицины, научиться работать с медицинскими данными и присоединиться к исследовательской группе, работающей над задачами биомедицины.
 """ }
 location = { en = "Saint Petersburg, Russia", fr = "Saint-Pétersbourg, Russie", ru = "Санкт-Петербург, Россия" }
 
