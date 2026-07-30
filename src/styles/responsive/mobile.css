@@ -181,23 +181,31 @@
     height: 100%;
   }
 
+  .hero-top {
+    display: none;
+  }
+
   .hero-content {
-    display: block !important;
-    position: relative;
+    display: flex !important;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     min-height: 0;
     width: 100%;
+    gap: 1rem;
   }
 
   .hero-photo {
-    position: absolute;
-    top: 30%;
-    left: 0;
-    right: 0;
-    transform: translateY(-60%);
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
     width: auto;
     max-width: 85%;
-    max-height: 40%;
+    max-height: 60%;
+    height: auto;
     object-fit: contain !important;
     border-radius: 12px;
     padding: 0;
@@ -205,16 +213,18 @@
   }
 
   .hero-text-block {
-    position: absolute;
-    top: 78%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    width: fit-content;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100%;
     max-width: 90%;
     margin: 0 auto;
     padding: 0;
     text-align: center;
+    flex-shrink: 0;
+    /* Текст не сжимается, чтобы не налезать на фото */
   }
 
   .hero-name {
@@ -232,7 +242,7 @@
     text-align-last: center;
     max-width: 100%;
     margin-top: 0.5rem;
-    font-size: 0.9rem;
+    font-size: calc(clamp(1.9rem, 9vw, 3rem) * 0.3);
     hyphens: auto;
     -webkit-hyphens: auto;
     overflow-wrap: break-word;
@@ -249,10 +259,17 @@
     justify-content: center;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    flex-shrink: 0;
   }
 
   .hero-draw-hint {
     display: none;
+  }
+
+  .scroll-cue {
+    padding: .7rem 0.8rem;
+    font-size: 1.15rem;
+    animation: bob-cue 1.5s ease-in-out infinite;
   }
 
   /* --- Content Grids --- */
