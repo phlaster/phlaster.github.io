@@ -33,7 +33,6 @@ export function initNavigation(renderCallback) {
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
 
-      // === Предотвращение сдвига страницы при смене языка ===
       const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
       const scrollPos = window.scrollY + barHeight + 50;
 
@@ -425,7 +424,6 @@ export function initCareerHighlighting() {
   };
 
   const drawLines = (item) => {
-    clearLines();
     const gridRect = careerGrid.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
     const placeId = item.dataset.place;
@@ -437,18 +435,44 @@ export function initCareerHighlighting() {
 
     if (matchingTags.length === 0) return;
 
-    const shuffled = [...matchingTags].sort(() => 0.5 - Math.random());
-    const tagsToAnimate = shuffled.slice(0, 10);
+    // === Группируем скиллы по их секциям (skill-group) ===
+    const groups = new Map();
+    matchingTags.forEach(tag => {
+      const group = tag.closest('.skill-group');
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(tag);
+    });
 
-    const totalDuration = 800;
-    const lineDuration = 600;
-    const stagger = tagsToAnimate.length > 1 ? (totalDuration - lineDuration) / (tagsToAnimate.length - 1) : 0;
+    // Перемешиваем навыки внутри каждой группы для случайности
+    const groupArrays = Array.from(groups.values());
+    groupArrays.forEach(arr => arr.sort(() => 0.5 - Math.random()));
+
+    // Выбираем равномерно (round-robin) из всех групп, но не больше 10
+    const tagsToAnimate = [];
+    let added = true;
+    while (tagsToAnimate.length < 10 && added) {
+      added = false;
+      for (let i = 0; i < groupArrays.length; i++) {
+        if (groupArrays[i].length > 0) {
+          tagsToAnimate.push(groupArrays[i].pop());
+          added = true;
+          if (tagsToAnimate.length === 10) break;
+        }
+      }
+    }
 
     tagsToAnimate.forEach((tag, index) => {
+      const delay = index * 20; // Плавный каскад
+
       setTimeout(() => {
+        // ЖЕСТКИЙ ЛИМИТ: Не более 50 лучей одновременно на экране
+        if (svg.querySelectorAll('line').length >= 25) return;
+
         const tagRect = tag.getBoundingClientRect();
+
         const startX = itemRect.left + Math.random() * itemRect.width - gridRect.left;
         const startY = itemRect.top + Math.random() * itemRect.height - gridRect.top;
+
         const endX = tagRect.left + Math.random() * tagRect.width - gridRect.left;
         const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
 
@@ -461,41 +485,47 @@ export function initCareerHighlighting() {
         line.setAttribute('stroke-width', '3');
         line.setAttribute('stroke-linecap', 'round');
 
-        const length = Math.hypot(endX - startX, endY - startY);
-        const segLength = Math.max(10, length * 0.3);
-
-        line.style.strokeDasharray = `${segLength} ${length + segLength}`;
-        line.style.strokeDashoffset = '0';
+        // Толще пунктир
+        line.style.strokeDasharray = '5 25';
         line.style.opacity = '0';
+
         svg.appendChild(line);
 
-        requestAnimationFrame(() => {
-          line.style.transition = 'opacity 0.2s ease-out, stroke-dashoffset 0.3s ease-in';
-          line.style.opacity = '0.6';
-          line.style.strokeDashoffset = `${-(length - segLength)}`;
+        // Быстрое время жизни и прозрачность
+        const fadeAnim = line.animate([
+          { opacity: 0, offset: 0 },
+          { opacity: 0.35, offset: 0.3 },
+          { opacity: 0.35, offset: 0.7 },
+          { opacity: 0, offset: 1 }
+        ], {
+          duration: 400,
+          easing: 'ease-in-out',
+          fill: 'forwards'
         });
 
-        setTimeout(() => {
-          line.style.transition = 'opacity 0.1s ease-out';
-          line.style.opacity = '0';
-        }, 300);
+        // Ускоренное течение пунктира
+        line.animate([
+          { strokeDashoffset: 0 },
+          { strokeDashoffset: -28 }
+        ], {
+          duration: 200,
+          iterations: Infinity
+        });
 
-        setTimeout(() => {
+        fadeAnim.onfinish = () => {
           if (line.parentNode) line.remove();
-        }, 450);
-      }, index * stagger);
+        };
+      }, delay);
     });
   };
 
-  // Очистка только визуального подсвечивания (для ховера)
   const clearVisuals = () => {
     timelineItems.forEach(i => i.classList.remove('is-highlighted'));
     skillTags.forEach(t => t.classList.remove('highlight'));
     careerGrid.classList.remove('is-hovering');
-    clearLines();
+    // Важно: НЕ вызываем clearLines() здесь, чтобы лучи могли плавно затухнуть сами
   };
 
-  // Применение визуального подсвечивания (для ховера)
   const applyVisuals = (item) => {
     clearVisuals();
     careerGrid.classList.add('is-hovering');
@@ -511,17 +541,24 @@ export function initCareerHighlighting() {
     drawLines(item);
   };
 
-  // Полная очистка (снимает фиксацию клика и визуал)
   const clearActive = () => {
     timelineItems.forEach(i => i.classList.remove('is-active'));
     clearVisuals();
+    clearLines(); // При сбросе (скролл) убиваем лучи мгновенно
   };
 
-  // Фиксация элемента (по клику или тапу)
   const setActive = (item) => {
-    clearActive();
-    item.classList.add('is-active');
-    applyVisuals(item);
+    if (item.classList.contains('is-highlighted')) {
+      timelineItems.forEach(i => {
+        if (i !== item) i.classList.remove('is-active');
+      });
+      item.classList.remove('is-highlighted');
+      item.classList.add('is-active');
+    } else {
+      clearActive();
+      item.classList.add('is-active');
+      applyVisuals(item);
+    }
   };
 
   timelineItems.forEach(item => {
@@ -531,7 +568,6 @@ export function initCareerHighlighting() {
     item.onpointerenter = null;
     item.onpointerleave = null;
 
-    // Ховер только для мыши и только если нет зафиксированного (is-active) элемента
     item.addEventListener('pointerenter', (e) => {
       if (e.pointerType === 'mouse' && !document.querySelector('.timeline-item.is-active')) {
         applyVisuals(item);
@@ -544,7 +580,6 @@ export function initCareerHighlighting() {
       }
     });
 
-    // Унифицированное поведение для кликов и тапов
     item.addEventListener('click', (e) => {
       if (e.target.closest('.timeline-link-btn')) return;
 
