@@ -77,28 +77,30 @@
   z-index: var(--z-base);
 }
 
-/* Активное состояние (тоггл на мобайл) */
-.timeline-item.is-active {
+/* Активное состояние (фиксация по клику/тапу) и Ховер (для мыши) */
+.timeline-item.is-active,
+.timeline-item.is-highlighted {
   border-color: var(--color-accent);
   background: rgba(var(--color-accent-rgb), 0.08);
   opacity: 1;
 }
 
-/* Обесцвечивание остальных элементов, когда один активен */
-.career-grid.is-hovering .timeline-item:not(.is-active),
+/* Обесцвечивание остальных элементов, когда один активен/подсвечен */
+.career-grid.is-hovering .timeline-item:not(.is-highlighted):not(.is-active),
 .career-grid.is-hovering .skill-tag:not(.highlight) {
   opacity: 0.5;
   transition: opacity 0.2s;
 }
 
+.career-grid.is-hovering .timeline-item.is-highlighted,
 .career-grid.is-hovering .timeline-item.is-active,
 .career-grid.is-hovering .skill-tag.highlight {
   opacity: 1 !important;
 }
 
-/* Кнопка-ссылка. По умолчанию скрыта (на десктопе) */
+/* Кнопка-ссылка */
 .timeline-link-btn {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
@@ -471,10 +473,8 @@
   color: var(--color-dark-fg);
   opacity: 0.3;
   pointer-events: none;
-  /* Не реагирует на ховер и касания по умолчанию */
 }
 
-/* Активная (текст набран) */
 .submit-btn.is-active {
   opacity: 1;
   pointer-events: auto;
@@ -482,7 +482,6 @@
   color: var(--color-dark-fg);
 }
 
-/* Состояние загрузки */
 .submit-btn.is-loading {
   opacity: 1;
   pointer-events: none;
@@ -490,7 +489,6 @@
   color: var(--color-dark-fg);
 }
 
-/* Состояние ошибки */
 .submit-btn.is-error {
   opacity: 1;
   pointer-events: auto;

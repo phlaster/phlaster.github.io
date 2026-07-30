@@ -47,7 +47,7 @@
   }
 
   .mobile-menu-toggle {
-    display: flex; /* Включаем гамбургер на мобильных */
+    display: flex;
     align-items: center;
     justify-content: center;
     grid-row: 1;
@@ -283,7 +283,6 @@
   }
 
   .timeline-item .timeline-link-btn {
-    display: flex; /* Показываем кнопку на мобилках */
     grid-column: 2;
     grid-row: 1;
   }

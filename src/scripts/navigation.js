@@ -37,7 +37,6 @@ export function initNavigation(renderCallback) {
       const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
       const scrollPos = window.scrollY + barHeight + 50;
 
-      // Находим секцию, в которой сейчас находится пользователь
       let activeSection = document.getElementById('hero');
       const sectionsList = Array.from(document.querySelectorAll('.content-section, #contact'));
       for (let i = 0; i < sectionsList.length; i++) {
@@ -48,13 +47,9 @@ export function initNavigation(renderCallback) {
         }
       }
 
-      // Запоминаем отступ от начала этой секции до текущего скролла
       const offsetIn = window.scrollY - activeSection.offsetTop;
-
-      // Перерисовываем контент (вызывает rerender в main.js)
       renderCallback(newLang);
 
-      // Восстанавливаем позицию скролла с учетом новых размеров секции
       const newScrollTop = activeSection.offsetTop + offsetIn;
       window.scrollTo(0, newScrollTop);
     });
@@ -67,14 +62,12 @@ export function initNavigation(renderCallback) {
     }
   });
 
-  // === Логика мобильного меню (гамбургер) ===
+  // === Логика мобильного меню ===
   if (mobileMenuToggle) {
     const closeMobileMenu = () => {
       if (topbar.classList.contains('mobile-menu-open')) {
         topbar.classList.remove('mobile-menu-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
-
-        // Триггерим закрытие меню выбора языка при закрытии мобильного меню
         langSwitch.classList.remove('open');
         langTrigger.setAttribute('aria-expanded', 'false');
       }
@@ -82,21 +75,17 @@ export function initNavigation(renderCallback) {
 
     mobileMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-
-      // Любое нажатие на гамбургер (открытие или закрытие) закрывает меню языка
       langSwitch.classList.remove('open');
       langTrigger.setAttribute('aria-expanded', 'false');
 
       const isOpen = topbar.classList.toggle('mobile-menu-open');
       mobileMenuToggle.setAttribute('aria-expanded', isOpen);
 
-      // Снимаем фокус с iframe, чтобы следующее касание по нему снова вызвало blur
       if (isOpen) {
         mobileMenuToggle.focus();
       }
     });
 
-    // Закрываем меню при клике или касании вне области топбара (по документу)
     const handleOutsideInteraction = (e) => {
       if (!topbar.contains(e.target)) {
         closeMobileMenu();
@@ -108,20 +97,14 @@ export function initNavigation(renderCallback) {
       passive: true
     });
 
-    // Особый случай: касание внутри iframe (например, для рисования).
-    // Если iframe получает фокус, родительское окно теряет фокус (событие blur).
-    // Это позволяет закрыть меню, не блокируя само касание внутри iframe.
     window.addEventListener('blur', () => {
       if (topbar.classList.contains('mobile-menu-open')) {
         closeMobileMenu();
       }
     });
 
-    // === Закрытие меню свайпом вверх ===
     let touchStartY = 0;
-
     topbar.addEventListener('touchstart', (e) => {
-      // Запоминаем начальную точку касания, только если меню открыто
       if (topbar.classList.contains('mobile-menu-open')) {
         touchStartY = e.touches[0].clientY;
       }
@@ -131,11 +114,8 @@ export function initNavigation(renderCallback) {
 
     topbar.addEventListener('touchend', (e) => {
       if (!topbar.classList.contains('mobile-menu-open')) return;
-
       const touchEndY = e.changedTouches[0].clientY;
       const deltaY = touchEndY - touchStartY;
-
-      // Если свайп вверх (отрицательное значение) больше 50px
       if (deltaY < -50) {
         closeMobileMenu();
       }
@@ -151,17 +131,14 @@ export function initNavigation(renderCallback) {
   const scrollCue = $('scrollCue');
   const heroSection = $('hero');
 
-  // === Клик по логотипу A.M — проматывает в самый верх ===
   const brandEl = document.querySelector('.brand');
   if (brandEl) {
     brandEl.style.cursor = 'pointer';
     brandEl.addEventListener('click', () => {
-      // Закрываем мобильное меню при клике на бренд
       if (topbar.classList.contains('mobile-menu-open')) {
         topbar.classList.remove('mobile-menu-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
-
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -169,35 +146,26 @@ export function initNavigation(renderCallback) {
     });
   }
 
-  // === Функция точного расчета позиции скролла ===
   function getTargetScrollTop(targetId) {
     const targetEl = document.getElementById(targetId);
     if (!targetEl) return 0;
-
-    // Берем высоту из CSS-переменной, чтобы раскрытое мобильное меню не ломало расчет отступа
     const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
-
     if (targetId === 'contact') {
       return targetEl.getBoundingClientRect().top + window.scrollY - barHeight + 30;
     }
-
     const panelHead = targetEl.querySelector('.panel-head');
     const anchorEl = panelHead || targetEl;
     return anchorEl.getBoundingClientRect().top + window.scrollY - barHeight - 20;
   }
 
-  // === Обработка кликов по навигации ===
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = link.getAttribute('href').substring(1);
-
-      // Закрываем мобильное меню при клике на пункт навигации
       if (topbar.classList.contains('mobile-menu-open')) {
         topbar.classList.remove('mobile-menu-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
-
       window.scrollTo({
         top: getTargetScrollTop(targetId),
         behavior: 'smooth'
@@ -205,7 +173,6 @@ export function initNavigation(renderCallback) {
     });
   });
 
-  // === Кнопка скролла из Hero ===
   if (scrollCue) {
     scrollCue.addEventListener('click', () => {
       window.scrollTo({
@@ -215,13 +182,10 @@ export function initNavigation(renderCallback) {
     });
   }
 
-  // === Клавиатурная навигация ===
   function getActiveSectionIndex() {
-    // Если мы в самом низу страницы, активным считается последний раздел (контакты)
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
       return sections.length - 1;
     }
-
     const barHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
     const scrollPos = window.scrollY + barHeight + 50;
     let activeIndex = -1;
@@ -249,10 +213,7 @@ export function initNavigation(renderCallback) {
     let currentIndex = getActiveSectionIndex();
 
     if (['PageDown', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
-      // Если мы в самом верху (Hero), currentIndex равен -1. 
-      // В таком случае нам нужен самый первый раздел (0 — About), а не +1 к нему.
       const nextIndex = currentIndex === -1 ? 0 : Math.min(currentIndex + 1, sections.length - 1);
-
       if (sections[nextIndex]) {
         window.scrollTo({
           top: getTargetScrollTop(sections[nextIndex].id),
@@ -296,7 +257,6 @@ export function initNavigation(renderCallback) {
     const heroObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const iframe = document.getElementById('heroIframe');
-
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           if (iframe && iframe.contentWindow) {
             iframe.contentWindow.postMessage({
@@ -306,7 +266,6 @@ export function initNavigation(renderCallback) {
           }
         } else {
           navLinks.forEach(link => link.classList.remove('active'));
-
           if (iframe && iframe.contentWindow) {
             const isMobile = window.matchMedia("(max-width: 768px)").matches;
             const mode = isMobile ? 'disabled' : 'reduced';
@@ -320,7 +279,6 @@ export function initNavigation(renderCallback) {
     }, {
       threshold: [0, 0.5, 1]
     });
-
     heroObserver.observe(heroSection);
   }
 
@@ -360,7 +318,6 @@ export function initNavigation(renderCallback) {
         drawHint.style.transform = `translateY(${10 * fadeProgress}px)`;
       }
 
-      // === Прилипание перемотки (Snap to top) ===
       const snapThreshold = heroHeight * 0.25;
       if (window.scrollY > 0 && window.scrollY <= snapThreshold) {
         clearTimeout(heroSnapTimer);
@@ -380,7 +337,6 @@ export function initNavigation(renderCallback) {
     if (scrollCue && heroSection) {
       const heroHeight = heroSection.offsetHeight;
       const isPastMidpoint = window.scrollY > heroHeight / 2;
-
       if (isPastMidpoint) {
         scrollCue.classList.add('paused');
       } else {
@@ -397,7 +353,6 @@ export function initNavigation(renderCallback) {
 
   document.addEventListener('visibilitychange', () => {
     const iframe = document.getElementById('heroIframe');
-
     if (document.hidden) {
       document.body.classList.add('tab-hidden');
       if (iframe && iframe.contentWindow) {
@@ -426,13 +381,11 @@ export function initNavigation(renderCallback) {
   handleScroll();
 }
 
-// Переменные для хранения слушателей, чтобы очищать их при повторном вызове
 let _careerResizeHandler = null;
 let _careerObserver = null;
 let _careerMediaHandler = null;
 
 export function initCareerHighlighting() {
-  // === ОЧИСТКА СТАРЫХ СЛУШАТЕЛЕЙ (чтобы не было утечки памяти) ===
   if (_careerResizeHandler) {
     window.removeEventListener('resize', _careerResizeHandler);
     _careerResizeHandler = null;
@@ -452,9 +405,6 @@ export function initCareerHighlighting() {
 
   if (!timelineItems.length || !skillTags.length || !careerGrid) return;
 
-  const isWideScreen = () => window.matchMedia('(min-width: 769px)').matches;
-
-  // === Создаем SVG слой для линий ===
   careerGrid.style.position = 'relative';
   let svg = careerGrid.querySelector('.career-lines-svg');
   if (!svg) {
@@ -476,8 +426,6 @@ export function initCareerHighlighting() {
 
   const drawLines = (item) => {
     clearLines();
-    if (isWideScreen()) return;
-
     const gridRect = careerGrid.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
     const placeId = item.dataset.place;
@@ -499,10 +447,8 @@ export function initCareerHighlighting() {
     tagsToAnimate.forEach((tag, index) => {
       setTimeout(() => {
         const tagRect = tag.getBoundingClientRect();
-
         const startX = itemRect.left + Math.random() * itemRect.width - gridRect.left;
         const startY = itemRect.top + Math.random() * itemRect.height - gridRect.top;
-
         const endX = tagRect.left + Math.random() * tagRect.width - gridRect.left;
         const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
 
@@ -521,7 +467,6 @@ export function initCareerHighlighting() {
         line.style.strokeDasharray = `${segLength} ${length + segLength}`;
         line.style.strokeDashoffset = '0';
         line.style.opacity = '0';
-
         svg.appendChild(line);
 
         requestAnimationFrame(() => {
@@ -538,22 +483,23 @@ export function initCareerHighlighting() {
         setTimeout(() => {
           if (line.parentNode) line.remove();
         }, 450);
-
       }, index * stagger);
     });
   };
 
-  const clearActive = () => {
-    timelineItems.forEach(i => i.classList.remove('is-active'));
+  // Очистка только визуального подсвечивания (для ховера)
+  const clearVisuals = () => {
+    timelineItems.forEach(i => i.classList.remove('is-highlighted'));
     skillTags.forEach(t => t.classList.remove('highlight'));
     careerGrid.classList.remove('is-hovering');
     clearLines();
   };
 
-  const setActive = (item) => {
-    clearActive();
-    item.classList.add('is-active');
+  // Применение визуального подсвечивания (для ховера)
+  const applyVisuals = (item) => {
+    clearVisuals();
     careerGrid.classList.add('is-hovering');
+    item.classList.add('is-highlighted');
     const placeId = item.dataset.place;
     if (placeId) {
       Array.from(skillTags).forEach(tag => {
@@ -565,34 +511,47 @@ export function initCareerHighlighting() {
     drawLines(item);
   };
 
-  // Удаляем старые слушатели на элементах перед добавлением новых (чтобы не дублировались)
+  // Полная очистка (снимает фиксацию клика и визуал)
+  const clearActive = () => {
+    timelineItems.forEach(i => i.classList.remove('is-active'));
+    clearVisuals();
+  };
+
+  // Фиксация элемента (по клику или тапу)
+  const setActive = (item) => {
+    clearActive();
+    item.classList.add('is-active');
+    applyVisuals(item);
+  };
+
   timelineItems.forEach(item => {
     item.onmouseenter = null;
     item.onmouseleave = null;
     item.onclick = null;
+    item.onpointerenter = null;
+    item.onpointerleave = null;
 
-    item.addEventListener('mouseenter', () => {
-      if (isWideScreen()) setActive(item);
+    // Ховер только для мыши и только если нет зафиксированного (is-active) элемента
+    item.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse' && !document.querySelector('.timeline-item.is-active')) {
+        applyVisuals(item);
+      }
     });
 
-    item.addEventListener('mouseleave', () => {
-      if (isWideScreen()) clearActive();
+    item.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse' && !document.querySelector('.timeline-item.is-active')) {
+        clearVisuals();
+      }
     });
 
+    // Унифицированное поведение для кликов и тапов
     item.addEventListener('click', (e) => {
       if (e.target.closest('.timeline-link-btn')) return;
 
-      if (isWideScreen()) {
-        const url = item.dataset.url;
-        if (url && url !== '#') {
-          window.open(url, '_blank', 'noopener');
-        }
+      if (item.classList.contains('is-active')) {
+        clearActive();
       } else {
-        if (item.classList.contains('is-active')) {
-          clearActive();
-        } else {
-          setActive(item);
-        }
+        setActive(item);
       }
     });
   });
@@ -602,7 +561,9 @@ export function initCareerHighlighting() {
     entries.forEach(entry => {
       if (entry.isIntersecting) clearActive();
     });
-  }, { threshold: 0.3 });
+  }, {
+    threshold: 0.3
+  });
   sections.forEach(sec => _careerObserver.observe(sec));
 
   _careerMediaHandler = (e) => {
