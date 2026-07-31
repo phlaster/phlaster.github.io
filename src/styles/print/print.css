@@ -396,12 +396,19 @@
     text-decoration: none !important;
   }
 
+  /* --- Content Grids --- */
   .about-grid,
   .career-grid,
   .research-grid,
-  .documents-grid,
   .projects-grid {
-    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Переопределение для документов на мобилках */
+  .documents-grid {
+    column-count: 1 !important;
+    column-gap: 0 !important;
   }
 
   .about-grid {
@@ -419,11 +426,6 @@
     gap: 3rem !important;
   }
 
-  .documents-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 1.5rem 3rem !important;
-  }
-
   .projects-grid {
     grid-template-columns: repeat(4, 1fr) !important;
   }
@@ -434,8 +436,24 @@
     image-rendering: high-quality;
   }
 
+  .documents-grid {
+    column-count: 3 !important;
+    column-gap: 3rem !important;
+  }
+
+  .doc-group {
+    break-inside: auto !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .doc-group-start {
+    break-inside: avoid !important;
+  }
+
   .doc-item {
     text-decoration: none !important;
     color: var(--color-text) !important;
+    break-inside: avoid !important;
   }
+
 }

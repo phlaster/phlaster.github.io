@@ -305,38 +305,79 @@
 
 /* Documents */
 .documents-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem 3rem;
+  column-width: 280px;
+  column-gap: 3rem;
+}
+
+.doc-group {
+  break-inside: auto;
+  -webkit-column-break-inside: auto;
+  page-break-inside: auto;
+  
+  margin-bottom: 2.5rem;
+  display: block;
+}
+
+.doc-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Неразрывный блок: заголовок + первый документ */
+.doc-group-start {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.doc-group-title {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .doc-item {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
   gap: 0.75rem;
-  padding: 1.25rem 0;
-  border-top: 1px solid var(--color-border);
+  position: relative;
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
   text-decoration: none;
   color: inherit;
+  
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
-.doc-meta {
-  display: flex;
-  justify-content: space-between;
+.doc-item:last-child {
+  margin-bottom: 0;
+}
+
+.doc-date {
   font-family: var(--font-sans);
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: var(--color-text-faded);
-  text-transform: uppercase;
 }
 
 .doc-title {
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
 }
 
-.doc-desc {
-  font-size: .9375rem;
-  color: var(--color-text-muted);
+.doc-item .view-pdf-btn {
+  align-self: center;
+  margin-top: 0;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
 }
 
 /* View PDF Button (Research & Documents) */

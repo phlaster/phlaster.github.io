@@ -276,10 +276,15 @@
   .about-grid,
   .career-grid,
   .research-grid,
-  .documents-grid,
   .projects-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
+  }
+
+  /* Переопределение для документов на мобилках */
+  .documents-grid {
+    column-count: 1 !important;
+    column-gap: 0 !important;
   }
 
   .research-grid .research-col:nth-child(1) {

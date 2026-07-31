@@ -277,27 +277,69 @@ export function renderContent(i18nConfig, lang) {
   // DOCUMENTS
   $('docs-title').textContent = sections.documents?.title || '';
   $('docs-sub').textContent = sections.documents?.sub || '';
+
+  const docGroupsConfig = i18nConfig.document_groups || {};
   const docs = (i18nConfig.documents || []).filter(d => !d.languages || d.languages.includes(lang));
+
+  // Распределяем документы по группам
+  const groupedDocs = {};
+  docs.forEach(d => {
+    (d.groups || []).forEach(g => {
+      if (!groupedDocs[g]) groupedDocs[g] = [];
+      groupedDocs[g].push(d);
+    });
+  });
+
+  // Сортируем документы внутри каждой группы по дате (от новых к старым).
+  // Если даты совпадают, исходный порядок сохраняется (стабильная сортировка).
+  Object.keys(groupedDocs).forEach(gKey => {
+    groupedDocs[gKey].sort((a, b) => {
+      const dateA = String(a.date || '');
+      const dateB = String(b.date || '');
+      return dateB.localeCompare(dateA);
+    });
+  });
+
+  // Генерируем HTML для групп
+  const docGroupsHtml = Object.keys(docGroupsConfig).map(gKey => {
+    const groupConfig = docGroupsConfig[gKey];
+    const items = groupedDocs[gKey] || [];
+    
+    // Не выводим пустые группы
+    if (items.length === 0) return '';
+
+    // Универсальная функция рендера одного документа
+    const renderDocItem = (d) => `
+      <div class="doc-item">
+        <span class="doc-date">${esc(d.date || '')}</span>
+        <div class="doc-title">${esc(d.title)}</div>
+        ${d.url ? `<button class="view-pdf-btn" data-pdf="${esc(d.url)}" type="button">${esc(ui.view_pdf || 'Open PDF')}</button>` : ''}
+        ${d.url ? `<a href="${esc(d.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
+      </div>
+    `;
+
+    // Оборачиваем заголовок и ПЕРВЫЙ документ в неразрывный блок
+    const startBlock = `
+      <div class="doc-group-start">
+        <h3 class="doc-group-title">${esc(groupConfig.title)}</h3>
+        ${renderDocItem(items[0])}
+      </div>
+    `;
+
+    // Остальные документы (если они есть)
+    const restItemsHtml = items.slice(1).map(renderDocItem).join('');
+
+    return `
+      <div class="doc-group">
+        ${startBlock}
+        ${restItemsHtml}
+      </div>
+    `;
+  }).filter(Boolean).join('');
 
   $('documents-content').innerHTML = `
     <div class="documents-grid">
-      ${docs.map(d => {
-        const pdfBtn = d.url ? `<button class="view-pdf-btn" data-pdf="${esc(d.url)}" type="button">${esc(ui.view_pdf || 'Open PDF')}</button>` : '';
-        return `
-          <div class="doc-item">
-            <div class="doc-meta">
-              <span class="doc-category">${esc(d.category)}</span>
-              <span class="doc-date">${esc(d.date)}</span>
-            </div>
-            <div class="doc-content">
-              <div class="doc-title">${esc(d.title)}</div>
-              <div class="doc-desc">${esc(d.description)}</div>
-            </div>
-            ${pdfBtn}
-            ${d.url ? `<a href="${esc(d.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
-          </div>
-        `;
-      }).join('')}
+      ${docGroupsHtml}
     </div>
   `;
 

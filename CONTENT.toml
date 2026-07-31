@@ -95,7 +95,7 @@ footer_text = { en = "Generated from interactive <a href=\"{url}\" target=\"_bla
 #========== ABOUT ==========#
 [about]
 name = { en = "Alexander Bezlepsky", fr = "Alexander Bezlepski", ru = "Александр Безлепский" }
-tagline = { en = "Bioinformatics graduate with a background in applied mathematics and physics; I develop open-source tools for genomic analysis and combine this with wet-lab work.", fr = "Diplômé en bioinformatique avec une formation en mathématiques appliquées et en physique ; je développe des outils open-source pour l'analyse génomique, que je combine avec un travail à la paillasse.", ru = "Бакалавр биоинформатики с подготовкой в прикладной математике и физике; разрабатываю open-source инструменты для геномного анализа и совмещаю это с работой в мокрой лаборатории." }
+tagline = { en = "Bioinformatics graduate with a background in applied mathematics and physics; I develop open-source tools for genomic analysis and combine this with wet-lab work", fr = "Diplômé en bioinformatique avec une formation en mathématiques appliquées et en physique ; je développe des outils open-source pour l'analyse génomique, que je combine avec un travail à la paillasse", ru = "Бакалавр биоинформатики с подготовкой в прикладной математике и физике; разрабатываю open-source инструменты для геномного анализа и совмещаю это с работой в мокрой лаборатории" }
 bio = { en = """
 B.Sc. in Bioinformatics (Peter the Great St. Petersburg Polytechnic University, 2026) with a foundation in physics and applied mathematics. Since 2022, I have been working at the Laboratory of Microbiological Monitoring and Soil Bioremediation at ARRIAM, where I combine computational analysis of genomic data with hands-on wet-lab work — from sample collection and DNA extraction to library preparation for amplicon sequencing.
 
@@ -423,155 +423,150 @@ url = "https://rscf.ru/project/TLqba7bD8O9L0l3QnP6vWU91ZAflwEAqQnqhu6i3QoGjperF_
 
 
 #========== DOCUMENTS & ACHIEVEMENTS ==========#
-[[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
-date = "2024"
-title = { en = "Skoltech Certificate", fr = "Certificat Skoltech", ru = "Сертификат Сколтех" }
-description = { en = "Certificate of completion", fr = "Certificat de fin", ru = "Сертификат об успешном окончании" }
-url = "/assets/pdfs/certificate_skoltech2024.pdf"
-languages = ["en", "ru", "fr"]
+[document_groups.languages]
+title = { en = "Language Proficiency", fr = "Compétences linguistiques", ru = "Владение языками" }
+
+[document_groups.thesis]
+title = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
+
+[document_groups.summer_schools]
+title = { en = "Summer Schools", fr = "Écoles d'été", ru = "Летние школы" }
+
+[document_groups.online_courses]
+title = { en = "Online Courses", fr = "Cours en ligne", ru = "Онлайн-курсы" }
+
+[document_groups.student_projects]
+title = { en = "Student Projects", fr = "Projets étudiants", ru = "Студенческие проекты" }
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["languages"]
 date = "2026"
-title = { en = "Strømmen Certificate", fr = "Certificat Strømmen", ru = "Сертификат Strømmen" }
-description = { en = "French Certificate: B2 (Upper-Intermediate)", fr = "Certificat de français : B2 (Intermediaire supérieur)", ru = "Сертификат французского языка: B2 (Продвинутый)" }
-url = "/assets/pdfs/certificate_efset.pdf"
+title = { en = "English: C1 (EF SET)", fr = "Anglais : C1 (EF SET)", ru = "Английский: C1 (EF SET)" }
+url = "/assets/pdfs/cefr_en_c1.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["languages"]
 date = "2026"
-title = { en = "EF SET Certificate", fr = "Certificat EF SET", ru = "Сертификат EF SET" }
-description = { en = "English Certificate: C1 (Advanced)", fr = "Certificat d'anglais : C1 (Avancé)", ru = "Сертификат английского языка: C1 (Свободное владение)" }
-url = "/assets/pdfs/certificate_efset.pdf"
+title = { en = "French: B2 (Strømmen)", fr = "Français : B2 (Strømmen)", ru = "Французский: B2 (Strømmen)" }
+url = "/assets/pdfs/cefr_fr_b2.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
-category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
+groups = ["languages"]
+date = "2026"
+title = { en = "Duolingo streak — French (984 days, Lvl 92)", fr = "Série Duolingo — français (984 jours, Niv 92)", ru = "Серия Duolingo — французский (984 дня, ур. 92)" }
+url = "/assets/pdfs/duo_streak.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+groups = ["thesis"]
 date = "2026"
 title = { en = "Full Thesis Text", fr = "Texte intégral du mémoire", ru = "Выпускная квалификационная работа" }
-description = { en = "Full text of the graduation thesis", fr = "Texte intégral du mémoire de fin d'études", ru = "Полный текст дипломной работы" }
 url = "/assets/pdfs/thesis_full.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
+groups = ["thesis"]
 date = "2026"
 title = { en = "Graduation Thesis Abstract", fr = "Résumé du mémoire de fin d'études", ru = "Автореферат дипломной работы" }
-description = { en = "Title page and abstract section", fr = "Page de titre et résumé", ru = "Титульный лист и автореферат" }
 url = "/assets/pdfs/thesis_abstract_en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
-category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
+groups = ["thesis"]
 date = "2026"
 title = { en = "Defense Presentation", fr = "Présentation de soutenance", ru = "Презентация к защите" }
-description = { en = "Presentation for the thesis defense", fr = "Présentation pour la soutenance du mémoire", ru = "Презентация для защиты ВКР" }
 url = "/assets/pdfs/thesis_presentation.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "Дипломная работа" }
+groups = ["thesis"]
 date = "2026"
 title = { en = "Supervisor's Review", fr = "Avis du directeur de recherche", ru = "Отзыв научного руководителя" }
-description = { en = "Supervisor's review of the thesis", fr = "Avis du directeur sur le mémoire", ru = "Отзыв на дипломную работу" }
 url = "/assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Attestation", ru = "Справка" }
+groups = ["thesis"]
 date = "2026"
-title = {en = "Certificate of Plagiarism Check",fr = "Attestation de vérification d'originalité",ru = "Справка о проверке на заимствования"}
-description = {en = "Plagiarism check report for the graduation thesis", fr = "Rapport de vérification de plagiat pour la thèse de fin d'études", ru = "Результат проверки выпускной квалификационной работы "}
+title = { en = "Certificate of Plagiarism Check", fr = "Attestation de vérification d'originalité", ru = "Справка о проверке на заимствования" }
 url = "/assets/pdfs/thesis_certificate.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["summer_schools"]
+date = "2024"
+title = { en = "Skoltech Certificate", fr = "Certificat Skoltech", ru = "Сертификат Сколтех" }
+url = "/assets/pdfs/certificate_skoltech2024.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
 url = "/assets/pdfs/stepik-linux-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
 url = "/assets/pdfs/stepik-linux-ru.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
 url = "/assets/pdfs/stepik-molbio-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
-category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
 url = "/assets/pdfs/stepik-molbio-ru.pdf"
 languages = ["ru"]
 
-
 [[documents]]
-category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
+groups = ["student_projects"]
 date = "2023"
 title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", fr = "Méthode du gradient conjugué préconditionné pour les matrices creuses", ru = "Предобусловленный метод сопряженных градиентов для разреженных матриц" }
-description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
 url = "/assets/pdfs/coursework_nummethods.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Academic Paper", fr = "Travail académique", ru = "Академическая работа" }
+groups = ["student_projects"]
 date = "2023"
 title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
-description = { en = "Term paper for English language course", fr = "Travail de semestre pour le cours d'anglais", ru = "Семестровая работа по курсу английского языка" }
 url = "/assets/pdfs/paper_fp.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
-category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
+groups = ["student_projects"]
 date = "2023"
 title = { en = "Solving the Generalized Traveling Salesman Problem for CNC Machine Idle-Path Optimization", fr = "Résolution du problème généralisé du voyageur de commerce pour l'optimisation des trajets à vide des machines CNC", ru = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ" }
-description = { en = "Optimization Methods", fr = "Méthodes d'optimisation", ru = "Методы оптимизации" }
 url = "/assets/pdfs/coursework_optmethods.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
+groups = ["student_projects"]
 date = "2026"
-title = { en = "BS-Seq", fr = "BS-Seq", ru = "BS-Seq" }
-description = { en = "Bioinformatics", fr = "Bioinformatique", ru = "Биоинформатика" }
+title = { en = "BS-Seq (Bioinformatics)", fr = "BS-Seq (Bioinformatique)", ru = "BS-Seq (Биоинформатика)" }
 url = "/assets/pdfs/labtask_bioinf.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
+groups = ["student_projects"]
 date = "2025"
 title = { en = "Classification of Multivariate Objects with a Training Set", fr = "Classification d'objets multivariés en présence d'un échantillon d'apprentissage", ru = "Классификация многомерных объектов при наличии обучающей выборки" }
-description = { en = "Multivariate Statistical Analysis", fr = "Analyse statistique multivariée", ru = "Многомерный статистический анализ" }
 url = "/assets/pdfs/labtask_msa.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { en = "Lab Report", fr = "Travail pratique", ru = "Лабораторная работа" }
+groups = ["student_projects"]
 date = "2023"
-title = { en = "Approximation of Tabular Functions", fr = "Approximation de fonctions tabulaires", ru = "Приближение табличных функций" }
-description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
+title = { en = "Approximation of Tabular Functions (Numerical Methods)", fr = "Approximation de fonctions tabulaires (Méthodes numériques)", ru = "Приближение табличных функций (Численные методы)" }
 url = "/assets/pdfs/labtask_nummethods.pdf"
 languages = ["ru"]
-
-[[documents]]
-category = { ru = "Личное", en = "Personal", fr = "Personnel" }
-date = "2026"
-title = { ru = "Серия Duolingo — французский", en = "Duolingo streak — French", fr = "Série Duolingo — français" }
-description = { ru = "984 дня непрерывной практики, уровень 92", en = "984-day streak, level 92", fr = "984 jours de pratique continue, niveau 92" }
-url = "/assets/pdfs/duo_streak.pdf"
-languages = ["en", "ru", "fr"]
