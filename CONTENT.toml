@@ -442,131 +442,131 @@ title = { en = "Student Projects", fr = "Projets étudiants", ru = "Студен
 groups = ["languages"]
 date = "2026"
 title = { en = "English: C1 (EF SET)", fr = "Anglais : C1 (EF SET)", ru = "Английский: C1 (EF SET)" }
-url = "/assets/pdfs/cefr_en_c1.pdf"
+url = "assets/pdfs/cefr_en_c1.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["languages"]
 date = "2026"
 title = { en = "French: B2 (Strømmen)", fr = "Français : B2 (Strømmen)", ru = "Французский: B2 (Strømmen)" }
-url = "/assets/pdfs/cefr_fr_b2.pdf"
+url = "assets/pdfs/cefr_fr_b2.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["languages"]
 date = "2026"
 title = { en = "Duolingo streak — French (984 days, Lvl 92)", fr = "Série Duolingo — français (984 jours, Niv 92)", ru = "Серия Duolingo — французский (984 дня, ур. 92)" }
-url = "/assets/pdfs/duo_streak.pdf"
+url = "assets/pdfs/duo_streak.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["thesis"]
 date = "2026"
 title = { en = "Full Thesis Text", fr = "Texte intégral du mémoire", ru = "Выпускная квалификационная работа" }
-url = "/assets/pdfs/thesis_full.pdf"
+url = "assets/pdfs/thesis_full.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["thesis"]
 date = "2026"
 title = { en = "Graduation Thesis Abstract", fr = "Résumé du mémoire de fin d'études", ru = "Автореферат дипломной работы" }
-url = "/assets/pdfs/thesis_abstract_en.pdf"
+url = "assets/pdfs/thesis_abstract_en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
 groups = ["thesis"]
 date = "2026"
 title = { en = "Defense Presentation", fr = "Présentation de soutenance", ru = "Презентация к защите" }
-url = "/assets/pdfs/thesis_presentation.pdf"
+url = "assets/pdfs/thesis_presentation.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["thesis"]
 date = "2026"
 title = { en = "Supervisor's Review", fr = "Avis du directeur de recherche", ru = "Отзыв научного руководителя" }
-url = "/assets/pdfs/thesis_review.pdf"
+url = "assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["thesis"]
 date = "2026"
 title = { en = "Certificate of Plagiarism Check", fr = "Attestation de vérification d'originalité", ru = "Справка о проверке на заимствования" }
-url = "/assets/pdfs/thesis_certificate.pdf"
+url = "assets/pdfs/thesis_certificate.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["summer_schools"]
 date = "2024"
 title = { en = "Skoltech Certificate", fr = "Certificat Skoltech", ru = "Сертификат Сколтех" }
-url = "/assets/pdfs/certificate_skoltech2024.pdf"
+url = "assets/pdfs/certificate_skoltech2024.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-url = "/assets/pdfs/stepik-linux-en.pdf"
+url = "assets/pdfs/stepik-linux-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-url = "/assets/pdfs/stepik-linux-ru.pdf"
+url = "assets/pdfs/stepik-linux-ru.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-url = "/assets/pdfs/stepik-molbio-en.pdf"
+url = "assets/pdfs/stepik-molbio-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-url = "/assets/pdfs/stepik-molbio-ru.pdf"
+url = "assets/pdfs/stepik-molbio-ru.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
 title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", fr = "Méthode du gradient conjugué préconditionné pour les matrices creuses", ru = "Предобусловленный метод сопряженных градиентов для разреженных матриц" }
-url = "/assets/pdfs/coursework_nummethods.pdf"
+url = "assets/pdfs/coursework_nummethods.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
 title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
-url = "/assets/pdfs/paper_fp.pdf"
+url = "assets/pdfs/paper_fp.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
 title = { en = "Solving the Generalized Traveling Salesman Problem for CNC Machine Idle-Path Optimization", fr = "Résolution du problème généralisé du voyageur de commerce pour l'optimisation des trajets à vide des machines CNC", ru = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ" }
-url = "/assets/pdfs/coursework_optmethods.pdf"
+url = "assets/pdfs/coursework_optmethods.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2026"
 title = { en = "BS-Seq (Bioinformatics)", fr = "BS-Seq (Bioinformatique)", ru = "BS-Seq (Биоинформатика)" }
-url = "/assets/pdfs/labtask_bioinf.pdf"
+url = "assets/pdfs/labtask_bioinf.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2025"
 title = { en = "Classification of Multivariate Objects with a Training Set", fr = "Classification d'objets multivariés en présence d'un échantillon d'apprentissage", ru = "Классификация многомерных объектов при наличии обучающей выборки" }
-url = "/assets/pdfs/labtask_msa.pdf"
+url = "assets/pdfs/labtask_msa.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
 title = { en = "Approximation of Tabular Functions (Numerical Methods)", fr = "Approximation de fonctions tabulaires (Méthodes numériques)", ru = "Приближение табличных функций (Численные методы)" }
-url = "/assets/pdfs/labtask_nummethods.pdf"
+url = "assets/pdfs/labtask_nummethods.pdf"
 languages = ["ru"]

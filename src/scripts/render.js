@@ -274,6 +274,24 @@ export function renderContent(i18nConfig, lang) {
   </div>
 `;
 
+  // Функция для формирования абсолютного URL для печатной версии PDF
+  const deploySiteUrl = import.meta.env.VITE_SITE_URL || '';
+  const getPrintUrl = (url) => {
+    if (!url) return '#';
+    if (url.startsWith('http')) return url;
+    
+    // Если мы знаем URL сайта (GitHub Pages), используем его
+    if (deploySiteUrl) {
+      const base = deploySiteUrl.endsWith('/') ? deploySiteUrl : deploySiteUrl + '/';
+      return new URL(url.replace(/^\.\//, ''), base).href;
+    }
+    
+    // Fallback: если деплой неизвестен (локальная печать), используем текущий адрес
+    const origin = window.location.origin;
+    const base = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
+    return new URL(url.replace(/^\.\//, ''), origin + base).href;
+  };
+
   // DOCUMENTS
   $('docs-title').textContent = sections.documents?.title || '';
   $('docs-sub').textContent = sections.documents?.sub || '';
@@ -304,17 +322,15 @@ export function renderContent(i18nConfig, lang) {
   const docGroupsHtml = Object.keys(docGroupsConfig).map(gKey => {
     const groupConfig = docGroupsConfig[gKey];
     const items = groupedDocs[gKey] || [];
-    
-    // Не выводим пустые группы
+
     if (items.length === 0) return '';
 
-    // Универсальная функция рендера одного документа
     const renderDocItem = (d) => `
       <div class="doc-item">
         <span class="doc-date">${esc(d.date || '')}</span>
         <div class="doc-title">${esc(d.title)}</div>
         ${d.url ? `<button class="view-pdf-btn" data-pdf="${esc(d.url)}" type="button">${esc(ui.view_pdf || 'Open PDF')}</button>` : ''}
-        ${d.url ? `<a href="${esc(d.url)}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
+        ${d.url ? `<a href="${esc(getPrintUrl(d.url))}" class="print-only-block-link" target="_blank" rel="noopener"></a>` : ''}
       </div>
     `;
 
