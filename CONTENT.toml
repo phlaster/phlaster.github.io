@@ -211,8 +211,8 @@ description = { en = "40.03.01.02, Law", fr = "40.03.01.02, Droit", ru = "40.03.
 title = { en = "Languages", fr = "Langues", ru = "Языки" }
 items = [
   { name = { en = "Russian (Native)", fr = "Russe (Natif)", ru = "Русский (Родной)" }, places = ["smtu", "herzen_uni", "polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = { en = "English (B2)", fr = "Anglais (B2)", ru = "Английский (B2)" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
-  { name = { en = "French (B1)", fr = "Français (B1)", ru = "Французский (B1)" } }
+  { name = { en = "English (C1)", fr = "Anglais (C1)", ru = "Английский (C1)" }, places = ["polytech_phys", "skoltech_school", "polytech_bioinf", "arriam"] },
+  { name = { en = "French (B2)", fr = "Français (B2)", ru = "Французский (B2)" } }
 ]
 
 [[skill_groups]]
@@ -429,6 +429,22 @@ date = "2024"
 title = { en = "Skoltech Certificate", fr = "Certificat Skoltech", ru = "Сертификат Сколтех" }
 description = { en = "Certificate of completion", fr = "Certificat de fin", ru = "Сертификат об успешном окончании" }
 url = "/assets/pdfs/certificate_skoltech2024.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2026"
+title = { en = "Strømmen Certificate", fr = "Certificat Strømmen", ru = "Сертификат Strømmen" }
+description = { en = "French Certificate: B2 (Upper-Intermediate)", fr = "Certificat de français : B2 (Intermediaire supérieur)", ru = "Сертификат французского языка: B2 (Продвинутый)" }
+url = "/assets/pdfs/certificate_efset.pdf"
+languages = ["en", "ru", "fr"]
+
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2026"
+title = { en = "EF SET Certificate", fr = "Certificat EF SET", ru = "Сертификат EF SET" }
+description = { en = "English Certificate: C1 (Advanced)", fr = "Certificat d'anglais : C1 (Avancé)", ru = "Сертификат английского языка: C1 (Свободное владение)" }
+url = "/assets/pdfs/certificate_efset.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
