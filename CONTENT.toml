@@ -381,7 +381,7 @@ cover = "/assets/pics/brc_micro.webp"
 [[publications]]
 date = "2025"
 title = "A comparison of 27 Arabidopsis thaliana genomes and the path toward an unbiased characterization of genetic polymorphism"
-authors = "Igolkina et al."
+authors = "Anna A Igolkina, Sebastian Vorbrugg, Fernando A Rabanal, Hai-Jun Liu, Haim Ashkenazy, Aleksandra E Kornienko, Joffrey Fitz, Max Collenberg, Christian Kubica, Almudena Mollá Morales, Benjamin Jaegle, Travis Wrightsman, Vitaly Voloshin, Alexander D Bezlepsky, Victor Llaca, Viktoria Nizhynska, Ilka Reichardt, Ilja Bezrukov, Christa Lanz, Felix Bemm, Pádraic J Flood, Sileshi Nemomissa, Angela Hancock, Ya-Long Guo, Paul Kersey, Detlef Weigel, Magnus Nordborg"
 venue = "Nature Genetics, 57(9), 2289–2301"
 url = "https://www.nature.com/articles/s41588-025-02293-0"
 pdf = "/assets/pdfs/nature2025.pdf"
@@ -480,6 +480,14 @@ url = "/assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
+category = { en = "Certificate", fr = "Attestation", ru = "Справка" }
+date = "2026"
+title = {en = "Certificate of Plagiarism Check",fr = "Attestation de vérification d'originalité",ru = "Справка о проверке на заимствования"}
+description = {en = "Plagiarism check report for the graduation thesis", fr = "Rapport de vérification de plagiat pour la thèse de fin d'études", ru = "Результат проверки выпускной квалификационной работы "}
+url = "/assets/pdfs/thesis_certificate.pdf"
+languages = ["ru"]
+
+[[documents]]
 category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
@@ -559,3 +567,11 @@ title = { en = "Approximation of Tabular Functions", fr = "Approximation de fonc
 description = { en = "Numerical Methods", fr = "Méthodes numériques", ru = "Численные методы" }
 url = "/assets/pdfs/labtask_nummethods.pdf"
 languages = ["ru"]
+
+[[documents]]
+category = { ru = "Личное", en = "Personal", fr = "Personnel" }
+date = "2026"
+title = { ru = "Серия Duolingo — французский", en = "Duolingo streak — French", fr = "Série Duolingo — français" }
+description = { ru = "984 дня непрерывной практики, уровень 92", en = "984-day streak, level 92", fr = "984 jours de pratique continue, niveau 92" }
+url = "/assets/pdfs/duo_streak.pdf"
+languages = ["en", "ru", "fr"]
