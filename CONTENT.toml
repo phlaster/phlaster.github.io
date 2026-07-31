@@ -460,7 +460,7 @@ category = { en = "Graduation Thesis", fr = "Mémoire de fin d'études", ru = "�
 date = "2026"
 title = { en = "Graduation Thesis Abstract", fr = "Résumé du mémoire de fin d'études", ru = "Автореферат дипломной работы" }
 description = { en = "Title page and abstract section", fr = "Page de titre et résumé", ru = "Титульный лист и автореферат" }
-url = "/assets/pdfs/thesis_abstract_ru_en.pdf"
+url = "/assets/pdfs/thesis_abstract_en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
