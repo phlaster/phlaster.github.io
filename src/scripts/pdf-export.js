@@ -167,6 +167,21 @@ export function initPdfExport(i18nConfigGetter) {
       }
 
       await new Promise(r => setTimeout(r, 50));
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      
+      lazyImages.forEach(img => {
+        img.removeAttribute('loading');
+      });
+
+      await Promise.all(Array.from(lazyImages).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', resolve, { once: true });
+        });
+      }));
+
+      await new Promise(r => setTimeout(r, 100));
       window.print();
 
       printBg.innerHTML = '';
