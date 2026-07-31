@@ -464,12 +464,37 @@ url = "/assets/pdfs/thesis_review.pdf"
 languages = ["ru"]
 
 [[documents]]
-category = { ru = "Личное", en = "Personal", fr = "Personnel" }
-date = "2026"
-title = { ru = "Серия Duolingo — французский", en = "Duolingo streak — French", fr = "Série Duolingo — français" }
-description = { ru = "984 дня непрерывной практики, уровень 92", en = "984-day streak, level 92", fr = "984 jours de pratique continue, niveau 92" }
-url = "/assets/pdfs/duo_streak.pdf"
-languages = ["en", "ru", "fr"]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2021"
+title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
+description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
+url = "/assets/pdfs/stepik-linux-en.pdf"
+languages = ["en", "fr"]
+
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2021"
+title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
+description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
+url = "/assets/pdfs/stepik-linux-ru.pdf"
+languages = ["ru"]
+
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2021"
+title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
+description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
+url = "/assets/pdfs/stepik-molbio-en.pdf"
+languages = ["en", "fr"]
+
+[[documents]]
+category = { en = "Certificate", fr = "Certificat", ru = "Сертификат" }
+date = "2021"
+title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
+description = { en = "Certificate of completion", fr = "Certificat d'achèvement", ru = "Сертификат об окончании" }
+url = "/assets/pdfs/stepik-molbio-ru.pdf"
+languages = ["ru"]
+
 
 [[documents]]
 category = { en = "Term Paper", fr = "Travail de semestre", ru = "Курсовая работа" }
