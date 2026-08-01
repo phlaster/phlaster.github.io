@@ -172,12 +172,56 @@ export function initNavigation(renderCallback) {
     });
   });
 
+  // === Drag Scroll Cue Logic ===
+  let isDraggingCue = false;
+  let dragStartY = 0;
+  let dragStartScrollY = 0;
+
   if (scrollCue) {
-    scrollCue.addEventListener('click', () => {
+    scrollCue.addEventListener('click', (e) => {
+      if (scrollCue.dataset.dragged === 'true') {
+        e.preventDefault();
+        scrollCue.dataset.dragged = 'false';
+        return;
+      }
       window.scrollTo({
         top: getTargetScrollTop('about'),
         behavior: 'smooth'
       });
+    });
+
+    scrollCue.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      isDraggingCue = true;
+      scrollCue.classList.add('is-dragging');
+      scrollCue.dataset.dragged = 'false';
+
+      dragStartY = e.clientY;
+      dragStartScrollY = window.scrollY;
+
+      document.body.style.userSelect = 'none';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDraggingCue) return;
+      e.preventDefault();
+
+      const deltaY = e.clientY - dragStartY;
+
+      if (Math.abs(deltaY) > 5) {
+        scrollCue.dataset.dragged = 'true';
+      }
+
+      const newScrollY = dragStartScrollY - deltaY;
+      window.scrollTo(0, newScrollY);
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDraggingCue) {
+        isDraggingCue = false;
+        scrollCue.classList.remove('is-dragging');
+        document.body.style.userSelect = '';
+      }
     });
   }
 
@@ -283,6 +327,9 @@ export function initNavigation(renderCallback) {
 
   let scrollTimer = null;
   let heroSnapTimer = null;
+  let footerSnapTimer = null;
+
+  const footerSnapThreshold = 150;
 
   const handleScroll = () => {
     const contentTop = contentArea.getBoundingClientRect().top;
@@ -318,10 +365,10 @@ export function initNavigation(renderCallback) {
       }
 
       const snapThreshold = heroHeight * 0.25;
-      if (window.scrollY > 0 && window.scrollY <= snapThreshold) {
+      if (!isDraggingCue && window.scrollY > 0 && window.scrollY <= snapThreshold) {
         clearTimeout(heroSnapTimer);
         heroSnapTimer = setTimeout(() => {
-          if (window.scrollY > 0 && window.scrollY <= snapThreshold) {
+          if (!isDraggingCue && window.scrollY > 0 && window.scrollY <= snapThreshold) {
             window.scrollTo({
               top: 0,
               behavior: 'smooth'
@@ -331,6 +378,23 @@ export function initNavigation(renderCallback) {
       } else {
         clearTimeout(heroSnapTimer);
       }
+    }
+
+    const distanceToBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+
+    if (!isDraggingCue && distanceToBottom > 0 && distanceToBottom < footerSnapThreshold) {
+      clearTimeout(footerSnapTimer);
+      footerSnapTimer = setTimeout(() => {
+        const currentDistance = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+        if (!isDraggingCue && currentDistance > 0 && currentDistance < footerSnapThreshold) {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
+    } else {
+      clearTimeout(footerSnapTimer);
     }
 
     if (scrollCue && heroSection) {
@@ -435,7 +499,6 @@ export function initCareerHighlighting() {
 
     if (matchingTags.length === 0) return;
 
-    // === Группируем скиллы по их секциям (skill-group) ===
     const groups = new Map();
     matchingTags.forEach(tag => {
       const group = tag.closest('.skill-group');
@@ -443,11 +506,9 @@ export function initCareerHighlighting() {
       groups.get(group).push(tag);
     });
 
-    // Перемешиваем навыки внутри каждой группы для случайности
     const groupArrays = Array.from(groups.values());
     groupArrays.forEach(arr => arr.sort(() => 0.5 - Math.random()));
 
-    // Выбираем равномерно (round-robin) из всех групп, но не больше 10
     const tagsToAnimate = [];
     let added = true;
     while (tagsToAnimate.length < 10 && added) {
@@ -462,10 +523,9 @@ export function initCareerHighlighting() {
     }
 
     tagsToAnimate.forEach((tag, index) => {
-      const delay = index * 20; // Плавный каскад
+      const delay = index * 20;
 
       setTimeout(() => {
-        // ЖЕСТКИЙ ЛИМИТ: Не более 50 лучей одновременно на экране
         if (svg.querySelectorAll('line').length >= 25) return;
 
         const tagRect = tag.getBoundingClientRect();
@@ -485,28 +545,39 @@ export function initCareerHighlighting() {
         line.setAttribute('stroke-width', '3');
         line.setAttribute('stroke-linecap', 'round');
 
-        // Толще пунктир
         line.style.strokeDasharray = '5 25';
         line.style.opacity = '0';
 
         svg.appendChild(line);
 
-        // Быстрое время жизни и прозрачность
-        const fadeAnim = line.animate([
-          { opacity: 0, offset: 0 },
-          { opacity: 0.35, offset: 0.3 },
-          { opacity: 0.35, offset: 0.7 },
-          { opacity: 0, offset: 1 }
+        const fadeAnim = line.animate([{
+            opacity: 0,
+            offset: 0
+          },
+          {
+            opacity: 0.35,
+            offset: 0.3
+          },
+          {
+            opacity: 0.35,
+            offset: 0.7
+          },
+          {
+            opacity: 0,
+            offset: 1
+          }
         ], {
           duration: 400,
           easing: 'ease-in-out',
           fill: 'forwards'
         });
 
-        // Ускоренное течение пунктира
-        line.animate([
-          { strokeDashoffset: 0 },
-          { strokeDashoffset: -28 }
+        line.animate([{
+            strokeDashoffset: 0
+          },
+          {
+            strokeDashoffset: -28
+          }
         ], {
           duration: 200,
           iterations: Infinity
@@ -523,7 +594,6 @@ export function initCareerHighlighting() {
     timelineItems.forEach(i => i.classList.remove('is-highlighted'));
     skillTags.forEach(t => t.classList.remove('highlight'));
     careerGrid.classList.remove('is-hovering');
-    // Важно: НЕ вызываем clearLines() здесь, чтобы лучи могли плавно затухнуть сами
   };
 
   const applyVisuals = (item) => {
@@ -544,7 +614,7 @@ export function initCareerHighlighting() {
   const clearActive = () => {
     timelineItems.forEach(i => i.classList.remove('is-active'));
     clearVisuals();
-    clearLines(); // При сбросе (скролл) убиваем лучи мгновенно
+    clearLines();
   };
 
   const setActive = (item) => {
