@@ -67,7 +67,7 @@
   align-items: start;
   text-decoration: none;
   color: inherit;
-  cursor: pointer;
+  cursor:cell;
   transition: opacity 0.2s, border-color 0.2s, background 0.2s;
   border: 1px solid transparent;
   border-radius: var(--radius);
@@ -195,7 +195,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  cursor: pointer;
+  cursor: context-menu;
 }
 
 .project-cover {
@@ -392,7 +392,7 @@
   border: 1px solid var(--color-border);
   padding: .3rem .8rem;
   border-radius: var(--radius);
-  cursor: pointer;
+  cursor: context-menu;
   background: transparent;
   transition: all 0.2s;
   margin-top: 0.5rem;
