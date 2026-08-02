@@ -505,28 +505,28 @@ languages = ["en", "ru", "fr"]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-url = "assets/pdfs/stepik-linux-en.pdf"
+url = "assets/pdfs/stepik_linux-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Introduction to Linux (with distinction)", fr = "Introduction à Linux (avec distinction)", ru = "Введение в Linux (с отличием)" }
-url = "assets/pdfs/stepik-linux-ru.pdf"
+url = "assets/pdfs/stepik_linux-ru.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-url = "assets/pdfs/stepik-molbio-en.pdf"
+url = "assets/pdfs/stepik_molbio-en.pdf"
 languages = ["en", "fr"]
 
 [[documents]]
 groups = ["online_courses"]
 date = "2021"
 title = { en = "Molecular Biology and Genetics (with distinction)", fr = "Biologie moléculaire et génétique (avec distinction)", ru = "Молекулярная биология и генетика (с отличием)" }
-url = "assets/pdfs/stepik-molbio-ru.pdf"
+url = "assets/pdfs/stepik_molbio-ru.pdf"
 languages = ["ru"]
 
 [[documents]]
