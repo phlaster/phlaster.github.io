@@ -532,41 +532,41 @@ languages = ["ru"]
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
-title = { en = "Preconditioned Conjugate Gradient Method for Sparse Matrices", fr = "Méthode du gradient conjugué préconditionné pour les matrices creuses", ru = "Предобусловленный метод сопряженных градиентов для разреженных матриц" }
+title = "Предобусловленный метод сопряженных градиентов для разреженных матриц (Численные методы)"
 url = "assets/pdfs/coursework_nummethods.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
-title = { en = "English Course Paper", fr = "Travail de cours d'anglais", ru = "Работа по английскому языку" }
+title = "Functional programming for scientific computing (English)"
 url = "assets/pdfs/paper_fp.pdf"
 languages = ["en", "ru", "fr"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
-title = { en = "Solving the Generalized Traveling Salesman Problem for CNC Machine Idle-Path Optimization", fr = "Résolution du problème généralisé du voyageur de commerce pour l'optimisation des trajets à vide des machines CNC", ru = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ" }
+title = "Решение обобщённой задачи коммивояжёра для оптимизации холостого хода станков с ЧПУ (Методы оптимизации)"
 url = "assets/pdfs/coursework_optmethods.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2026"
-title = { en = "BS-Seq (Bioinformatics)", fr = "BS-Seq (Bioinformatique)", ru = "BS-Seq (Биоинформатика)" }
+title = { ru = "BS-Seq (Биоинформатика)" }
 url = "assets/pdfs/labtask_bioinf.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2025"
-title = { en = "Classification of Multivariate Objects with a Training Set", fr = "Classification d'objets multivariés en présence d'un échantillon d'apprentissage", ru = "Классификация многомерных объектов при наличии обучающей выборки" }
+title = "Классификация многомерных объектов при наличии обучающей выборки (Многомерная статистика)"
 url = "assets/pdfs/labtask_msa.pdf"
 languages = ["ru"]
 
 [[documents]]
 groups = ["student_projects"]
 date = "2023"
-title = { en = "Approximation of Tabular Functions (Numerical Methods)", fr = "Approximation de fonctions tabulaires (Méthodes numériques)", ru = "Приближение табличных функций (Численные методы)" }
+title = "Приближение табличных функций (Численные методы)"
 url = "assets/pdfs/labtask_nummethods.pdf"
 languages = ["ru"]
