@@ -313,24 +313,24 @@
   }
 
   .timeline-item {
-    grid-template-columns: 1fr auto !important;
-    gap: 0.5rem 1rem !important;
-    align-items: start !important;
+    display: block !important;
+    position: relative;
+    padding-right: 42px !important;
   }
 
   .timeline-item .timeline-period {
-    grid-column: 1;
-    grid-row: 1;
+    display: block;
+    margin-bottom: 0.25rem;
   }
 
   .timeline-item .timeline-link-btn {
-    grid-column: 2;
-    grid-row: 1;
+    position: absolute !important;
+    top: 0;
+    right: 0;
   }
 
   .timeline-item .timeline-content {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    display: block;
   }
 
   .about-meta[style] {

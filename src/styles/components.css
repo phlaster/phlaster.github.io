@@ -79,21 +79,18 @@
   z-index: var(--z-base);
 }
 
-/* Простой ховер (только подсветка самого элемента) */
 .timeline-item.is-hovered {
   border-color: var(--color-accent);
   background-color: rgba(var(--color-accent-rgb), 0.08);
   opacity: 1;
 }
 
-/* Активное состояние (фиксация по клику/тапу) */
 .timeline-item.is-active {
   border-color: var(--color-accent);
   background-color: rgba(var(--color-accent-rgb), 0.08);
   opacity: 1;
 }
 
-/* Обесцвечивание остальных элементов (линейно, пока кривые достигают скиллов) */
 .career-grid.is-hovering .timeline-item:not(.is-active),
 .career-grid.is-hovering .skill-tag:not(.highlight) {
   opacity: 0.5;
@@ -105,7 +102,6 @@
     color var(--anim-draw, 600ms) linear;
 }
 
-/* Нарастание яркости скиллов (линейно, пока хвосты завершают анимацию) */
 .career-grid.is-hovering .skill-tag.highlight {
   border-color: var(--color-accent);
   color: var(--color-text);
@@ -142,17 +138,26 @@
   font-family: var(--font-serif);
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .timeline-role {
   font-size: 0.9rem;
   color: var(--color-text-muted);
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .timeline-desc {
   font-size: 0.7rem;
   font-style: italic;
   color: var(--color-text-muted);
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .skills-groups {
