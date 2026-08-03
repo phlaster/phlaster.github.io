@@ -445,17 +445,12 @@ export function initNavigation(renderCallback) {
 }
 
 let _careerResizeHandler = null;
-let _careerObserver = null;
 let _careerMediaHandler = null;
 
 export function initCareerHighlighting() {
   if (_careerResizeHandler) {
     window.removeEventListener('resize', _careerResizeHandler);
     _careerResizeHandler = null;
-  }
-  if (_careerObserver) {
-    _careerObserver.disconnect();
-    _careerObserver = null;
   }
   if (_careerMediaHandler) {
     window.matchMedia('(min-width: 769px)').removeEventListener('change', _careerMediaHandler);
@@ -483,11 +478,35 @@ export function initCareerHighlighting() {
     careerGrid.appendChild(svg);
   }
 
-  const clearLines = () => {
-    if (svg) svg.innerHTML = '';
+  let activeTimeout = null;
+  let drawTimeout = null;
+  let highlightTimeout = null;
+
+  const clearVisuals = () => {
+    timelineItems.forEach(i => i.classList.remove('is-hovered'));
+    skillTags.forEach(t => t.classList.remove('highlight'));
+    careerGrid.classList.remove('is-hovering');
   };
 
-  const drawLines = (item) => {
+  const clearActive = () => {
+    if (activeTimeout) clearTimeout(activeTimeout);
+    if (drawTimeout) clearTimeout(drawTimeout);
+    if (highlightTimeout) clearTimeout(highlightTimeout);
+    activeTimeout = null;
+    drawTimeout = null;
+    highlightTimeout = null;
+
+    timelineItems.forEach(i => i.classList.remove('is-active'));
+    clearVisuals();
+
+    svg.querySelectorAll('path').forEach(p => {
+      p.style.transition = 'opacity 0.2s';
+      p.style.opacity = '0';
+      setTimeout(() => p.remove(), 250);
+    });
+  };
+
+  const drawLines = (item, drawDuration, eraseDuration) => {
     const gridRect = careerGrid.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
     const placeId = item.dataset.place;
@@ -499,76 +518,39 @@ export function initCareerHighlighting() {
 
     if (matchingTags.length === 0) return;
 
-    const groups = new Map();
-    matchingTags.forEach(tag => {
-      const group = tag.closest('.skill-group');
-      if (!groups.has(group)) groups.set(group, []);
-      groups.get(group).push(tag);
-    });
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    const groupArrays = Array.from(groups.values());
-    groupArrays.forEach(arr => arr.sort(() => 0.5 - Math.random()));
-
-    const tagsToAnimate = [];
-    let added = true;
-    while (tagsToAnimate.length < 10 && added) {
-      added = false;
-      for (let i = 0; i < groupArrays.length; i++) {
-        if (groupArrays[i].length > 0) {
-          tagsToAnimate.push(groupArrays[i].pop());
-          added = true;
-          if (tagsToAnimate.length === 10) break;
-        }
-      }
-    }
-
-    tagsToAnimate.forEach((tag, index) => {
-      const delay = index * 20;
-
-      setTimeout(() => {
-        if (svg.querySelectorAll('line').length >= 25) return;
-
+    if (isMobile) {
+      matchingTags.forEach(tag => {
         const tagRect = tag.getBoundingClientRect();
+        const x = tagRect.left + Math.random() * tagRect.width - gridRect.left;
+        const startY = itemRect.top - gridRect.top;
+        const endY = tagRect.bottom - gridRect.top;
 
-        const startX = itemRect.left + Math.random() * itemRect.width - gridRect.left;
-        const startY = itemRect.top + Math.random() * itemRect.height - gridRect.top;
-
-        const endX = tagRect.left + Math.random() * tagRect.width - gridRect.left;
-        const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
-
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', startX);
-        line.setAttribute('y1', startY);
-        line.setAttribute('x2', endX);
-        line.setAttribute('y2', endY);
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const d = `M ${x} ${startY} L ${x} ${endY}`;
+        line.setAttribute('d', d);
         line.setAttribute('stroke', 'var(--color-accent)');
-        line.setAttribute('stroke-width', '3');
+        line.setAttribute('stroke-width', '2');
         line.setAttribute('stroke-linecap', 'round');
-
-        line.style.strokeDasharray = '5 25';
-        line.style.opacity = '0';
+        line.setAttribute('fill', 'none');
 
         svg.appendChild(line);
 
-        const fadeAnim = line.animate([{
-            opacity: 0,
-            offset: 0
+        const length = line.getTotalLength();
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        line.style.opacity = '0.5';
+
+        line.animate([{
+            strokeDashoffset: length
           },
           {
-            opacity: 0.35,
-            offset: 0.3
-          },
-          {
-            opacity: 0.35,
-            offset: 0.7
-          },
-          {
-            opacity: 0,
-            offset: 1
+            strokeDashoffset: 0
           }
         ], {
-          duration: 400,
-          easing: 'ease-in-out',
+          duration: drawDuration,
+          easing: 'linear',
           fill: 'forwards'
         });
 
@@ -576,59 +558,122 @@ export function initCareerHighlighting() {
             strokeDashoffset: 0
           },
           {
-            strokeDashoffset: -28
+            strokeDashoffset: -length
           }
         ], {
-          duration: 200,
-          iterations: Infinity
+          duration: eraseDuration,
+          delay: drawDuration,
+          easing: 'linear',
+          fill: 'forwards'
+        });
+      });
+    } else {
+      const startX = itemRect.right - gridRect.left;
+      const topY = itemRect.top - gridRect.top + 10;
+      const bottomY = itemRect.bottom - gridRect.top - 10;
+      const count = matchingTags.length;
+
+      matchingTags.forEach((tag, index) => {
+        const tagRect = tag.getBoundingClientRect();
+        const endX = tagRect.left - gridRect.left;
+        const endY = tagRect.top + Math.random() * tagRect.height - gridRect.top;
+
+        const startY = count === 1 ? (topY + bottomY) / 2 : topY + (index / (count - 1)) * (bottomY - topY);
+
+        const cp1x = startX + (endX - startX) * 0.5;
+        const cp1y = startY;
+        const cp2x = endX - (endX - startX) * 0.5;
+        const cp2y = endY;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const d = `M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`;
+
+        line.setAttribute('d', d);
+        line.setAttribute('stroke', 'var(--color-accent)');
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('stroke-linecap', 'round');
+        line.setAttribute('fill', 'none');
+
+        svg.appendChild(line);
+
+        const length = line.getTotalLength();
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        line.style.opacity = '0.5';
+
+        line.animate([{
+            strokeDashoffset: length
+          },
+          {
+            strokeDashoffset: 0
+          }
+        ], {
+          duration: drawDuration,
+          easing: 'linear',
+          fill: 'forwards'
         });
 
-        fadeAnim.onfinish = () => {
-          if (line.parentNode) line.remove();
-        };
-      }, delay);
-    });
-  };
-
-  const clearVisuals = () => {
-    timelineItems.forEach(i => i.classList.remove('is-highlighted'));
-    skillTags.forEach(t => t.classList.remove('highlight'));
-    careerGrid.classList.remove('is-hovering');
-  };
-
-  const applyVisuals = (item) => {
-    clearVisuals();
-    careerGrid.classList.add('is-hovering');
-    item.classList.add('is-highlighted');
-    const placeId = item.dataset.place;
-    if (placeId) {
-      Array.from(skillTags).forEach(tag => {
-        if (tag.dataset.places.split(' ').includes(placeId)) {
-          tag.classList.add('highlight');
-        }
+        line.animate([{
+            strokeDashoffset: 0
+          },
+          {
+            strokeDashoffset: -length
+          }
+        ], {
+          duration: eraseDuration,
+          delay: drawDuration,
+          easing: 'linear',
+          fill: 'forwards'
+        });
       });
     }
-    drawLines(item);
-  };
 
-  const clearActive = () => {
-    timelineItems.forEach(i => i.classList.remove('is-active'));
-    clearVisuals();
-    clearLines();
+    highlightTimeout = setTimeout(() => {
+      matchingTags.forEach(tag => tag.classList.add('highlight'));
+    }, drawDuration);
   };
 
   const setActive = (item) => {
-    if (item.classList.contains('is-highlighted')) {
-      timelineItems.forEach(i => {
-        if (i !== item) i.classList.remove('is-active');
-      });
-      item.classList.remove('is-highlighted');
-      item.classList.add('is-active');
-    } else {
+    if (item.classList.contains('is-active')) {
       clearActive();
-      item.classList.add('is-active');
-      applyVisuals(item);
+      return;
     }
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const isInterrupting = !!document.querySelector('.timeline-item.is-active');
+
+    const fadeDuration = isInterrupting ? 200 : 300;
+    const stateTransitionDuration = isInterrupting ? 200 : 400;
+    const drawDuration = 400;
+    const eraseDuration = 600;
+
+    careerGrid.style.setProperty('--anim-fade', `${fadeDuration}ms`);
+    careerGrid.style.setProperty('--anim-draw', `${stateTransitionDuration}ms`);
+    careerGrid.style.setProperty('--anim-erase', `${eraseDuration}ms`);
+
+    svg.querySelectorAll('path').forEach(p => {
+      p.style.transition = 'opacity 0.2s';
+      p.style.opacity = '0';
+      setTimeout(() => p.remove(), 250);
+    });
+
+    timelineItems.forEach(i => i.classList.remove('is-active'));
+    skillTags.forEach(t => t.classList.remove('highlight'));
+
+    item.classList.add('is-active');
+
+    if (drawTimeout) clearTimeout(drawTimeout);
+    if (highlightTimeout) clearTimeout(highlightTimeout);
+    if (activeTimeout) clearTimeout(activeTimeout);
+
+    drawTimeout = setTimeout(() => {
+      careerGrid.classList.add('is-hovering');
+      drawLines(item, drawDuration, eraseDuration);
+    }, fadeDuration);
+
+    activeTimeout = setTimeout(() => {
+      clearActive();
+    }, fadeDuration + drawDuration + eraseDuration + 10000);
   };
 
   timelineItems.forEach(item => {
@@ -640,36 +685,24 @@ export function initCareerHighlighting() {
 
     item.addEventListener('pointerenter', (e) => {
       if (e.pointerType === 'mouse' && !document.querySelector('.timeline-item.is-active')) {
-        applyVisuals(item);
+        clearVisuals();
+        item.classList.add('is-hovered');
       }
     });
 
     item.addEventListener('pointerleave', (e) => {
       if (e.pointerType === 'mouse' && !document.querySelector('.timeline-item.is-active')) {
-        clearVisuals();
+        item.classList.remove('is-hovered');
       }
     });
 
+    // Клик/тап (запуск анимации)
     item.addEventListener('click', (e) => {
       if (e.target.closest('.timeline-link-btn')) return;
-
-      if (item.classList.contains('is-active')) {
-        clearActive();
-      } else {
-        setActive(item);
-      }
+      setActive(item);
     });
   });
 
-  const sections = document.querySelectorAll('.content-section');
-  _careerObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) clearActive();
-    });
-  }, {
-    threshold: 0.3
-  });
-  sections.forEach(sec => _careerObserver.observe(sec));
 
   _careerMediaHandler = (e) => {
     if (e.matches) clearActive();
@@ -680,7 +713,7 @@ export function initCareerHighlighting() {
   _careerResizeHandler = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (careerGrid.classList.contains('is-hovering')) clearLines();
+      svg.innerHTML = '';
     }, 100);
   };
   window.addEventListener('resize', _careerResizeHandler);
